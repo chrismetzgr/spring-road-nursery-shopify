@@ -1,0 +1,132 @@
+<div class="sn-header">
+  <div class="content">
+    <div class="side">
+      <img class="mobile" id="hamburger-icon"src="//504073-2.myshopify.com/cdn/shop/t/3/assets/Hamburger.png?v=127917421503974602431758761701" height="auto" width="auto"/>
+    </div>
+    <div class="main">
+      <a href="">
+        <img id="logo" src="//504073-2.myshopify.com/cdn/shop/t/3/assets/SRN-BLACK-1.png?v=141064158772183533471758729064" height="auto" width="auto"/>
+      </a>
+      <div class="menu">
+        <div><a href="">THE SHOP</a></div>
+        <div><a href="/pages/nursery">THE NURSERY</a></div>
+        <div><a href="/pages/garden-design">GARDEN DESIGN</a></div>
+      </div>
+    </div>
+    <div class="side">
+      <img id="filter-icon" src="//504073-2.myshopify.com/cdn/shop/t/3/assets/WormFilterIcon.png?v=167054639961952859231758736295" height="auto" width="auto"/>
+    </div>
+  </div>
+</div>
+<style>
+  @font-face {
+    font-family: "Akzidenz-Grotesk Pro";
+    src: url('//504073-2.myshopify.com/cdn/shop/t/3/assets/akzidenzgroteskpro_ext.otf?v=80077680508818808221758732275') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  a {
+    text-decoration: none;
+    color: #3B5669;
+  }
+  a:visited {
+    color: #3B5669;
+  }
+  #logo {
+    height: 180px;
+    margin: 25px 0px;
+  }
+  #filter {
+    margin-top: 10px;
+  }
+  #menu-icon {
+    margin-top: 10px;
+  }
+  .content {
+    max-width: 1200px;
+    width: 100%;
+    min-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+  }
+  .side {
+    min-width: 20%;
+    max-width: 275px;
+    min-height: 1px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+  }
+  .sn-header {
+    width: 100vw;
+  }
+  .menu {
+    font-family: var(--font-secondary-family);
+    font-size: 14px;
+    max-width: 768px;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .side:first-child {
+    display: flex !important;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  #hamburger-icon {
+    height: 20px
+  }
+
+  #filter-icon {
+    height: 60px
+  }
+
+  @media (max-width: 768px) {
+    #logo {
+      height: 90px;
+      margin: 25px 0px;
+    }
+    
+    #hamburger-icon {
+      height: 20px
+    }
+    
+    #filter-icon {
+      height: 45px
+    }
+
+    .content {
+      min-width: auto;
+      padding: 0 20px;
+      align-items: center;
+    }
+
+    .side {
+      min-width: auto;
+      max-width: none;
+      width: 60px;
+    }
+    
+    .menu {
+      display: none;
+    }
+
+    .mobile {
+      display: block;
+    }
+  }
+</style>

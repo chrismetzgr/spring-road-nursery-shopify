@@ -1,0 +1,129 @@
+
+<main class="landing" role="main">
+  <div class="video-container">
+    <video autoplay muted loop playsinline src="https://www.dropbox.com/scl/fi/c1ri1vh0k8yd9h0ajd9dp/SRN_LANDING-PAGE-CLOUDS.mp4?rlkey=aa17ogz3z2fzlraytzposqlu0&raw=1"/>
+  </div>
+  <nav class="landing__menu" role="navigation" aria-label="Main navigation">
+        <div><a href="{{ collections['web-shop'].url }}" class="landing__menu-link">THE SHOP</a></div>
+        <div><a href="/pages/nursery" class="landing__menu-link">THE NURSERY</a></div>
+        <div><a href="/pages/garden-design" class="landing__menu-link">GARDEN DESIGN</a></div>
+  </nav>
+  
+  <div class="landing__logo">
+    <img src="{{ 'SRN-WHITE-LARGE.png' | asset_url }}" 
+         alt="{{ shop.name | default: 'Site Logo' }}" 
+         class="landing__logo-image"
+         height="auto" 
+         width="auto">
+  </div>
+  
+  <footer class="landing__location" role="contentinfo">
+    TUNBRIDGE, VT
+  </footer>
+</main>
+
+<style>
+  @font-face {
+    font-family: "Akzidenz-Grotesk Pro";
+    src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .landing {
+    font-family: var(--font-secondary-family);
+    color: var(--font-color-light);
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+  }
+
+  .landing__menu-link {
+    text-decoration: none;
+    color: var(--font-color-light);
+    transition: opacity 0.2s ease;
+  }
+
+  .landing__menu-link:visited {
+    color: var(--font-color-light);
+  }
+
+  .landing__menu-link:hover {
+    opacity: 0.7;
+  }
+
+  .landing__menu {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 120px);
+    max-width: calc(100vw - 120px);
+    font-size: 30px;
+    letter-spacing: 0.07em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .landing__logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -99;
+  }
+
+  .landing__logo-image {
+    display: block;
+  }
+
+  .landing__location {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.video-container {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-color: black;
+    z-index: -101
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    z-index: -100;
+}
+
+  @media (max-width: 999px) {
+    .landing__menu {
+      top: 55%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 17.5vh;
+      font-size: 20px;
+      letter-spacing: 0.15em;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+    }
+
+    .landing__logo {
+      top: 33%;
+    }
+
+    .landing__logo-image {
+      width: 300px;
+    }
+
+    .landing__location {
+      font-size: 10px;
+    }
+  }
+</style>
