@@ -1,7 +1,7 @@
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
 const wormSortIcon = document.querySelector('#sort-icon');
-const mobileSort = document.querySelector('#mobile-filter')
+const mobileSort = document.querySelector('#mobile-sort')
 const desktopSortDropdown = document.querySelector('.filter-dropdown')
 
 function clickExitEventHandler(element) {
