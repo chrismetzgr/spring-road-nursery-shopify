@@ -52,14 +52,15 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      --color-background: #D3DCCF
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
           :root,
         {%- endif %}
-        .color-{{ scheme.id }} {
-          --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }};
+        /* .color-{{ scheme.id }} {
+          --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }}; */
 
         {% liquid
           assign background_color = scheme.settings.background
@@ -72,7 +73,6 @@
             assign background_color_contrast = background_color | color_darken: 25
           endif
         %}
-
         --color-foreground: var(--font-color-dark);
         --color-background-contrast: {{ background_color_contrast.red }},{{ background_color_contrast.green }},{{ background_color_contrast.blue }};
         --color-shadow: {{ scheme.settings.shadow.red }},{{ scheme.settings.shadow.green }},{{ scheme.settings.shadow.blue }};
@@ -93,6 +93,7 @@
       }
 
       :root {
+        --color-background: {%if page.handle == 'nursery'%}#EFC142{% elsif page.handle == 'garden-design' %}#F1AD96{% else %}#D3DCCF{% endif %};
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
@@ -230,7 +231,7 @@
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
-        background-color: #D3DCCF;
+        background-color: var(--color-background);
       }
 
       @media screen and (min-width: 750px) {
@@ -317,8 +318,6 @@
         nursery_url: '/pages/nursery',
         garden_design_url: '/pages/garden-design'
       };
-      console.log({routes: window.routes})
-
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,
         quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,

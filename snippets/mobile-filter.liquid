@@ -1,0 +1,90 @@
+<link rel="preload" as="image" href="{{ "MOBILE-FILTER-BACKGROUND.png" | asset_url }}">
+<div id="mobile-filter">
+    <div class="exit-container">
+      <img src="{{ "exit-dark.png" | asset_url }}" height="20px" width="20px"/>
+    </div>
+    <div id="mobile-filter-menu">
+        <div>FILTER</div>
+        <div>FEATURED</div>
+        <div>BEST SELLING</div>
+        <div>PRICE</div>
+        <div>NEWEST</div>
+    </div>
+  </div>
+<style>
+  @font-face {
+    font-family: "Akzidenz-Grotesk Pro";
+    src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  .exit-container {
+    direction: rtl;
+    img {
+      margin: 20px 20px 0 0;
+    }
+    img:hover {
+      cursor:pointer;
+    }
+  }
+  #mobile-filter {
+    display: none;
+    color: var(--font-color-dark);
+    width: 80vw;
+    position: absolute;
+    background-image: url('{{ "MOBILE-FILTER-BACKGROUND.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 2000;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+
+    #mobile-filter-menu {
+      height: 100vh;
+      font-family: var(--font-secondary-family);
+      font-size: 20px;
+      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 100px;
+    }
+  }
+
+  #mobile-filter.show {
+    display: block; /* Make it visible */
+    animation: slideInRight 0.5s ease-out forwards; /* Apply the animation */
+  }
+
+  #mobile-filter.hide {
+    animation: slideOutRight 0.5s ease-out; /* Apply the animation */
+  }
+
+  @keyframes slideInRight {
+  from {
+    transform: translateX(100%); /* Start off-screen to the Right */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    transform: translateX(0); /* End at its original position */
+    opacity: 1; /* End fully visible */
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0); /* Start at current position */
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%); /* Slide out to the Right */
+    opacity: 0;
+  }
+}
+</style>

@@ -1,0 +1,113 @@
+<div id="img-container">
+    <img src="{{ 'goldenrods.png' | asset_url }}" height="630px" width="auto"/>
+</div>
+<div class="nursery-menu">
+    <div><a href="#">What We Do</a></div>
+    <div><a href="#">Our Hours</a></div>
+    <div><a href="#">Our Plants</a></div>
+    <div><a href="#">Contact Us</a></div>
+</div>
+<div id="nursery-content">
+    <img src="{{ 'what-we-do.png' | asset_url }}" height="80px" width="auto"/>
+    <div class="text">
+           On a hillside in Tunbridge, Vermont, our little nursery is a place where wonder and curiosity guide the work. A former pasture now lined with terraced garden beds that climb the slope and spill with plants. 
+           Each bed is its own cosmos, a collection of strange and unusual species, tended by hand, season after season. The greenhouse hums with life, the barn shelters our shop of hand-crafted goods, 
+           and every path through the land carries its own current of vitality. 
+           <br/><br/> 
+           To us, the work is ritual: soil plucked, seedlings lifted, stalks clipped back, compost spread, petals opening like sudden revelation. 
+           The garden is a ceremony, psychedelic and sublime, where labor and wonder are not separate acts but one gesture. In the words of Ken Kesey: “Plant a garden in which strange plants grow and mysteries bloom.”  
+           <br/><br/>
+           We believe the garden is not a backdrop but a force—ecstatic, insistent, alive. It asks for devotion and patience, but also for play, improvisation, and surrender. Our garden designs are bound to that spirit: 
+           plants chosen for their wildness, their peculiarity, and their ability to bend light and shift a space until it feels both inevitable and enchanted. Each garden grows out of the ground it stands on, inseparable from place, 
+           inseparable from time, an index of the seasons passing.  
+           <br/><br/>
+           This is the world we cultivate: real, rooted, handmade, alive. From wandering gardens to greenhouse benches, from seeds to vessels to tools, everything here begins 
+           in the soil and returns to it, shaped by human hands and the mystery of growth. 
+           <br/><br/>
+           And through every season—in the effort, the devotion, the ecstasy—we carry one assurance close: all will be well in the garden.  
+           <br/><br/>
+           With love, 
+           <br/>
+           Bryan & Adam    
+    </div>
+    <img src="{{ 'hours.png' | asset_url }}" height="80px" width="auto"/>
+    <div class="text">
+        Our days and hours shift with the season. Currently, we are open...
+    </div>
+    <div class="text center special-text">
+        Weekdays 
+        <br/>
+        by appointment
+        <br/><br/><br/>
+        Saturday & Sunday 
+        <br/>
+        10 AM – 4 PM
+    </div>
+    <img src="{{ 'our-plants.png' | asset_url }}" height="80px" width="auto"/>
+    <div class="text center">
+        We propagate thousands of plants from seed, cuttings, and division. 
+        <br/><br/>
+        A shifting chorus that changes with the seasons and our curiosities.  Alongside these perennials and annuals, you’ll find a small gathering of trees and shrubs — each available here at our nursery  in Tunbridge, Vermont.
+        <br/><br/>
+        <a href="#" class="special-text wavy-underline">Click here for the full list of what’s growing, blooming,
+            <br/>
+            and ready to wander home with you.</a>
+    </div>
+    <img src="{{ 'contact.png' | asset_url }}" height="80px" width="auto"/>
+    <div class="text center">
+        bryan@springroadnurseryvt.com
+        <br/>(802) 276-6481
+    </div>
+</div>
+
+<style>
+    #img-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    #nursery-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        img {
+            margin-top: 100px;
+            align-self: center;
+        }
+
+        .text {
+            font-size: 25px;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 850px;
+            line-height: 1.15;
+            color: var(--font-color-dark);
+        }
+        .special-text {
+            font-family: var(--font-secondary-family);
+        }
+        .center {
+            text-align: center;
+        }
+        a {
+            font-size: 20px;
+        }
+    }
+    .nursery-menu {
+        text-transform: uppercase;
+        font-family: var(--font-secondary-family);
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 14px;
+        width: 500px;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+</style>

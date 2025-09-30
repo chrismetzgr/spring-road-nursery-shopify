@@ -9,15 +9,18 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "header": {
+      "type": "header",
       "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
       }
     },
+    "nursery": {
+      "type": "nursery",
+      "settings": {},
+    }
   },
   "order": [
-    "main"
+    "header",
+    "nursery",
   ]
 }

@@ -82,7 +82,7 @@
               disabled
             {% endif %}
           >
-            <span>
+            <span class="{% if product.selected_or_first_available_variant != null and product.selected_or_first_available_variant.available != false and quantity_rule_soldout != true %}wavy-underline-yellow{% endif %} %}">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}

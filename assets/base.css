@@ -26,6 +26,7 @@
   --font-heading-weight: normal;
   --font-color-dark: #3B5669;
   --font-color-light: #FFFFFF;
+  --font-color-light-secondary: #D3DCCF
 }
 
 .product-card-wrapper .card,
@@ -500,6 +501,10 @@ h6:empty {
   display: none;
 }
 
+a {
+  z-index: 1000;
+}
+
 .link,
 .customer a {
   cursor: pointer;
@@ -896,6 +901,17 @@ summary::-webkit-details-marker {
 .subtitle--medium {
   font-size: 1.6rem;
   letter-spacing: 0.08rem;
+}
+
+.wavy-underline-yellow {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #EFC142;
+}
+
+.wavy-underline {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
 }
 
 /* component-grid */
@@ -1948,8 +1964,7 @@ input[type='checkbox'] {
   text-align: center;
   background-color: transparent;
   border: 0;
-  padding: 0 0.5rem;
-  width: 100%;
+  width: 30px;
   flex-grow: 1;
   -webkit-appearance: none;
   appearance: none;

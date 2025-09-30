@@ -41,14 +41,14 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
-                  <a
-                href="{{ card_product.url }}"
-                id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
-                class="full-unstyled-link"
-                aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-              >
-    <div
-      class="
+    <a
+      href="{{ card_product.url }}"
+      id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
+    
+      aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+    >
+      <div
+        class="
         card card--{{ settings.card_style }}
         {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
         {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
@@ -56,9 +56,9 @@
         {% if extend_height %} card--extend-height{% endif %}
         {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
         {% if horizontal_class %} card--horizontal{% endif %}
-      "
-      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
-    >
+        "
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+      >
       <div
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
@@ -113,6 +113,7 @@
           </div>
         {%- endif -%}
         <div class="card__content">
+          <div class="card__outer">{{ card_product.title  }}</div>
           <div class="card__information">
             <span
               class="card__heading"
@@ -123,7 +124,7 @@
               <a
                 href="{{ card_product.url }}"
                 id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
-                class="full-unstyled-link"
+              
                 aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
               >
                 {{ card_product.title | escape }}
@@ -160,7 +161,7 @@
             <a
               href="{{ card_product.url }}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
-              class="full-unstyled-link"
+            
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
               {{ card_product.title | escape }}
@@ -514,7 +515,7 @@
                         </a>
                       </div>
                       <div class="quick-add-modal__content-info--bulk-details large-up-hide">
-                        <a href="{{ card_product.url }}" class="full-unstyled-link">
+                        <a href="{{ card_product.url }}">
                           <span>{{ card_product.title | escape }}</span>
                         </a>
                         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
@@ -527,7 +528,7 @@
                     </div>
                     <div>
                       <div class="quick-add-modal__content-info--bulk-details small-hide medium-hide">
-                        <a href="{{ card_product.url }}" class="full-unstyled-link">
+                        <a href="{{ card_product.url }}">
                           <span class="h2">
                             {{ card_product.title | escape }}
                           </span>
@@ -610,9 +611,10 @@
         </div>
       </div>
       <div class="card__content">
+        <div class="card__outer">{{ card_product.title  }}</div>
         <div class="card__information">
           <span class="card__heading card__heading--placeholder{% if settings.card_style == 'standard' %} h5{% endif %}">
-            <a role="link" aria-disabled="true" class="full-unstyled-link">
+            <a role="link" aria-disabled="true">
               {{ 'onboarding.product_title' | t }}
             </a>
           </span>

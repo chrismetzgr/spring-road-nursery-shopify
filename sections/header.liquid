@@ -1,3 +1,5 @@
+{% render 'mobile-nav' %}
+{% render 'mobile-filter' %}
 <div class="sn-header">
   <div class="content">
     <div class="side">
@@ -8,16 +10,20 @@
         <img id="logo" src="{{ 'SRN-BLACK-1.png' | asset_url }}" height="auto" width="auto"/>
       </a>
       <div class="menu">
-        <div><a href="{{ collections['web-shop'].url }}">THE SHOP</a></div>
-        <div><a href="/pages/nursery">THE NURSERY</a></div>
-        <div><a href="/pages/garden-design">GARDEN DESIGN</a></div>
+        <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
+        <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
+        <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
       </div>
     </div>
     <div class="side">
-      <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
+      {% if template == 'collection' %}
+        <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
+        {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+      {% endif %}
     </div>
   </div>
 </div>
+<script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
 <style>
   @font-face {
     font-family: "Akzidenz-Grotesk Pro";
@@ -43,6 +49,7 @@
     margin-top: 10px;
   }
   .content {
+    font-family: var(--font-secondary-family);
     max-width: 1200px;
     width: 100%;
     min-width: 768px;
@@ -57,6 +64,11 @@
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
+    gap: 100px;
+
+    img:hover {
+      cursor:pointer;
+    }
   }
   .main {
     display: flex;
@@ -67,8 +79,11 @@
   .sn-header {
     width: 100vw;
   }
+  #srn-cart {
+    color: #3B5669;
+    font-size: 15px
+  }
   .menu {
-    font-family: var(--font-secondary-family);
     font-size: 14px;
     max-width: 768px;
     width: 80%;
@@ -119,6 +134,7 @@
       min-width: auto;
       max-width: none;
       width: 60px;
+      gap: 0px;
     }
     
     .menu {
@@ -128,5 +144,8 @@
     .mobile {
       display: block;
     }
-  }
+
+    #srn-cart {
+      display: none;}
+    }
 </style>
