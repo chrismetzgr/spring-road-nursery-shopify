@@ -25,6 +25,7 @@ hamburgerMenuIcon.addEventListener('click', () => {
 });
 
 wormFilterIcon.addEventListener('click', () => {
+  console.log({width: window.innerWidth})
   mobileFilter.style.display = 'block'; // Ensure it's visible before animating
   clickExitEventHandler(mobileFilter);
 });
