@@ -1,6 +1,6 @@
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
-const wormSortIcon = document.querySelector('#mobile-sort');
+const wormSortIcon = document.querySelector('#sort-icon');
 const mobileSort = document.querySelector('#mobile-filter')
 const desktopSortDropdown = document.querySelector('.filter-dropdown')
 
