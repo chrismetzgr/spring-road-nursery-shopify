@@ -24,14 +24,14 @@ hamburgerMenuIcon.addEventListener('click', () => {
 });
 
 wormFilterIcon.addEventListener('click', () => {
-  if(window.innerWidth > 850){
+  if(window.innerWidth < 850){
     mobileFilter.style.display = 'block'; 
     clickExitEventHandler(mobileFilter);
   }
 });
 
 wormFilterIcon.addEventListener('mouseover', () =>{
-  if(window.innerWidth < 850){
+  if(window.innerWidth > 850){
     mobileFilter.style.display = 'block'; 
     clickExitEventHandler(mobileFilter);
   }
