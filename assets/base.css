@@ -21,7 +21,7 @@
   --font-body-weight: normal;
   --font-body-weight-bold: 700;
   --font-heading-family: "Cormorant Garamond", serif;
-  --font-secondary-family: "Akzidenz-Grotesk Pro", sans-serif;
+  --font-family-secondary: "Akzidenz-Grotesk Pro", sans-serif;
   --font-heading-style: normal;
   --font-heading-weight: normal;
   --font-color-dark: #3B5669;
@@ -1955,7 +1955,7 @@ input[type='checkbox'] {
 
 .quantity__input {
   color: currentColor;
-  font-family: var(--font-secondary-family);
+  font-family: var(--font-family-secondary);
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
   font-size: 1.6rem;
