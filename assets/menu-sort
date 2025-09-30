@@ -1,8 +1,8 @@
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
-const wormFilterIcon = document.querySelector('#filter-icon');
-const mobileFilter = document.querySelector('#mobile-filter')
-const desktopFilterDropdown = document.querySelector('.filter-dropdown')
+const wormSortIcon = document.querySelector('#filter-icon');
+const mobileSort = document.querySelector('#mobile-filter')
+const desktopSortDropdown = document.querySelector('.filter-dropdown')
 
 function clickExitEventHandler(element) {
   element.classList.add('show');
@@ -24,41 +24,41 @@ hamburgerMenuIcon.addEventListener('click', () => {
   clickExitEventHandler(mobileNav);
 });
 
-wormFilterIcon.addEventListener('click', () => {
+wormSortIcon.addEventListener('click', () => {
   if(window.innerWidth < 850){
-    mobileFilter.style.display = 'block'; 
-    clickExitEventHandler(mobileFilter);
+    mobileSort.style.display = 'block'; 
+    clickExitEventHandler(mobileSort);
   }
 });
 
 let filterTimeout;
 
-wormFilterIcon.addEventListener('mouseover', () => {
+wormSortIcon.addEventListener('mouseover', () => {
   if(window.innerWidth > 850){
     clearTimeout(filterTimeout);
-    desktopFilterDropdown.classList.add('active');
+    desktopSortDropdown.classList.add('active');
   }
 });
 
-wormFilterIcon.addEventListener('mouseout', () => {
+wormSortIcon.addEventListener('mouseout', () => {
   if(window.innerWidth > 850){
     filterTimeout = setTimeout(() => {
-      desktopFilterDropdown.classList.remove('active');
+      desktopSortDropdown.classList.remove('active');
     }, 100);
   }
 });
 
-desktopFilterDropdown.addEventListener('mouseover', () => {
+desktopSortDropdown.addEventListener('mouseover', () => {
   if(window.innerWidth > 850){
     clearTimeout(filterTimeout);
-    desktopFilterDropdown.classList.add('active');
+    desktopSortDropdown.classList.add('active');
   }
 });
 
-desktopFilterDropdown.addEventListener('mouseout', () => {
+desktopSortDropdown.addEventListener('mouseout', () => {
   if(window.innerWidth > 850){
     filterTimeout = setTimeout(() => {
-      desktopFilterDropdown.classList.remove('active');
+      desktopSortDropdown.classList.remove('active');
     }, 100);
   }
 });
