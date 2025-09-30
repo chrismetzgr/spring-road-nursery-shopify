@@ -18,6 +18,12 @@
     <div class="side">
       {% if template == 'collection' %}
         <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
+        <div id="filter-menu" class="filter-dropdown">
+          <span data-filter="featured">Featured</span>
+          <span data-filter="best-selling">Best Selling</span>
+          <span data-filter="price">Price</span>
+          <span data-filter="newest">Newest</span>
+        </div>
         {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
       {% endif %}
     </div>
@@ -57,6 +63,46 @@
     margin-right: auto;
     display: flex;
   }
+  .filter-dropdown {
+    position: absolute;
+    min-width: 170px;
+    max-width: 275px;
+    background: white;
+    border: 1px solid #3B5669;
+    border-radius: 4px;
+    padding: 10px 0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .filter-dropdown span {
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #3B5669;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: var(--font-secondary-family);
+  }
+
+  .filter-dropdown span:hover {
+    background-color: #f5f5f5;
+  }
+
+  /* Update the .side class to position the dropdown */
   .side {
     min-width: 20%;
     max-width: 275px;
@@ -65,9 +111,13 @@
     flex-direction: column-reverse;
     align-items: center;
     gap: 100px;
+    position: relative; /* Add this */
+  }
 
-    img:hover {
-      cursor:pointer;
+  @media (max-width: 850px) {
+    .filter-dropdown {
+      min-width: 150px;
+      max-width: 200px;
     }
   }
   .main {
