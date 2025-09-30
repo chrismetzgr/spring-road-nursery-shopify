@@ -18,7 +18,7 @@
     <div class="side">
       {% if template == 'collection' %}
         <div class="filter-container">
-          <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
+          <img id="mobile-sort" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
           <div id="filter-menu" class="filter-dropdown">
             <span data-filter="featured">Featured</span>
             <span data-filter="best-selling">Best Selling</span>
@@ -31,7 +31,7 @@
     </div>
   </div>
 </div>
-<script src="{{ 'menu-filter.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'menu-sort' | asset_url }}" defer="defer"></script>
 <style>
   @font-face {
     font-family: "Akzidenz-Grotesk Pro";
@@ -162,7 +162,7 @@
     height: 20px
   }
 
-  #filter-icon {
+  #mobile-sort {
     height: 60px;
   }
 
@@ -176,7 +176,7 @@
       height: 20px
     }
     
-    #filter-icon {
+    #mobile-sort {
       height: 45px
     }
 
