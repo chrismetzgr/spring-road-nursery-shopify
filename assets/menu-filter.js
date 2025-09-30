@@ -29,3 +29,10 @@ wormFilterIcon.addEventListener('click', () => {
     clickExitEventHandler(mobileFilter);
   }
 });
+
+wormFilterIcon.addEventListener('mouseover', () =>{
+  if(window.innerWidth < 850){
+    mobileFilter.style.display = 'block'; 
+    clickExitEventHandler(mobileFilter);
+  }
+})
