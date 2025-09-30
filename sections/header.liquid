@@ -17,13 +17,13 @@
     </div>
     <div class="side">
       {% if template == 'collection' %}
-        <div class="filter-container">
+        <div class="sort-container">
           <img id="sort-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
-          <div id="filter-menu" class="sort-dropdown">
-            <span data-filter="featured">Featured</span>
-            <span data-filter="best-selling">Best Selling</span>
-            <span data-filter="price">Price</span>
-            <span data-filter="newest">Newest</span>
+          <div id="sort-menu" class="sort-dropdown">
+            <span data-sort="featured">Featured</span>
+            <span data-sort="best-selling">Best Selling</span>
+            <span data-sort="price">Price</span>
+            <span data-sort="newest">Newest</span>
           </div>
         </div>
         {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
