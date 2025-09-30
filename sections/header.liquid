@@ -17,12 +17,14 @@
     </div>
     <div class="side">
       {% if template == 'collection' %}
-        <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
-        <div id="filter-menu" class="filter-dropdown">
-          <span data-filter="featured">Featured</span>
-          <span data-filter="best-selling">Best Selling</span>
-          <span data-filter="price">Price</span>
-          <span data-filter="newest">Newest</span>
+        <div class="filter-container">
+          <img id="filter-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
+          <div id="filter-menu" class="filter-dropdown">
+            <span data-filter="featured">Featured</span>
+            <span data-filter="best-selling">Best Selling</span>
+            <span data-filter="price">Price</span>
+            <span data-filter="newest">Newest</span>
+          </div>
         </div>
         {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
       {% endif %}
