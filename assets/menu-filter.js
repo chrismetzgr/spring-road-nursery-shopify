@@ -31,14 +31,34 @@ wormFilterIcon.addEventListener('click', () => {
   }
 });
 
-wormFilterIcon.addEventListener('mouseover', () =>{
+let filterTimeout;
+
+wormFilterIcon.addEventListener('mouseover', () => {
   if(window.innerWidth > 850){
+    clearTimeout(filterTimeout);
     desktopFilterDropdown.classList.add('active');
   }
-})
+});
 
-wormFilterIcon.addEventListener('mouseout', () =>{
+wormFilterIcon.addEventListener('mouseout', () => {
   if(window.innerWidth > 850){
-    desktopFilterDropdown.classList.remove('active');
+    filterTimeout = setTimeout(() => {
+      desktopFilterDropdown.classList.remove('active');
+    }, 100);
   }
-})
+});
+
+desktopFilterDropdown.addEventListener('mouseover', () => {
+  if(window.innerWidth > 850){
+    clearTimeout(filterTimeout);
+    desktopFilterDropdown.classList.add('active');
+  }
+});
+
+desktopFilterDropdown.addEventListener('mouseout', () => {
+  if(window.innerWidth > 850){
+    filterTimeout = setTimeout(() => {
+      desktopFilterDropdown.classList.remove('active');
+    }, 100);
+  }
+});
