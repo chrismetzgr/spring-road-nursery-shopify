@@ -17,10 +17,15 @@
     "nursery": {
       "type": "nursery",
       "settings": {},
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {},
     }
   },
   "order": [
     "header",
     "nursery",
+    "footer"
   ]
 }
