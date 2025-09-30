@@ -24,7 +24,6 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
-      "disabled": true,
       "settings": {
         "products_per_page": 36,
         "columns_desktop": 3,
@@ -45,6 +44,7 @@
     },
     "featured_collection_QzRMEG": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
         "collection": "web-shop",
