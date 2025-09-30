@@ -7,11 +7,19 @@
   </div>
 </div>
 <style>
+   @font-face {
+      font-family: "Akzidenz-Grotesk Pro", sans-serif;
+      src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
     #footer-details {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: 20px;
+      text-transform: uppercase;
+      font-family: var(--font-family-secondary);
     }
 </style>
