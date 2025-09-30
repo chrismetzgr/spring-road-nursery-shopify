@@ -1,5 +1,19 @@
 <div id="footer">
-  
+  <div class="content">
+    <div class="side">
+      <div class="menu">
+        <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
+        <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
+        <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
+      </div>
+    </div>
+    <div class="main">
+      <img id="logo" src="{{ 'inchworm.png' | asset_url }}" height="auto" width="auto"/>
+    </div>
+    <div class="side">
+      Stay in touch
+    </div>
+  </div>
   <div id="footer-details">
     <span>Spring Road Nursery </span>      
     <span>78 Spring Rd </span>      
