@@ -36,3 +36,9 @@ wormFilterIcon.addEventListener('mouseover', () =>{
     desktopFilterDropdown.classList.add('active');
   }
 })
+
+wormFilterIcon.addEventListener('mouseout', () =>{
+  if(window.innerWidth > 850){
+    desktopFilterDropdown.classList.remove('active');
+  }
+})
