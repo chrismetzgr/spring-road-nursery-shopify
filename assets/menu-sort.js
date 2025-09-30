@@ -97,16 +97,23 @@ function handleSort(sortValue) {
 }
 
 // Desktop sort
-desktopSortDropdown?.querySelectorAll('span[data-sort]').forEach(span => {
-  span.addEventListener('click', (e) => {
-    handleSort(e.target.dataset.sort);
+desktopSortDropdown?.addEventListener('click', (e) => {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
     desktopSortDropdown.classList.remove('active');
-  });
+  }
 });
 
 // Mobile sort
-document.querySelectorAll('#mobile-sort span[data-sort]').forEach(span => {
-  span.addEventListener('click', (e) => {
-    handleSort(e.target.dataset.sort);
-  });
+document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    mobileSort.classList.remove('show');
+    mobileSort.classList.add('hide');
+    setTimeout(() => {
+      mobileSort.style.display = 'none';
+    }, 500);
+  }
 });
