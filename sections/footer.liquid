@@ -1,7 +1,7 @@
 <div id="footer">
   <div class="footer-content">
     <div class="footer-side">
-      <div class="menu special">
+      <div class="footer-menu special">
         <a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a>
         <a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a>
         <a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a>
@@ -18,13 +18,9 @@
       </div>
       <div class="side-text">
         From rare plants to handcrafted goods,
-        <br/>
         we cultivate the strange and the beautiful
-        <br/>
         on our mountainside in Vermont.  
-        <br/>
         Be the first to hear about 
-        <br/>
         what’s unfurling in the garden.
       </div>
     </div>
@@ -66,7 +62,7 @@
         line-height: 1;
       }
     }
-    .menu {
+    .footer-menu {
       display: flex;
       flex-direction: column;
       align-items: center;
