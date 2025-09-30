@@ -2,7 +2,7 @@ const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
 const wormSortIcon = document.querySelector('#sort-icon');
 const mobileSort = document.querySelector('#mobile-sort')
-const desktopSortDropdown = document.querySelector('.filter-dropdown')
+const desktopSortDropdown = document.querySelector('.sort-dropdown')
 
 function clickExitEventHandler(element) {
   element.classList.add('show');
@@ -31,18 +31,18 @@ wormSortIcon.addEventListener('click', () => {
   }
 });
 
-let filterTimeout;
+let sortTimeout;
 
 wormSortIcon.addEventListener('mouseover', () => {
   if(window.innerWidth > 850){
-    clearTimeout(filterTimeout);
+    clearTimeout(sortTimeout);
     desktopSortDropdown.classList.add('active');
   }
 });
 
 wormSortIcon.addEventListener('mouseout', () => {
   if(window.innerWidth > 850){
-    filterTimeout = setTimeout(() => {
+    sortTimeout = setTimeout(() => {
       desktopSortDropdown.classList.remove('active');
     }, 100);
   }
@@ -50,14 +50,14 @@ wormSortIcon.addEventListener('mouseout', () => {
 
 desktopSortDropdown.addEventListener('mouseover', () => {
   if(window.innerWidth > 850){
-    clearTimeout(filterTimeout);
+    clearTimeout(sortTimeout);
     desktopSortDropdown.classList.add('active');
   }
 });
 
 desktopSortDropdown.addEventListener('mouseout', () => {
   if(window.innerWidth > 850){
-    filterTimeout = setTimeout(() => {
+    sortTimeout = setTimeout(() => {
       desktopSortDropdown.classList.remove('active');
     }, 100);
   }

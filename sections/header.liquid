@@ -19,7 +19,7 @@
       {% if template == 'collection' %}
         <div class="filter-container">
           <img id="sort-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
-          <div id="filter-menu" class="filter-dropdown">
+          <div id="filter-menu" class="sort-dropdown">
             <span data-filter="featured">Featured</span>
             <span data-filter="best-selling">Best Selling</span>
             <span data-filter="price">Price</span>
@@ -75,7 +75,7 @@
   align-items: center;
 }
 
-.filter-dropdown {
+.sort-dropdown {
   position: absolute;
   top: 100%; /* Position directly below the image */
   left: 50%;
@@ -95,13 +95,13 @@
   z-index: 1000;
 }
 
-.filter-dropdown.active {
+.sort-dropdown.active {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
-.filter-dropdown span {
+.sort-dropdown span {
   text-transform: uppercase;
   font-size: 12px;
   cursor: pointer;
@@ -121,7 +121,7 @@
 }
 
   @media (max-width: 850px) {
-    .filter-dropdown {
+    .sort-dropdown {
       min-width: 150px;
       max-width: 200px;
     }
