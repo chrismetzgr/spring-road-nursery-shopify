@@ -23,7 +23,7 @@
         Be the first to hear about 
         what’s unfurling in the garden.
       </div>
-      <div class="footer-email-form">
+      <div class="special">
         {% form 'customer', class: 'newsletter-form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">
@@ -49,7 +49,7 @@
                 required
               >
               <label class="field__label" for="NewsletterForm--{{ section.id }}">
-                {{ 'newsletter.label' | t }}
+                Your Email Address Here
               </label>
               <button
                 type="submit"
