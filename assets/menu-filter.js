@@ -1,6 +1,6 @@
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
-const wormFilterIcon = document.querySelector('#filter-icon.mobile');
+const wormFilterIcon = document.querySelector('#filter-icon');
 const mobileFilter = document.querySelector('#mobile-filter')
 
 function clickExitEventHandler(element) {
