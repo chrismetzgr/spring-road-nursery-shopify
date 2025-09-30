@@ -33,7 +33,6 @@ wormFilterIcon.addEventListener('click', () => {
 
 wormFilterIcon.addEventListener('mouseover', () =>{
   if(window.innerWidth > 850){
-    mobileFilter.style.display = 'block'; 
-    clickExitEventHandler(mobileFilter);
+    desktopFilterDropdown.classList.add('active');
   }
 })
