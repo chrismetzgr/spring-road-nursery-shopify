@@ -1,6 +1,6 @@
 <div id="footer">
   <div class="footer-content">
-    <div class="side">
+    <div class="footer-side">
       <div class="menu special">
         <a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a>
         <a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a>
@@ -12,7 +12,7 @@
     <div class="main">
       <img src="{{ 'inchworm.png' | asset_url }}" height="125px" width="auto"/>
     </div>
-    <div class="side">
+    <div class="footer-side">
       <div class="special underline-wavy">
         Keep In touch
       </div>
@@ -61,7 +61,7 @@
           height: 150px;
       }
     }
-    .side {
+    .footer-side {
       font-family: var(--font-family);
       width: 33%;
 
