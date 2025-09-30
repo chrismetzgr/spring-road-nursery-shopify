@@ -68,31 +68,40 @@
     margin-right: auto;
     display: flex;
   }
-  .filter-dropdown {
-    position: absolute;
-    min-width: 170px;
-    max-width: 275px;
-    background: white;
-    border: 1px solid #3B5669;
-    border-radius: 4px;
-    padding: 10px 0;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+  .filter-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .filter-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+.filter-dropdown {
+  position: absolute;
+  top: 100%; /* Position directly below the image */
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  min-width: 170px;
+  max-width: 275px;
+  background: white;
+  border: 1px solid #3B5669;
+  border-radius: 4px;
+  padding: 10px 0;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
 
   .filter-dropdown span {
     padding: 8px 20px;
