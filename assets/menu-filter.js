@@ -24,6 +24,8 @@ hamburgerMenuIcon.addEventListener('click', () => {
 });
 
 wormFilterIcon.addEventListener('click', () => {
-  mobileFilter.style.display = 'block'; 
-  clickExitEventHandler(mobileFilter);
+  if(window.innerWidth > 850){
+    mobileFilter.style.display = 'block'; 
+    clickExitEventHandler(mobileFilter);
+  }
 });
