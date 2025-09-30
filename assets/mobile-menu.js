@@ -12,20 +12,18 @@ function clickExitEventHandler(element) {
     element.classList.remove('show');
     element.classList.add('hide');
     
-    // Hide the element after animation completes
     setTimeout(() => {
       element.style.display = 'none';
-    }, 500); // Match the animation duration (0.5s = 500ms)
+    }, 500); 
   }, { once: true})
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
-  mobileNav.style.display = 'block'; // Ensure it's visible before animating
+  mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
 });
 
 wormFilterIcon.addEventListener('click', () => {
-  console.log({width: window.innerWidth})
-  mobileFilter.style.display = 'block'; // Ensure it's visible before animating
+  mobileFilter.style.display = 'block'; 
   clickExitEventHandler(mobileFilter);
 });
