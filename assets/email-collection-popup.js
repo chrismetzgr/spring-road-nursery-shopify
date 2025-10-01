@@ -1,4 +1,3 @@
-// Check localStorage and show popup after 5 seconds
 const popupKey = 'springRoadNurseryNewsLetterSignup';
 const popup = document.getElementById('email-collection-popup');
 
