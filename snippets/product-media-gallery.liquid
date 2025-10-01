@@ -64,6 +64,7 @@
   .thumbnail-slider {
     position: relative;
     margin-top: 1rem;
+    display: block;
   }
 
   .thumbnail-list {
@@ -72,6 +73,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: thin;
+    padding: 0 40px;
   }
 
   .thumbnail-list::-webkit-scrollbar {
@@ -90,6 +92,7 @@
   .thumbnail-list__item {
     flex: 0 0 auto;
     width: 80px;
+    list-style: none;
   }
 
   .thumbnail button {
@@ -97,6 +100,14 @@
     border: 2px solid transparent;
     cursor: pointer;
     transition: border-color 0.2s;
+    padding: 0;
+    background: none;
+  }
+
+  .thumbnail button img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .thumbnail button:hover,
@@ -126,16 +137,27 @@
   }
 
   .thumbnail-nav-button--prev {
-    left: -16px;
+    left: 0;
   }
 
   .thumbnail-nav-button--next {
-    right: -16px;
+    right: 0;
   }
 
   .thumbnail-nav-button:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+  }
+
+  /* Ensure thumbnails show on all viewports */
+  @media screen and (min-width: 850px) {
+    .thumbnail-slider {
+      display: block !important;
+    }
+    
+    .thumbnail-list {
+      padding: 0 40px;
+    }
   }
 
   @media screen and (max-width: 849px) {
