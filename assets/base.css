@@ -3638,6 +3638,13 @@ details-disclosure > details {
   display: block;
 }
 
+@media screen and (min-width: 850px) {
+  .card--standard .card__media {
+    margin: 0;
+    width: 100%;
+  }
+}
+
 @keyframes indeterminateAnimation {
   0% {
     transform: translateX(-20%) scaleX(0);
