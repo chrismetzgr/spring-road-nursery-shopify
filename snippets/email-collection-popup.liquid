@@ -12,18 +12,7 @@
     Be the first to hear about 
     what’s unfurling in the garden.
   </div>
-      <div class="footer-side">
-      <div class="special wavy-underline">
-        Keep In touch
-      </div>
-      <div class="side-text">
-        From rare plants to handcrafted goods,
-        we cultivate the strange and the beautiful
-        on our mountainside in Vermont.  
-        Be the first to hear about 
-        what’s unfurling in the garden.
-      </div>
-      <div id="footer-email-form" class="special">
+  <div id="footer-email-form" class="special">
         {% form 'customer', class: 'newsletter-form' %}
         {%- if form.posted_successfully? -%}
           <h3
@@ -85,7 +74,6 @@
         {%- endif -%}
       {% endform %}
       </div>
-    </div>
 </div>
 
 <style>
