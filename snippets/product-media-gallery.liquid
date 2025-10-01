@@ -96,54 +96,72 @@
     opacity: 1;
   }
 
-  .thumbnail button {
+  .thumbnail-button {
     width: 100%;
-    border: none;
+    border: none !important;
     cursor: pointer;
-    padding: 0;
-    background: none;
-    box-shadow: none;
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    line-height: normal !important;
+    font-size: inherit !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    font-weight: normal !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    border-radius: 0 !important;
   }
 
-  .thumbnail button img {
+  .thumbnail-button:hover,
+  .thumbnail-button:focus,
+  .thumbnail-button:active {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transform: none !important;
+  }
+
+  .thumbnail-button img {
     display: block;
     width: 100%;
     height: auto;
   }
 
-  .thumbnail-nav-button {
+  .thumbnail-nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: transparent;
-    border: none;
     width: 40px;
     height: 40px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 2;
-    padding: 0;
   }
 
-  .thumbnail-nav-button img {
+  .thumbnail-nav-arrow img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    display: block;
   }
 
-  .thumbnail-nav-button--prev {
+  .thumbnail-nav-arrow--prev {
     left: 0;
   }
 
-  .thumbnail-nav-button--next {
+  .thumbnail-nav-arrow--next {
     right: 0;
   }
 
-  .thumbnail-nav-button:disabled {
+  .thumbnail-nav-arrow.disabled {
     opacity: 0.3;
     cursor: not-allowed;
+    pointer-events: none;
   }
 
   /* Ensure thumbnails show on all viewports */
@@ -161,7 +179,7 @@
       justify-content: center;
     }
     
-    .thumbnail-nav-button {
+    .thumbnail-nav-arrow {
       display: flex !important;
     }
   }
@@ -284,14 +302,15 @@
 
   {%- if media_count > 1 -%}
     <div class="thumbnail-slider" style="display: block !important;">
-      <button
-        type="button"
-        class="thumbnail-nav-button thumbnail-nav-button--prev"
+      <div
+        class="thumbnail-nav-arrow thumbnail-nav-arrow--prev"
+        role="button"
+        tabindex="0"
         aria-label="Previous thumbnails"
         data-thumbnail-prev
       >
-        <img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="BACK"/>
-      </button>
+        <img src="YOUR_LEFT_ARROW_IMAGE_URL_HERE" alt="Previous" />
+      </div>
       
       <ul
         id="Slider-Thumbnails-{{ section.id }}"
@@ -323,7 +342,7 @@
             data-media-position="{{ media_index }}"
           >
             <button
-              class="thumbnail"
+              class="thumbnail-button"
               aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
               aria-current="true"
             >
@@ -374,7 +393,7 @@
                 </span>
               {%- endif -%}
               <button
-                class="thumbnail"
+                class="thumbnail-button"
                 aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
                 {% if media == product.selected_or_first_available_variant.featured_media
                   or product.selected_or_first_available_variant.featured_media == null
@@ -399,14 +418,15 @@
         {%- endfor -%}
       </ul>
       
-      <button
-        type="button"
-        class="thumbnail-nav-button thumbnail-nav-button--next"
+      <div
+        class="thumbnail-nav-arrow thumbnail-nav-arrow--next"
+        role="button"
+        tabindex="0"
         aria-label="Next thumbnails"
         data-thumbnail-next
       >
-        <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>
-      </button>
+        <img src="YOUR_RIGHT_ARROW_IMAGE_URL_HERE" alt="Next" />
+      </div>
     </div>
   {%- endif -%}
 </media-gallery>
