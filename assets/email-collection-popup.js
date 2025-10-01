@@ -8,18 +8,6 @@ if (popup && !localStorage.getItem(popupKey)) {
   
   setTimeout(() => {
     popup.style.opacity = '1';
-  }, 5000);
-}
-
-popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
-  popup.style.opacity = '0';
-  setTimeout(() => {
-    popup.style.display = 'none';
-  }, 500);
-  localStorage.setItem(popupKey, 'true');
-});
-
-const form = popup?.querySelector('form');
-form?.addEventListener('submit', () => {
     localStorage.setItem(popupKey, 'true');
-});
+  }, 5000);
+
