@@ -309,7 +309,7 @@
         aria-label="Previous thumbnails"
         data-thumbnail-prev
       >
-        <img src="YOUR_LEFT_ARROW_IMAGE_URL_HERE" alt="Previous" />
+        <img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="PREVIOUS"/>
       </div>
       
       <ul
@@ -425,7 +425,7 @@
         aria-label="Next thumbnails"
         data-thumbnail-next
       >
-        <img src="YOUR_RIGHT_ARROW_IMAGE_URL_HERE" alt="Next" />
+        <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>
       </div>
     </div>
   {%- endif -%}
