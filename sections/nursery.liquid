@@ -62,41 +62,53 @@
 
 <style>
     #img-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    img {
+        max-width: 1370px;
         width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+        height: auto;
     }
-    #nursery-content {
-        margin-bottom: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+}
 
-        img {
-            margin-top: 100px;
-            align-self: center;
-        }
+#nursery-content {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
 
-        .text {
-            font-size: 25px;
-            margin-top: 50px;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 850px;
-            line-height: 1.15;
-            color: var(--font-color-dark);
-        }
-        .special-text {
-            font-family: var(--font-family-secondary);
-        }
-        .center {
-            text-align: center;
-        }
-        a {
-            font-size: 20px;
-        }
+    img {
+        margin-top: 100px;
+        align-self: center;
+        max-width: 100%;
+        height: auto;
     }
+
+    .text {
+        font-size: 25px;
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 850px;
+        width: 100%;
+        line-height: 1.15;
+        color: var(--font-color-dark);
+    }
+    .special-text {
+        font-family: var(--font-family-secondary);
+    }
+    .center {
+        text-align: center;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+
     .nursery-menu {
         text-transform: uppercase;
         font-family: var(--font-family-secondary);
@@ -104,11 +116,13 @@
         margin-left: auto;
         margin-right: auto;
         font-size: 14px;
-        width: 500px;
+        max-width: 500px;
+        width: 100%;
         height: 50px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+        padding: 0 20px;
     }
 </style>
