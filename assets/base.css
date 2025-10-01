@@ -103,6 +103,18 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* can't use lvh — we want screen size */
+  background: black; /* or background-image */
+  z-index: -1;
 }
 
 .page-width {
