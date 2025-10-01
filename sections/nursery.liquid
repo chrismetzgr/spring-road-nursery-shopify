@@ -1,10 +1,10 @@
 <div id="img-container">
     <img src="{{ 'goldenrods.png' | asset_url }}" height="630px" width="auto"/>
 </div>
-<div class="nursery-menu">
+<div id="nursery-menu">
     <div><a href="#what-we-do">What We Do</a></div>
     <div><a href="#hours">Our Hours</a></div>
-    <div><a href="#our-plants">Our Plants</a></div>
+    <div><a href="#plants">Our Plants</a></div>
     <div><a href="#contact">Contact Us</a></div>
 </div>
 <div id="nursery-content">
@@ -117,7 +117,7 @@
     }
 }
 
-    .nursery-menu {
+    #nursery-menu {
         text-transform: uppercase;
         font-family: var(--font-family-secondary);
         margin-top: 20px;
@@ -135,6 +135,9 @@
     }
 
     @media (max-width: 850px) {
+    #nursery-menu:last {
+        display: none;
+    }
     #contact {
         display: none;
     }
