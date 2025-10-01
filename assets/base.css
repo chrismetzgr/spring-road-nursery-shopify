@@ -911,6 +911,12 @@ summary::-webkit-details-marker {
   text-decoration-color: #EFC142;
 }
 
+.wavy-underline-green {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: ##D3DCCF;
+}
+
 .wavy-underline {
   text-decoration-line: underline;
   text-decoration-style: wavy;
