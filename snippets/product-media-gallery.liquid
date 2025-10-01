@@ -147,6 +147,8 @@
     height: 40px;
     cursor: pointer;
     z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease;
   }
 
   .thumbnail-nav-arrow img {
@@ -166,7 +168,7 @@
 
   .thumbnail-nav-arrow.disabled {
     opacity: 0.3;
-    cursor: not-allowed;
+    cursor: default;
     pointer-events: none;
   }
 
@@ -315,7 +317,7 @@
         aria-label="Previous thumbnails"
         data-thumbnail-prev
       >
-          <img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="PREVIOUS"/>
+        <img src="YOUR_LEFT_ARROW_IMAGE_URL_HERE" alt="Previous" />
       </div>
       
       <ul
@@ -431,10 +433,8 @@
         aria-label="Next thumbnails"
         data-thumbnail-next
       >
-          <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>
+        <img src="YOUR_RIGHT_ARROW_IMAGE_URL_HERE" alt="Next" />
       </div>
     </div>
   {%- endif -%}
 </media-gallery>
-  
-  
