@@ -82,55 +82,79 @@
 </div>
 
 <style>
+#email-collection-popup {
+    display: none;
+    width: 90%;
+    max-width: 750px;
+    padding: 25px 30px 50px;
+    background-color: var(--color-background-secondary);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    z-index: -1-;
+    border-radius: 10px;
+    color: var(--font-color-dark);
+
+    #pop-up-content {
+      margin-top: 50px;
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center;
+      gap: 20px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .exit-container {
+      img {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+      img:hover {
+        cursor:pointer;
+      }
+    }
+
+    .pop-up-title {
+        font-size: 27px;
+    }
+
+    .popup-text {
+        width: 80%;
+        font-size: 22px;
+        text-align: center;
+        line-height: 1;
+    }
+
+    #popup-email-form {
+        width: 90%;
+        background-color: var(--color-background);
+    }
+}
+
+@media (max-width: 768px) {
     #email-collection-popup {
-        display: none;
-        width: 750px;
-        padding: 25px 30px 50px;
-        background-color: var(--color-background-secondary);
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-        z-index: -1-;
-        border-radius: 10px;
-        color: var(--font-color-dark);
-
-        #pop-up-content {
-          margin-top: 50px;
-          display: flex; 
-          flex-direction: column; 
-          align-items: center; 
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .exit-container {
-          img {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-          }
-          img:hover {
-            cursor:pointer;
-          }
-        }
+        padding: 20px 15px 30px;
 
         .pop-up-title {
-            font-size: 27px;
+            font-size: 20px;
         }
 
         .popup-text {
-            width: 80%;
-            font-size: 22px;
-            text-align: center;
-            line-height: 1;
+            font-size: 18px;
+            width: 90%;
         }
 
         #popup-email-form {
-            width: 90%;
-            background-color: var(--color-background);
+            width: 95%;
         }
     }
-  
+}
 </style>
