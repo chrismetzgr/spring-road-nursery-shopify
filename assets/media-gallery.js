@@ -48,6 +48,8 @@ if (!customElements.get('media-gallery')) {
         const activeItem = this.elements.viewer.querySelector('.media-gallery__item.is-active');
         if (activeItem) {
           this.currentMediaId = activeItem.dataset.mediaId;
+          // Set initial active thumbnail
+          this.setActiveThumbnail(this.currentMediaId);
         }
       }
 
@@ -92,8 +94,10 @@ if (!customElements.get('media-gallery')) {
           const button = thumbnail.querySelector('button');
           if (thumbnail.dataset.target === mediaId) {
             button.setAttribute('aria-current', 'true');
+            thumbnail.classList.add('active');
           } else {
             button.removeAttribute('aria-current');
+            thumbnail.classList.remove('active');
           }
         });
       }
