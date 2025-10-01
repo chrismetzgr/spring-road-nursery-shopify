@@ -64,7 +64,8 @@
   .thumbnail-slider {
     position: relative;
     margin-top: 1rem;
-    display: block;
+    display: flex;
+    align-items: center;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -78,6 +79,7 @@
     scrollbar-width: none;
     padding: 0 50px;
     justify-content: center;
+    align-items: center;
   }
 
   .thumbnail-list::-webkit-scrollbar {
@@ -309,7 +311,7 @@
         aria-label="Previous thumbnails"
         data-thumbnail-prev
       >
-        <img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="PREVIOUS"/>
+        <img src="YOUR_LEFT_ARROW_IMAGE_URL_HERE" alt="Previous" />
       </div>
       
       <ul
@@ -425,7 +427,7 @@
         aria-label="Next thumbnails"
         data-thumbnail-next
       >
-        <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>
+        <img src="YOUR_RIGHT_ARROW_IMAGE_URL_HERE" alt="Next" />
       </div>
     </div>
   {%- endif -%}
