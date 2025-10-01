@@ -13,8 +13,8 @@
       "type": "header",
       "settings": {}
     },
-    "nursery": {
-      "type": "nursery",
+    "garden-design": {
+      "type": "garden-design",
       "settings": {}
     },
     "footer": {
@@ -24,7 +24,7 @@
   },
   "order": [
     "header",
-    "nursery",
+    "garden-design",
     "footer"
   ]
 }
