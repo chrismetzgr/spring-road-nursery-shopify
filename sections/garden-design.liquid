@@ -8,7 +8,9 @@
     <div><a href="#">Contact Us</a></div>
 </div>
 <div id="garden-design-content">
-    <img src="{{ 'coming-soon.png' | asset_url }}" height="80px" width="auto"/>
+    <img class="desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
+    <img class="mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
+    <img class="mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
     <div class="text">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
@@ -86,9 +88,20 @@ deserunt mollit anim id est laborum.
     padding: 0 20px;
 }
 
+.mobile-pic {
+    display: none;
+}
+
 @media (max-width: 768px) {
     #garden-design-content .text {
         font-size: 18px;
+    }
+
+    .mobile-pic {
+        display: inline-block;
+    }
+    .desktop-pic { 
+        display: none;
     }
 }
 </style>
