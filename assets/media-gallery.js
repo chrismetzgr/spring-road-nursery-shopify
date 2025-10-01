@@ -29,31 +29,28 @@ if (!customElements.get('media-gallery')) {
             }
           });
 
-          // Set up thumbnail navigation arrows
+          // Set up thumbnail navigation arrows to change main image
           if (this.elements.prevArrow) {
-            this.elements.prevArrow.addEventListener('click', () => this.scrollThumbnails('prev'));
+            this.elements.prevArrow.addEventListener('click', () => this.navigateImage('prev'));
             this.elements.prevArrow.addEventListener('keydown', (e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                this.scrollThumbnails('prev');
+                this.navigateImage('prev');
               }
             });
           }
           if (this.elements.nextArrow) {
-            this.elements.nextArrow.addEventListener('click', () => this.scrollThumbnails('next'));
+            this.elements.nextArrow.addEventListener('click', () => this.navigateImage('next'));
             this.elements.nextArrow.addEventListener('keydown', (e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                this.scrollThumbnails('next');
+                this.navigateImage('next');
               }
             });
           }
 
-          // Update button states on scroll
-          if (this.elements.thumbnailList) {
-            this.elements.thumbnailList.addEventListener('scroll', () => this.updateNavigationButtons());
-            this.updateNavigationButtons();
-          }
+          // Update arrow states
+          this.updateNavigationArrows();
         }
 
         // Find and set initial active media
@@ -62,6 +59,25 @@ if (!customElements.get('media-gallery')) {
           this.currentMediaId = activeItem.dataset.mediaId;
           // Set initial active thumbnail
           this.setActiveThumbnail(this.currentMediaId);
+        }
+      }
+
+      navigateImage(direction) {
+        if (!this.elements.thumbnailList) return;
+
+        const thumbnails = Array.from(this.elements.thumbnailList.querySelectorAll('[data-target]'));
+        const currentIndex = thumbnails.findIndex(thumb => thumb.dataset.target === this.currentMediaId);
+        
+        let newIndex;
+        if (direction === 'prev') {
+          newIndex = currentIndex > 0 ? currentIndex - 1 : currentIndex;
+        } else {
+          newIndex = currentIndex < thumbnails.length - 1 ? currentIndex + 1 : currentIndex;
+        }
+
+        if (newIndex !== currentIndex) {
+          const newThumbnail = thumbnails[newIndex];
+          this.setActiveMedia(newThumbnail.dataset.target);
         }
       }
 
@@ -84,6 +100,9 @@ if (!customElements.get('media-gallery')) {
 
         // Update thumbnail active state
         this.setActiveThumbnail(mediaId);
+
+        // Update arrow states
+        this.updateNavigationArrows();
 
         // Play media if applicable
         this.playActiveMedia(targetMedia);
@@ -117,7 +136,7 @@ if (!customElements.get('media-gallery')) {
       scrollThumbnails(direction) {
         if (!this.elements.thumbnailList) return;
 
-        const scrollAmount = 200; // Adjust based on thumbnail size
+        const scrollAmount = 200;
         const currentScroll = this.elements.thumbnailList.scrollLeft;
 
         if (direction === 'prev') {
@@ -133,12 +152,14 @@ if (!customElements.get('media-gallery')) {
         }
       }
 
-      updateNavigationButtons() {
+      updateNavigationArrows() {
         if (!this.elements.thumbnailList || !this.elements.prevArrow || !this.elements.nextArrow) return;
 
-        const list = this.elements.thumbnailList;
-        const isAtStart = list.scrollLeft <= 0;
-        const isAtEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+        const thumbnails = Array.from(this.elements.thumbnailList.querySelectorAll('[data-target]'));
+        const currentIndex = thumbnails.findIndex(thumb => thumb.dataset.target === this.currentMediaId);
+
+        const isAtStart = currentIndex <= 0;
+        const isAtEnd = currentIndex >= thumbnails.length - 1;
 
         if (isAtStart) {
           this.elements.prevArrow.classList.add('disabled');
