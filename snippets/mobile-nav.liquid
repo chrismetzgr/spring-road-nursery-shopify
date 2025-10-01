@@ -20,6 +20,9 @@
   #mobile-nav {
     display: none;
     position: fixed;
+    inset: 0;
+    padding-top: env(safe-area-inset-top, 40px);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
     top: 0;
     left: 0;
     width: 80vw;
