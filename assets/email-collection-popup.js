@@ -12,7 +12,6 @@ if (popup && !localStorage.getItem(popupKey)) {
   }, 5000);
 }
 
-// Close button
 popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
   popup.style.opacity = '0';
   setTimeout(() => {
@@ -21,7 +20,6 @@ popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
   localStorage.setItem(popupKey, 'true');
 });
 
-// Form submission success
 const form = popup?.querySelector('form');
 form?.addEventListener('submit', () => {
   setTimeout(() => {
