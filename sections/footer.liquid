@@ -24,6 +24,15 @@
         what’s unfurling in the garden.
       </div>
       <div id="footer-email-form" class="special">
+        {%- if form.posted_successfully? -%}
+          <h3
+            class="newsletter-form__message newsletter-form__message--success"
+            id="Newsletter-success--{{ section.id }}"
+            autofocus
+          >
+            {{- 'newsletter.success' | t }}
+          </h3>
+        {%  else %}
         {% form 'customer', class: 'newsletter-form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">
@@ -73,16 +82,8 @@
               </small>
             {%- endif -%}
           </div>
-          {%- if form.posted_successfully? -%}
-            <h3
-              class="newsletter-form__message newsletter-form__message--success"
-              id="Newsletter-success--{{ section.id }}"
-              autofocus
-            >
-              {{- 'newsletter.success' | t }}
-            </h3>
-          {%- endif -%}
         {% endform %}
+      {%- endif -%}
       </div>
     </div>
   </div>
