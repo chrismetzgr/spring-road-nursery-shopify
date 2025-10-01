@@ -8,6 +8,7 @@ if (popup && !localStorage.getItem(popupKey)) {
   
   setTimeout(() => {
     popup.style.opacity = '1';
+    popup.style['z-index'] = 2000;
   }, 5000);
 }
 
