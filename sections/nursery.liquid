@@ -2,8 +2,8 @@
     <img src="{{ 'goldenrods.png' | asset_url }}" height="630px" width="auto"/>
 </div>
 <div class="nursery-menu">
-    <div><a href="#">What We Do</a></div>
-    <div><a href="#">Our Hours</a></div>
+    <div><a href="#what-we-do">What We Do</a></div>
+    <div><a href="#hours">Our Hours</a></div>
     <div><a href="#">Our Plants</a></div>
     <div><a href="#">Contact Us</a></div>
 </div>
@@ -32,18 +32,20 @@
                Bryan & Adam    
         </div>
     </div>
-    <img src="{{ 'hours.png' | asset_url }}" height="80px" width="auto"/>
-    <div class="text">
-        Our days and hours shift with the season. Currently, we are open...
-    </div>
-    <div class="text center special-text">
-        Weekdays 
-        <br/>
-        by appointment
-        <br/><br/><br/>
-        Saturday & Sunday 
-        <br/>
-        10 AM – 4 PM
+    <div id="hours">
+        <img src="{{ 'hours.png' | asset_url }}" height="80px" width="auto"/>
+        <div class="text">
+            Our days and hours shift with the season. Currently, we are open...
+        </div>
+        <div class="text center special-text">
+            Weekdays 
+            <br/>
+            by appointment
+            <br/><br/><br/>
+            Saturday & Sunday 
+            <br/>
+            10 AM – 4 PM
+        </div>
     </div>
     <img src="{{ 'our-plants.png' | asset_url }}" height="80px" width="auto"/>
     <div class="text center">
