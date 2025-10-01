@@ -92,6 +92,8 @@
     list-style: none;
     opacity: 0.4;
     transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
   }
 
   .thumbnail-list__item.active {
@@ -116,6 +118,8 @@
     color: inherit !important;
     text-decoration: none !important;
     border-radius: 0 !important;
+    display: flex;
+    align-items: center;
   }
 
   .thumbnail-button:hover,
@@ -311,7 +315,8 @@
         aria-label="Previous thumbnails"
         data-thumbnail-prev
       >
-<img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="PREVIOUS"/>      </div>
+          <img src="{{ 'left-carat.png' | asset_url }}" height="auto" width="auto" alt="PREVIOUS"/>
+      </div>
       
       <ul
         id="Slider-Thumbnails-{{ section.id }}"
@@ -426,8 +431,10 @@
         aria-label="Next thumbnails"
         data-thumbnail-next
       >
-      <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>      </div>
+          <img src="{{ 'right-carat.png' | asset_url }}" height="auto" width="auto" alt="NEXT"/>
+      </div>
     </div>
   {%- endif -%}
 </media-gallery>
-
+  
+  
