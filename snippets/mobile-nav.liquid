@@ -18,10 +18,11 @@
     font-style: normal;
   }
   #mobile-nav {
-    min-height: calc(100dvh - 6rem);
+    height: 100vh;
     display: none;
     width: 80vw;
-    position: fixed;
+    position: absolute;
+    top: -10;
     background-image: url('{{ "MOBILE-MENU-BACKGROUND.png" | asset_url }}');
     background-repeat: no-repeat;
     background-attachment: fixed;
