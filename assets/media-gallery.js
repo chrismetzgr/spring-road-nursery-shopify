@@ -8,8 +8,8 @@ if (!customElements.get('media-gallery')) {
           liveRegion: this.querySelector('[id^="GalleryStatus"]'),
           viewer: this.querySelector('[id^="GalleryViewer"]'),
           thumbnailList: this.querySelector('.thumbnail-list'),
-          prevButton: this.querySelector('[data-thumbnail-prev]'),
-          nextButton: this.querySelector('[data-thumbnail-next]'),
+          prevArrow: this.querySelector('[data-thumbnail-prev]'),
+          nextArrow: this.querySelector('[data-thumbnail-next]'),
         };
 
         this.currentMediaId = null;
@@ -21,7 +21,7 @@ if (!customElements.get('media-gallery')) {
         if (this.elements.thumbnailList) {
           const thumbnails = this.elements.thumbnailList.querySelectorAll('[data-target]');
           thumbnails.forEach((thumbnail) => {
-            const button = thumbnail.querySelector('button');
+            const button = thumbnail.querySelector('.thumbnail-button');
             if (button) {
               button.addEventListener('click', () => {
                 this.setActiveMedia(thumbnail.dataset.target);
@@ -29,12 +29,24 @@ if (!customElements.get('media-gallery')) {
             }
           });
 
-          // Set up thumbnail navigation buttons
-          if (this.elements.prevButton) {
-            this.elements.prevButton.addEventListener('click', () => this.scrollThumbnails('prev'));
+          // Set up thumbnail navigation arrows
+          if (this.elements.prevArrow) {
+            this.elements.prevArrow.addEventListener('click', () => this.scrollThumbnails('prev'));
+            this.elements.prevArrow.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.scrollThumbnails('prev');
+              }
+            });
           }
-          if (this.elements.nextButton) {
-            this.elements.nextButton.addEventListener('click', () => this.scrollThumbnails('next'));
+          if (this.elements.nextArrow) {
+            this.elements.nextArrow.addEventListener('click', () => this.scrollThumbnails('next'));
+            this.elements.nextArrow.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.scrollThumbnails('next');
+              }
+            });
           }
 
           // Update button states on scroll
@@ -91,7 +103,7 @@ if (!customElements.get('media-gallery')) {
 
         const thumbnails = this.elements.thumbnailList.querySelectorAll('[data-target]');
         thumbnails.forEach((thumbnail) => {
-          const button = thumbnail.querySelector('button');
+          const button = thumbnail.querySelector('.thumbnail-button');
           if (thumbnail.dataset.target === mediaId) {
             button.setAttribute('aria-current', 'true');
             thumbnail.classList.add('active');
@@ -122,14 +134,27 @@ if (!customElements.get('media-gallery')) {
       }
 
       updateNavigationButtons() {
-        if (!this.elements.thumbnailList || !this.elements.prevButton || !this.elements.nextButton) return;
+        if (!this.elements.thumbnailList || !this.elements.prevArrow || !this.elements.nextArrow) return;
 
         const list = this.elements.thumbnailList;
         const isAtStart = list.scrollLeft <= 0;
         const isAtEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
 
-        this.elements.prevButton.disabled = isAtStart;
-        this.elements.nextButton.disabled = isAtEnd;
+        if (isAtStart) {
+          this.elements.prevArrow.classList.add('disabled');
+          this.elements.prevArrow.setAttribute('aria-disabled', 'true');
+        } else {
+          this.elements.prevArrow.classList.remove('disabled');
+          this.elements.prevArrow.removeAttribute('aria-disabled');
+        }
+
+        if (isAtEnd) {
+          this.elements.nextArrow.classList.add('disabled');
+          this.elements.nextArrow.setAttribute('aria-disabled', 'true');
+        } else {
+          this.elements.nextArrow.classList.remove('disabled');
+          this.elements.nextArrow.removeAttribute('aria-disabled');
+        }
       }
 
       announceLiveRegion(activeItem, position) {
