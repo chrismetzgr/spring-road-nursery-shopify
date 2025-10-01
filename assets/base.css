@@ -3638,11 +3638,13 @@ details-disclosure > details {
   display: block;
 }
 
-@media screen and (min-width: 850px) {
-  .card--standard .card__media {
-    margin: 0;
-    width: 100%;
-  }
+.card__media {
+  margin: var(--image-padding);
+  width: 100%;
+}
+
+.card--standard .card__media {
+  margin: 0;
 }
 
 @keyframes indeterminateAnimation {
