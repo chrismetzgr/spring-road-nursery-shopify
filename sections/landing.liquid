@@ -22,6 +22,21 @@
   </footer>
 </main>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const video = document.querySelector('.video-container video');
+  
+  video.addEventListener('canplay', function() {
+    video.classList.add('loaded');
+  });
+  
+  // Fallback in case canplay doesn't fire
+  if (video.readyState >= 3) {
+    video.classList.add('loaded');
+  }
+});
+</script>
+
 <style>
   @font-face {
     font-family: "Akzidenz-Grotesk Pro";
@@ -89,7 +104,7 @@
     width: 100vw;
     position: relative;
     background-color: black;
-    z-index: -101
+    z-index: -101;
 }
 
 .video-container video {
@@ -98,6 +113,12 @@
     position: absolute;
     object-fit: cover;
     z-index: -100;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.video-container video.loaded {
+    opacity: 1;
 }
 
   @media (max-width: 999px) {
