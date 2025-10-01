@@ -20,17 +20,17 @@
   #mobile-nav {
     display: none;
     width: 80vw;
-    position: absolute;
+    height: 100vh;
+    height: 100dvh;
+    position: fixed;
     background-image: url('{{ "MOBILE-MENU-BACKGROUND.png" | asset_url }}');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     z-index: 2000;
     top: 0;
-    bottom:0;
-    position:fixed;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    left: 0;
+    overflow: hidden;
     
     .exit-container {
       direction: rtl;
