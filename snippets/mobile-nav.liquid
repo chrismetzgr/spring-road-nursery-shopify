@@ -17,16 +17,18 @@
     font-weight: normal;
     font-style: normal;
   }
-#mobile-nav {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  
+  #mobile-nav {
+    height: 100vh;
+    display: none;
+    width: 80vw;
+    position: absolute;
+    background-image: url('{{ "MOBILE-MENU-BACKGROUND.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 2000;
+    overflow: hidden;
+    
     .exit-container {
       direction: rtl;
       img {
@@ -56,17 +58,6 @@
       }
     }
   }
-
-#mobile-nav::before {
-  content: "";
-  position: absolute;
-  top: -100px;
-  left: 0;
-  right: 0;
-  bottom: -100px;
-  background-color: black; /* your background */
-  z-index: -1;
-}
 
   #mobile-nav.show {
     display: block; /* Make it visible */
