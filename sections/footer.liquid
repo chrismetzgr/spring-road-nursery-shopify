@@ -24,6 +24,7 @@
         what’s unfurling in the garden.
       </div>
       <div id="footer-email-form" class="special">
+        {% form 'customer', class: 'newsletter-form' %}
         {%- if form.posted_successfully? -%}
           <h3
             class="newsletter-form__message newsletter-form__message--success"
@@ -33,7 +34,6 @@
             {{- 'newsletter.success' | t }}
           </h3>
         {%  else %}
-        {% form 'customer', class: 'newsletter-form' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">
             <div class="field">
@@ -82,8 +82,8 @@
               </small>
             {%- endif -%}
           </div>
-        {% endform %}
-      {%- endif -%}
+        {%- endif -%}
+      {% endform %}
       </div>
     </div>
   </div>
