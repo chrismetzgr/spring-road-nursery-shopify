@@ -153,10 +153,17 @@
   @media screen and (min-width: 850px) {
     .thumbnail-slider {
       display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     
     .thumbnail-list {
       padding: 0 40px;
+      display: flex !important;
+    }
+    
+    .thumbnail-nav-button {
+      display: flex !important;
     }
   }
 
@@ -167,6 +174,10 @@
     
     .thumbnail-list__item {
       width: 60px;
+    }
+    
+    .thumbnail-slider {
+      display: block !important;
     }
   }
 </style>
@@ -271,15 +282,8 @@
     </button>
   {%- endif -%}
 
-  {%- liquid
-    assign is_not_limited_to_single_item = false
-    if limit == null or limit > 1
-      assign is_not_limited_to_single_item = true
-    endif
-  -%}
-  
-  {%- if is_not_limited_to_single_item and media_count > 1 -%}
-    <div class="thumbnail-slider">
+  {%- if media_count > 1 -%}
+    <div class="thumbnail-slider" style="display: block !important;">
       <button
         type="button"
         class="thumbnail-nav-button thumbnail-nav-button--prev"
