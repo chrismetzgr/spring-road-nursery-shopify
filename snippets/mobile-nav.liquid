@@ -17,13 +17,13 @@
     font-weight: normal;
     font-style: normal;
   }
-#mobile-nav {
+  #mobile-nav {
     height: 100dvh;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
     box-sizing: border-box;
+    display: none;
+    width: 80vw;
     position: fixed;
     background-image: url('{{ "MOBILE-MENU-BACKGROUND.png" | asset_url }}');
     background-repeat: no-repeat;
