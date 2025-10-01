@@ -21,9 +21,5 @@ popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
 
 const form = popup?.querySelector('form');
 form?.addEventListener('submit', () => {
-  setTimeout(() => {
-    if (form.querySelector('.newsletter-form__message--success')) {
-      localStorage.setItem(popupKey, 'true');
-    }
-  }, 100);
+    localStorage.setItem(popupKey, 'true');
 });
