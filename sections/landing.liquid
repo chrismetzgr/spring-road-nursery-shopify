@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     video.classList.add('loaded');
   });
   
-  // Fallback in case canplay doesn't fire
   if (video.readyState >= 3) {
     video.classList.add('loaded');
   }
