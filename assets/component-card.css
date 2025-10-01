@@ -93,7 +93,14 @@
 }
 
 .card-information {
-  text-align: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 850px) {
+  .card-information {
+    margin-top: 0; /* Remove spacing on larger screens */
+  }
 }
 
 .card__media,
