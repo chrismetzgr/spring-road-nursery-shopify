@@ -228,9 +228,18 @@
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
+                  {%- liquid
+                    assign check_against_inventory = true
+                    if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+                      assign check_against_inventory = false
+                    endif
+                    if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+                      assign quantity_rule_soldout = true
+                    endif
+                  -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
-                  class="product-form__input product-form__quantity"
+                  class="product-form__input product-form__quantity {% if quantity_rule_soldout %}hidden{%  endif %}"
                 >
                   {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
                   {% # theme-check-disable %}
@@ -245,15 +254,6 @@
                       {{- 'products.product.quantity.label' | t -}}
                     {%- endif -%}
                   </span> {% endcomment %}
-                  {%- liquid
-                    assign check_against_inventory = true
-                    if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
-                      assign check_against_inventory = false
-                    endif
-                    if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
-                      assign quantity_rule_soldout = true
-                    endif
-                  -%}
                   <label
                     class="quantity__label form__label"
                     for="Quantity-{{ section.id }}"
