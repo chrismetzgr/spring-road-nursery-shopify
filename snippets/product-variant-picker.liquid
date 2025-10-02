@@ -1,6 +1,10 @@
 {% comment %}
   Renders product variant-picker
 {% endcomment %}
+ <script type="application/json" data-product-variants>
+  {{ product.variants | json }}
+</script>
+
 {%- unless product.has_only_default_variant -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
