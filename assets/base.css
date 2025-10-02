@@ -909,17 +909,20 @@ summary::-webkit-details-marker {
   text-decoration-line: underline;
   text-decoration-style: wavy;
   text-decoration-color: #EFC142;
+  text-underline-offset: 5px;
 }
 
 .wavy-underline-green {
   text-decoration-line: underline;
   text-decoration-style: wavy;
   text-decoration-color: #D3DCCF;
+  text-underline-offset: 5px;
 }
 
 .wavy-underline {
   text-decoration-line: underline;
   text-decoration-style: wavy;
+  text-underline-offset: 5px;
 }
 
 /* component-grid */
