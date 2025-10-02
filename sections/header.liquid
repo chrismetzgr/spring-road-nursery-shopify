@@ -16,8 +16,7 @@
       </div>
     </div>
     <div class="side">
-      <div class="sort-container">
-          {% if template == 'collection' %}
+      <div class="sort-container {% if template == 'collection' %}hidden{% endif %}">
           <img id="sort-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
           <div id="sort-menu" class="sort-dropdown">
             <span data-sort="featured">Featured</span>
@@ -25,7 +24,6 @@
             <span data-sort="price">Price</span>
             <span data-sort="newest">Newest</span>
           </div>
-        {% endif %}
         </div>
       {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
     </div>
@@ -38,6 +36,9 @@
     src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
     font-weight: normal;
     font-style: normal;
+  }
+  .hidden {
+    visibility: hidden;
   }
   a {
     text-decoration: none;
@@ -69,8 +70,8 @@
     display: flex;
   }
   .sort-container {
-    position: relative; 
-    display: flex !important;
+    position: relative;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
