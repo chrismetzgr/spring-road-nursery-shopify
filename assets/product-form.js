@@ -2,6 +2,7 @@ if (!customElements.get('variant-selects')) {
   customElements.define('variant-selects', class VariantSelects extends HTMLElement {
 constructor() {
   super();
+  console.log('testing');
   
   // Listen for changes on radio buttons specifically
   this.querySelectorAll('input[type="radio"]').forEach(radio => {
