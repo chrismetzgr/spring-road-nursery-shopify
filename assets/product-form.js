@@ -14,6 +14,38 @@ function initializeRadioButtons() {
   });
 }
 
+// Prevent product-info from replacing radio buttons
+subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+  // After product-info updates, restore the correct radio selection
+  const data = event.data;
+  if (!data || !data.variant) return;
+  
+  setTimeout(() => {
+    const variantSelects = document.querySelector('variant-selects');
+    if (!variantSelects) return;
+    
+    const variant = data.variant;
+    console.log('Restoring radio selection for variant:', variant);
+    
+    // Set radio buttons to match the variant options
+    if (variant.option1) {
+      const radio1 = variantSelects.querySelector(`input[type="radio"][value="${variant.option1}"]`);
+      if (radio1) radio1.checked = true;
+    }
+    if (variant.option2) {
+      const radio2 = variantSelects.querySelector(`input[type="radio"][value="${variant.option2}"]`);
+      if (radio2) radio2.checked = true;
+    }
+    if (variant.option3) {
+      const radio3 = variantSelects.querySelector(`input[type="radio"][value="${variant.option3}"]`);
+      if (radio3) radio3.checked = true;
+    }
+    
+    // Re-attach listeners to the potentially new elements
+    initializeRadioButtons();
+  }, 150);
+});
+
 function handleRadioChange(e) {
   console.log('Radio changed to:', e.target.value);
   
