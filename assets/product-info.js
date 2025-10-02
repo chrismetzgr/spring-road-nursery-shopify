@@ -159,9 +159,9 @@ updateOptionValues(html) {
   const hasRadioButtons = this.variantSelectors?.querySelector('input[type="radio"]');
   
   // Don't update variant selectors if using radio buttons
-  // if (variantSelects && !hasRadioButtons) {
-  //   HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
-  // }
+  if (variantSelects && !hasRadioButtons) {
+    HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
+  }
 }
 
       handleUpdateProductInfo(productUrl) {
