@@ -73,9 +73,6 @@ if (!customElements.get('variant-selects')) {
     }
 
     updateVariantStatuses() {
-      const selectedOptionOneVariants = this.variantData.filter(
-        (variant) => this.querySelector(':checked').value === variant.option1
-      );
       const inputWrappers = [...this.querySelectorAll('.variant-radio-option')];
       inputWrappers.forEach((option) => {
         if (option.querySelector('input[type="radio"]')) {
@@ -88,10 +85,16 @@ if (!customElements.get('variant-selects')) {
       const input = option.querySelector('input');
       const label = option.querySelector('label');
       const optionValue = input.value;
-      const optionInputs = Array.from(
-        this.querySelectorAll(`input[name="${input.name}"]`)
-      );
-      const optionPosition = optionInputs.indexOf(input);
+      
+      // Find which option position this input represents
+      const allRadioGroups = [...this.querySelectorAll('fieldset.variant-radio-group')];
+      let optionPosition = -1;
+      for (let i = 0; i < allRadioGroups.length; i++) {
+        if (allRadioGroups[i].contains(input)) {
+          optionPosition = i;
+          break;
+        }
+      }
 
       const selectedOptions = Array.from(this.querySelectorAll('input[type="radio"]:checked')).map(el => el.value);
       
@@ -115,7 +118,7 @@ if (!customElements.get('variant-selects')) {
       const baseText = optionValue;
       if (!isAvailable && !label.textContent.includes('- Out of stock')) {
         label.textContent = `${baseText} - Out of stock`;
-      } else if (isAvailable) {
+      } else if (isAvailable && label.textContent.includes('- Out of stock')) {
         label.textContent = baseText;
       }
     }
@@ -204,13 +207,17 @@ if (!customElements.get('variant-selects')) {
 
       if (disable) {
         addButton.setAttribute('disabled', 'disabled');
-        if (text) addButtonText.textContent = text;
+        // Only update text if explicitly provided and it's a sold out/unavailable message
+        if (text && (text === window.variantStrings.soldOut || text === window.variantStrings.unavailable)) {
+          if (addButtonText) addButtonText.textContent = text;
+        }
       } else {
         addButton.removeAttribute('disabled');
-        addButtonText.textContent = window.variantStrings.addToCart;
+        // Only reset to "Add to Cart" if we're not in the middle of showing "Added!"
+        if (addButtonText && addButtonText.textContent !== 'Added!') {
+          addButtonText.textContent = window.variantStrings.addToCart;
+        }
       }
-
-      if (!modifyClass) return;
     }
 
     setUnavailable() {
@@ -219,7 +226,7 @@ if (!customElements.get('variant-selects')) {
       const addButtonText = button.querySelector('[name="add"] > span.add-to-cart-text');
       const price = document.getElementById(`price-${this.dataset.section}`);
       if (!addButton) return;
-      addButtonText.textContent = window.variantStrings.unavailable;
+      if (addButtonText) addButtonText.textContent = window.variantStrings.unavailable;
       if (price) price.classList.add('visibility-hidden');
     }
 
@@ -229,3 +236,20 @@ if (!customElements.get('variant-selects')) {
     }
   });
 }
+
+if (!customElements.get('product-form')) {
+  customElements.define(
+    'product-form',
+    class ProductForm extends HTMLElement {
+      constructor() {
+        super();
+
+        this.form = this.querySelector('form');
+        this.variantIdInput.disabled = false;
+        this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
+        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+        this.submitButton = this.querySelector('[type="submit"]');
+        this.submitButtonText = this.submitButton.querySelector('span.add-to-cart-text');
+        this.addedText = this.submitButton.querySelector('span.added-to-cart-text');
+
+        if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-hasp
