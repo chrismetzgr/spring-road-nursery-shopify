@@ -23,24 +23,20 @@ function updateVariantAvailability() {
     radios.forEach(radio => {
       const optionValue = radio.value;
       
-      // Check if this option is available with current selections
       const isAvailable = allVariants.some(variant => {
         if (!variant.available) return false;
         if (variant.options[currentGroupIndex] !== optionValue) return false;
         
-        // Check if it matches other selected options
         return Object.keys(selectedOptions).every(selectedIndex => {
           if (parseInt(selectedIndex) === currentGroupIndex) return true;
           return variant.options[selectedIndex] === selectedOptions[selectedIndex];
         });
       });
 
-      // Update styling
       const label = radio.nextElementSibling;
       if (label) {
         label.classList.toggle('variant-radio-label--disabled', !isAvailable);
         
-        // Update label text
         const baseText = optionValue;
         if (!isAvailable && !label.textContent.includes('- Out of stock')) {
           label.textContent = `${baseText} - Out of stock`;
@@ -49,8 +45,12 @@ function updateVariantAvailability() {
         }
       }
       
-      // Update disabled state
       radio.disabled = !isAvailable;
+      if (!isAvailable) {
+        radio.classList.add('disabled');
+      } else {
+        radio.classList.remove('disabled');
+      }
     });
   });
 }
