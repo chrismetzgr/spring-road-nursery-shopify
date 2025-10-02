@@ -86,7 +86,7 @@
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span class="price-item price-item--regular">
-                    {{ amount_no_decimals }}
+            {{ money_price | money_without_trailing_zeros }}
           </span>
         {%- endif -%}
       </div>
