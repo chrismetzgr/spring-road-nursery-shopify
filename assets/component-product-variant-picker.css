@@ -8,7 +8,6 @@ variant-selects {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
 .product--no-media .product-form__input.product-form__input--pill,
