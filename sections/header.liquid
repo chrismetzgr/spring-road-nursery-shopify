@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="side">
-      <div class="sort-container {% if template != 'collection' %}hidden{% endif %}">
+      <div class="sort-container {% if template != 'collection' %}hide{% endif %}">
           <img id="sort-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
           <div id="sort-menu" class="sort-dropdown">
             <span data-sort="featured">Featured</span>
@@ -73,7 +73,7 @@
     align-items: center;
   }
 
-  .sort-container.hidden {
+  .sort-container.hide {
       visibility: hidden;
     }
 
