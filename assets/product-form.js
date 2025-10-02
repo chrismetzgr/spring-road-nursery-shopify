@@ -7,41 +7,68 @@ function updateVariantAvailability() {
   if (!allVariantsScript) return;
   
   const allVariants = JSON.parse(allVariantsScript.textContent);
-  const selectedOptions = {};
   const radioGroups = variantSelects.querySelectorAll('fieldset.product-form__input--pill');
   
-  radioGroups.forEach((group, groupIndex) => {
-    const checkedRadio = group.querySelector('input[type="radio"]:checked');
-    if (checkedRadio) {
-      selectedOptions[groupIndex] = checkedRadio.value;
+  if (radioGroups.length === 0) return;
+
+  // For the FIRST option group (e.g., Size/Type), check if ANY variant with that option is available
+  const firstGroup = radioGroups[0];
+  const firstGroupRadios = firstGroup.querySelectorAll('input[type="radio"]');
+  
+  firstGroupRadios.forEach(radio => {
+    const optionValue = radio.value;
+    
+    // Check if ANY variant with this first option value is available
+    const hasAnyAvailable = allVariants.some(variant => {
+      return variant.available && variant.options[0] === optionValue;
+    });
+
+    const label = radio.nextElementSibling;
+    if (label) {
+      label.classList.toggle('variant-radio-label--disabled', !hasAnyAvailable);
+      
+      if (!hasAnyAvailable && !label.textContent.includes('- Out of stock')) {
+        label.textContent = `${optionValue} - Out of stock`;
+      } else if (hasAnyAvailable && label.textContent.includes('- Out of stock')) {
+        label.textContent = optionValue;
+      }
+    }
+    
+    radio.disabled = !hasAnyAvailable;
+    if (!hasAnyAvailable) {
+      radio.classList.add('disabled');
+    } else {
+      radio.classList.remove('disabled');
     }
   });
 
-  radioGroups.forEach((group, currentGroupIndex) => {
+  // For SUBSEQUENT option groups (e.g., Color), check availability based on selected first option
+  const selectedFirstOption = firstGroup.querySelector('input[type="radio"]:checked')?.value;
+  
+  if (!selectedFirstOption) return;
+
+  for (let groupIndex = 1; groupIndex < radioGroups.length; groupIndex++) {
+    const group = radioGroups[groupIndex];
     const radios = group.querySelectorAll('input[type="radio"]');
     
     radios.forEach(radio => {
       const optionValue = radio.value;
       
+      // Check if this option is available with the selected first option
       const isAvailable = allVariants.some(variant => {
-        if (!variant.available) return false;
-        if (variant.options[currentGroupIndex] !== optionValue) return false;
-        
-        return Object.keys(selectedOptions).every(selectedIndex => {
-          if (parseInt(selectedIndex) === currentGroupIndex) return true;
-          return variant.options[selectedIndex] === selectedOptions[selectedIndex];
-        });
+        return variant.available && 
+               variant.options[0] === selectedFirstOption && 
+               variant.options[groupIndex] === optionValue;
       });
 
       const label = radio.nextElementSibling;
       if (label) {
         label.classList.toggle('variant-radio-label--disabled', !isAvailable);
         
-        const baseText = optionValue;
         if (!isAvailable && !label.textContent.includes('- Out of stock')) {
-          label.textContent = `${baseText} - Out of stock`;
+          label.textContent = `${optionValue} - Out of stock`;
         } else if (isAvailable && label.textContent.includes('- Out of stock')) {
-          label.textContent = baseText;
+          label.textContent = optionValue;
         }
       }
       
@@ -52,7 +79,18 @@ function updateVariantAvailability() {
         radio.classList.remove('disabled');
       }
     });
-  });
+    
+    // Auto-select first available option if current selection is unavailable
+    const checkedRadio = group.querySelector('input[type="radio"]:checked');
+    if (checkedRadio && checkedRadio.disabled) {
+      const firstAvailable = group.querySelector('input[type="radio"]:not(:disabled)');
+      if (firstAvailable) {
+        firstAvailable.checked = true;
+        // Trigger change event to update the variant
+        firstAvailable.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    }
+  }
 }
 
 // Radio button variant selector
