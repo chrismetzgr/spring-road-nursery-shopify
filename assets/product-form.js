@@ -91,14 +91,14 @@ function handleRadioChange(e) {
       selectedOptionValues: selectedOptionValues
     }
   });
-  
-  // Update availability of other options after variant change processes
-  setTimeout(() => {
-    updateVariantAvailability();
-  }, 100);
 }
 
 document.addEventListener('DOMContentLoaded', initializeRadioButtons);
+
+// Listen for variant changes and update availability
+subscribe(PUB_SUB_EVENTS.variantChange, () => {
+  updateVariantAvailability();
+});
 
 // Product form with "Added!" functionality
 if (!customElements.get('product-form')) {
