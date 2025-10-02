@@ -1,32 +1,45 @@
-// Radio button listener for variant selection
-document.addEventListener('DOMContentLoaded', function() {
+// Radio button variant selector
+function initializeRadioButtons() {
   const variantSelects = document.querySelector('variant-selects');
   if (!variantSelects) return;
   
   const radioButtons = variantSelects.querySelectorAll('input[type="radio"]');
-  console.log('Radio button variant selector initialized. Found', radioButtons.length, 'radio buttons');
+  console.log('Attaching listeners to', radioButtons.length, 'radio buttons');
   
   radioButtons.forEach(radio => {
-    radio.addEventListener('change', function(e) {
-      console.log('Radio changed to:', e.target.value);
-      
-      // Get all selected option values
-      const selectedOptionValues = Array.from(
-        variantSelects.querySelectorAll('input[type="radio"]:checked')
-      ).map(input => input.value);
-      
-      console.log('Selected options:', selectedOptionValues);
-      
-      // Publish the event that product-info is listening for
-      publish(PUB_SUB_EVENTS.optionValueSelectionChange, {
-        data: {
-          event: e,
-          target: variantSelects,
-          selectedOptionValues: selectedOptionValues
-        }
-      });
-    });
+    // Remove any existing listener to prevent duplicates
+    radio.removeEventListener('change', handleRadioChange);
+    // Attach new listener
+    radio.addEventListener('change', handleRadioChange);
   });
+}
+
+function handleRadioChange(e) {
+  console.log('Radio changed to:', e.target.value);
+  
+  const variantSelects = document.querySelector('variant-selects');
+  const selectedOptionValues = Array.from(
+    variantSelects.querySelectorAll('input[type="radio"]:checked')
+  ).map(input => input.value);
+  
+  console.log('Selected options:', selectedOptionValues);
+  
+  publish(PUB_SUB_EVENTS.optionValueSelectionChange, {
+    data: {
+      event: e,
+      target: variantSelects,
+      selectedOptionValues: selectedOptionValues
+    }
+  });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initializeRadioButtons);
+
+// Re-initialize after variant changes (when HTML gets updated)
+subscribe(PUB_SUB_EVENTS.variantChange, () => {
+  console.log('Variant changed, re-attaching radio listeners');
+  setTimeout(initializeRadioButtons, 100); // Small delay to ensure DOM is updated
 });
 
 // Product form with "Added!" functionality
