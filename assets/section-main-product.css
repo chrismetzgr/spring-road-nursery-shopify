@@ -7,6 +7,7 @@
 
 product-info {
   display: block;
+  line-height: 1.3;
 }
 
 .product {
@@ -40,7 +41,6 @@ product-info {
   }
 
   .product__info-wrapper {
-    line-height: 1.3;
     padding: 0 0 0 5rem;
   }
 
