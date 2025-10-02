@@ -150,3 +150,10 @@
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 </div>
+
+<style>
+  .button--processing {
+    pointer-events: none;
+    cursor: not-allowed !important;
+  }
+</style>
