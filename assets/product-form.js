@@ -1,9 +1,18 @@
 if (!customElements.get('variant-selects')) {
   customElements.define('variant-selects', class VariantSelects extends HTMLElement {
-    constructor() {
-      super();
-      this.addEventListener('change', this.onVariantChange);
-    }
+constructor() {
+  super();
+  
+  // Listen for changes on radio buttons specifically
+  this.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', this.onVariantChange.bind(this));
+  });
+  
+  // Also listen for changes on select elements (in case there are any)
+  this.querySelectorAll('select').forEach(select => {
+    select.addEventListener('change', this.onVariantChange.bind(this));
+  });
+}
 
 onVariantChange(event) {
   console.log('=== VARIANT CHANGE START ===');
