@@ -106,7 +106,9 @@ document.addEventListener('DOMContentLoaded', initializeRadioButtons);
 
 // Listen for variant changes and update availability
 subscribe(PUB_SUB_EVENTS.variantChange, () => {
-  updateVariantAvailability();
+  setTimeout(() => {
+    updateVariantAvailability();
+  }, 300);
 });
 
 // Product form with "Added!" functionality
