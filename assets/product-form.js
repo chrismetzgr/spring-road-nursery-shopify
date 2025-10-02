@@ -8,7 +8,7 @@ function updateVariantAvailability() {
   
   const allVariants = JSON.parse(allVariantsScript.textContent);
   const selectedOptions = {};
-  const radioGroups = variantSelects.querySelectorAll('fieldset.variant-radio-group');
+  const radioGroups = variantSelects.querySelectorAll('fieldset.product-form__input--pill');
   
   radioGroups.forEach((group, groupIndex) => {
     const checkedRadio = group.querySelector('input[type="radio"]:checked');
