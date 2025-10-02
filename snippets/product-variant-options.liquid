@@ -93,7 +93,7 @@
     >
     <label for="{{ input_id }}">
       {{ value -}}
-      {{ label_unavailable }}
+      {%- if option_disabled %} - Out of Stock{%- endif -%}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
