@@ -1,8 +1,34 @@
 if (!customElements.get('variant-selects')) {
   customElements.define('variant-selects', class VariantSelects extends HTMLElement {
-    constructor() {
-      super();
-      this.addEventListener('change', this.onVariantChange);
+constructor() {
+  super();
+  this.addEventListener('change', this.onVariantChange);
+  
+  // Initialize radio buttons based on URL variant parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const variantId = urlParams.get('variant');
+  
+  if (variantId) {
+    const variantData = this.getVariantData();
+    const selectedVariant = variantData.find(v => v.id == variantId);
+    
+    if (selectedVariant) {
+      // Set the radio buttons to match this variant
+      selectedVariant.options.forEach((optionValue, index) => {
+        const radioGroup = this.querySelectorAll('fieldset.variant-radio-group')[index];
+        if (radioGroup) {
+          const radioToSelect = radioGroup.querySelector(`input[value="${optionValue}"]`);
+          if (radioToSelect) {
+            radioToSelect.checked = true;
+          }
+        }
+      });
+    }
+  }
+}
+This ensures that when the URL changes (and the page state updates), the radio buttons are set to match the variant in the URL. The issue is likely that the URL updates but the radio buttons don't update to match, so the visual state and the actual variant state get out of sync.
+
+
     }
 
     onVariantChange() {
