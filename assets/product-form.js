@@ -13,6 +13,8 @@ function updateVariantAvailability() {
     return;
   }
 
+  console.log('All variants:', allVariants);
+
   const selectedOptions = {};
   const radioGroups = variantSelects.querySelectorAll('fieldset.variant-radio-group');
   
@@ -23,8 +25,13 @@ function updateVariantAvailability() {
     }
   });
 
+  console.log('Selected options:', selectedOptions);
+  console.log('Number of radio groups:', radioGroups.length);
+
   radioGroups.forEach((group, currentGroupIndex) => {
     const radios = group.querySelectorAll('input[type="radio"]');
+    
+    console.log(`Checking group ${currentGroupIndex}, has ${radios.length} radios`);
     
     radios.forEach(radio => {
       const optionValue = radio.value;
@@ -47,6 +54,8 @@ function updateVariantAvailability() {
         
         return matches;
       });
+
+      console.log(`Option "${optionValue}" in group ${currentGroupIndex}: ${isAvailable ? 'available' : 'NOT available'}`);
 
       const label = radio.nextElementSibling;
       radio.disabled = !isAvailable;
