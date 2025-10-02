@@ -143,61 +143,64 @@ if (!customElements.get('variant-selects')) {
       if (productForm) productForm.handleErrorMessage();
     }
 
-    renderProductInfo() {
-      const requestedVariantId = this.currentVariant.id;
-      const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
+renderProductInfo() {
+  const requestedVariantId = this.currentVariant.id;
+  const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
-      fetch(
-        `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-      )
-        .then((response) => response.text())
-        .then((responseText) => {
-          if (this.currentVariant.id !== requestedVariantId) return;
+  fetch(
+    `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+  )
+    .then((response) => response.text())
+    .then((responseText) => {
+      if (this.currentVariant.id !== requestedVariantId) return;
 
-          const html = new DOMParser().parseFromString(responseText, 'text/html');
-          const destination = document.getElementById(`price-${this.dataset.section}`);
-          const source = html.getElementById(
-            `price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-          );
-          const skuSource = html.getElementById(
-            `Sku-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-          );
-          const skuDestination = document.getElementById(`Sku-${this.dataset.section}`);
-          const inventorySource = html.getElementById(
-            `Inventory-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-          );
-          const inventoryDestination = document.getElementById(`Inventory-${this.dataset.section}`);
+      const html = new DOMParser().parseFromString(responseText, 'text/html');
+      
+      // Update price
+      const destination = document.getElementById(`price-${this.dataset.section}`);
+      const source = html.getElementById(
+        `price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+      );
+      if (source && destination) destination.innerHTML = source.innerHTML;
+      
+      // Update SKU
+      const skuSource = html.getElementById(
+        `Sku-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+      );
+      const skuDestination = document.getElementById(`Sku-${this.dataset.section}`);
+      if (skuSource && skuDestination) {
+        skuDestination.innerHTML = skuSource.innerHTML;
+        skuDestination.classList.toggle('visibility-hidden', skuSource.classList.contains('visibility-hidden'));
+      }
+      
+      // Update inventory
+      const inventorySource = html.getElementById(
+        `Inventory-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+      );
+      const inventoryDestination = document.getElementById(`Inventory-${this.dataset.section}`);
+      if (inventorySource && inventoryDestination) inventoryDestination.innerHTML = inventorySource.innerHTML;
 
-          if (source && destination) destination.innerHTML = source.innerHTML;
-          if (inventorySource && inventoryDestination) inventoryDestination.innerHTML = inventorySource.innerHTML;
-          if (skuSource && skuDestination) {
-            skuDestination.innerHTML = skuSource.innerHTML;
-            skuDestination.classList.toggle('visibility-hidden', skuSource.classList.contains('visibility-hidden'));
-          }
+      const price = document.getElementById(`price-${this.dataset.section}`);
+      if (price) price.classList.remove('visibility-hidden');
 
-          const price = document.getElementById(`price-${this.dataset.section}`);
+      if (inventoryDestination)
+        inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
 
-          if (price) price.classList.remove('visibility-hidden');
+      const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
+      this.toggleAddButton(
+        addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
+        window.variantStrings.soldOut
+      );
 
-          if (inventoryDestination)
-            inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
-
-          const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
-          this.toggleAddButton(
-            addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
-            window.variantStrings.soldOut
-          );
-
-          publish(PUB_SUB_EVENTS.variantChange, {
-            data: {
-              sectionId,
-              html,
-              variant: this.currentVariant,
-            },
-          });
-        });
-    }
-
+      publish(PUB_SUB_EVENTS.variantChange, {
+        data: {
+          sectionId,
+          html,
+          variant: this.currentVariant,
+        },
+      });
+    });
+}
     toggleAddButton(disable = true, text, modifyClass = true) {
       const productForm = document.getElementById(`product-form-${this.dataset.section}`);
       if (!productForm) return;
