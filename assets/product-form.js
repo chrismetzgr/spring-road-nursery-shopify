@@ -1,3 +1,4 @@
+console.log('hi');
 if (!customElements.get('variant-selects')) {
   customElements.define('variant-selects', class VariantSelects extends HTMLElement {
 constructor() {
