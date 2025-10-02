@@ -154,12 +154,16 @@ if (!customElements.get('product-info')) {
         return `${url}?${params.join('&')}`;
       }
 
-      updateOptionValues(html) {
-        const variantSelects = html.querySelector('variant-selects');
-        if (variantSelects) {
-          HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
-        }
-      }
+updateOptionValues(html) {
+  const variantSelects = html.querySelector('variant-selects');
+  
+  // Check if we're using radio buttons - if so, don't update them
+  const hasRadioButtons = this.variantSelectors?.querySelector('input[type="radio"]');
+  
+  if (variantSelects && !hasRadioButtons) {
+    HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
+  }
+}
 
       handleUpdateProductInfo(productUrl) {
         return (html) => {
