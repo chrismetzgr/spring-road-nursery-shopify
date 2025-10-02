@@ -86,7 +86,6 @@ if (!customElements.get('variant-selects')) {
       const label = option.querySelector('label');
       const optionValue = input.value;
       
-      // Find which option position this input represents
       const allRadioGroups = [...this.querySelectorAll('fieldset.variant-radio-group')];
       let optionPosition = -1;
       for (let i = 0; i < allRadioGroups.length; i++) {
@@ -98,10 +97,9 @@ if (!customElements.get('variant-selects')) {
 
       const selectedOptions = Array.from(this.querySelectorAll('input[type="radio"]:checked')).map(el => el.value);
       
-      // Check if this option is available with currently selected options
       const availableVariants = this.getVariantData().filter((variant) => {
         return selectedOptions.every((selected, index) => {
-          if (index === optionPosition) return true; // Skip checking this option's position
+          if (index === optionPosition) return true;
           return variant.options[index] === selected;
         });
       });
@@ -110,11 +108,9 @@ if (!customElements.get('variant-selects')) {
         return variant.available && variant.options[optionPosition] === optionValue;
       });
 
-      // Update disabled state and label text
       input.disabled = !isAvailable;
       label.classList.toggle('variant-radio-label--disabled', !isAvailable);
       
-      // Update label text to add/remove "- Out of stock"
       const baseText = optionValue;
       if (!isAvailable && !label.textContent.includes('- Out of stock')) {
         label.textContent = `${baseText} - Out of stock`;
@@ -207,13 +203,11 @@ if (!customElements.get('variant-selects')) {
 
       if (disable) {
         addButton.setAttribute('disabled', 'disabled');
-        // Only update text if explicitly provided and it's a sold out/unavailable message
         if (text && (text === window.variantStrings.soldOut || text === window.variantStrings.unavailable)) {
           if (addButtonText) addButtonText.textContent = text;
         }
       } else {
         addButton.removeAttribute('disabled');
-        // Only reset to "Add to Cart" if we're not in the middle of showing "Added!"
         if (addButtonText && addButtonText.textContent !== 'Added!') {
           addButtonText.textContent = window.variantStrings.addToCart;
         }
@@ -256,7 +250,6 @@ if (!customElements.get('product-form')) {
 
         this.hideErrors = this.dataset.hideErrors === 'true';
         
-        // Set up transitions on the text elements
         if (this.submitButtonText) {
           this.submitButtonText.style.transition = 'opacity 0.3s ease';
         }
@@ -274,7 +267,6 @@ if (!customElements.get('product-form')) {
 
         this.submitButton.setAttribute('aria-disabled', true);
         
-        // Dim the button text instead of showing spinner
         if (this.submitButtonText) {
           this.submitButtonText.style.opacity = '0.5';
         }
@@ -314,7 +306,6 @@ if (!customElements.get('product-form')) {
               this.error = true;
               return;
             } else if (!this.cart) {
-              // Don't redirect to cart - just show added message
               this.showAddedMessage();
               return;
             }
@@ -330,16 +321,13 @@ if (!customElements.get('product-form')) {
               });
             this.error = false;
             
-            // Show "Added!" message
             this.showAddedMessage();
             
-            // Update cart silently in the background - DO NOT open or show it
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
               quickAddModal.hide(true);
             }
             
-            // Silently update cart contents without rendering/opening
             if (this.cart) {
               CartPerformance.measure("add:paint-updated-sections", () => {
                 this.cart.getSectionsToRender().forEach((section) => {
@@ -372,33 +360,27 @@ if (!customElements.get('product-form')) {
       }
 
       showAddedMessage() {
-        // Fade out "Add to Cart" text
         if (this.submitButtonText) {
           this.submitButtonText.style.opacity = '0';
           
-          // After fade out completes, hide it and show "Added!"
           setTimeout(() => {
             this.submitButtonText.style.display = 'none';
             if (this.addedText) {
               this.addedText.style.display = 'inline';
-              // Trigger reflow to ensure transition works
               this.addedText.offsetHeight;
               this.addedText.style.opacity = '1';
             }
           }, 300);
         }
 
-        // After 2 seconds, fade back to "Add to Cart"
         setTimeout(() => {
           if (this.addedText) {
             this.addedText.style.opacity = '0';
             
-            // After fade out completes, hide "Added!" and show "Add to Cart"
             setTimeout(() => {
               this.addedText.style.display = 'none';
               if (this.submitButtonText) {
                 this.submitButtonText.style.display = 'inline';
-                // Trigger reflow to ensure transition works
                 this.submitButtonText.offsetHeight;
                 this.submitButtonText.style.opacity = '1';
               }
