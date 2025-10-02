@@ -4,9 +4,17 @@ function updateVariantAvailability() {
   if (!variantSelects) return;
 
   const allVariantsScript = document.querySelector('script[data-product-variants]');
-  if (!allVariantsScript) return;
+  let allVariants = [];
   
-  const allVariants = JSON.parse(allVariantsScript.textContent);
+  if (allVariantsScript) {
+    allVariants = JSON.parse(allVariantsScript.textContent);
+  } else {
+    console.warn('No variant data found. Add a script tag with all product variants.');
+    return;
+  }
+
+  console.log('All variants:', allVariants);
+
   const selectedOptions = {};
   const radioGroups = variantSelects.querySelectorAll('fieldset.variant-radio-group');
   
@@ -17,30 +25,44 @@ function updateVariantAvailability() {
     }
   });
 
+  console.log('Selected options:', selectedOptions);
+  console.log('Number of radio groups:', radioGroups.length);
+
   radioGroups.forEach((group, currentGroupIndex) => {
     const radios = group.querySelectorAll('input[type="radio"]');
+    
+    console.log(`Checking group ${currentGroupIndex}, has ${radios.length} radios`);
     
     radios.forEach(radio => {
       const optionValue = radio.value;
       
-      // Check if this option is available with current selections
       const isAvailable = allVariants.some(variant => {
         if (!variant.available) return false;
-        if (variant.options[currentGroupIndex] !== optionValue) return false;
         
-        // Check if it matches other selected options
-        return Object.keys(selectedOptions).every(selectedIndex => {
-          if (parseInt(selectedIndex) === currentGroupIndex) return true;
-          return variant.options[selectedIndex] === selectedOptions[selectedIndex];
+        if (variant.options[currentGroupIndex] !== optionValue) {
+          return false;
+        }
+        
+        let matches = true;
+        Object.keys(selectedOptions).forEach(selectedIndex => {
+          if (parseInt(selectedIndex) !== currentGroupIndex) {
+            if (variant.options[selectedIndex] !== selectedOptions[selectedIndex]) {
+              matches = false;
+            }
+          }
         });
+        
+        return matches;
       });
 
-      // Update styling
+      console.log(`Option "${optionValue}" in group ${currentGroupIndex}: ${isAvailable ? 'available' : 'NOT available'}`);
+
       const label = radio.nextElementSibling;
+      radio.disabled = !isAvailable;
+      
       if (label) {
         label.classList.toggle('variant-radio-label--disabled', !isAvailable);
         
-        // Update label text
         const baseText = optionValue;
         if (!isAvailable && !label.textContent.includes('- Out of stock')) {
           label.textContent = `${baseText} - Out of stock`;
@@ -48,9 +70,6 @@ function updateVariantAvailability() {
           label.textContent = baseText;
         }
       }
-      
-      // Update disabled state
-      radio.disabled = !isAvailable;
     });
   });
 }
@@ -89,7 +108,7 @@ document.addEventListener('DOMContentLoaded', initializeRadioButtons);
 subscribe(PUB_SUB_EVENTS.variantChange, () => {
   setTimeout(() => {
     updateVariantAvailability();
-  }, 500);
+  }, 300);
 });
 
 // Product form with "Added!" functionality
