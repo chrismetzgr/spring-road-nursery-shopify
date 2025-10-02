@@ -126,35 +126,40 @@ if (!customElements.get('product-form')) {
           .querySelector(selector).innerHTML;
       }
 
-      showAddedMessage() {
-        if (this.submitButtonText) {
-          this.submitButtonText.style.opacity = '0';
-          
-          setTimeout(() => {
-            this.submitButtonText.style.display = 'none';
-            if (this.addedText) {
-              this.addedText.style.display = 'inline';
-              this.addedText.offsetHeight;
-              this.addedText.style.opacity = '1';
-            }
-          }, 300);
-        }
-
-        setTimeout(() => {
-          if (this.addedText) {
-            this.addedText.style.opacity = '0';
-            
-            setTimeout(() => {
-              this.addedText.style.display = 'none';
-              if (this.submitButtonText) {
-                this.submitButtonText.style.display = 'inline';
-                this.submitButtonText.offsetHeight;
-                this.submitButtonText.style.opacity = '1';
-              }
-            }, 300);
-          }
-        }, 2000);
+showAddedMessage() {
+  // Add disabled class for styling
+  this.submitButton.classList.add('button--processing');
+  
+  if (this.submitButtonText) {
+    this.submitButtonText.style.opacity = '0';
+    
+    setTimeout(() => {
+      this.submitButtonText.style.display = 'none';
+      if (this.addedText) {
+        this.addedText.style.display = 'inline';
+        this.addedText.offsetHeight;
+        this.addedText.style.opacity = '1';
       }
+    }, 300);
+  }
+
+  setTimeout(() => {
+    if (this.addedText) {
+      this.addedText.style.opacity = '0';
+      
+      setTimeout(() => {
+        this.addedText.style.display = 'none';
+        if (this.submitButtonText) {
+          this.submitButtonText.style.display = 'inline';
+          this.submitButtonText.offsetHeight;
+          this.submitButtonText.style.opacity = '1';
+        }
+        // Remove disabled class
+        this.submitButton.classList.remove('button--processing');
+      }, 300);
+    }
+  }, 2000);
+}
 
       handleErrorMessage(errorMessage = false) {
         if (this.hideErrors) return;
