@@ -5,6 +5,11 @@ const popup = document.getElementById('email-collection-popup');
 const urlParams = new URLSearchParams(window.location.search);
 const customerPosted = urlParams.get('customer_posted');
 
+// If form was just submitted, temporarily clear the localStorage to show success message
+if (customerPosted === 'true' && localStorage.getItem(popupKey)) {
+  localStorage.removeItem(popupKey);
+}
+
 if (popup && !localStorage.getItem(popupKey)) {
   popup.style.opacity = '0';
   popup.style.transition = 'opacity 0.5s ease';
