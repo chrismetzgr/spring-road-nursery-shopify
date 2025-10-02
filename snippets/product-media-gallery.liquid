@@ -220,76 +220,49 @@
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   
   <!-- Main Gallery Viewer with Fade Transitions -->
-  <div id="GalleryViewer-{{ section.id }}" class="media-gallery__main">
-    <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
-      {{ 'accessibility.skip_to_product_info' | t }}
-    </a>
+<div id="GalleryViewer-{{ section.id }}" class="media-gallery__main">
+  <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+    {{ 'accessibility.skip_to_product_info' | t }}
+  </a>
+  
+  {%- for media in product.media -%}
+    {%- liquid
+      assign media_position = forloop.index
+      assign lazy_load = false
+      if media_position > 1
+        assign lazy_load = true
+      endif
+      
+      assign is_active = false
+      if product.selected_or_first_available_variant.featured_media.id == media.id
+        assign is_active = true
+      elsif product.selected_or_first_available_variant.featured_media == nil and forloop.first
+        assign is_active = true
+      endif
+    -%}
     
-    {%- if product.selected_or_first_available_variant.featured_media != null -%}
-      {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
-      <div
-        id="Media-{{ section.id }}-{{ featured_media.id }}"
-        class="media-gallery__item is-active"
-        data-media-id="{{ section.id }}-{{ featured_media.id }}"
-      >
-        {%- assign media_position = 1 -%}
-        {% render 'product-thumbnail',
-          media: featured_media,
-          media_count: media_count,
-          position: media_position,
-          desktop_layout: section.settings.gallery_layout,
-          mobile_layout: section.settings.mobile_thumbnails,
-          loop: section.settings.enable_video_looping,
-          modal_id: section.id,
-          xr_button: true,
-          media_width: media_width,
-          media_fit: section.settings.media_fit,
-          constrain_to_viewport: section.settings.constrain_to_viewport,
-          lazy_load: false
-        %}
-      </div>
-    {%- endif -%}
-    
-    {%- for media in product.media -%}
-      {% if media_position >= limit
-        or media_position >= 1
-        and section.settings.hide_variants
-        and variant_images contains media.src
+    <div
+      id="Media-{{ section.id }}-{{ media.id }}"
+      class="media-gallery__item{% if is_active %} is-active{% endif %}"
+      data-media-id="{{ section.id }}-{{ media.id }}"
+    >
+      {% render 'product-thumbnail',
+        media: media,
+        media_count: product.media.size,
+        position: media_position,
+        desktop_layout: section.settings.gallery_layout,
+        mobile_layout: section.settings.mobile_thumbnails,
+        loop: section.settings.enable_video_looping,
+        modal_id: section.id,
+        xr_button: true,
+        media_width: media_width,
+        media_fit: section.settings.media_fit,
+        constrain_to_viewport: section.settings.constrain_to_viewport,
+        lazy_load: lazy_load
       %}
-        {% continue %}
-      {% endif %}
-
-      {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-        <div
-          id="Media-{{ section.id }}-{{ media.id }}"
-          class="media-gallery__item{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}"
-          data-media-id="{{ section.id }}-{{ media.id }}"
-        >
-          {%- liquid
-            assign media_position = media_position | default: 0 | plus: 1
-            assign lazy_load = false
-            if media_position > 1
-              assign lazy_load = true
-            endif
-          -%}
-          {% render 'product-thumbnail',
-            media: media,
-            media_count: media_count,
-            position: media_position,
-            desktop_layout: section.settings.gallery_layout,
-            mobile_layout: section.settings.mobile_thumbnails,
-            loop: section.settings.enable_video_looping,
-            modal_id: section.id,
-            xr_button: true,
-            media_width: media_width,
-            media_fit: section.settings.media_fit,
-            constrain_to_viewport: section.settings.constrain_to_viewport,
-            lazy_load: lazy_load
-          %}
-        </div>
-      {%- endunless -%}
-    {%- endfor -%}
-  </div>
+    </div>
+  {%- endfor -%}
+</div>
 
   {%- if first_3d_model -%}
     <button
