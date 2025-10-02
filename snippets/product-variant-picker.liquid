@@ -32,7 +32,6 @@
 {%- endunless -%}
 
 <style>
-/* Style the button picker to look like plain text options */
 .product-form__input--pill {
   border: none;
   padding: 0;
@@ -61,13 +60,21 @@
   font-weight: bold;
 }
 
-.product-form__input--pill input[type="radio"]:not(:disabled) + label:hover {
+/* Only show hover effect on available options */
+.product-form__input--pill input[type="radio"]:not(:disabled):not(.disabled) + label:hover {
   opacity: 0.7;
 }
 
+/* Disabled/sold out styling */
 .product-form__input--pill input[type="radio"]:disabled + label,
 .product-form__input--pill input.disabled + label {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+/* Prevent hover on disabled */
+.product-form__input--pill input[type="radio"]:disabled + label:hover,
+.product-form__input--pill input.disabled + label:hover {
+  opacity: 0.3;
 }
 </style>
