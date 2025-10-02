@@ -18,7 +18,6 @@ if (!customElements.get('media-gallery')) {
       }
 
       init() {
-        // Set up thumbnail click handlers
         if (this.elements.thumbnailList) {
           const thumbnails = this.elements.thumbnailList.querySelectorAll('[data-target]');
           thumbnails.forEach((thumbnail) => {
@@ -30,7 +29,6 @@ if (!customElements.get('media-gallery')) {
             }
           });
 
-          // Set up thumbnail navigation arrows to change main image
           if (this.elements.prevArrow) {
             this.elements.prevArrow.addEventListener('click', () => this.navigateImage('prev'));
             this.elements.prevArrow.addEventListener('keydown', (e) => {
@@ -50,41 +48,27 @@ if (!customElements.get('media-gallery')) {
             });
           }
 
-          // Update arrow states
           this.updateNavigationArrows();
         }
 
-        // Find and set initial active media
         const activeItem = this.elements.viewer.querySelector('.media-gallery__item.is-active');
         if (activeItem) {
           this.currentMediaId = activeItem.dataset.mediaId;
-          // Set initial active thumbnail
           this.setActiveThumbnail(this.currentMediaId);
         }
       }
 
       connectedCallback() {
-        // Listen for variant changes
         this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-          console.log('Full variant change event:', event);
-          console.log('Event data:', event.data);
-          console.log('Variant object:', event.data?.variant);
-          console.log('Featured media:', event.data?.variant?.featured_media);
-          
           const variant = event.data?.variant;
-          if (!variant || !variant.featured_media) {
-            console.log('No variant or no featured_media found');
-            return;
-          }
+          if (!variant || !variant.featured_media) return;
           
           const mediaId = `${this.sectionId}-${variant.featured_media.id}`;
-          console.log('Variant changed, switching to media:', mediaId);
           this.setActiveMedia(mediaId);
         });
       }
 
       disconnectedCallback() {
-        // Clean up subscription
         if (this.variantChangeUnsubscriber) {
           this.variantChangeUnsubscriber();
         }
@@ -117,31 +101,22 @@ if (!customElements.get('media-gallery')) {
           return;
         }
 
-        // Fade out current media
         if (currentMedia) {
           currentMedia.classList.remove('is-active');
         }
 
-        // Fade in new media
         targetMedia.classList.add('is-active');
         this.currentMediaId = mediaId;
 
-        // Update thumbnail active state
         this.setActiveThumbnail(mediaId);
-
-        // Update arrow states
         this.updateNavigationArrows();
-
-        // Play media if applicable
         this.playActiveMedia(targetMedia);
 
-        // Announce to screen readers
         const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
         if (thumbnail) {
           this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
         }
 
-        // Prevent sticky header
         this.preventStickyHeader();
       }
 
