@@ -238,13 +238,22 @@
                     | item_count_for_variant: product.selected_or_first_available_variant.id
                   -%}
                   {% # theme-check-enable %}
-                  <span class="visually-hidden" id="quantity-label-{{ section.id }}">
+                  {% comment %} <span class="visually-hidden" id="quantity-label-{{ section.id }}">
                     {%- if cart_qty > 0 -%}
                       {{- 'products.product.quantity.in_cart_aria_label' | t: quantity: cart_qty -}}
                     {%- else -%}
                       {{- 'products.product.quantity.label' | t -}}
                     {%- endif -%}
-                  </span>
+                  </span> {% endcomment %}
+                  {%- liquid
+                    assign check_against_inventory = true
+                    if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+                      assign check_against_inventory = false
+                    endif
+                    if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+                      assign quantity_rule_soldout = true
+                    endif
+                  -%}
                   <label
                     class="quantity__label form__label"
                     for="Quantity-{{ section.id }}"
