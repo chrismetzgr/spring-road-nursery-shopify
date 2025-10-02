@@ -1,3 +1,106 @@
+// Function to update variant option availability based on current selections
+function updateVariantAvailability() {
+  const variantSelects = document.querySelector('variant-selects');
+  if (!variantSelects) return;
+
+  const allVariantsScript = document.querySelector('script[data-product-variants]');
+  let allVariants = [];
+  
+  if (allVariantsScript) {
+    allVariants = JSON.parse(allVariantsScript.textContent);
+  } else {
+    console.warn('No variant data found. Add a script tag with all product variants.');
+    return;
+  }
+
+  const selectedOptions = {};
+  const radioGroups = variantSelects.querySelectorAll('fieldset.variant-radio-group');
+  
+  radioGroups.forEach((group, groupIndex) => {
+    const checkedRadio = group.querySelector('input[type="radio"]:checked');
+    if (checkedRadio) {
+      selectedOptions[groupIndex] = checkedRadio.value;
+    }
+  });
+
+  radioGroups.forEach((group, currentGroupIndex) => {
+    const radios = group.querySelectorAll('input[type="radio"]');
+    
+    radios.forEach(radio => {
+      const optionValue = radio.value;
+      
+      const isAvailable = allVariants.some(variant => {
+        if (!variant.available) return false;
+        
+        if (variant.options[currentGroupIndex] !== optionValue) {
+          return false;
+        }
+        
+        let matches = true;
+        Object.keys(selectedOptions).forEach(selectedIndex => {
+          if (parseInt(selectedIndex) !== currentGroupIndex) {
+            if (variant.options[selectedIndex] !== selectedOptions[selectedIndex]) {
+              matches = false;
+            }
+          }
+        });
+        
+        return matches;
+      });
+
+      const label = radio.nextElementSibling;
+      radio.disabled = !isAvailable;
+      
+      if (label) {
+        label.classList.toggle('variant-radio-label--disabled', !isAvailable);
+        
+        const baseText = optionValue;
+        if (!isAvailable && !label.textContent.includes('- Out of stock')) {
+          label.textContent = `${baseText} - Out of stock`;
+        } else if (isAvailable && label.textContent.includes('- Out of stock')) {
+          label.textContent = baseText;
+        }
+      }
+    });
+  });
+}
+
+// Radio button variant selector
+function initializeRadioButtons() {
+  const variantSelects = document.querySelector('variant-selects');
+  if (!variantSelects) return;
+  
+  const radioButtons = variantSelects.querySelectorAll('input[type="radio"]');
+  
+  radioButtons.forEach(radio => {
+    radio.removeEventListener('change', handleRadioChange);
+    radio.addEventListener('change', handleRadioChange);
+  });
+}
+
+function handleRadioChange(e) {
+  const variantSelects = document.querySelector('variant-selects');
+  const selectedOptionValues = Array.from(
+    variantSelects.querySelectorAll('input[type="radio"]:checked')
+  ).map(input => input.value);
+  
+  publish(PUB_SUB_EVENTS.optionValueSelectionChange, {
+    data: {
+      event: e,
+      target: variantSelects,
+      selectedOptionValues: selectedOptionValues
+    }
+  });
+  
+  // Update availability of other options after variant change processes
+  setTimeout(() => {
+    updateVariantAvailability();
+  }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', initializeRadioButtons);
+
+// Product form with "Added!" functionality
 if (!customElements.get('product-form')) {
   customElements.define(
     'product-form',
@@ -126,40 +229,38 @@ if (!customElements.get('product-form')) {
           .querySelector(selector).innerHTML;
       }
 
-showAddedMessage() {
-  // Add disabled class for styling
-  this.submitButton.classList.add('button--processing');
-  
-  if (this.submitButtonText) {
-    this.submitButtonText.style.opacity = '0';
-    
-    setTimeout(() => {
-      this.submitButtonText.style.display = 'none';
-      if (this.addedText) {
-        this.addedText.style.display = 'inline';
-        this.addedText.offsetHeight;
-        this.addedText.style.opacity = '1';
-      }
-    }, 300);
-  }
-
-  setTimeout(() => {
-    if (this.addedText) {
-      this.addedText.style.opacity = '0';
-      
-      setTimeout(() => {
-        this.addedText.style.display = 'none';
+      showAddedMessage() {
+        this.submitButton.classList.add('button--processing');
+        
         if (this.submitButtonText) {
-          this.submitButtonText.style.display = 'inline';
-          this.submitButtonText.offsetHeight;
-          this.submitButtonText.style.opacity = '1';
+          this.submitButtonText.style.opacity = '0';
+          
+          setTimeout(() => {
+            this.submitButtonText.style.display = 'none';
+            if (this.addedText) {
+              this.addedText.style.display = 'inline';
+              this.addedText.offsetHeight;
+              this.addedText.style.opacity = '1';
+            }
+          }, 300);
         }
-        // Remove disabled class
-        this.submitButton.classList.remove('button--processing');
-      }, 300);
-    }
-  }, 2000);
-}
+
+        setTimeout(() => {
+          if (this.addedText) {
+            this.addedText.style.opacity = '0';
+            
+            setTimeout(() => {
+              this.addedText.style.display = 'none';
+              if (this.submitButtonText) {
+                this.submitButtonText.style.display = 'inline';
+                this.submitButtonText.offsetHeight;
+                this.submitButtonText.style.opacity = '1';
+              }
+              this.submitButton.classList.remove('button--processing');
+            }, 300);
+          }
+        }, 2000);
+      }
 
       handleErrorMessage(errorMessage = false) {
         if (this.hideErrors) return;
