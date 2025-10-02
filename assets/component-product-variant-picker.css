@@ -6,8 +6,6 @@ variant-selects {
 .product--no-media .product-form__input--swatch,
 .product--no-media .product-form__input--dropdown {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .product--no-media .product-form__input.product-form__input--pill,
