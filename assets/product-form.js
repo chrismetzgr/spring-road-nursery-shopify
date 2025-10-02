@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', initializeRadioButtons);
 subscribe(PUB_SUB_EVENTS.variantChange, () => {
   setTimeout(() => {
     updateVariantAvailability();
-  }, 300);
+  }, 500);
 });
 
 // Product form with "Added!" functionality
