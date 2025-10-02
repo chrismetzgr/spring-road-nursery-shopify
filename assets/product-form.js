@@ -16,6 +16,15 @@ if (!customElements.get('product-form')) {
         if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
         this.hideErrors = this.dataset.hideErrors === 'true';
+        
+        // Set up transitions on the text elements
+        if (this.submitButtonText) {
+          this.submitButtonText.style.transition = 'opacity 0.3s ease';
+        }
+        if (this.addedText) {
+          this.addedText.style.transition = 'opacity 0.3s ease';
+          this.addedText.style.opacity = '0';
+        }
       }
 
       onSubmitHandler(evt) {
@@ -123,21 +132,37 @@ if (!customElements.get('product-form')) {
       }
 
       showAddedMessage() {
-        // Hide "Add to Cart" text and show "Added!" text
+        // Fade out "Add to Cart" text
         if (this.submitButtonText) {
-          this.submitButtonText.style.display = 'none';
-        }
-        if (this.addedText) {
-          this.addedText.style.display = 'inline';
+          this.submitButtonText.style.opacity = '0';
+          
+          // After fade out completes, hide it and show "Added!"
+          setTimeout(() => {
+            this.submitButtonText.style.display = 'none';
+            if (this.addedText) {
+              this.addedText.style.display = 'inline';
+              // Trigger reflow to ensure transition works
+              this.addedText.offsetHeight;
+              this.addedText.style.opacity = '1';
+            }
+          }, 300);
         }
 
         // After 2 seconds, fade back to "Add to Cart"
         setTimeout(() => {
           if (this.addedText) {
-            this.addedText.style.display = 'none';
-          }
-          if (this.submitButtonText) {
-            this.submitButtonText.style.display = 'inline';
+            this.addedText.style.opacity = '0';
+            
+            // After fade out completes, hide "Added!" and show "Add to Cart"
+            setTimeout(() => {
+              this.addedText.style.display = 'none';
+              if (this.submitButtonText) {
+                this.submitButtonText.style.display = 'inline';
+                // Trigger reflow to ensure transition works
+                this.submitButtonText.offsetHeight;
+                this.submitButtonText.style.opacity = '1';
+              }
+            }, 300);
           }
         }, 2000);
       }
