@@ -5,25 +5,61 @@ if (!customElements.get('variant-selects')) {
       this.addEventListener('change', this.onVariantChange);
     }
 
-    onVariantChange() {
-      this.updateOptions();
-      this.updateMasterId();
-      this.toggleAddButton(true, '', false);
-      this.updatePickupAvailability();
-      this.removeErrorMessage();
-      this.updateVariantStatuses();
+onVariantChange(event) {
+  this.updateOptions();
+  this.updateMasterId();
+  
+  console.log('Selected options:', this.options);
+  console.log('Current variant ID:', this.currentVariant ? this.currentVariant.id : 'none');
+  
+  this.removeErrorMessage();
+  this.updateVariantStatuses();
 
-      if (!this.currentVariant) {
-        this.toggleAddButton(true, '', true);
-        this.setUnavailable();
+  if (!this.currentVariant) {
+    this.setUnavailable();
+  } else {
+    // Update the hidden variant input
+    this.updateVariantInput();
+    
+    // Update URL without fetching
+    if (this.dataset.updateUrl !== 'false') {
+      window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
+    }
+    
+    // Update button state based on variant availability
+    const productForm = document.getElementById(`product-form-${this.dataset.section}`);
+    if (productForm) {
+      const addButton = productForm.querySelector('[name="add"]');
+      const addButtonText = productForm.querySelector('[name="add"] > span.add-to-cart-text');
+      
+      if (this.currentVariant.available) {
+        addButton.removeAttribute('disabled');
+        if (addButtonText && addButtonText.textContent !== 'Added!') {
+          addButtonText.textContent = window.variantStrings.addToCart;
+        }
       } else {
-        this.updateMedia();
-        this.updateURL();
-        this.updateVariantInput();
-        this.renderProductInfo();
-        this.updateShareUrl();
+        addButton.setAttribute('disabled', 'disabled');
+        if (addButtonText) {
+          addButtonText.textContent = window.variantStrings.soldOut;
+        }
       }
     }
+    
+    // Update media if available
+    this.updateMedia();
+    
+    // Update pickup availability
+    this.updatePickupAvailability();
+    
+    // Publish the variant change event for other components
+    publish(PUB_SUB_EVENTS.variantChange, {
+      data: {
+        sectionId: this.dataset.section,
+        variant: this.currentVariant,
+      },
+    });
+  }
+}
 
     updateOptions() {
       this.options = Array.from(this.querySelectorAll('input[type="radio"]:checked, select'), (input) => input.value);
