@@ -70,8 +70,7 @@
                   {% if settings.currency_code_enabled %}
                     {{ compare_at_price | money_with_currency }}
                   {% else %}
-                    {% comment %} {{ compare_at_price | money }} {% endcomment %}
-                    {{ amount_no_decimals }}
+                    {{ compare_at_price | money }}
                   {% endif %}
                 </s>
               </span>
