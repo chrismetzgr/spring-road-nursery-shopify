@@ -95,7 +95,7 @@
                   for="Option-{{ section.id }}-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}"
                   class="variant-radio-label{% if option_disabled %} variant-radio-label--disabled{% endif %}"
                 >
-                  {{ value }}
+                  {{ value }}{% if option_disabled %} - Out of stock{% endif %}
                 </label>
               </div>
             {%- endfor -%}
@@ -113,15 +113,15 @@
 <style>
 .variant-radio-group {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  gap: 2px;
   border: none;
   padding: 0;
   margin: 10px 0 0 0;
 }
 
 .variant-radio-option {
-  display: inline-block;
+  display: block;
 }
 
 .variant-radio-input {
@@ -132,7 +132,7 @@
 
 .variant-radio-label {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 4px 0;
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
@@ -140,7 +140,6 @@
 .variant-radio-label--disabled {
   opacity: 0.3;
   cursor: not-allowed;
-  text-decoration: line-through;
 }
 
 .variant-radio-input:checked + .variant-radio-label {
