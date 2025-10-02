@@ -1,107 +1,28 @@
 {% comment %}
   Renders product variant-picker
-
-  Accepts:
-  - product: {Object} product object.
-  - block: {Object} passing the block information.
-  - product_form_id: {String} Id of the product form to which the variant picker is associated.
-  Usage:
-  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
   <variant-selects
     id="variant-selects-{{ section.id }}"
     data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
     {{ block.shopify_attributes }}
   >
     {%- for option in product.options_with_values -%}
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
-        assign picker_type = block.settings.picker_type
-
-        if swatch_count > 0 and block.settings.swatch_shape != 'none'
-          if block.settings.picker_type == 'dropdown'
-            assign picker_type = 'swatch_dropdown'
-          else
-            assign picker_type = 'swatch'
-          endif
-        endif
+        assign picker_type = 'button'
       -%}
-      {%- if picker_type == 'swatch' -%}
-        <fieldset class="js product-form__input product-form__input--swatch">
-          <legend class="form__label">
-            {{ option.name }}:
-            <span data-selected-value>
-              {{- option.selected_value -}}
-            </span>
-          </legend>
-          {% render 'product-variant-options',
-            product: product,
-            option: option,
-            block: block,
-            picker_type: picker_type
-          %}
-        </fieldset>
-      {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
-          {% render 'product-variant-options',
-            product: product,
-            option: option,
-            block: block,
-            picker_type: picker_type
-          %}
-        </fieldset>
-      {%- else -%}
-        <div class="product-form__input product-form__input--radio">
-          <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-            {{ option.name }}
-          </label>
-          <fieldset class="variant-radio-group">
-            {%- for value in option.values -%}
-              {%- liquid
-                assign option_disabled = true
-                for variant in product.variants
-                  if variant.available
-                    case option.position
-                      when 1
-                        if variant.option1 == value
-                          assign option_disabled = false
-                        endif
-                      when 2
-                        if variant.option2 == value
-                          assign option_disabled = false
-                        endif
-                      when 3
-                        if variant.option3 == value
-                          assign option_disabled = false
-                        endif
-                    endcase
-                  endif
-                endfor
-              -%}
-              <div class="variant-radio-option">
-                <input
-                  type="radio"
-                  id="Option-{{ section.id }}-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}"
-                  name="options[{{ option.name | escape }}]"
-                  value="{{ value | escape }}"
-                  form="{{ product_form_id }}"
-                  {% if option.selected_value == value %}checked{% endif %}
-                  {% if option_disabled %}disabled{% endif %}
-                  class="variant-radio-input"
-                >
-                <label 
-                  for="Option-{{ section.id }}-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}"
-                  class="variant-radio-label{% if option_disabled %} variant-radio-label--disabled{% endif %}"
-                >
-                  {{ value }}{% if option_disabled %} - Out of stock{% endif %}
-                </label>
-              </div>
-            {%- endfor -%}
-          </fieldset>
-        </div>
-      {%- endif -%}
+      
+      <fieldset class="js product-form__input product-form__input--pill">
+        <legend class="form__label">{{ option.name }}</legend>
+        {% render 'product-variant-options',
+          product: product,
+          option: option,
+          block: block,
+          picker_type: picker_type
+        %}
+      </fieldset>
     {%- endfor -%}
 
     <script type="application/json" data-selected-variant>
@@ -111,46 +32,40 @@
 {%- endunless -%}
 
 <style>
-.variant-radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+/* Style the button picker to look like plain text options */
+.product-form__input--pill {
   border: none;
   padding: 0;
-  margin: 10px 0 0 0;
 }
 
-.variant-radio-option {
-  display: block;
-}
-
-.variant-radio-input {
+.product-form__input--pill input[type="radio"] {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-.variant-radio-label {
-  display: inline-block;
+.product-form__input--pill label {
+  display: block;
   padding: 4px 0;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  border: none;
+  background: none;
+  text-align: left;
+  margin: 2px 0;
 }
 
-.variant-radio-label--disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.variant-radio-input:checked + .variant-radio-label {
+.product-form__input--pill input[type="radio"]:checked + label {
   font-weight: bold;
 }
 
-.variant-radio-input:not(:disabled) + .variant-radio-label:hover {
+.product-form__input--pill input[type="radio"]:not(:disabled) + label:hover {
   opacity: 0.7;
 }
 
-.variant-radio-input:disabled + .variant-radio-label:hover {
+.product-form__input--pill input[type="radio"]:disabled + label,
+.product-form__input--pill input.disabled + label {
   opacity: 0.3;
+  cursor: not-allowed;
 }
 </style>
