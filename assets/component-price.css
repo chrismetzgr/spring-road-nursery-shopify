@@ -22,7 +22,7 @@
   display: inline-block;
   margin: 0 1rem 0 0;
   font-family: var(--font-family-secondary);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .price__regular .price-item--regular {
