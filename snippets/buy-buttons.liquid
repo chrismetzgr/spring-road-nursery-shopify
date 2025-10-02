@@ -82,7 +82,7 @@
               disabled
             {% endif %}
           >
-            <span class="{% if product.selected_or_first_available_variant != null and product.selected_or_first_available_variant.available != false and quantity_rule_soldout != true %}wavy-underline-yellow{% endif %} %}">
+            <span class="add-to-cart-text {% if product.selected_or_first_available_variant != null and product.selected_or_first_available_variant.available != false and quantity_rule_soldout != true %}wavy-underline-yellow{% endif %}">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -91,6 +91,7 @@
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
+            <span class="added-to-cart-text" style="display: none;">Added!</span>
             {%- render 'loading-spinner' -%}
           </button>
           {%- if show_dynamic_checkout -%}

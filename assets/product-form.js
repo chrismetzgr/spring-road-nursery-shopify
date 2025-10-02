@@ -10,7 +10,8 @@ if (!customElements.get('product-form')) {
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
         this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         this.submitButton = this.querySelector('[type="submit"]');
-        this.submitButtonText = this.submitButton.querySelector('span');
+        this.submitButtonText = this.submitButton.querySelector('span.add-to-cart-text');
+        this.addedText = this.submitButton.querySelector('span.added-to-cart-text');
 
         if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
@@ -76,6 +77,10 @@ if (!customElements.get('product-form')) {
                 CartPerformance.measureFromMarker('add:wait-for-subscribers', startMarker);
               });
             this.error = false;
+            
+            // Show "Added!" message instead of opening cart
+            this.showAddedMessage();
+            
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
               document.body.addEventListener(
@@ -91,6 +96,7 @@ if (!customElements.get('product-form')) {
               );
               quickAddModal.hide(true);
             } else {
+              // Update cart contents without opening it
               CartPerformance.measure("add:paint-updated-sections", () => {
                 this.cart.renderContents(response);
               });
@@ -107,6 +113,26 @@ if (!customElements.get('product-form')) {
 
             CartPerformance.measureFromEvent("add:user-action", evt);
           });
+      }
+
+      showAddedMessage() {
+        // Hide "Add to Cart" text and show "Added!" text
+        if (this.submitButtonText) {
+          this.submitButtonText.style.display = 'none';
+        }
+        if (this.addedText) {
+          this.addedText.style.display = 'inline';
+        }
+
+        // After 2 seconds, fade back to "Add to Cart"
+        setTimeout(() => {
+          if (this.addedText) {
+            this.addedText.style.display = 'none';
+          }
+          if (this.submitButtonText) {
+            this.submitButtonText.style.display = 'inline';
+          }
+        }, 2000);
       }
 
       handleErrorMessage(errorMessage = false) {
