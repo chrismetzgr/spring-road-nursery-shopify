@@ -156,10 +156,9 @@ if (!customElements.get('product-info')) {
 
 updateOptionValues(html) {
   const variantSelects = html.querySelector('variant-selects');
-  
-  // Check if we're using radio buttons - if so, don't update them
   const hasRadioButtons = this.variantSelectors?.querySelector('input[type="radio"]');
   
+  // Don't update variant selectors if using radio buttons
   // if (variantSelects && !hasRadioButtons) {
   //   HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
   // }
