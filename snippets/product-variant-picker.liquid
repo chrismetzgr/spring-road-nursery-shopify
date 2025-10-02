@@ -53,36 +53,53 @@
           %}
         </fieldset>
       {%- else -%}
-        <div class="product-form__input product-form__input--dropdown">
+        <div class="product-form__input product-form__input--radio">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
             {{ option.name }}
           </label>
-          <div class="select">
-            {%- if picker_type == 'swatch_dropdown' -%}
-              <span
-                data-selected-value
-                class="dropdown-swatch"
-              >
-                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
-              </span>
-            {%- endif -%}
-            <select
-              id="Option-{{ section.id }}-{{ forloop.index0 }}"
-              class="select__select"
-              name="options[{{ option.name | escape }}]"
-              form="{{ product_form_id }}"
-            >
-              {% render 'product-variant-options',
-                product: product,
-                option: option,
-                block: block,
-                picker_type: picker_type
-              %}
-            </select>
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </div>
+          <fieldset class="variant-radio-group">
+            {%- for value in option.values -%}
+              {%- liquid
+                assign option_disabled = true
+                for variant in product.variants
+                  if variant.available
+                    case option.position
+                      when 1
+                        if variant.option1 == value
+                          assign option_disabled = false
+                        endif
+                      when 2
+                        if variant.option2 == value
+                          assign option_disabled = false
+                        endif
+                      when 3
+                        if variant.option3 == value
+                          assign option_disabled = false
+                        endif
+                    endcase
+                  endif
+                endfor
+              -%}
+              <div class="variant-radio-option">
+                <input
+                  type="radio"
+                  id="Option-{{ section.id }}-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}"
+                  name="options[{{ option.name | escape }}]"
+                  value="{{ value | escape }}"
+                  form="{{ product_form_id }}"
+                  {% if option.selected_value == value %}checked{% endif %}
+                  {% if option_disabled %}disabled{% endif %}
+                  class="variant-radio-input"
+                >
+                <label 
+                  for="Option-{{ section.id }}-{{ forloop.parentloop.index0 }}-{{ forloop.index0 }}"
+                  class="variant-radio-label{% if option_disabled %} variant-radio-label--disabled{% endif %}"
+                >
+                  {{ value }}
+                </label>
+              </div>
+            {%- endfor -%}
+          </fieldset>
         </div>
       {%- endif -%}
     {%- endfor -%}
@@ -92,3 +109,49 @@
     </script>
   </variant-selects>
 {%- endunless -%}
+
+<style>
+.variant-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.variant-radio-option {
+  display: inline-block;
+}
+
+.variant-radio-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.variant-radio-label {
+  display: inline-block;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.variant-radio-label--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.variant-radio-input:checked + .variant-radio-label {
+  font-weight: bold;
+}
+
+.variant-radio-input:not(:disabled) + .variant-radio-label:hover {
+  opacity: 0.7;
+}
+
+.variant-radio-input:disabled + .variant-radio-label:hover {
+  opacity: 0.3;
+}
+</style>
