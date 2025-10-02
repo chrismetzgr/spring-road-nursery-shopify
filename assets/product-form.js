@@ -63,7 +63,8 @@ if (!customElements.get('product-form')) {
               this.error = true;
               return;
             } else if (!this.cart) {
-              window.location = window.routes.cart_url;
+              // Don't redirect to cart - just show added message
+              this.showAddedMessage();
               return;
             }
 
@@ -81,24 +82,24 @@ if (!customElements.get('product-form')) {
             // Show "Added!" message
             this.showAddedMessage();
             
+            // Update cart silently in the background - DO NOT open or show it
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
-              document.body.addEventListener(
-                'modalClosed',
-                () => {
-                  setTimeout(() => {
-                    CartPerformance.measure("add:paint-updated-sections", () => {
-                      this.cart.renderContents(response);
-                    });
-                  });
-                },
-                { once: true }
-              );
               quickAddModal.hide(true);
-            } else {
-              // Update cart contents silently without opening the drawer
+            }
+            
+            // Silently update cart contents without rendering/opening
+            if (this.cart) {
               CartPerformance.measure("add:paint-updated-sections", () => {
-                this.updateCartSilently(response);
+                this.cart.getSectionsToRender().forEach((section) => {
+                  const sectionElement = document.getElementById(section.id);
+                  if (sectionElement && response.sections && response.sections[section.id]) {
+                    sectionElement.innerHTML = this.getSectionInnerHTML(
+                      response.sections[section.id],
+                      section.selector
+                    );
+                  }
+                });
               });
             }
           })
@@ -115,18 +116,10 @@ if (!customElements.get('product-form')) {
           });
       }
 
-      updateCartSilently(response) {
-        // Temporarily store the cart's open method and replace it with a no-op
-        const originalOpen = this.cart.open;
-        this.cart.open = function() {};
-        
-        // Render the cart contents (which would normally open it)
-        this.cart.renderContents(response);
-        
-        // Restore the original open method after a short delay
-        setTimeout(() => {
-          this.cart.open = originalOpen;
-        }, 100);
+      getSectionInnerHTML(html, selector) {
+        return new DOMParser()
+          .parseFromString(html, 'text/html')
+          .querySelector(selector).innerHTML;
       }
 
       showAddedMessage() {
