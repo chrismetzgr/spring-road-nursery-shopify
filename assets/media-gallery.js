@@ -66,10 +66,17 @@ if (!customElements.get('media-gallery')) {
       connectedCallback() {
         // Listen for variant changes
         this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-          const variant = event.data?.variant;
-          if (!variant || !variant.featured_media) return;
+          console.log('Full variant change event:', event);
+          console.log('Event data:', event.data);
+          console.log('Variant object:', event.data?.variant);
+          console.log('Featured media:', event.data?.variant?.featured_media);
           
-          // Construct the media ID in the format: template--[section-id]__main-[featured_media.id]
+          const variant = event.data?.variant;
+          if (!variant || !variant.featured_media) {
+            console.log('No variant or no featured_media found');
+            return;
+          }
+          
           const mediaId = `${this.sectionId}-${variant.featured_media.id}`;
           console.log('Variant changed, switching to media:', mediaId);
           this.setActiveMedia(mediaId);
