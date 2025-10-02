@@ -1,34 +1,8 @@
 if (!customElements.get('variant-selects')) {
   customElements.define('variant-selects', class VariantSelects extends HTMLElement {
-constructor() {
-  super();
-  this.addEventListener('change', this.onVariantChange);
-  
-  // Initialize radio buttons based on URL variant parameter
-  const urlParams = new URLSearchParams(window.location.search);
-  const variantId = urlParams.get('variant');
-  
-  if (variantId) {
-    const variantData = this.getVariantData();
-    const selectedVariant = variantData.find(v => v.id == variantId);
-    
-    if (selectedVariant) {
-      // Set the radio buttons to match this variant
-      selectedVariant.options.forEach((optionValue, index) => {
-        const radioGroup = this.querySelectorAll('fieldset.variant-radio-group')[index];
-        if (radioGroup) {
-          const radioToSelect = radioGroup.querySelector(`input[value="${optionValue}"]`);
-          if (radioToSelect) {
-            radioToSelect.checked = true;
-          }
-        }
-      });
-    }
-  }
-}
-This ensures that when the URL changes (and the page state updates), the radio buttons are set to match the variant in the URL. The issue is likely that the URL updates but the radio buttons don't update to match, so the visual state and the actual variant state get out of sync.
-
-
+    constructor() {
+      super();
+      this.addEventListener('change', this.onVariantChange);
     }
 
     onVariantChange() {
@@ -169,64 +143,61 @@ This ensures that when the URL changes (and the page state updates), the radio b
       if (productForm) productForm.handleErrorMessage();
     }
 
-renderProductInfo() {
-  const requestedVariantId = this.currentVariant.id;
-  const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
+    renderProductInfo() {
+      const requestedVariantId = this.currentVariant.id;
+      const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
-  fetch(
-    `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-  )
-    .then((response) => response.text())
-    .then((responseText) => {
-      if (this.currentVariant.id !== requestedVariantId) return;
+      fetch(
+        `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+      )
+        .then((response) => response.text())
+        .then((responseText) => {
+          if (this.currentVariant.id !== requestedVariantId) return;
 
-      const html = new DOMParser().parseFromString(responseText, 'text/html');
-      
-      // Update price
-      const destination = document.getElementById(`price-${this.dataset.section}`);
-      const source = html.getElementById(
-        `price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-      );
-      if (source && destination) destination.innerHTML = source.innerHTML;
-      
-      // Update SKU
-      const skuSource = html.getElementById(
-        `Sku-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-      );
-      const skuDestination = document.getElementById(`Sku-${this.dataset.section}`);
-      if (skuSource && skuDestination) {
-        skuDestination.innerHTML = skuSource.innerHTML;
-        skuDestination.classList.toggle('visibility-hidden', skuSource.classList.contains('visibility-hidden'));
-      }
-      
-      // Update inventory
-      const inventorySource = html.getElementById(
-        `Inventory-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
-      );
-      const inventoryDestination = document.getElementById(`Inventory-${this.dataset.section}`);
-      if (inventorySource && inventoryDestination) inventoryDestination.innerHTML = inventorySource.innerHTML;
+          const html = new DOMParser().parseFromString(responseText, 'text/html');
+          const destination = document.getElementById(`price-${this.dataset.section}`);
+          const source = html.getElementById(
+            `price-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+          );
+          const skuSource = html.getElementById(
+            `Sku-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+          );
+          const skuDestination = document.getElementById(`Sku-${this.dataset.section}`);
+          const inventorySource = html.getElementById(
+            `Inventory-${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section}`
+          );
+          const inventoryDestination = document.getElementById(`Inventory-${this.dataset.section}`);
 
-      const price = document.getElementById(`price-${this.dataset.section}`);
-      if (price) price.classList.remove('visibility-hidden');
+          if (source && destination) destination.innerHTML = source.innerHTML;
+          if (inventorySource && inventoryDestination) inventoryDestination.innerHTML = inventorySource.innerHTML;
+          if (skuSource && skuDestination) {
+            skuDestination.innerHTML = skuSource.innerHTML;
+            skuDestination.classList.toggle('visibility-hidden', skuSource.classList.contains('visibility-hidden'));
+          }
 
-      if (inventoryDestination)
-        inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
+          const price = document.getElementById(`price-${this.dataset.section}`);
 
-      const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
-      this.toggleAddButton(
-        addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
-        window.variantStrings.soldOut
-      );
+          if (price) price.classList.remove('visibility-hidden');
 
-      publish(PUB_SUB_EVENTS.variantChange, {
-        data: {
-          sectionId,
-          html,
-          variant: this.currentVariant,
-        },
-      });
-    });
-}
+          if (inventoryDestination)
+            inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
+
+          const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
+          this.toggleAddButton(
+            addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
+            window.variantStrings.soldOut
+          );
+
+          publish(PUB_SUB_EVENTS.variantChange, {
+            data: {
+              sectionId,
+              html,
+              variant: this.currentVariant,
+            },
+          });
+        });
+    }
+
     toggleAddButton(disable = true, text, modifyClass = true) {
       const productForm = document.getElementById(`product-form-${this.dataset.section}`);
       if (!productForm) return;
