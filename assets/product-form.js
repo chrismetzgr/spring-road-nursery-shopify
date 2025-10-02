@@ -87,9 +87,19 @@ document.addEventListener('DOMContentLoaded', initializeRadioButtons);
 
 // Listen for variant changes and update availability
 subscribe(PUB_SUB_EVENTS.variantChange, () => {
-  setTimeout(() => {
-    updateVariantAvailability();
-  }, 500);
+  // Try multiple times with increasing delays
+  const attempts = [100, 300, 500, 800, 1200];
+  
+  attempts.forEach(delay => {
+    setTimeout(() => {
+      const radioGroups = document.querySelectorAll('fieldset.variant-radio-group');
+      console.log(`Attempt at ${delay}ms: Found ${radioGroups.length} radio groups`);
+      
+      if (radioGroups.length > 0) {
+        updateVariantAvailability();
+      }
+    }, delay);
+  });
 });
 
 // Product form with "Added!" functionality
