@@ -1,9 +1,9 @@
 {% render 'mobile-nav' %}
 {% render 'mobile-sort' %}
 {% if page.handle == 'nursery' %}
-  {% assign header_image = 'SRN-LOGO-LIGHT-GREEN.png' %}
-{% elsif page.handle == 'garden-design' %}
   {% assign header_image = 'SRN-LOGO-BLACK.png' %}
+{% elsif page.handle == 'garden-design' %}
+  {% assign header_image = 'SRN-LOGO-LIGHT-GREEN.png' %}
 {% else %}
     {% assign header_image = 'SRN-GREEN.png' %}
 {% endif %}
