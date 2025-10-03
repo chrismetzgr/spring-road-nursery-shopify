@@ -7,7 +7,7 @@
 {% else %}
     {% assign header_image = 'SRN-GREEN.png' %}
 {% endif %}
-<div class="sn-header">
+<div class="sn-header {% if page.handle == 'nursery' %}nursery-header{% elsif page.handle == 'garden-design' %}garden-design-header{% endif %}">
   <div class="content">
     <div class="side">
       <img class="mobile" id="hamburger-icon"src="{{ "Hamburger.png" | asset_url }}" height="auto" width="auto"/>
@@ -16,7 +16,7 @@
       <a href="{{ routes.root_url }}">
         <img id="logo" src="{{ header_image | asset_url }}" height="auto" width="auto"/>
       </a>
-      <div class="menu {% if page.handle == 'nursery' %}nursery-menu{% elsif page.handle == 'garden-design' %}garden-design-menu{% endif %}">
+      <div class="menu">
         <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
         <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
         <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
