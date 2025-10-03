@@ -465,7 +465,9 @@
 }
 
 @media screen and (max-width: 650px) {
-  font-size: 8px;
+  .card__heading {
+    font-size: 8px;
+  }
 
 }
 
