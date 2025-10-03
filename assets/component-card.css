@@ -464,6 +464,11 @@
   text-transform: uppercase; 
 }
 
+@media(max-width: 650px) {
+  font-size: 10px;
+
+}
+
 .card__heading span {
   color: var(--font-color-dark)
 }
