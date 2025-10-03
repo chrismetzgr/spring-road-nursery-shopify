@@ -155,10 +155,13 @@
     }
 
     #hours-container {
-        text-align: center;
-        gap: 40px;
         font-stretch: expanded;
         .hours-content {
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 50px;
             font-family: var(--font-family-secondary);
             text-transform: uppercase;
         }
