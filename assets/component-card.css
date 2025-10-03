@@ -347,6 +347,37 @@
   width: 100%;
 }
 
+/* Remove all padding/margin from card elements */
+.product-card-wrapper .card__inner {
+  padding: 0;
+}
+
+.product-card-wrapper .card__content {
+  padding: 0;
+}
+
+.product-card-wrapper .card--media .card__inner .card__content {
+  padding: 0; /* Override the calc(var(--image-padding) + 1rem) */
+}
+
+.product-card-wrapper .card__media {
+  margin: 0;
+}
+
+.product-card-wrapper .card--standard .card__media {
+  margin: 0;
+}
+
+/* Remove any border/shadow that might create visual gaps */
+.product-card-wrapper .card--standard .card__inner {
+  border: 0;
+  box-shadow: none;
+}
+
+.product-card-wrapper .card--standard .card__inner:after {
+  display: none; /* Remove the shadow pseudo-element */
+}
+
 @media screen and (min-width: 990px) {
   .grid--6-col-desktop .card__content quick-add-bulk .quantity {
     width: auto;
