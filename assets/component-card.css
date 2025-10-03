@@ -480,9 +480,11 @@
 }
 
 .card__heading {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
   margin-top: 0;
   margin-bottom: 0;
-  text-align: center;
 }
 
 .card__heading:last-child {
