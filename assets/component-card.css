@@ -455,12 +455,12 @@
   letter-spacing: 1.5px;
 }
 
-.card__heading .product-page-title {
-  text-transform: uppercase; 
-    font-weight: 500;
-  font-style: normal;
-  font-stretch: expanded;
-  max-width: 75%;
+.card__heading-title {
+  weight: 500;
+
+}
+.card__heading-price {
+
 }
 
 .card__heading:last-child {
