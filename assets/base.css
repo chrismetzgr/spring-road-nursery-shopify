@@ -1,8 +1,35 @@
-@font-face {
-  font-family: "Akzidenz-Grotesk Pro";
-  src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+ @font-face {
+    font-family: "Akzidenz-Grotesk Pro";
+    src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+:root {
+  --alpha-button-background: #3B5669;
+  --alpha-button-border: 1;
+  --alpha-link: 0.85;
+  --alpha-badge-border: 0.1;
+  --color-foreground: #3B5669;
+  --color-button: #3B5669;
+  --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  --focused-base-outline-offset: 0.3rem;
+  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --font-body-family: "Cormorant Garamond", serif;
+  --font-body-style: normal;
+  --font-body-weight: normal;
+  --font-body-weight-bold: 700;
+  --font-heading-family: "Cormorant Garamond", serif;
+  --font-family-secondary: "Akzidenz-Grotesk Pro", sans-serif;
+  --font-heading-style: normal;
+  --font-heading-weight: normal;
+  --font-color-dark:  #008809;
+  --font-color-light: ##1EFDF;
+  --font-color-light-secondary: #D3DCCF;
+  --color-background: #F1EFDF;
+  --color-background-secondary: #EFC142;
+
 }
 
 /* base */
