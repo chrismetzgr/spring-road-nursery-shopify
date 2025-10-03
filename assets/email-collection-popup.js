@@ -28,6 +28,7 @@ if (popup && customerPosted === 'true') {
     url.searchParams.delete('customer_posted');
     window.history.replaceState({}, '', url);
   }, 5000);
+// } else if (popup && !localStorage.getItem(popupKey)) {
 } else if (popup && !localStorage.getItem(popupKey)) {
   // Normal behavior: show after 5 second delay for first-time visitors
   popup.style.opacity = '0';
