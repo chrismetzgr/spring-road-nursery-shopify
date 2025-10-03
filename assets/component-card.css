@@ -457,7 +457,9 @@
 
 .card__heading .product-page-title {
   text-transform: uppercase; 
-  font-weight: 500;
+    font-weight: 500;
+  font-style: normal;
+  font-stretch: expanded;
   max-width: 75%;
 }
 
