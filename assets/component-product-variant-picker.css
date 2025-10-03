@@ -60,6 +60,7 @@ variant-selects {
   flex-direction: column;
   font-family: var(--font-family-secondary);
   font-stretch: expanded;
+  gap: 1px;
   .form__label {
     font-size: 20x;
   }
