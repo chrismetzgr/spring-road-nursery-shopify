@@ -457,6 +457,10 @@
   text-transform: uppercase; 
 }
 
+.card__heading a {
+  color: var(--font-color-dark)
+}
+
 .card__heading-title {
   font-weight: 500;
   font-style: normal;
