@@ -470,7 +470,7 @@
 }
 
 .card__heading-title {
-  weight: 500;
+  font-weight: 500;
 
 }
 .card__heading-price {
