@@ -457,7 +457,7 @@
   text-transform: uppercase; 
 }
 
-.card__heading a {
+.card__heading span {
   color: var(--font-color-dark)
 }
 
