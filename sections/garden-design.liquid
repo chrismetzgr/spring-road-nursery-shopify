@@ -3,7 +3,7 @@
 
 <div id="garden-design">
 <div id="img-container">
-    <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="630px" width="auto"/>
+    <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="auto" width="auto"/>
 </div>
 <div id="garden-design-content">
     <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
@@ -22,6 +22,7 @@
 
 <style>
 #img-container {
+    max-height: 630px;
     width: 100%;
     display: flex;
     flex-direction: row;
