@@ -27,7 +27,7 @@
 @media screen and (max-width: 989px) {
   .facets-container {
     grid-template-columns: auto minmax(0, max-content);
-    column-gap: 2rem;
+    /* column-gap: 2rem; */
   }
 }
 
