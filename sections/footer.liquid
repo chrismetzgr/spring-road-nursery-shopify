@@ -1,4 +1,4 @@
-<div id="footer {% if page.handle == 'nursery' %}nursery-footer{% elsif page.handle == 'garden-design' %}garden-design-footer{% endif %}">
+<div id="footer" class="{% if page.handle == 'nursery' %}nursery-footer{% elsif page.handle == 'garden-design' %}garden-design-footer{% endif %}">
   <div id="footer-content">
     <div class="footer-side">
       <div class="footer-menu">
@@ -181,7 +181,7 @@
     .nursery-footer span,
     .nursery-footer .side-title,
     .nursery-footer .side-text {
-      color: var(--font-color-dark-secondary) !important;
+      color: var(--font-color-light-quaternary) !important;
     }
 
     /* Garden design footer color overrides */
@@ -191,7 +191,7 @@
     .garden-design-footer span,
     .garden-design-footer .side-title,
     .garden-design-footer .side-text {
-      color: var(--font-color-light-quaternary) !important;
+      color: black !important;
     }
 
     @media (max-width: 768px) {
