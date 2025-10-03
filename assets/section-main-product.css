@@ -192,9 +192,6 @@
 }
 
 .product-form__submit {
-  font-family: "Akzidenz-Grotesk Pro", sans-serif;
-  color: var(--font-color-dark);
-  text-transform: uppercase;
   margin: 0 !important;
   justify-content: flex-start !important;
   padding: 0 !important;
@@ -216,6 +213,12 @@
   .product-form__submit[aria-disabled='true'] {
     color: Window;
   }
+}
+
+.add-to-cart-text {
+  font-family: var(--font-family-secondary);
+  color: var(--font-color-dark);
+  text-transform: uppercase;
 }
 
 /* Overrides */
