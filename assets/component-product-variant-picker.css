@@ -79,7 +79,7 @@ variant-selects {
   border: none;
   background: none;
   text-align: left;
-  margin: 500px;
+  margin: 2px 0;
 }
 
 .product-form__input--pill input[type="radio"]:checked + label {
