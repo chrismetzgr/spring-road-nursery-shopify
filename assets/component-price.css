@@ -1,5 +1,4 @@
 .price {
-  margin-top: 50px;
   font-size: 1.6rem;
   letter-spacing: 0.1rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
@@ -37,7 +36,7 @@
 
 @media screen and (min-width: 750px) {
   .price {
-    margin: 10px 0;
+    margin: 25px 0;
   }
 }
 
