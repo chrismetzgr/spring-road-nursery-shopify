@@ -487,6 +487,8 @@
   margin-top: 0;
   margin-bottom: 0;
   .product-page-title {
+    font-family: var(--font-family-secondary);
+    text-transform: uppercase; 
     font-weight: 500;
   }
 }
