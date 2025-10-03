@@ -486,6 +486,9 @@
   gap: 5px;
   margin-top: 0;
   margin-bottom: 0;
+  .product-page-title {
+    font-weight: 600;
+  }
 }
 
 .card__heading:last-child {
