@@ -219,6 +219,8 @@
   font-family: var(--font-family-secondary);
   color: var(--font-color-dark);
   text-transform: uppercase;
+  font-stretch: expanded;
+  letter-spacing: 50px;
 }
 
 /* Overrides */
