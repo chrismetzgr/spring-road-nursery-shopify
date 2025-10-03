@@ -7,7 +7,7 @@
     </div>
     <div class="main">
       <a href="{{ routes.root_url }}">
-        <img id="logo" src="{{ 'SRN-GREEN.png' | asset_url }}" height="300px" width="auto"/>
+        <img id="logo" src="{{ 'SRN-GREEN.png' | asset_url }}" height="auto" width="auto"/>
       </a>
       <div class="menu">
         <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
@@ -165,11 +165,6 @@
   }
 
   @media (max-width: 850px) {
-    #logo {
-      height: 90px;
-      margin: 25px 0px;
-    }
-    
     #hamburger-icon {
       height: 20px
     }
