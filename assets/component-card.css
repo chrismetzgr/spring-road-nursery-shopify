@@ -452,12 +452,13 @@
   gap: 5px;
   margin-top: 15px;
   font-family: var(--font-family-secondary);
-  letter-spacing: 1.5px;;
-  .product-page-title {
-    text-transform: uppercase; 
-    font-weight: 500;
-    max-width: 75%;
-  }
+  letter-spacing: 1.5px;
+}
+
+.card__heading .product-page-title {
+  text-transform: uppercase; 
+  font-weight: 500;
+  max-width: 75%;
 }
 
 .card__heading:last-child {
