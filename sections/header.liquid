@@ -28,44 +28,11 @@
       {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
     </div>
   </div>
-  /* Font family variable */
-:root {
-  --font-family-secondary: "Akzidenz-Grotesk Pro", sans-serif;
-}
-
-/* Style tests */
-.test-bold {
-  font-family: var(--font-family-secondary);
-  font-weight: 700;
-  font-style: normal;
-}
-
-.test-italic {
-  font-family: var(--font-family-secondary);
-  font-weight: 400;
-  font-style: italic;
-}
-
-.test-condensed {
-  font-family: var(--font-family-secondary);
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: condensed;
-}
-
-.test-extended {
-  font-family: var(--font-family-secondary);
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: expanded;
-}
-
-.test-medium-extended {
-  font-family: var(--font-family-secondary);
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: expanded;
-}
+  <p class="test-bold">This is a test of Bold style</p>
+<p class="test-italic">This is a test of Italic style</p>
+<p class="test-condensed">This is a test of Condensed style</p>
+<p class="test-extended">This is a test of Extended style</p>
+<p class="test-medium-extended">This is a test of Medium Extended style</p>
 
 </div>
 <script src="{{ 'menu-sort.js' | asset_url }}" defer="defer"></script>
