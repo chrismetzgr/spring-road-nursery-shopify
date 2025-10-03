@@ -93,7 +93,7 @@
       }
 
       :root {
-        --color-background: {%if page.handle == 'nursery'%}#232107{% elsif page.handle == 'garden-design' %}#F0FFBB{% else %}#F1EFDF{% endif %};
+        --color-background: {%if page.handle == 'nursery'%}#F0FFBB{% elsif page.handle == 'garden-design' %}#232107{% else %}#F1EFDF{% endif %};
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
