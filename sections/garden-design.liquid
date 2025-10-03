@@ -2,22 +2,22 @@
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 
 <div id="garden-design">
-<div id="img-container">
-    <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="auto" width="auto"/>
-</div>
-<div id="garden-design-content">
-    <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
-    <img class="text-image mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
-    <img class="text-image mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
-    <div class="text">
-        We’ve begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
-        <br/><br/>
-        At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.
-        <br/><br/>
-        If you’re interested in working with us, please reach out: 
-        <span class="garden-design-link">design@springroadnursery.com  </span>
+    <div id="img-container">
+        <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="auto" width="auto"/>
     </div>
-</div>
+    <div id="garden-design-content">
+        <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
+        <img class="text-image mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
+        <img class="text-image mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
+        <div class="text">
+            We’ve begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
+            <br/><br/>
+            At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.
+            <br/><br/>
+            If you’re interested in working with us, please reach out: 
+            <span class="garden-design-link">design@springroadnursery.com  </span>
+        </div>
+    </div>
 </div>
 
 <style>
@@ -38,9 +38,13 @@
     text-decoration: underline;
 }
 
-#garden-design-content {
+#garden-design {
     margin-bottom: 150px;
     margin-top: 100px;
+}
+
+#garden-design-content {
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
