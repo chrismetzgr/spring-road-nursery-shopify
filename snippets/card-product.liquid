@@ -165,12 +165,12 @@
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
           >
-              <span class="product-page-title">
+              <span class="card__heading-title">
                 {{ card_product.title | escape }}
               </span>
-                <span>
-                  {{ card_product.price | money_without_trailing_zeros }}
-                </span>
+              <span class="card__heading-price">
+                {{ card_product.price | money_without_trailing_zeros }}
+              </span>
             </div>
           </a>
           <div class="card-information">
