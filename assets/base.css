@@ -1,17 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
- @font-face {
-    font-family: "Akzidenz-Grotesk Pro";
-    src: url('{{ "AkzidenzGroteskPro-Regular.woff" | asset_url }}') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
+/* Light */
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_light.ttf" | asset_url }}') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
 
-  @font-face {
-    font-family: "Akzidenz-Grotesk Pro";
-    src: url('{{ "AkzidenzGroteskPro-Regular.woff" | asset_url }}') format('opentype');
-    font-weight: 500;
-    font-style: bold;
-  }
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_lightit.ttf" | asset_url }}') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_lightex.ttf" | asset_url }}') format('truetype');
+  font-weight: 300;
+  font-stretch: expanded;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_ligextit.ttf" | asset_url }}') format('truetype');
+  font-weight: 300;
+  font-stretch: expanded;
+  font-style: italic;
+}
+
+/* Regular */
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_regular.ttf" | asset_url }}') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_it.ttf" | asset_url }}') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Medium */
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_md.ttf" | asset_url }}') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_mdcn.ttf" | asset_url }}') format('truetype');
+  font-weight: 500;
+  font-stretch: condensed;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_mdcnit.ttf" | asset_url }}') format('truetype');
+  font-weight: 500;
+  font-stretch: condensed;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Akzidenz-Grotesk Pro";
+  src: url('{{ "akzidenzgroteskpro_mdex.ttf" | asset_url }}') format('truetype');
+  font-wei
+}
 :root {
   --alpha-button-background: #3B5669;
   --alpha-button-border: 1;
