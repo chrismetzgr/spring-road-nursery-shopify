@@ -489,6 +489,7 @@
   .product-page-title {
     font-family: var(--font-family-secondary);
     text-transform: uppercase; 
+    letter-spacing: 15%;
     font-weight: 500;
   }
 }
