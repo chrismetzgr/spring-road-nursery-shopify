@@ -1,7 +1,6 @@
 .price {
   margin: 10px 0;
   font-size: 1.6rem;
-  font-stretch: expanded;
   letter-spacing: 0.1rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   color: rgb(var(--color-foreground));
@@ -25,6 +24,7 @@
   margin: 0 1rem 0 0;
   font-family: var(--font-family-secondary);
   font-size: 14px;
+  font-stretch: expanded;
 }
 
 .price__regular .price-item--regular {
