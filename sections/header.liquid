@@ -28,9 +28,16 @@
       {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
     </div>
   </div>
+  <div id="testing">TESTING</div>
 </div>
 <script src="{{ 'menu-sort.js' | asset_url }}" defer="defer"></script>
 <style>
+  #testing {
+  font-family: "Akzidenz-Grotesk Pro", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-stretch: condensed;
+}
   a {
     text-decoration: none;
     color: var(--font-color-dark);
