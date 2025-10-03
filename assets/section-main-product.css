@@ -391,6 +391,7 @@ a.product__text {
 
 .product-form__buttons {
   font-stretch: expanded;
+  letter-spacing: 3px;
   max-width: 44rem;
 }
 
