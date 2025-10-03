@@ -247,7 +247,7 @@ h1,
 .h1 {
   font-family: var(--font-family-secondary);
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.15;
   font-size: calc(var(--font-heading-scale) * 3rem);
 }
 
