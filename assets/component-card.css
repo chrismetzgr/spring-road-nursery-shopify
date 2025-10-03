@@ -490,6 +490,7 @@
     text-transform: uppercase; 
     letter-spacing: 15%;
     font-weight: 500;
+    max-width: 75%;
   }
 }
 
