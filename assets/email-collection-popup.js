@@ -1,4 +1,4 @@
-const popupKey = 'springRoadNurseryNewsLetterSignup';
+const popupKey = 'springRoadNurseryNewsLetterSignupUpdated';
 const popup = document.getElementById('email-collection-popup');
 
 // Check if the page was refreshed after successful form submission
