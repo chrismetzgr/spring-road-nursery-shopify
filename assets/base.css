@@ -3623,10 +3623,10 @@ details-disclosure > details {
 }
 
 #product-grid {
-  margin-left: -1px; /* Compensate for sub-pixel rendering */
+  margin-left: -1px !important; /* Compensate for sub-pixel rendering */
 }
 
 #product-grid .grid__item {
-  margin-left: 1px;
-  margin-right: -1px;
+  margin-left: 1px !important;
+  margin-right: -1px !important;
 }
