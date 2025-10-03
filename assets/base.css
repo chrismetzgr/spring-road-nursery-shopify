@@ -3600,3 +3600,33 @@ details-disclosure > details {
   margin: 0;
   padding: 0;
 }
+
+#product-grid {
+  gap: 0 !important;
+  grid-column-gap: 0 !important;
+  grid-row-gap: 0 !important;
+}
+
+#product-grid .grid__item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.card-wrapper.product-card-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.card__inner {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#product-grid {
+  margin-left: -1px; /* Compensate for sub-pixel rendering */
+}
+
+#product-grid .grid__item {
+  margin-left: 1px;
+  margin-right: -1px;
+}
