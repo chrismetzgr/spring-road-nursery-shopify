@@ -76,7 +76,7 @@ variant-selects {
 
 .product-form__input--pill label {
   display: block;
-  padding: 4px 0;
+  padding: 2px 0;
   cursor: pointer;
   transition: opacity 0.2s ease;
   border: none;
