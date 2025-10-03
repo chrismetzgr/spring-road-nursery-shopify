@@ -1,4 +1,4 @@
-<div id="footer">
+<div id="footer {% if page.handle == 'nursery' %}nursery-footer{% elsif page.handle == 'garden-design' %}garden-design-footer{% endif %}">
   <div id="footer-content">
     <div class="footer-side">
       <div class="footer-menu">
@@ -10,7 +10,13 @@
       </div>
     </div>
     <div class="main">
-      <img src="{{ 'inchworm.png' | asset_url }}" height="150px" width="auto"/>
+      {% if page.handle == 'nursery' %}
+        <img src="{{ 'inchworm-light.png' | asset_url }}" height="150px" width="auto"/>
+      {% elsif page.handle == 'garden-design' %}
+        <img src="{{ 'inchworm-dark.png' | asset_url }}" height="150px" width="auto"/>
+      {% else %}
+        <img src="{{ 'inchworm.png' | asset_url }}" height="150px" width="auto"/>
+      {% endif %}
     </div>
     <div class="footer-side">
       <div class="side-title wavy-underline">
@@ -21,7 +27,7 @@
         we cultivate the strange and the beautiful
         on our mountainside in Vermont.  
         Be the first to hear about 
-        what’s unfurling in the garden.
+        what's unfurling in the garden.
       </div>
       <div id="footer-email-form">
         {% form 'customer', class: 'newsletter-form' %}
@@ -166,6 +172,26 @@
 
     #footer-email-form {
       margin-top: 40px;
+    }
+
+    /* Nursery footer color overrides */
+    .nursery-footer,
+    .nursery-footer a,
+    .nursery-footer a:visited,
+    .nursery-footer span,
+    .nursery-footer .side-title,
+    .nursery-footer .side-text {
+      color: var(--font-color-light-quaternary) !important;
+    }
+
+    /* Garden design footer color overrides */
+    .garden-design-footer,
+    .garden-design-footer a,
+    .garden-design-footer a:visited,
+    .garden-design-footer span,
+    .garden-design-footer .side-title,
+    .garden-design-footer .side-text {
+      color: black !important;
     }
 
     @media (max-width: 768px) {
