@@ -837,21 +837,17 @@ summary::-webkit-details-marker {
   letter-spacing: 0.08rem;
 }
 
-.wavy-underline-light {
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: var(--font-color-light);
-}
-
-.wavy-underline-dark {
-  text-decoration-line: underline;
-  text-decoration-style: wavy;
-  text-decoration-color: var(--font-color-dark);
-}
-
 .wavy-underline {
   text-decoration-line: underline;
   text-decoration-style: wavy;
+  text-underline-offset: 5px;
+  .wavy-underline-light {
+    text-decoration-color: var(--font-color-light);
+
+  }
+  .wavy-underline-dark {
+    text-decoration-color: var(--font-color-dark);
+  }
 }
 
 /* component-grid */
