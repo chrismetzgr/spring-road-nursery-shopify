@@ -808,16 +808,16 @@ summary::-webkit-details-marker {
   letter-spacing: 0.08rem;
 }
 
-.wavy-underline-yellow {
+.wavy-underline-light {
   text-decoration-line: underline;
   text-decoration-style: wavy;
-  text-decoration-color: #EFC142;
+  text-decoration-color: var(--font-color-light);
 }
 
-.wavy-underline-green {
+.wavy-underline-dark {
   text-decoration-line: underline;
   text-decoration-style: wavy;
-  text-decoration-color: #D3DCCF;
+  text-decoration-color: var(--font-color-dark);
 }
 
 .wavy-underline {
