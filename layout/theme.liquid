@@ -52,7 +52,7 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
-      --color-background: #D3DCCF
+      /* --color-background: #D3DCCF */
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -60,7 +60,7 @@
           :root,
         {%- endif %}
         /* .color-{{ scheme.id }} {
-          --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }}; */
+          /* --color-background: {{ scheme.settings.background.red }},{{ scheme.settings.background.green }},{{ scheme.settings.background.blue }}; */ */
 
         {% liquid
           assign background_color = scheme.settings.background
@@ -93,7 +93,7 @@
       }
 
       :root {
-        --color-background: {%if page.handle == 'nursery'%}#EFC142{% elsif page.handle == 'garden-design' %}#F1AD96{% else %}#D3DCCF{% endif %};
+        --color-background: {%if page.handle == 'nursery'%}#EFC142{% elsif page.handle == 'garden-design' %}#F1AD96{% else %}#F1EFDF{% endif %};
         --font-body-scale: {{ settings.body_scale | divided_by: 100.0 }};
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
 
