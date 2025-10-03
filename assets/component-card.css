@@ -485,7 +485,7 @@
   justify-content: center;
   gap: 5px;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 10px;
   .product-page-title {
     font-family: var(--font-family-secondary);
     text-transform: uppercase; 
