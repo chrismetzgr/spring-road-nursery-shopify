@@ -884,7 +884,8 @@ summary::-webkit-details-marker {
 
 @media screen and (min-width: 750px) {
   .grid--3-col .grid__item {
-    width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+    /* width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3); */
+    width: calc(33.33%);
   }
 }
 
@@ -902,8 +903,8 @@ summary::-webkit-details-marker {
   }
 
   .grid--3-col-tablet .grid__item {
-    width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
-  }
+    /* width: calc(33.33% - var(--grid-desktop-horizontal-spacing) * 2 / 3); */
+    width: calc(33.33%);  }
 
   .grid--2-col-tablet .grid__item {
     width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
