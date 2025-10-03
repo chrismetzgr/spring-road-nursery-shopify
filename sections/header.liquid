@@ -7,6 +7,13 @@
 {% else %}
     {% assign header_image = 'SRN-GREEN.png' %}
 {% endif %}
+{% if page.handle == 'nursery' %}
+  {% assign header_image = 'SRN-LOGO-LIGHT-GREEN.png' %}
+{% elsif page.handle == 'garden-design' %}
+  {% assign header_image = 'SRN-LOGO-BLACK.png' %}
+{% else %}
+    {% assign header_image = 'SRN-GREEN.png' %}
+{% endif %}
 <div class="sn-header {% if page.handle == 'nursery' %}nursery-header{% elsif page.handle == 'garden-design' %}garden-design-header{% endif %}">
   <div class="content">
     <div class="side">
