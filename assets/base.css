@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
  @font-face {
     font-family: "Akzidenz-Grotesk Pro";
-    src: url('{{ "akzidenzgroteskpro_ext.otf" | asset_url }}') format('opentype');
+    src: url('{{ "AkzidenzGroteskPro-Regular.woff" | asset_url }}') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
