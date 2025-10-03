@@ -164,7 +164,7 @@
             
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
-              {{ card_product.title | escape }} !!!
+              {{ card_product.title | escape }} {{ card_product.price | money_without_trailing_zeros }}
             </a>
           </span>
           <div class="card-information">
