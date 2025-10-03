@@ -390,6 +390,7 @@ a.product__text {
 }
 
 .product-form__buttons {
+  font-stretch: expanded;
   max-width: 44rem;
 }
 
