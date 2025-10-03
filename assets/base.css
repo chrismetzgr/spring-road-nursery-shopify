@@ -3578,3 +3578,19 @@ details-disclosure > details {
 .progress-bar .progress-bar-value {
   display: block;
 }
+
+ul#product-grid {
+  gap: 0;
+}
+
+ul#product-grid > li.grid__item {
+  margin: 0;
+  padding: 0;
+}
+
+.card__media img {
+  display: block;
+  width: calc(100% + 1px);
+  max-width: none;
+  margin-right: -1px;
+}
