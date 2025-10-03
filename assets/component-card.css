@@ -453,6 +453,7 @@
   margin-top: 15px;
   font-family: var(--font-family-secondary);
   letter-spacing: 1.5px;
+  text-transform: uppercase; 
 }
 
 .card__heading-title {
