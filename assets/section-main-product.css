@@ -220,7 +220,7 @@
   color: var(--font-color-dark);
   text-transform: uppercase;
   font-stretch: expanded;
-  letter-spacing: 50px;
+  letter-spacing: 3px;
 }
 
 /* Overrides */
