@@ -6,6 +6,12 @@
     font-style: normal;
   }
 
+  @font-face {
+    font-family: "Akzidenz-Grotesk Pro";
+    src: url('{{ "AkzidenzGroteskPro-Regular.woff" | asset_url }}') format('opentype');
+    font-weight: 500;
+    font-style: bold;
+  }
 :root {
   --alpha-button-background: #3B5669;
   --alpha-button-border: 1;
