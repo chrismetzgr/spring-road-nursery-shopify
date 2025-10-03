@@ -115,6 +115,12 @@
         <div class="card__content">
           <div class="card__outer">{{ card_product.title  }}</div>
           <div class="card__information">
+            <span
+              class="card__heading"
+              {% if card_product.featured_media == null and settings.card_style == 'standard' %}
+                id="title-{{ section_id }}-{{ card_product.id }}"
+              {% endif %}
+            >
               <a
                 href="{{ card_product.url }}"
                 id="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }}"
@@ -123,6 +129,7 @@
               >
                 {{ card_product.title | escape }}
               </a>
+            </span>
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
@@ -153,7 +160,7 @@
             aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
           >
           <div
-            class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
+            class="card__heading"
             {% if card_product.featured_media or settings.card_style == 'card' %}
               id="title-{{ section_id }}-{{ card_product.id }}"
             {% endif %}
