@@ -272,6 +272,7 @@
   width: 100%;
 }
 
+
 .card--media .card__inner .card__content {
   position: relative;
   padding: calc(var(--image-padding) + 1rem);
@@ -339,6 +340,11 @@
 
 .card__information-volume-pricing-note--button + .global-settings-popup.quantity-popover__info .quantity__rules {
   text-align: left;
+}
+
+.card__media {
+  margin: 0; /* Remove the var(--image-padding) */
+  width: 100%;
 }
 
 @media screen and (min-width: 990px) {
