@@ -249,6 +249,10 @@
   margin-bottom: 0;
 }
 
+.description-text {
+  font-weight: 600;
+}
+
 a.product__text {
   display: block;
   text-decoration: none;
