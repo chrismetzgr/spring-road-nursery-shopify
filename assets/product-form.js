@@ -207,6 +207,7 @@ if (!customElements.get('product-form')) {
                 console.log({str});
                 if (str){
                   const number = str.replace("CART ", "");
+                  console.log({number})
                   if (number) {
                     document.getElementById('srn-cart').innerText = `CART${response.quantity + number}`
                   }
