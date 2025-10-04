@@ -219,6 +219,8 @@ if (!customElements.get('product-form')) {
               return;
             }
 
+            console.log('uhh?')
+
              this.updateHeaderCart();
               if (!this.cart) {
                 this.showAddedMessage();
@@ -275,6 +277,7 @@ if (!customElements.get('product-form')) {
       }
 
     updateHeaderCart() {
+      console.log9('uhm')
       fetch('/cart.js')
         .then(response => response.json())
         .then(cart => {
