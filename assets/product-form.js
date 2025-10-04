@@ -199,7 +199,7 @@ if (!customElements.get('product-form')) {
           .then((response) => response.json())
           .then((response) => {
             if(response.quantity){
-              
+              const cartLink = document.getElementById('cart-link')
             }
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
