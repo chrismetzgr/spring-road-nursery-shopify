@@ -1,94 +1,33 @@
 {% render 'email-collection-popup' %}
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-<div id="the-nursery">
 
-<div id="img-container">
-    <img src="{{ 'nursery.jpg' | asset_url }}" height="auto" width="auto"/>
-</div>
-<div id="nursery-menu">
-    <div><a href="#what-we-do">What We Do</a></div>
-    <div>•</div>
-    <div><a href="#hours">Our Hours</a></div>
-    <div>•</div>
-    <div><a href="#plants">Our Plants</a></div>
-    <div>•</div>
-    <div><a href="#contact">Contact Us</a></div>
-</div>
-<div id="nursery-content">
-    <div id="what-we-do" class="nursery-section">
-        <img class="text-image desktop-pic" src="{{ 'what-we-do.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'what.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'we-do.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="what-we-do-text">
-            Cross the covered bridge in Tunbridge village, follow the road as it climbs the mountain and turns to dirt, and you'll arrive at Spring Road Nursery: a farm of terraced gardens where rare plants are grown and propagated, and new landscapes are imagined into being.
+<div id="garden-design">
+    <div id="img-container">
+        <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="auto" width="auto"/>
+    </div>
+    <div id="garden-design-content">
+        <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
+        <img class="text-image mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
+        <img class="text-image mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
+        <div class="text">
+            We've begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
             <br/><br/>
-            This place was once a pasture. Now it is a living library of plants. Each bed is an experiment, where sun, water, and soil test the resilience, abundance, and vigor of every species. Flowers chosen for their uncommon color, foliage that calls to be touched. We collect seed, take cuttings, divide crowns, and pass them on, so you can plant them at home.
+            At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.
             <br/><br/>
-            The greenhouse hums with what we've grown, ready for you to sift through and find the thing you didn't know you needed. In the barn you'll find our shop full of tools and objects built to last—spades and shears, handwoven blankets, birdhouses made by a luthier, and glossaries of plants. Things that make the work steadier, sharper, and more beautiful.
-            <br/><br/>
-            The labor here is a daily ritual. Beds weeded. Seedlings lifted. Compost spread. Stalks cut back. Chickens shooed from the rows. Work that ties us to the soil we all depend on.
-            <br/><br/>
-            The garden is not decoration. It is a force—ecstatic, insistent, alive. It humbles and surprises. It asks for patience but also surrender. Every season it reshapes itself, and us with it.
-            <br/><br/>
-            This is what we offer: plants to carry home, tools to work with, objects to keep close, and gardens designed to endure. All of it is rooted here, shaped by weather, labor, and time.
-            <br/><br/>
-            And through each season—the effort, the devotion, the ecstasy—we carry one assurance close: All will be well in the garden.
-            <br/><br/>
-            We hope to see you soon.
-            <br/>
-            Bryan & Adam
-            <br/><br/>
-            "Plant a garden in which strange plants grow and mysteries bloom. The need for mystery is greater than the need for an answer." —Ken Kesey  
+            If you're interested in working with us, please reach out: 
+            <span class="garden-design-link">design@springroadnursery.com  </span>
         </div>
     </div>
-    <div id="hours" class="nursery-section">
-        <img class="text-image" src="{{ 'hours.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="hours-heading">
-            Our days and hours shift with the season. Currently, we are open...
-        </div>
-        <div class="hours-content">
-            <div class="hours">            
-                <span class="schedule-title">Weekdays </span>
-                <br/>
-                <span class="schedule-hours">by appointment</span>
-            </div>
-             <div class="hours">            
-                <span class="schedule-title">Saturday & Sunday</span>
-                <br/>
-                <span class="schedule-hours">10AM - 4PM</span>
-            </div>
-        </div>
-    </div>
-    <div id="plants" class="nursery-section">
-        <img class="text-image desktop-pic" src="{{ 'our-plants.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'our.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'plants.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="plants-content">
-            We propagate thousands of plants from seed, cuttings, and division. 
-            <br/><br/>
-            A shifting chorus that changes with the seasons and our curiosities.  Alongside these perennials and annuals, you'll find a small gathering of trees and shrubs — each available here at our nursery  in Tunbridge, Vermont.
-            <br/><br/>
-            <a href="#" class="plants-link wavy-underline">Click here for the full list of what's growing, blooming,
-                <br/>
-                and ready to wander home with you.</a>
-        </div>
-    </div>
-    <div id="contact" class="nursery-section">
-        <img class="text-image" src="{{ 'contact.png' | asset_url }}" height="auto" width="auto"/>
-            <span class="nursery-email">hello@springroadnurseryvt.com</span>
-            <span class="nursery-phone">(802) 276-6481</span>
-    </div>
-</div>
 </div>
 
 <style>
-    /* Container */
-    #the-nursery {
+    /* ===== CONTAINER ===== */
+    #garden-design {
         margin-top: 50px;
         margin-bottom: 150px;
     }
-    
-    /* Header image */
+
+    /* ===== HEADER IMAGE ===== */
     #img-container {
         max-height: 630px;
         width: 100%;
@@ -101,62 +40,31 @@
         width: 100%;
     }
 
-    /* Navigation menu */
-    #nursery-menu {
+    /* ===== CONTENT ===== */
+    #garden-design-content {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        max-width: 700px;
-        width: 100%;
-        margin: 40px auto 0;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 100px;
         padding: 0 20px;
-        font-family: var(--font-family-secondary);
-        font-size: 14px;
-        font-stretch: expanded;
-        text-transform: uppercase;
-    }
-    
-    #nursery-menu a,
-    #nursery-menu a:visited { 
-        color: var(--font-color-dark-secondary);
+        color: var(--font-color-light-tertiary);
     }
 
-    /* Content sections */
-    #nursery-content {
-        margin-top: 150px;
-        font-size: 18px;
-        color: var(--font-color-dark-secondary);
-    }
-
-    #nursery-content img {
+    #garden-design-content img {
+        align-self: center;
         max-width: 100%;
         height: auto;
     }
 
-    #nursery-content a {
-        color: var(--font-color-dark-secondary);
-        font-family: var(--font-family-secondary);
+    #garden-design-content a {
         font-size: 20px;
-        font-weight: medium;
     }
 
-    /* Common section styles */
-    .nursery-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        max-width: 850px;
-        width: 100%;
-        margin: 100px auto 0;
-        padding: 0 20px;
-        font-size: 25px;
-        line-height: 1.15;
-        text-align: center;
+    #garden-design-content div {
+        margin-top: 100px;
     }
 
-    /* Text images */
+    /* Text images (section headers) */
     img.text-image {
         height: 75px !important;
         width: auto;
@@ -166,91 +74,91 @@
         display: none;
     }
 
-    /* What We Do section */
-    .what-we-do-text {
-        margin-top: 40px;
-        text-align: left;
-    }
-
-    /* Hours section */
-    #hours {
-        font-stretch: expanded;
-    }
-
-    .hours-heading {
-        margin: 50px 0;
-    }
-
-    .hours-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 75px;
-        font-family: var(--font-family-secondary);
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        line-height: 1.7;
-    }
-
-    .hours {
+    /* Main text content */
+    .text {
+        max-width: 850px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        font-size: 25px;
+        line-height: 1.15;
         text-align: center;
     }
 
-    .schedule-hours {
-        font-weight: 300;
-    }
-
-    /* Plants section */
-    .plants-content {
-        margin-top: 50px;
-        line-height: 1.5;
-    }
-
-    .plants-link {
-        font-weight: 500;
-        letter-spacing: 3px;
-    }
-
-    /* Contact section */
-    #contact {
-        gap: 0;
-        letter-spacing: 2px;
-    }
-
-    .nursery-email {
-        margin-top: 50px;
+    .garden-design-link {
         text-decoration: underline;
     }
 
-px * (100vw / 850));
-        }
+    /* ===== NAVIGATION MENU (if used) ===== */
+    .garden-design-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        max-width: 700px;
+        width: 100%;
+        margin: 20px auto 0;
+        padding: 0 20px;
+        font-family: var(--font-family-secondary);
+        font-size: 14px;
+        text-transform: uppercase;
+    }
 
-        .plants-link {
-            letter-spacing: calc(3px * (100vw / 850));
-        }
-
-        #contact {
-            letter-spacing: calc(2px * (100vw / 850));
-        }
-
-        .nursery-email {
+    /* ===== RESPONSIVE: TABLETS (481px - 850px) ===== */
+    @media (max-width: 850px) {
+        #garden-design {
             margin-top: calc(50px * (100vw / 850));
+            margin-bottom: calc(150px * (100vw / 850));
+        }
+
+        #garden-design-content {
+            margin-top: calc(100px * (100vw / 850));
+        }
+
+        #garden-design-content a {
+            font-size: 18px !important;
+        }
+
+        #garden-design-content div {
+            margin-top: calc(100px * (100vw / 850));
+        }
+
+        img.text-image {
+            height: calc(75px * (100vw / 850)) !important;
+        }
+
+        .text {
+            margin-top: calc(50px * (100vw / 850));
+            font-size: 20px !important;
+        }
+
+        .garden-design-menu {
+            margin-top: calc(20px * (100vw / 850));
+            font-size: 12px !important;
         }
     }
 
-    /* Mobile: Show/hide elements */
+    /* ===== RESPONSIVE: MOBILE (≤480px) ===== */
+    @media (max-width: 480px) {
+        #garden-design-content a {
+            font-size: 16px !important;
+        }
+
+        .text {
+            font-size: 18px !important;
+        }
+
+        .garden-design-menu {
+            font-size: 11px !important;
+        }
+    }
+
+    /* ===== RESPONSIVE: MOBILE LAYOUT CHANGES (≤768px) ===== */
     @media (max-width: 768px) {
-        #contact {
+        .garden-design-menu div:last-child {
             display: none;
         }
-        
-        #nursery-menu div:nth-child(5),
-        #nursery-menu div:nth-child(6),
-        #nursery-menu div:nth-child(7) {
-            display: none;
-        }
-        
+
         .mobile-pic {
             display: inline-block;
         }
