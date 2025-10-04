@@ -10,121 +10,146 @@
         <img class="text-image mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
         <img class="text-image mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
         <div class="text">
-            We’ve begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
+            We've begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
             <br/><br/>
             At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.
             <br/><br/>
-            If you’re interested in working with us, please reach out: 
+            If you're interested in working with us, please reach out: 
             <span class="garden-design-link">design@springroadnursery.com  </span>
         </div>
     </div>
 </div>
 
 <style>
-#img-container {
-    max-height: 630px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    /* Container */
+    #garden-design {
+        margin-top: 50px;
+        margin-bottom: 150px;
+    }
+
+    /* Header image */
+    #img-container {
+        max-height: 630px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     
-    img {
+    #img-container img {
         max-width: 1370px;
         width: 100%;
     }
-}
 
-.garden-design-link {
-    text-decoration: underline;
-}
+    /* Content */
+    #garden-design-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 100px;
+        padding: 0 20px;
+        color: var(--font-color-light-tertiary);
+    }
 
-#garden-design {
-    margin-top: 50px;
-    margin-bottom: 150px;
-}
-
-#garden-design-content {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 20px;
-    color: var(--font-color-light-tertiary);
-
-    img {
-        height: 75px !important;
+    #garden-design-content img {
         align-self: center;
         max-width: 100%;
         height: auto;
     }
 
-    .text {
-        font-size: 25px;
-        margin-top: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 850px;
-        width: 100%;
-        line-height: 1.15;
-        text-align: center;
-    }
-    .special-text {
-        font-family: var(--font-family-secondary);
-    }
-    .center {
-        text-align: center;
-    }
-    a {
+    #garden-design-content a {
         font-size: 20px;
     }
-    div {
+
+    #garden-design-content div {
         margin-top: 100px;
     }
-}
 
-.garden-design-menu {
-    text-transform: uppercase;
-    font-family: var(--font-family-secondary);
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 14px;
-    max-width: 700px;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0 20px;
-}
-
-.mobile-pic {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .garden-design-menu {
-        font-size: 12px;
-        height: auto;
-        div:last-child {
-            display: none;
-        }
-    }
-    #garden-design-content {
-        img {
-            margin-top: 20px;
-        }
-        .text {
-            font-size: 18px;
-        }
+    /* Text images */
+    img.text-image {
+        height: 75px !important;
+        width: auto;
     }
 
     .mobile-pic {
-        display: inline-block;
-    }
-    .desktop-pic { 
         display: none;
     }
-}
+
+    /* Text content */
+    .text {
+        max-width: 850px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        font-size: 25px;
+        line-height: 1.15;
+        text-align: center;
+    }
+
+    .garden-design-link {
+        text-decoration: underline;
+    }
+
+    /* Navigation menu (if used) */
+    .garden-design-menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        max-width: 700px;
+        width: 100%;
+        margin: 20px auto 0;
+        padding: 0 20px;
+        font-family: var(--font-family-secondary);
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    /* Responsive: Tablets and smaller (850px and below) */
+    @media (max-width: 850px) {
+        #garden-design {
+            margin-top: calc(50px * (100vw / 850));
+            margin-bottom: calc(150px * (100vw / 850));
+        }
+
+        #garden-design-content {
+            margin-top: calc(100px * (100vw / 850));
+        }
+
+        #garden-design-content a {
+            font-size: calc(20px * (100vw / 850));
+        }
+
+        #garden-design-content div {
+            margin-top: calc(100px * (100vw / 850));
+        }
+
+        img.text-image {
+            height: calc(75px * (100vw / 850)) !important;
+        }
+
+        .text {
+            margin-top: calc(50px * (100vw / 850));
+            font-size: calc(25px * (100vw / 850));
+        }
+
+        .garden-design-menu {
+            margin-top: calc(20px * (100vw / 850));
+            font-size: calc(14px * (100vw / 850));
+        }
+    }
+
+    /* Mobile: Show/hide elements */
+    @media (max-width: 768px) {
+        .garden-design-menu div:last-child {
+            display: none;
+        }
+
+        .mobile-pic {
+            display: inline-block;
+        }
+        
+        .desktop-pic { 
+            display: none;
+        }
+    }
 </style>
