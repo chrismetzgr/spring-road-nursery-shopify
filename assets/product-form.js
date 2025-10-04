@@ -145,6 +145,9 @@ if (!customElements.get('product-form')) {
       constructor() {
         super();
 
+
+        console.log('ProductForm constructor called for:', this);
+        console.log('Form element:', this.querySelector('form'));
         this.form = this.querySelector('form');
         this.variantIdInput.disabled = false;
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
@@ -167,6 +170,7 @@ if (!customElements.get('product-form')) {
       }
 
       onSubmitHandler(evt) {
+        console.log('Submit handler called on form:', this.form);
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
