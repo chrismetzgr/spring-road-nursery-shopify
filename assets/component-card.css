@@ -490,24 +490,120 @@
   .grid--3-col-desktop .grid__item:nth-child(6n+1) .card-wrapper:hover .card__media,
   .grid--3-col-desktop .grid__item:nth-child(6n+3) .card-wrapper:hover .card__media,
   .grid--3-col-desktop .grid__item:nth-child(6n+4) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 0%);
+    clip-path: polygon(
+      0% 40%,
+      5% 35%,
+      10% 30%,
+      15% 25%,
+      20% 20%,
+      25% 16%,
+      30% 13%,
+      35% 10%,
+      40% 7%,
+      45% 5%,
+      50% 4%,
+      55% 5%,
+      60% 7%,
+      65% 10%,
+      70% 13%,
+      75% 16%,
+      80% 20%,
+      85% 25%,
+      90% 30%,
+      95% 35%,
+      100% 40%,
+      100% 100%,
+      0% 100%
+    );
   }
   
   .grid--3-col-desktop .grid__item:nth-child(6n+2) .card-wrapper:hover .card__media,
   .grid--3-col-desktop .grid__item:nth-child(6n+5) .card-wrapper:hover .card__media,
   .grid--3-col-desktop .grid__item:nth-child(6n+6) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 100%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 60%,
+      95% 65%,
+      90% 70%,
+      85% 75%,
+      80% 80%,
+      75% 84%,
+      70% 87%,
+      65% 90%,
+      60% 93%,
+      55% 95%,
+      50% 96%,
+      45% 95%,
+      40% 93%,
+      35% 90%,
+      30% 87%,
+      25% 84%,
+      20% 80%,
+      15% 75%,
+      10% 70%,
+      5% 65%,
+      0% 60%
+    );
   }
 
   /* 2-column grid patterns */
   .grid--2-col-desktop .grid__item:nth-child(4n+1) .card-wrapper:hover .card__media,
   .grid--2-col-desktop .grid__item:nth-child(4n+4) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 0%);
+    clip-path: polygon(
+      0% 40%,
+      5% 35%,
+      10% 30%,
+      15% 25%,
+      20% 20%,
+      25% 16%,
+      30% 13%,
+      35% 10%,
+      40% 7%,
+      45% 5%,
+      50% 4%,
+      55% 5%,
+      60% 7%,
+      65% 10%,
+      70% 13%,
+      75% 16%,
+      80% 20%,
+      85% 25%,
+      90% 30%,
+      95% 35%,
+      100% 40%,
+      100% 100%,
+      0% 100%
+    );
   }
   
   .grid--2-col-desktop .grid__item:nth-child(4n+2) .card-wrapper:hover .card__media,
   .grid--2-col-desktop .grid__item:nth-child(4n+3) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 100%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 60%,
+      95% 65%,
+      90% 70%,
+      85% 75%,
+      80% 80%,
+      75% 84%,
+      70% 87%,
+      65% 90%,
+      60% 93%,
+      55% 95%,
+      50% 96%,
+      45% 95%,
+      40% 93%,
+      35% 90%,
+      30% 87%,
+      25% 84%,
+      20% 80%,
+      15% 75%,
+      10% 70%,
+      5% 65%,
+      0% 60%
+    );
   }
 
   /* 4-column grid patterns */
@@ -515,14 +611,62 @@
   .grid--4-col-desktop .grid__item:nth-child(8n+3) .card-wrapper:hover .card__media,
   .grid--4-col-desktop .grid__item:nth-child(8n+6) .card-wrapper:hover .card__media,
   .grid--4-col-desktop .grid__item:nth-child(8n+8) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 0%);
+    clip-path: polygon(
+      0% 40%,
+      5% 35%,
+      10% 30%,
+      15% 25%,
+      20% 20%,
+      25% 16%,
+      30% 13%,
+      35% 10%,
+      40% 7%,
+      45% 5%,
+      50% 4%,
+      55% 5%,
+      60% 7%,
+      65% 10%,
+      70% 13%,
+      75% 16%,
+      80% 20%,
+      85% 25%,
+      90% 30%,
+      95% 35%,
+      100% 40%,
+      100% 100%,
+      0% 100%
+    );
   }
   
   .grid--4-col-desktop .grid__item:nth-child(8n+2) .card-wrapper:hover .card__media,
   .grid--4-col-desktop .grid__item:nth-child(8n+4) .card-wrapper:hover .card__media,
   .grid--4-col-desktop .grid__item:nth-child(8n+5) .card-wrapper:hover .card__media,
   .grid--4-col-desktop .grid__item:nth-child(8n+7) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 100%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 60%,
+      95% 65%,
+      90% 70%,
+      85% 75%,
+      80% 80%,
+      75% 84%,
+      70% 87%,
+      65% 90%,
+      60% 93%,
+      55% 95%,
+      50% 96%,
+      45% 95%,
+      40% 93%,
+      35% 90%,
+      30% 87%,
+      25% 84%,
+      20% 80%,
+      15% 75%,
+      10% 70%,
+      5% 65%,
+      0% 60%
+    );
   }
 
   /* 5-column grid patterns */
@@ -531,7 +675,31 @@
   .grid--5-col-desktop .grid__item:nth-child(10n+5) .card-wrapper:hover .card__media,
   .grid--5-col-desktop .grid__item:nth-child(10n+7) .card-wrapper:hover .card__media,
   .grid--5-col-desktop .grid__item:nth-child(10n+9) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 0%);
+    clip-path: polygon(
+      0% 40%,
+      5% 35%,
+      10% 30%,
+      15% 25%,
+      20% 20%,
+      25% 16%,
+      30% 13%,
+      35% 10%,
+      40% 7%,
+      45% 5%,
+      50% 4%,
+      55% 5%,
+      60% 7%,
+      65% 10%,
+      70% 13%,
+      75% 16%,
+      80% 20%,
+      85% 25%,
+      90% 30%,
+      95% 35%,
+      100% 40%,
+      100% 100%,
+      0% 100%
+    );
   }
   
   .grid--5-col-desktop .grid__item:nth-child(10n+2) .card-wrapper:hover .card__media,
@@ -539,7 +707,31 @@
   .grid--5-col-desktop .grid__item:nth-child(10n+6) .card-wrapper:hover .card__media,
   .grid--5-col-desktop .grid__item:nth-child(10n+8) .card-wrapper:hover .card__media,
   .grid--5-col-desktop .grid__item:nth-child(10n+10) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 100%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 60%,
+      95% 65%,
+      90% 70%,
+      85% 75%,
+      80% 80%,
+      75% 84%,
+      70% 87%,
+      65% 90%,
+      60% 93%,
+      55% 95%,
+      50% 96%,
+      45% 95%,
+      40% 93%,
+      35% 90%,
+      30% 87%,
+      25% 84%,
+      20% 80%,
+      15% 75%,
+      10% 70%,
+      5% 65%,
+      0% 60%
+    );
   }
 
   /* 6-column grid patterns */
@@ -549,7 +741,31 @@
   .grid--6-col-desktop .grid__item:nth-child(12n+8) .card-wrapper:hover .card__media,
   .grid--6-col-desktop .grid__item:nth-child(12n+10) .card-wrapper:hover .card__media,
   .grid--6-col-desktop .grid__item:nth-child(12n+12) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 0%);
+    clip-path: polygon(
+      0% 40%,
+      5% 35%,
+      10% 30%,
+      15% 25%,
+      20% 20%,
+      25% 16%,
+      30% 13%,
+      35% 10%,
+      40% 7%,
+      45% 5%,
+      50% 4%,
+      55% 5%,
+      60% 7%,
+      65% 10%,
+      70% 13%,
+      75% 16%,
+      80% 20%,
+      85% 25%,
+      90% 30%,
+      95% 35%,
+      100% 40%,
+      100% 100%,
+      0% 100%
+    );
   }
   
   .grid--6-col-desktop .grid__item:nth-child(12n+2) .card-wrapper:hover .card__media,
@@ -558,7 +774,31 @@
   .grid--6-col-desktop .grid__item:nth-child(12n+7) .card-wrapper:hover .card__media,
   .grid--6-col-desktop .grid__item:nth-child(12n+9) .card-wrapper:hover .card__media,
   .grid--6-col-desktop .grid__item:nth-child(12n+11) .card-wrapper:hover .card__media {
-    clip-path: ellipse(50% 40% at 50% 100%);
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 60%,
+      95% 65%,
+      90% 70%,
+      85% 75%,
+      80% 80%,
+      75% 84%,
+      70% 87%,
+      65% 90%,
+      60% 93%,
+      55% 95%,
+      50% 96%,
+      45% 95%,
+      40% 93%,
+      35% 90%,
+      30% 87%,
+      25% 84%,
+      20% 80%,
+      15% 75%,
+      10% 70%,
+      5% 65%,
+      0% 60%
+    );
   }
 }
 
