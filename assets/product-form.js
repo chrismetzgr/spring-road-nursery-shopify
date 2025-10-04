@@ -214,10 +214,13 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            } else if (!this.cart) {
+            }
+
+            // Always update header cart count regardless of cart drawer existence
+            this.updateHeaderCart(response.item_count);
+
+            if (!this.cart) {
               this.showAddedMessage();
-              // Update header cart count
-              this.updateHeaderCart(response.item_count);
               return;
             }
 
@@ -265,11 +268,11 @@ if (!customElements.get('product-form')) {
       }
 
       updateHeaderCart(itemCount) {
-        // Dispatch custom event with cart count
-        const event = new CustomEvent('cart:updated', {
-          detail: { itemCount: itemCount }
-        });
-        document.dispatchEvent(event);
+        // Update the header cart count
+        const cartElement = document.getElementById('srn-cart');
+        if (cartElement) {
+          cartElement.textContent = `CART ${itemCount}`;
+        }
       }
 
       getSectionInnerHTML(html, selector) {
