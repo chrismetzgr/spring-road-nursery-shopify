@@ -7,8 +7,7 @@
     </div>
     <div id="garden-design-content">
         <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'coming.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'soon.png' | asset_url }}" height="auto" width="auto"/>
+        <img class="text-image mobile-pic" src="{{ 'coming-soon-mobile.png' | asset_url }}" height="auto" width="auto"/>
         <div class="text">
             We've begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
             <br/><br/>
@@ -21,13 +20,12 @@
 </div>
 
 <style>
-    /* ===== CONTAINER ===== */
+    /* Base styles - Desktop (>850px) */
     #garden-design {
         margin-top: 50px;
         margin-bottom: 150px;
     }
 
-    /* ===== HEADER IMAGE ===== */
     #img-container {
         max-height: 630px;
         width: 100%;
@@ -40,7 +38,6 @@
         width: 100%;
     }
 
-    /* ===== CONTENT ===== */
     #garden-design-content {
         display: flex;
         flex-direction: column;
@@ -52,7 +49,7 @@
 
     #garden-design-content img {
         align-self: center;
-        max-width: 100%;
+        max-width: 90%;
         height: auto;
     }
 
@@ -64,9 +61,8 @@
         margin-top: 100px;
     }
 
-    /* Text images (section headers) */
     img.text-image {
-        height: 75px !important;
+        max-height: 75px;
         width: auto;
     }
 
@@ -74,7 +70,6 @@
         display: none;
     }
 
-    /* Main text content */
     .text {
         max-width: 850px;
         width: 100%;
@@ -90,7 +85,6 @@
         text-decoration: underline;
     }
 
-    /* ===== NAVIGATION MENU (if used) ===== */
     .garden-design-menu {
         display: flex;
         justify-content: space-between;
@@ -104,67 +98,79 @@
         text-transform: uppercase;
     }
 
-    /* ===== RESPONSIVE: TABLETS (481px - 850px) ===== */
+    /* Tablet (481px - 850px) */
     @media (max-width: 850px) {
         #garden-design {
-            margin-top: calc(50px * (100vw / 850));
-            margin-bottom: calc(150px * (100vw / 850));
+            margin-top: 30px;
+            margin-bottom: 100px;
         }
 
         #garden-design-content {
-            margin-top: calc(100px * (100vw / 850));
+            margin-top: 60px;
         }
 
         #garden-design-content a {
-            font-size: 18px !important;
+            font-size: 18px;
         }
 
         #garden-design-content div {
-            margin-top: calc(100px * (100vw / 850));
+            margin-top: 60px;
         }
 
         img.text-image {
-            height: calc(75px * (100vw / 850)) !important;
+            max-height: 60px;
         }
 
         .text {
-            margin-top: calc(50px * (100vw / 850));
-            font-size: 20px !important;
+            margin-top: 35px;
+            font-size: 20px;
         }
 
         .garden-design-menu {
-            margin-top: calc(20px * (100vw / 850));
-            font-size: 12px !important;
+            margin-top: 15px;
+            font-size: 12px;
         }
     }
 
-    /* ===== RESPONSIVE: MOBILE (≤480px) ===== */
+    /* Mobile (≤480px) */
     @media (max-width: 480px) {
+        #garden-design {
+            margin-top: 0;
+            margin-bottom: 75px;
+        }
+
+        #garden-design-content {
+            margin-top: 25px;
+        }
+
         #garden-design-content a {
-            font-size: 16px !important;
+            font-size: 16px;
         }
 
-        .text {
-            font-size: 18px !important;
-        }
-
-        .garden-design-menu {
-            font-size: 11px !important;
-        }
-    }
-
-    /* ===== RESPONSIVE: MOBILE LAYOUT CHANGES (≤768px) ===== */
-    @media (max-width: 768px) {
-        .garden-design-menu div:last-child {
-            display: none;
+        #garden-design-content div {
+            margin-top: 25px;
         }
 
         .mobile-pic {
             display: inline-block;
         }
+
+        img.text-image.mobile-pic {
+            max-height: 150px;
+        }
         
         .desktop-pic { 
             display: none;
+        }
+
+        .text {
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        .garden-design-menu {
+            margin-top: 10px;
+            font-size: 11px;
         }
     }
 </style>
