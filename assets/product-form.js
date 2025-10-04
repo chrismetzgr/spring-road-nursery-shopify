@@ -272,6 +272,7 @@ if (!customElements.get('product-form')) {
         const cartElement = document.getElementById('srn-cart');
         if (cartElement) {
           cartElement.textContent = `CART ${itemCount}`;
+          console.log({cartElement: cartElement.textContent});
         }
       }
 
