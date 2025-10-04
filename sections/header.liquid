@@ -48,25 +48,6 @@
   </div>
 </div>
 <script src="{{ 'menu-sort.js' | asset_url }}" defer="defer"></script>
-<script>
-  // Listen for cart updates
-  document.addEventListener('cart:updated', function(e) {
-    const cartElement = document.getElementById('srn-cart');
-    const cartCount = document.getElementById('cart-count');
-    
-    if (cartElement && cartCount) {
-      const itemCount = e.detail.itemCount;
-      cartCount.textContent = itemCount;
-      
-      // Show cart if it was hidden
-      if (itemCount > 0) {
-        cartElement.classList.remove('cart-hidden');
-      } else {
-        cartElement.classList.add('cart-hidden');
-      }
-    }
-  });
-</script>
 <style>
   a {
     text-decoration: none;
