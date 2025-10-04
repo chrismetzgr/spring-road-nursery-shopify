@@ -275,31 +275,26 @@ if (!customElements.get('product-form')) {
       }
 updateHeaderCart() {
   console.log('updating')
+  
+  // Check for multiple elements with same ID
+  const allCartElements = document.querySelectorAll('#srn-cart');
+  console.log('Number of elements with ID srn-cart:', allCartElements.length);
+  allCartElements.forEach((el, index) => {
+    console.log(`Element ${index}:`, el.outerHTML);
+  });
+  
   fetch('/cart.js')
     .then(response => response.json())
     .then(cart => {
       const itemCount = cart.item_count;
-      console.log({itemCount})
       
-      const cartElement = document.getElementById('srn-cart');
-      if (cartElement) {
-        console.log('Element before update:', cartElement.outerHTML);
-        
+      // Update ALL elements with this ID
+      allCartElements.forEach((cartElement, index) => {
+        console.log(`Updating element ${index}`);
         cartElement.textContent = `CART ${itemCount}`;
         cartElement.style.backgroundColor = 'red';
-        
-        console.log('Element immediately after update:', cartElement.outerHTML);
-        
-        // Check if it gets changed after a short delay
-        setTimeout(() => {
-          console.log('Element after 100ms:', cartElement.outerHTML);
-          console.log('Background color after 100ms:', cartElement.style.backgroundColor);
-        }, 100);
-        
-        setTimeout(() => {
-          console.log('Element after 500ms:', cartElement.outerHTML);
-        }, 500);
-      }
+        cartElement.style.border = '3px solid blue'; // Extra visual indicator
+      });
     })
     .catch(error => console.error('Error fetching cart:', error));
 }
