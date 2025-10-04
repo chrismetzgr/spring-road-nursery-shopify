@@ -209,7 +209,7 @@ if (!customElements.get('product-form')) {
                   const number = str.replace("CART ", "");
                   console.log({number})
                   if (number) {
-                    cartTextDiv.innerText = `CART ${response.quantity + number}`
+                    cartTextDiv.innerText = `CART ${response.quantity}`
                     console.log('inner', cartTextDiv.innerText)
                   }
                 }
