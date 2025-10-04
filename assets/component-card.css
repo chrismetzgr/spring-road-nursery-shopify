@@ -583,17 +583,8 @@
   }
 
   .card-wrapper:hover .card__media img {
-    -webkit-mask: 
-      radial-gradient(100% 100% at 50% 0%, transparent 99%, black 100%) top,
-      linear-gradient(black, black) bottom / 100% 50%;
-    -webkit-mask-composite: xor;
-    -webkit-mask-repeat: no-repeat;
-    
-    mask: 
-      radial-gradient(100% 100% at 50% 0%, transparent 99%, black 100%) top,
-      linear-gradient(black, black) bottom / 100% 50%;
-    mask-composite: exclude;
-    mask-repeat: no-repeat;
+    -webkit-mask: radial-gradient(ellipse 100% 200% at 50% 100%, black 49.5%, transparent 50%);
+    mask: radial-gradient(ellipse 100% 200% at 50% 100%, black 49.5%, transparent 50%);
   }
 }
 
