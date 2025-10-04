@@ -578,18 +578,17 @@
 
 /* NEW HOVER EFFECT - Arch cutout at top of image with perfectly smooth curve */
 @media screen and (min-width: 990px) {
+  .card-wrapper .card__media {
+    overflow: visible;
+  }
+  
   .card-wrapper .card__media img {
-    transition: mask 0.4s ease-in-out, -webkit-mask 0.4s ease-in-out;
+    transition: border-radius 0.4s ease-in-out;
+    border-radius: 0;
   }
 
   .card-wrapper:hover .card__media img {
-    -webkit-mask-image: 
-      radial-gradient(ellipse 50% 100% at 50% 0%, black 100%, transparent 100.1%);
-    -webkit-mask-repeat: no-repeat;
-    
-    mask-image: 
-      radial-gradient(ellipse 50% 100% at 50% 0%, black 100%, transparent 100.1%);
-    mask-repeat: no-repeat;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   }
 }
 
