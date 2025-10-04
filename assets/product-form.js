@@ -200,6 +200,7 @@ if (!customElements.get('product-form')) {
           .then((response) => {
             console.log('Full response object:', response);
             console.log('Response status:', response.status);
+            console.log('this.cart exists:', !!this.cart);
             console.log('test 1')
             
             if (response.status) {
@@ -221,18 +222,15 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            } else if (!this.cart) {
+            }
+
+            console.log('test 3 - SUCCESS')
+            this.updateHeaderCart();
+            
+            if (!this.cart) {
               this.showAddedMessage();
               return;
             }
-
-              console.log('test 3')
-
-             this.updateHeaderCart();
-              if (!this.cart) {
-                this.showAddedMessage();
-                return;
-              }
 
             const startMarker = CartPerformance.createStartingMarker('add:wait-for-subscribers');
             if (!this.error)
