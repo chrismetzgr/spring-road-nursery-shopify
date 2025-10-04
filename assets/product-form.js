@@ -204,6 +204,7 @@ if (!customElements.get('product-form')) {
                 cartHeaderDiv?.classList?.remove('hidden')
                 const cartTextDiv = document.getElementById('srn-cart')
                 const str = cartTextDiv.innerText;
+                console.log({str});
                 if (str){
                   const number = str.replace("Cart ", "");
                   if (number) {
