@@ -274,19 +274,27 @@ if (!customElements.get('product-form')) {
           .querySelector(selector).innerHTML;
       }
 
-      updateHeaderCart() {
-      // Fetch the current cart to get accurate item count
-      fetch('/cart.js')
-        .then(response => response.json())
-        .then(cart => {
-          const cartElement = document.getElementById('srn-cart');
-          if (cartElement) {
-            cartElement.textContent = `CART ${cart.item_count}`;
-            console.log('Updated cart count to:', cart.item_count);
-          }
-        })
-        .catch(error => console.error('Error fetching cart:', error));
-    }
+ updateHeaderCart(itemCount) {
+  const cartElement = document.getElementById('srn-cart');
+  if (cartElement) {
+    // Try multiple update methods
+    cartElement.textContent = `CART ${itemCount}`;
+    cartElement.innerHTML = `CART ${itemCount}`;
+    
+    // Force a repaint
+    cartElement.style.display = 'none';
+    cartElement.offsetHeight; // Trigger reflow
+    cartElement.style.display = '';
+    
+    // Add a visual indicator that the update happened
+    cartElement.style.backgroundColor = 'red';
+    setTimeout(() => {
+      cartElement.style.backgroundColor = '';
+    }, 1000);
+    
+    console.log('Cart element after update:', cartElement.outerHTML);
+  }
+}
 
       showAddedMessage() {
         this.submitButton.classList.add('button--processing');
