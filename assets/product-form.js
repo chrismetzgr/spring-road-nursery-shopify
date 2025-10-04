@@ -199,12 +199,16 @@ if (!customElements.get('product-form')) {
           .then((response) => response.json())
           .then((response) => {
             if(response.quantity){
-              const cartLink = document.getElementById('cart-link')
-              if(cartLink){
-                cartLink?.style?.remove('hidden')
-                const str = cartLink.innerText;
-                const number = str.replace("Cart ", "");
-                
+              const cartHeaderDiv = document.getElementById('srn-cart')
+              if(cartHeaderDiv){
+                cartHeaderDiv?.style?.remove('hidden')
+                const str = cartHeaderDiv.innerText;
+                if (str){
+                  const number = str.replace("Cart ", "");
+                  if (number) {
+                    cartHeaderDiv.inner
+                  }
+                }
               }
             }
             if (response.status) {
