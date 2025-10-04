@@ -39,7 +39,7 @@
             <span data-sort="newest">Newest</span>
           </div>
         </div>
-      {% if template == 'product' or template == 'collection' %} <a id="cart-link" href="{{ routes.cart_url }}" class="{%  if cart.item_count != 0 %}hidden{%  endif %}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+      {% if template == 'product' or template == 'collection' %} <a id="cart-link" href="{{ routes.cart_url }}" class="{%  if cart.item_count == 0 %}hidden{%  endif %}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
     </div>
   </div>
 </div>
