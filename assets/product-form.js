@@ -279,10 +279,17 @@ if (!customElements.get('product-form')) {
           .then(response => response.json())
           .then(cart => {
             const itemCount = cart.item_count;
-            const cartElements = document.querySelectorAll('.srn-cart');
+            const cartElements = document.querySelectorAll('.srn-cart'); // or '#srn-cart' if you kept the ID
             
             cartElements.forEach(cartElement => {
-              cartElement.textContent = `CART ${itemCount}`;
+              if (itemCount > 0) {
+                // Show cart and update count
+                cartElement.textContent = `CART ${itemCount}`;
+                cartElement.style.display = 'block'; // or 'inline' or whatever display you want
+              } else {
+                // Hide cart when empty
+                cartElement.style.display = 'none';
+              }
             });
           })
           .catch(error => console.error('Error fetching cart:', error));
