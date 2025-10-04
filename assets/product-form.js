@@ -233,8 +233,6 @@ if (!customElements.get('product-form')) {
             this.error = false;
             
             this.showAddedMessage();
-            // Update header cart count
-            this.updateHeaderCart(response.item_count);
             
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
