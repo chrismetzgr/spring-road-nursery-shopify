@@ -129,9 +129,7 @@ subscribe(PUB_SUB_EVENTS.variantChange, () => {
   
   attempts.forEach(delay => {
     setTimeout(() => {
-      const radioGroups = document.querySelectorAll('fieldset.product-form__input--pill');
-      console.log(`Attempt at ${delay}ms: Found ${radioGroups.length} radio groups`);
-      
+      const radioGroups = document.querySelectorAll('fieldset.product-form__input--pill');      
       if (radioGroups.length > 0) {
         updateVariantAvailability();
       }
@@ -198,15 +196,7 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            console.log('Full response object:', response);
-            console.log('Response status:', response.status);
-            console.log('this.cart exists:', !!this.cart);
-            console.log('test 1')
-            
             if (response.status) {
-              console.log('test 2 - ERROR:', response);
-              console.log('Error description:', response.description);
-              console.log('Error message:', response.message);
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
@@ -285,7 +275,6 @@ if (!customElements.get('product-form')) {
       fetch('/cart.js')
         .then(response => response.json())
         .then(cart => {
-          console.log('Full cart data:', cart);
           const itemCount = cart.item_count;
           
           const cartElement = document.getElementById('srn-cart');
