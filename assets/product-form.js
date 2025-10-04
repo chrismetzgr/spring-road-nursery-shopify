@@ -273,24 +273,30 @@ if (!customElements.get('product-form')) {
           .parseFromString(html, 'text/html')
           .querySelector(selector).innerHTML;
       }
-
-    updateHeaderCart() {
-      console.log('updating')
-      fetch('/cart.js')
-        .then(response => response.json())
-        .then(cart => {
-          const itemCount = cart.item_count;
-          console.log({itemCount})
-          
-          const cartElement = document.getElementById('srn-cart');
-          if (cartElement) {
-            console.log('inside element')
-            cartElement.textContent = `CART ${itemCount}`;
-            console.log('textContent', cartElement.textContent )
-          }
-        })
-        .catch(error => console.error('Error fetching cart:', error));
-    }
+updateHeaderCart() {
+  console.log('updating')
+  fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      const itemCount = cart.item_count;
+      console.log({itemCount})
+      
+      const cartElement = document.getElementById('srn-cart');
+      if (cartElement) {
+        console.log('inside element')
+        cartElement.textContent = `CART ${itemCount}`;
+        
+        // Add this back to see if the update is happening
+        cartElement.style.backgroundColor = 'red';
+        setTimeout(() => {
+          cartElement.style.backgroundColor = '';
+        }, 1000);
+        
+        console.log('textContent', cartElement.textContent )
+      }
+    })
+    .catch(error => console.error('Error fetching cart:', error));
+}
 
       showAddedMessage() {
         this.submitButton.classList.add('button--processing');
