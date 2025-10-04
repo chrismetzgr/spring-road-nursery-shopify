@@ -194,27 +194,11 @@ if (!customElements.get('product-form')) {
           this.cart.setActiveElement(document.activeElement);
         }
         config.body = formData;
+        console.log({formData})
 
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            if(response.quantity){
-              const cartHeaderDiv = document.getElementById('cart-link')
-              if(cartHeaderDiv){
-                cartHeaderDiv?.classList?.remove('hidden')
-                const cartTextDiv = document.getElementById('srn-cart')
-                const str = cartTextDiv.innerText;
-                console.log({str});
-                if (str){
-                  const number = str.replace("CART ", "");
-                  console.log({number})
-                  if (number) {
-                    cartTextDiv.innerText = `CART ${response.quantity}`
-                    console.log('inner', cartTextDiv.innerText)
-                  }
-                }
-              }
-            }
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
