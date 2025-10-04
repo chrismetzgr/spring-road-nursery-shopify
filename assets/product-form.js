@@ -202,7 +202,8 @@ if (!customElements.get('product-form')) {
               const cartHeaderDiv = document.getElementById('cart-link')
               if(cartHeaderDiv){
                 cartHeaderDiv?.classList?.remove('hidden')
-                const str = cartHeaderDiv.innerText;
+                const cartTextDiv = document.getElementById('srn-cart')
+                const str = cartTextDiv.innerText;
                 if (str){
                   const number = str.replace("Cart ", "");
                   if (number) {
