@@ -214,12 +214,7 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            }
-
-            // Always update header cart count regardless of cart drawer existence
-            this.updateHeaderCart(response.item_count);
-
-            if (!this.cart) {
+            } else if (!this.cart) {
               this.showAddedMessage();
               return;
             }
@@ -265,34 +260,6 @@ if (!customElements.get('product-form')) {
 
             CartPerformance.measureFromEvent("add:user-action", evt);
           });
-      }
-
-      updateHeaderCart(itemCount) {
-        console.log('trying')
-          const selectors = [
-            '#srn-cart',
-            '.cart-count',
-            '[data-cart-count]',
-            '.header-cart-count'
-          ];
-          
-          let cartElement = null;
-          for (const selector of selectors) {
-            cartElement = document.querySelector(selector);
-            if (cartElement) break;
-          }
-          
-          if (cartElement) {
-            cartElement.textContent = `CART ${itemCount}`;
-          } else {
-            console.log('No cart element found with any selector');
-          }
-        // Update the header cart count
-        const cartElement = document.getElementById('srn-cart');
-        if (cartElement) {
-          cartElement.textContent = `CART ${itemCount}`;
-          console.log({cartElement: cartElement.textContent});
-        }
       }
 
       getSectionInnerHTML(html, selector) {
