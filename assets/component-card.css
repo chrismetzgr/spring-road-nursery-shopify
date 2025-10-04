@@ -576,19 +576,15 @@
   pointer-events: none;
 }
 
-/* NEW HOVER EFFECT - Arch cutout at top of image with perfectly smooth curve */
+/* NEW HOVER EFFECT - Rounded top corners creating arch effect */
 @media screen and (min-width: 990px) {
-  .card-wrapper .card__media {
-    overflow: visible;
-  }
-  
   .card-wrapper .card__media img {
     transition: border-radius 0.4s ease-in-out;
     border-radius: 0;
   }
 
   .card-wrapper:hover .card__media img {
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    border-radius: 120px 120px 0 0;
   }
 }
 
