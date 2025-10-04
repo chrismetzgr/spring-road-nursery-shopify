@@ -268,6 +268,25 @@ if (!customElements.get('product-form')) {
       }
 
       updateHeaderCart(itemCount) {
+        console.log('trying')
+          const selectors = [
+            '#srn-cart',
+            '.cart-count',
+            '[data-cart-count]',
+            '.header-cart-count'
+          ];
+          
+          let cartElement = null;
+          for (const selector of selectors) {
+            cartElement = document.querySelector(selector);
+            if (cartElement) break;
+          }
+          
+          if (cartElement) {
+            cartElement.textContent = `CART ${itemCount}`;
+          } else {
+            console.log('No cart element found with any selector');
+          }
         // Update the header cart count
         const cartElement = document.getElementById('srn-cart');
         if (cartElement) {
