@@ -215,7 +215,6 @@ if (!customElements.get('product-form')) {
               this.submitButtonText.classList.add('hidden');
               soldOutMessage.classList.remove('hidden');
               this.error = true;
-              return;
             }
 
             this.updateHeaderCart();
