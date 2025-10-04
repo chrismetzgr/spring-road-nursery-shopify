@@ -280,7 +280,7 @@ if (!customElements.get('product-form')) {
           .then(cart => {
             const itemCount = cart.item_count;
             const cartElements = document.querySelectorAll('.srn-cart'); // or '#srn-cart' if you kept the ID
-            
+            console.log({itemCount})
             cartElements.forEach(cartElement => {
               if (itemCount > 0) {
                 // Show cart and update count
