@@ -584,20 +584,16 @@
 
   .card-wrapper:hover .card__media img {
     -webkit-mask-image: 
-      radial-gradient(circle at 50% 0%, black 50%, transparent 50.1%),
-      linear-gradient(black, black);
-    -webkit-mask-size: 100% 100%, 100% 50%;
-    -webkit-mask-position: top, bottom;
+      radial-gradient(circle at 50% 100%, black 50%, transparent 50.1%);
+    -webkit-mask-size: 100% 200%;
+    -webkit-mask-position: 50% 0%;
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-composite: source-in;
     
     mask-image: 
-      radial-gradient(circle at 50% 0%, black 50%, transparent 50.1%),
-      linear-gradient(black, black);
-    mask-size: 100% 100%, 100% 50%;
-    mask-position: top, bottom;
+      radial-gradient(circle at 50% 100%, black 50%, transparent 50.1%);
+    mask-size: 100% 200%;
+    mask-position: 50% 0%;
     mask-repeat: no-repeat;
-    mask-composite: add;
   }
 }
 
