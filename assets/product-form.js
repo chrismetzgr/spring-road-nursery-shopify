@@ -199,7 +199,7 @@ if (!customElements.get('product-form')) {
           .then((response) => response.json())
           .then((response) => {
             if(response.quantity){
-              const cartHeaderDiv = document.getElementById('srn-cart')
+              const cartHeaderDiv = document.getElementById('cart-link')
               if(cartHeaderDiv){
                 cartHeaderDiv?.style?.remove('hidden')
                 const str = cartHeaderDiv.innerText;
