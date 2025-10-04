@@ -579,12 +579,14 @@
 /* NEW HOVER EFFECT - Arch cutout at top of image with perfectly smooth curve */
 @media screen and (min-width: 990px) {
   .card-wrapper .card__media img {
-    transition: clip-path 0.4s ease-in-out;
-    clip-path: inset(0% 0% 0% 0% round 0);
+    transition: mask 0.4s ease-in-out, -webkit-mask 0.4s ease-in-out;
   }
 
   .card-wrapper:hover .card__media img {
-    clip-path: path('M 0,50 L 0,100 L 100,100 L 100,50 Q 100,0 50,0 Q 0,0 0,50 Z');
+    -webkit-mask-image: 
+      radial-gradient(circle at 50% -50%, transparent 50%, black 50.1%);
+    mask-image: 
+      radial-gradient(circle at 50% -50%, transparent 50%, black 50.1%);
   }
 }
 
