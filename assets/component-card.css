@@ -580,11 +580,18 @@
 @media screen and (min-width: 990px) {
   .card-wrapper .card__media img {
     transition: clip-path 0.4s ease-in-out;
-    clip-path: inset(0 0 0 0 round 0);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 
   .card-wrapper:hover .card__media img {
-    clip-path: ellipse(100% 100% at 50% 100%);
+    clip-path: polygon(
+      0% 50%,
+      0% 45%, 1% 40%, 2% 35%, 4% 30%, 6% 26%, 8% 22%, 11% 18%, 14% 15%, 17% 12%, 21% 9%, 25% 7%, 29% 5%, 34% 3%, 39% 2%, 44% 1%, 50% 0%,
+      56% 1%, 61% 2%, 66% 3%, 71% 5%, 75% 7%, 79% 9%, 83% 12%, 86% 15%, 89% 18%, 92% 22%, 94% 26%, 96% 30%, 98% 35%, 99% 40%, 100% 45%,
+      100% 50%,
+      100% 100%,
+      0% 100%
+    );
   }
 }
 
