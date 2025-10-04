@@ -39,7 +39,7 @@
             <span data-sort="newest">Newest</span>
           </div>
         </div>
-      <a href="{{ routes.cart_url }}"><div class="srn-cart">CART {{ cart.item_count }}</div></a>
+      <a href="{{ routes.cart_url }}"><div class="srn-cart {% if cart == empty %}hidden{% endif %}">CART {{ cart.item_count }}</div></a>
     </div>
   </div>
 </div>
@@ -181,7 +181,6 @@ function updateCartVisibility() {
     width: 100vw;
   }
   .srn-cart {
-    display: none;
     color: var(--font-color-dark);
     font-size: 15px
   }
