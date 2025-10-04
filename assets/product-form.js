@@ -144,10 +144,7 @@ if (!customElements.get('product-form')) {
     class ProductForm extends HTMLElement {
       constructor() {
         super();
-
-
-        console.log('ProductForm constructor called for:', this);
-        console.log('Form element:', this.querySelector('form'));
+        
         this.form = this.querySelector('form');
         this.variantIdInput.disabled = false;
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
