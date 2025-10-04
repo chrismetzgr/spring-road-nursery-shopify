@@ -20,11 +20,11 @@
         <img class="text-image mobile-pic" src="{{ 'what.png' | asset_url }}" height="auto" width="auto"/>
         <img class="text-image mobile-pic" src="{{ 'we-do.png' | asset_url }}" height="auto" width="auto"/>
         <div class="what-we-do-text">
-            Cross the covered bridge in Tunbridge village, follow the road as it climbs the mountain and turns to dirt, and you’ll arrive at Spring Road Nursery: a farm of terraced gardens where rare plants are grown and propagated, and new landscapes are imagined into being.
+            Cross the covered bridge in Tunbridge village, follow the road as it climbs the mountain and turns to dirt, and you'll arrive at Spring Road Nursery: a farm of terraced gardens where rare plants are grown and propagated, and new landscapes are imagined into being.
             <br/><br/>
             This place was once a pasture. Now it is a living library of plants. Each bed is an experiment, where sun, water, and soil test the resilience, abundance, and vigor of every species. Flowers chosen for their uncommon color, foliage that calls to be touched. We collect seed, take cuttings, divide crowns, and pass them on, so you can plant them at home.
             <br/><br/>
-            The greenhouse hums with what we’ve grown, ready for you to sift through and find the thing you didn’t know you needed. In the barn you’ll find our shop full of tools and objects built to last—spades and shears, handwoven blankets, birdhouses made by a luthier, and glossaries of plants. Things that make the work steadier, sharper, and more beautiful.
+            The greenhouse hums with what we've grown, ready for you to sift through and find the thing you didn't know you needed. In the barn you'll find our shop full of tools and objects built to last—spades and shears, handwoven blankets, birdhouses made by a luthier, and glossaries of plants. Things that make the work steadier, sharper, and more beautiful.
             <br/><br/>
             The labor here is a daily ritual. Beds weeded. Seedlings lifted. Compost spread. Stalks cut back. Chickens shooed from the rows. Work that ties us to the soil we all depend on.
             <br/><br/>
@@ -38,7 +38,7 @@
             <br/>
             Bryan & Adam
             <br/><br/>
-            “Plant a garden in which strange plants grow and mysteries bloom. The need for mystery is greater than the need for an answer.” —Ken Kesey  
+            "Plant a garden in which strange plants grow and mysteries bloom. The need for mystery is greater than the need for an answer." —Ken Kesey  
         </div>
     </div>
     <div id="hours" class="nursery-section">
@@ -66,9 +66,9 @@
         <div class="plants-content">
             We propagate thousands of plants from seed, cuttings, and division. 
             <br/><br/>
-            A shifting chorus that changes with the seasons and our curiosities.  Alongside these perennials and annuals, you’ll find a small gathering of trees and shrubs — each available here at our nursery  in Tunbridge, Vermont.
+            A shifting chorus that changes with the seasons and our curiosities.  Alongside these perennials and annuals, you'll find a small gathering of trees and shrubs — each available here at our nursery  in Tunbridge, Vermont.
             <br/><br/>
-            <a href="#" class="plants-link wavy-underline">Click here for the full list of what’s growing, blooming,
+            <a href="#" class="plants-link wavy-underline">Click here for the full list of what's growing, blooming,
                 <br/>
                 and ready to wander home with you.</a>
         </div>
@@ -84,104 +84,105 @@
 <style>
 
     #the-nursery {
-        margin-top: 50px;
-        margin-bottom: 150px;
-
+        margin-top: clamp(1.5rem, 4vw, 3.125rem);
+        margin-bottom: clamp(3rem, 10vw, 9.375rem);
     }
-    #img-container {
-    max-height: 630px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     
-    img {
-        max-width: 1370px;
+    #img-container {
+        max-height: 39.375rem;
         width: 100%;
-    }
-}
-
-.nursery-section {
-    margin-top: 100px;
-    font-size: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 850px;
-    width: 100%;
-    line-height: 1.15;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-    width: 100%; /* Add this to prevent overflow */
-}
-
-.plants-content {
-    margin-top: 50px;
-    line-height: 1.5;
-}
-
-.plants-link {
-    font-weight: 500;
-    letter-spacing: 3px;
-}
-
-.what-we-do-text {
-    margin-top: 40px;
-    text-align: left;
-}
-
-#contact {
-    gap: 0;
-    letter-spacing: 2px;
-}
-
-.nursery-email {
-    margin-top: 50px;
-}
-
-#nursery-content {
-    margin-top: 150px;
-    font-size: 18px;
-    color: var(--font-color-dark-secondary);
-
-    img {
-        align-self: center;
-        max-width: 100%;
-        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+        img {
+            max-width: 85.625rem;
+            width: 100%;
+        }
     }
 
-    .center {
+    .nursery-section {
+        margin-top: clamp(3rem, 8vw, 6.25rem);
+        font-size: clamp(1.125rem, 2vw, 1.5625rem);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 53.125rem;
+        width: 100%;
+        padding: 0 1.25rem;
+        line-height: 1.15;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: clamp(1.25rem, 3vw, 1.875rem);
     }
-    a {
+
+    .plants-content {
+        margin-top: clamp(1.5rem, 4vw, 3.125rem);
+        line-height: 1.5;
+    }
+
+    .plants-link {
+        font-weight: 500;
+        letter-spacing: 0.1875rem;
+    }
+
+    .what-we-do-text {
+        margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        text-align: left;
+    }
+
+    #contact {
+        gap: 0;
+        letter-spacing: 0.125rem;
+    }
+
+    .nursery-email {
+        margin-top: clamp(1.5rem, 4vw, 3.125rem);
+    }
+
+    #nursery-content {
+        margin-top: clamp(3rem, 10vw, 9.375rem);
+        font-size: clamp(1rem, 1.5vw, 1.125rem);
         color: var(--font-color-dark-secondary);
-        font-size: 20px;
-        font-family: var(--font-family-secondary); 
-        font-weight: medium; 
+
+        img {
+            align-self: center;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .center {
+            text-align: center;
+        }
+        a {
+            color: var(--font-color-dark-secondary);
+            font-size: clamp(1.125rem, 1.8vw, 1.25rem);
+            font-family: var(--font-family-secondary); 
+            font-weight: medium; 
+        }
     }
-}
 
     #nursery-menu {
         text-transform: uppercase;
         font-family: var(--font-family-secondary);
-        margin-top: 40px;
+        margin-top: clamp(1.25rem, 3vw, 2.5rem);
         margin-left: auto;
         margin-right: auto;
-        font-size: 14px;
-        max-width: 700px;
+        font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+        max-width: 43.75rem;
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        padding: 0 20px;
+        padding: 0 1.25rem;
         font-stretch: expanded;
     }
+    
     #nursery-menu a, #nursery-menu a:visited{ 
-            color: var(--font-color-dark-secondary);
+        color: var(--font-color-dark-secondary);
     }
 
     .mobile-pic {
@@ -194,56 +195,54 @@
 
     #hours {
         font-stretch: expanded;
+        
         .hours-heading {
-            margin: 50px 0;
+            margin: clamp(1.5rem, 4vw, 3.125rem) 0;
         }
+        
         .hours-content {
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            gap: 75px;
+            gap: clamp(2rem, 6vw, 4.6875rem);
             font-family: var(--font-family-secondary);
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: clamp(0.1875rem, 0.4vw, 0.3125rem);
             line-height: 1.7;
         }
+        
         .schedule-hours {
             font-weight: 300;
         }
+        
         .hours {
             text-align: center;
         }
     }
 
-    @media (max-width: 768px) {
-    #contact {
-        display: none;
+    img.text-image {
+        height: clamp(3rem, 6vw, 4.6875rem) !important;
+        width: auto;
     }
-    #nursery-menu {
-        font-size: 12px;
-        height: auto;
-        div:last-child {
+
+    @media (max-width: 48rem) {
+        #contact {
             display: none;
         }
-    }
-    #nursery-content{
-        img {
-            margin-top: 20px;
+        
+        #nursery-menu {
+            div:nth-child(5), div:nth-child(6), div:nth-child(7) {
+                display: none;
+            }
         }
-        div {
-            margin-top: 20px;
+        
+        .mobile-pic {
+            display: inline-block;
         }
-    }
-    .mobile-pic {
-        display: inline-block;
-    }
-    .desktop-pic { 
-        display: none;
-    }
-}
-    img.text-image {
-        height: 75px !important;
-        width: auto;
+        
+        .desktop-pic { 
+            display: none;
+        }
     }
 </style>
