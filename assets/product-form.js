@@ -219,6 +219,12 @@ if (!customElements.get('product-form')) {
               return;
             }
 
+             this.updateHeaderCart();
+              if (!this.cart) {
+                this.showAddedMessage();
+                return;
+              }
+
             const startMarker = CartPerformance.createStartingMarker('add:wait-for-subscribers');
             if (!this.error)
               publish(PUB_SUB_EVENTS.cartUpdate, {
