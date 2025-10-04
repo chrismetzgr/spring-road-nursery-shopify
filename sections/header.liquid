@@ -8,11 +8,11 @@
     {% assign header_image = 'SRN-GREEN.png' %}
 {% endif %}
 {% if page.handle == 'nursery' %}
-  {% assign hamburger = 'hamburger-dark-green.png' %}
+  {% assign hamburger = 'hamburger' %}
 {% elsif page.handle == 'garden-design' %}
   {% assign hamburger = 'hamburger-light-green.png' %}
 {% else %}
-    {% assign hamburger = 'hamburger.png' %}
+    {% assign hamburger = 'hamburger-dark-green.png' %}
 {% endif %}
 <div class="sn-header {% if page.handle == 'nursery' %}nursery-header{% elsif page.handle == 'garden-design' %}garden-design-header{% endif %}">
   <div class="content">
