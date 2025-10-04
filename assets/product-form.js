@@ -275,10 +275,12 @@ if (!customElements.get('product-form')) {
       }
 
     updateHeaderCart() {
+      console.log('updating')
       fetch('/cart.js')
         .then(response => response.json())
         .then(cart => {
           const itemCount = cart.item_count;
+          console.log({itemCount})
           
           const cartElement = document.getElementById('srn-cart');
           if (cartElement) {
