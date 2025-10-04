@@ -584,7 +584,7 @@
   }
 
   .card-wrapper:hover .card__media img {
-    border-radius: 120px 120px 0 0;
+    border-radius: 50% 50% 0 0;
   }
 }
 
