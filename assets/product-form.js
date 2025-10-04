@@ -200,6 +200,12 @@ if (!customElements.get('product-form')) {
           .then((response) => {
             if(response.quantity){
               const cartLink = document.getElementById('cart-link')
+              if(cartLink){
+                cartLink?.style?.remove('hidden')
+                const str = cartLink.innerText;
+                const number = str.replace("Cart ", "");
+                
+              }
             }
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
