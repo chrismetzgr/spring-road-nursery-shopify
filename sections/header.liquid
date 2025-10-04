@@ -39,11 +39,34 @@
             <span data-sort="newest">Newest</span>
           </div>
         </div>
-      {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+      <a href="{{ routes.cart_url }}">
+        <div id="srn-cart" class="{% if cart.item_count == 0 %}cart-hidden{% endif %}">
+          CART <span id="cart-count">{{ cart.item_count }}</span>
+        </div>
+      </a>
     </div>
   </div>
 </div>
 <script src="{{ 'menu-sort.js' | asset_url }}" defer="defer"></script>
+<script>
+  // Listen for cart updates
+  document.addEventListener('cart:updated', function(e) {
+    const cartElement = document.getElementById('srn-cart');
+    const cartCount = document.getElementById('cart-count');
+    
+    if (cartElement && cartCount) {
+      const itemCount = e.detail.itemCount;
+      cartCount.textContent = itemCount;
+      
+      // Show cart if it was hidden
+      if (itemCount > 0) {
+        cartElement.classList.remove('cart-hidden');
+      } else {
+        cartElement.classList.add('cart-hidden');
+      }
+    }
+  });
+</script>
 <style>
   a {
     text-decoration: none;
@@ -160,8 +183,15 @@
   }
   #srn-cart {
     color: var(--font-color-dark);
-    font-size: 15px
+    font-size: 15px;
+    transition: opacity 0.3s ease;
   }
+  
+  #srn-cart.cart-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
   .menu {
     font-size: 14px;
     font-stretch: expanded;
@@ -226,6 +256,7 @@
     }
 
     #srn-cart {
-      display: none;}
+      display: none;
     }
+  }
 </style>
