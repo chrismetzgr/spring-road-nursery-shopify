@@ -214,7 +214,6 @@ if (!customElements.get('product-form')) {
               return;
             }
 
-            console.log('test 3 - SUCCESS')
             this.updateHeaderCart();
             
             if (!this.cart) {
