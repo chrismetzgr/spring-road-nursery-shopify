@@ -21,13 +21,13 @@
 </div>
 
 <style>
-    /* Container */
+    /* ===== CONTAINER ===== */
     #garden-design {
         margin-top: 50px;
         margin-bottom: 150px;
     }
 
-    /* Header image */
+    /* ===== HEADER IMAGE ===== */
     #img-container {
         max-height: 630px;
         width: 100%;
@@ -40,7 +40,7 @@
         width: 100%;
     }
 
-    /* Content */
+    /* ===== CONTENT ===== */
     #garden-design-content {
         display: flex;
         flex-direction: column;
@@ -64,7 +64,7 @@
         margin-top: 100px;
     }
 
-    /* Text images */
+    /* Text images (section headers) */
     img.text-image {
         height: 75px !important;
         width: auto;
@@ -74,7 +74,7 @@
         display: none;
     }
 
-    /* Text content */
+    /* Main text content */
     .text {
         max-width: 850px;
         width: 100%;
@@ -90,7 +90,7 @@
         text-decoration: underline;
     }
 
-    /* Navigation menu (if used) */
+    /* ===== NAVIGATION MENU (if used) ===== */
     .garden-design-menu {
         display: flex;
         justify-content: space-between;
@@ -104,7 +104,7 @@
         text-transform: uppercase;
     }
 
-    /* Responsive: Tablets and smaller (850px and below) */
+    /* ===== RESPONSIVE: TABLETS (481px - 850px) ===== */
     @media (max-width: 850px) {
         #garden-design {
             margin-top: calc(50px * (100vw / 850));
@@ -116,7 +116,7 @@
         }
 
         #garden-design-content a {
-            font-size: calc(20px * (100vw / 850));
+            font-size: 18px !important;
         }
 
         #garden-design-content div {
@@ -129,16 +129,31 @@
 
         .text {
             margin-top: calc(50px * (100vw / 850));
-            font-size: calc(25px * (100vw / 850));
+            font-size: 20px !important;
         }
 
         .garden-design-menu {
             margin-top: calc(20px * (100vw / 850));
-            font-size: calc(14px * (100vw / 850));
+            font-size: 12px !important;
         }
     }
 
-    /* Mobile: Show/hide elements */
+    /* ===== RESPONSIVE: MOBILE (≤480px) ===== */
+    @media (max-width: 480px) {
+        #garden-design-content a {
+            font-size: 16px !important;
+        }
+
+        .text {
+            font-size: 18px !important;
+        }
+
+        .garden-design-menu {
+            font-size: 11px !important;
+        }
+    }
+
+    /* ===== RESPONSIVE: MOBILE LAYOUT CHANGES (≤768px) ===== */
     @media (max-width: 768px) {
         .garden-design-menu div:last-child {
             display: none;
