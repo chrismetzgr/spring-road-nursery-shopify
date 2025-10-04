@@ -282,7 +282,6 @@ if (!customElements.get('product-form')) {
       }
 
     updateHeaderCart() {
-      console.log('test 4')
       fetch('/cart.js')
         .then(response => response.json())
         .then(cart => {
@@ -292,14 +291,6 @@ if (!customElements.get('product-form')) {
           const cartElement = document.getElementById('srn-cart');
           if (cartElement) {
             cartElement.textContent = `CART ${itemCount}`;
-            
-            // Debug flash to confirm the update is happening
-            cartElement.style.backgroundColor = 'red';
-            setTimeout(() => {
-              cartElement.style.backgroundColor = '';
-            }, 1000);
-            
-            console.log('Updated cart element to:', cartElement.textContent);
           }
         })
         .catch(error => console.error('Error fetching cart:', error));
