@@ -284,7 +284,9 @@ if (!customElements.get('product-form')) {
           
           const cartElement = document.getElementById('srn-cart');
           if (cartElement) {
+            console.log('inside element')
             cartElement.textContent = `CART ${itemCount}`;
+            console.log('textContent', cartElement.textContent )
           }
         })
         .catch(error => console.error('Error fetching cart:', error));
