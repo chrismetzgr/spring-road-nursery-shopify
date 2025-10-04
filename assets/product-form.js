@@ -198,7 +198,9 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
+            console.log('test 1')
             if (response.status) {
+              console.log('test 2')
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
                 productVariantId: formData.get('id'),
@@ -219,7 +221,7 @@ if (!customElements.get('product-form')) {
               return;
             }
 
-            console.log('uhh?')
+              console.log('test 3')
 
              this.updateHeaderCart();
               if (!this.cart) {
@@ -277,7 +279,7 @@ if (!customElements.get('product-form')) {
       }
 
     updateHeaderCart() {
-      console.log9('uhm')
+      console.log('test 4')
       fetch('/cart.js')
         .then(response => response.json())
         .then(cart => {
