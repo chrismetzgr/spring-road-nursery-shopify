@@ -216,6 +216,8 @@ if (!customElements.get('product-form')) {
               return;
             } else if (!this.cart) {
               this.showAddedMessage();
+              // Update header cart count
+              this.updateHeaderCart(response.item_count);
               return;
             }
 
@@ -231,6 +233,8 @@ if (!customElements.get('product-form')) {
             this.error = false;
             
             this.showAddedMessage();
+            // Update header cart count
+            this.updateHeaderCart(response.item_count);
             
             const quickAddModal = this.closest('quick-add-modal');
             if (quickAddModal) {
@@ -260,6 +264,14 @@ if (!customElements.get('product-form')) {
 
             CartPerformance.measureFromEvent("add:user-action", evt);
           });
+      }
+
+      updateHeaderCart(itemCount) {
+        // Dispatch custom event with cart count
+        const event = new CustomEvent('cart:updated', {
+          detail: { itemCount: itemCount }
+        });
+        document.dispatchEvent(event);
       }
 
       getSectionInnerHTML(html, selector) {
