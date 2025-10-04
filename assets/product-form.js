@@ -285,10 +285,7 @@ if (!customElements.get('product-form')) {
               if (itemCount > 0) {
                 // Show cart and update count
                 cartElement.textContent = `CART ${itemCount}`;
-                cartElement.style.display = 'block'; // or 'inline' or whatever display you want
-              } else {
-                // Hide cart when empty
-                cartElement.style.display = 'none';
+                cartElement.classList.remove('hidden');
               }
             });
           })
