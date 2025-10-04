@@ -39,7 +39,7 @@
             <span data-sort="newest">Newest</span>
           </div>
         </div>
-        {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+      {% if cart.item_count != 0 and template == 'product' or template == 'collection' %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
     </div>
   </div>
 </div>
@@ -160,15 +160,8 @@
   }
   #srn-cart {
     color: var(--font-color-dark);
-    font-size: 15px;
-    transition: opacity 0.3s ease;
+    font-size: 15px
   }
-  
-  #srn-cart.cart-hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-  
   .menu {
     font-size: 14px;
     font-stretch: expanded;
@@ -233,7 +226,6 @@
     }
 
     #srn-cart {
-      display: none;
+      display: none;}
     }
-  }
 </style>
