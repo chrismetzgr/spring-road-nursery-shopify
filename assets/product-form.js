@@ -210,6 +210,7 @@ if (!customElements.get('product-form')) {
                   console.log({number})
                   if (number) {
                     cartTextDiv.innerText = `CART ${response.quantity + number}`
+                    console.log('inner', cartTextDiv.innerText)
                   }
                 }
               }
