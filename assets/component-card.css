@@ -576,17 +576,45 @@
   pointer-events: none;
 }
 
-/* NEW HOVER EFFECT - Rounded top corners creating arch effect */
+/* NEW HOVER EFFECT - Rounded corners creating arch effect with alternating pattern */
 @media screen and (min-width: 990px) {
   .card-wrapper .card__media img {
     transition: border-radius 0.4s ease-in-out;
     border-radius: 0;
   }
 
-  .card-wrapper:hover .card__media img {
+  /* 3-column grid pattern */
+  .grid--3-col-desktop .grid__item:nth-child(6n+1) .card-wrapper:hover .card__media img,
+  .grid--3-col-desktop .grid__item:nth-child(6n+3) .card-wrapper:hover .card__media img,
+  .grid--3-col-desktop .grid__item:nth-child(6n+4) .card-wrapper:hover .card__media img,
+  .grid--3-col-desktop .grid__item:nth-child(6n+6) .card-wrapper:hover .card__media img {
+    border-radius: 50% 50% 0 0;
+  }
+
+  .grid--3-col-desktop .grid__item:nth-child(6n+2) .card-wrapper:hover .card__media img,
+  .grid--3-col-desktop .grid__item:nth-child(6n+5) .card-wrapper:hover .card__media img {
+    border-radius: 0 0 50% 50%;
+  }
+
+  /* 2-column grid pattern */
+  .grid--2-col-desktop .grid__item:nth-child(4n+1) .card-wrapper:hover .card__media img,
+  .grid--2-col-desktop .grid__item:nth-child(4n+4) .card-wrapper:hover .card__media img {
+    border-radius: 50% 50% 0 0;
+  }
+
+  .grid--2-col-desktop .grid__item:nth-child(4n+2) .card-wrapper:hover .card__media img,
+  .grid--2-col-desktop .grid__item:nth-child(4n+3) .card-wrapper:hover .card__media img {
+    border-radius: 0 0 50% 50%;
+  }
+
+  /* 4-column grid and other layouts - default to top radius */
+  .grid--4-col-desktop .card-wrapper:hover .card__media img,
+  .grid--5-col-desktop .card-wrapper:hover .card__media img,
+  .grid--6-col-desktop .card-wrapper:hover .card__media img {
     border-radius: 50% 50% 0 0;
   }
 }
+
 
 .card--standard.card--media .card__inner .card__information,
 .card--standard.card--text:not(.card--horizontal) > .card__content .card__heading:not(.card__heading--placeholder),
