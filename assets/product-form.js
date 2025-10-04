@@ -274,27 +274,28 @@ if (!customElements.get('product-form')) {
           .querySelector(selector).innerHTML;
       }
 
- updateHeaderCart(itemCount) {
-  const cartElement = document.getElementById('srn-cart');
-  if (cartElement) {
-    // Try multiple update methods
-    cartElement.textContent = `CART ${itemCount}`;
-    cartElement.innerHTML = `CART ${itemCount}`;
-    
-    // Force a repaint
-    cartElement.style.display = 'none';
-    cartElement.offsetHeight; // Trigger reflow
-    cartElement.style.display = '';
-    
-    // Add a visual indicator that the update happened
-    cartElement.style.backgroundColor = 'red';
-    setTimeout(() => {
-      cartElement.style.backgroundColor = '';
-    }, 1000);
-    
-    console.log('Cart element after update:', cartElement.outerHTML);
-  }
-}
+    updateHeaderCart() {
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          console.log('Full cart data:', cart);
+          const itemCount = cart.item_count;
+          
+          const cartElement = document.getElementById('srn-cart');
+          if (cartElement) {
+            cartElement.textContent = `CART ${itemCount}`;
+            
+            // Debug flash to confirm the update is happening
+            cartElement.style.backgroundColor = 'red';
+            setTimeout(() => {
+              cartElement.style.backgroundColor = '';
+            }, 1000);
+            
+            console.log('Updated cart element to:', cartElement.textContent);
+          }
+        })
+        .catch(error => console.error('Error fetching cart:', error));
+    }
 
       showAddedMessage() {
         this.submitButton.classList.add('button--processing');
