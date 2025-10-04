@@ -80,13 +80,12 @@
 </div>
 
 <style>
-    /* ===== CONTAINER ===== */
+    /* Base styles - Desktop (>850px) */
     #the-nursery {
         margin-top: 50px;
         margin-bottom: 150px;
     }
     
-    /* ===== HEADER IMAGE ===== */
     #img-container {
         max-height: 630px;
         width: 100%;
@@ -99,7 +98,6 @@
         width: 100%;
     }
 
-    /* ===== NAVIGATION MENU ===== */
     #nursery-menu {
         display: flex;
         justify-content: space-between;
@@ -119,7 +117,6 @@
         color: var(--font-color-dark-secondary);
     }
 
-    /* ===== CONTENT WRAPPER ===== */
     #nursery-content {
         margin-top: 150px;
         font-size: 18px;
@@ -138,7 +135,6 @@
         font-weight: medium;
     }
 
-    /* ===== SECTIONS ===== */
     .nursery-section {
         display: flex;
         flex-direction: column;
@@ -154,9 +150,8 @@
         text-align: center;
     }
 
-    /* Text images (section headers) */
     img.text-image {
-        max-height: 75px !important;
+        max-height: 75px;
         width: auto;
     }
 
@@ -164,13 +159,11 @@
         display: none;
     }
 
-    /* ===== WHAT WE DO SECTION ===== */
     .what-we-do-text {
         margin-top: 40px;
         text-align: left;
     }
 
-    /* ===== HOURS SECTION ===== */
     #hours {
         font-stretch: expanded;
     }
@@ -199,7 +192,6 @@
         font-weight: 300;
     }
 
-    /* ===== PLANTS SECTION ===== */
     .plants-content {
         margin-top: 50px;
         line-height: 1.5;
@@ -210,7 +202,6 @@
         letter-spacing: 3px;
     }
 
-    /* ===== CONTACT SECTION ===== */
     #contact {
         gap: 0;
         letter-spacing: 2px;
@@ -221,113 +212,126 @@
         text-decoration: underline;
     }
 
-    /* ===== RESPONSIVE: TABLETS (481px - 850px) ===== */
+    /* Tablet (481px - 850px) */
     @media (max-width: 850px) {
+        #the-nursery {
+            margin-top: 30px;
+            margin-bottom: 100px;
+        }
 
         #nursery-menu {
-            font-size: 12px !important;
+            margin-top: 25px;
+            font-size: 12px;
         }
 
         #nursery-content {
-            font-size: 16px !important;
+            margin-top: 75px;
+            font-size: 16px;
         }
 
         #nursery-content a {
-            font-size: 18px !important;
+            font-size: 18px;
         }
 
         .nursery-section {
-            font-size: 20px !important;
+            margin-top: 60px;
+            gap: 25px;
+            font-size: 20px;
+        }
+
+        img.text-image {
+            max-height: 60px;
+        }
+
+        .what-we-do-text {
+            margin-top: 25px;
+        }
+
+        .hours-heading {
+            margin: 35px 0;
         }
 
         .hours-content {
-            letter-spacing: 4px !important;
+            gap: 50px;
+            letter-spacing: 4px;
+        }
+
+        .plants-content {
+            margin-top: 35px;
         }
 
         .plants-link {
-            letter-spacing: 2px !important;
+            letter-spacing: 2px;
         }
 
         #contact {
-            letter-spacing: 1.5px !important;
+            letter-spacing: 1.5px;
+        }
+
+        .nursery-email {
+            margin-top: 35px;
         }
     }
 
-    /* ===== RESPONSIVE: MOBILE (≤480px) ===== */
+    /* Mobile (≤480px) */
     @media (max-width: 480px) {
-        .what-we-do-text {
-            margin-top: 10px;
+        #the-nursery {
+            margin-top: 0;
+            margin-bottom: 75px;
         }
-        .hours-heading, .hours-content {
-            margin: 25px;
-        }
+
         #nursery-menu {
-            font-size: 9px !important;
+            margin-top: 15px;
+            font-size: 9px;
         }
 
         #nursery-content {
-            font-size: 15px !important;
+            margin-top: 25px;
+            font-size: 15px;
         }
 
         #nursery-content a {
-            font-size: 16px !important;
+            font-size: 16px;
         }
 
         .nursery-section {
-            font-size: 18px !important;
+            margin-top: 50px;
+            gap: 20px;
+            font-size: 18px;
         }
 
-        .hours-content {
-            letter-spacing: 3px !important;
-        }
-
-        .plants-link {
-            letter-spacing: 1.5px !important;
-        }
-
-        #contact {
-            letter-spacing: 1px !important;
-        }
-
-        .text-image.mobile-pic {
-            max-height: 150px !important;
-            display: inline-block;
-        }
-
-        .text-image {
+        img.text-image {
             max-height: 75px;
+        }
+
+        .mobile-pic {
+            display: inline-block;
+            max-height: 150px;
         }
         
         .desktop-pic { 
             display: none;
         }
 
-
-        .hours-heading {
-            margin: 25px 0;
+        .what-we-do-text {
+            margin-top: 10px;
         }
-    }
-
-    /* ===== RESPONSIVE: MOBILE LAYOUT CHANGES (≤768px) ===== */
-    @media (max-width: 768px) {
-        #the-nursery {
-            margin-top: 0;
-            margin-bottom: 75px;
-        }
-
-        .nursery-section {
-            margin: 50px 0;
-        }
-
 
         .hours-heading {
             margin: 25px 0;
         }
 
-        #nursery-content {
+        .hours-content {
+            gap: 40px;
+            letter-spacing: 3px;
+        }
+
+        .plants-content {
             margin-top: 25px;
-            font-size: 18px;
-            color: var(--font-color-dark-secondary);
+        }
+
+        .plants-link {
+            letter-spacing: 1.5px;
         }
 
         #contact {
