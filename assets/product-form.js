@@ -268,6 +268,20 @@ if (!customElements.get('product-form')) {
           .querySelector(selector).innerHTML;
       }
 
+      updateHeaderCart() {
+      // Fetch the current cart to get accurate item count
+      fetch('/cart.js')
+        .then(response => response.json())
+        .then(cart => {
+          const cartElement = document.getElementById('srn-cart');
+          if (cartElement) {
+            cartElement.textContent = `CART ${cart.item_count}`;
+            console.log('Updated cart count to:', cart.item_count);
+          }
+        })
+        .catch(error => console.error('Error fetching cart:', error));
+    }
+
       showAddedMessage() {
         this.submitButton.classList.add('button--processing');
         
@@ -331,4 +345,5 @@ if (!customElements.get('product-form')) {
       }
     }
   );
+  
 }
