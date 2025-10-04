@@ -144,7 +144,7 @@ if (!customElements.get('product-form')) {
     class ProductForm extends HTMLElement {
       constructor() {
         super();
-        
+
         this.form = this.querySelector('form');
         this.variantIdInput.disabled = false;
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
@@ -167,7 +167,6 @@ if (!customElements.get('product-form')) {
       }
 
       onSubmitHandler(evt) {
-        console.log('Submit handler called on form:', this.form);
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
@@ -197,7 +196,7 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            console.log('uhm');
+            this.updateHeaderCart();
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
@@ -214,10 +213,7 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
             }
-            console.log('etest 5')
 
-            this.updateHeaderCart();
-            
             if (!this.cart) {
               this.showAddedMessage();
               return;
