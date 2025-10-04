@@ -273,31 +273,20 @@ if (!customElements.get('product-form')) {
           .parseFromString(html, 'text/html')
           .querySelector(selector).innerHTML;
       }
-updateHeaderCart() {
-  console.log('updating')
-  
-  // Check for multiple elements with same ID
-  const allCartElements = document.querySelectorAll('#srn-cart');
-  console.log('Number of elements with ID srn-cart:', allCartElements.length);
-  allCartElements.forEach((el, index) => {
-    console.log(`Element ${index}:`, el.outerHTML);
-  });
-  
-  fetch('/cart.js')
-    .then(response => response.json())
-    .then(cart => {
-      const itemCount = cart.item_count;
-      
-      // Update ALL elements with this ID
-      allCartElements.forEach((cartElement, index) => {
-        console.log(`Updating element ${index}`);
-        cartElement.textContent = `CART ${itemCount}`;
-        cartElement.style.backgroundColor = 'red';
-        cartElement.style.border = '3px solid blue'; // Extra visual indicator
-      });
-    })
-    .catch(error => console.error('Error fetching cart:', error));
-}
+
+      updateHeaderCart() {
+        fetch('/cart.js')
+          .then(response => response.json())
+          .then(cart => {
+            const itemCount = cart.item_count;
+            const cartElements = document.querySelectorAll('.srn-cart');
+            
+            cartElements.forEach(cartElement => {
+              cartElement.textContent = `CART ${itemCount}`;
+            });
+          })
+          .catch(error => console.error('Error fetching cart:', error));
+      }
 
       showAddedMessage() {
         this.submitButton.classList.add('button--processing');
