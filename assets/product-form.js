@@ -283,16 +283,22 @@ updateHeaderCart() {
       
       const cartElement = document.getElementById('srn-cart');
       if (cartElement) {
-        console.log('inside element')
+        console.log('Element before update:', cartElement.outerHTML);
+        
         cartElement.textContent = `CART ${itemCount}`;
-        
-        // Add this back to see if the update is happening
         cartElement.style.backgroundColor = 'red';
-        setTimeout(() => {
-          cartElement.style.backgroundColor = '';
-        }, 1000);
         
-        console.log('textContent', cartElement.textContent )
+        console.log('Element immediately after update:', cartElement.outerHTML);
+        
+        // Check if it gets changed after a short delay
+        setTimeout(() => {
+          console.log('Element after 100ms:', cartElement.outerHTML);
+          console.log('Background color after 100ms:', cartElement.style.backgroundColor);
+        }, 100);
+        
+        setTimeout(() => {
+          console.log('Element after 500ms:', cartElement.outerHTML);
+        }, 500);
       }
     })
     .catch(error => console.error('Error fetching cart:', error));
