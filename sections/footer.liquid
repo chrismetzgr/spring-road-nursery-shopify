@@ -329,9 +329,14 @@
   #footer-details {
     display: flex; 
     flex-wrap: wrap;
-    direction: row;
+    justify-content: center; /* Center the items */
     font-size: 10px;
     gap: 5px;
+  }
+
+  #footer-details span:first-child,
+  #footer-details span:last-child {
+    flex-basis: 100%; /* Force these to take full width, creating their own row */
   }
 }
 
