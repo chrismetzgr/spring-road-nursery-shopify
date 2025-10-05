@@ -280,22 +280,15 @@
   font-size: 1.6rem !important; /* Keep the default size */
 }
 
-{% comment %} /* Shrink to 8px when the label moves up (on focus or when input has content) */
-.field__input:focus ~ .field__label,
-.field__input:not(:placeholder-shown) ~ .field__label,
-.field__input:-webkit-autofill ~ .field__label {
-  font-size: 10px !important;
-} {% endcomment %}
-
-    @media(max-width: 990px) {
-      #inchworm-logo {
-        display: none;
-      }
-      .footer-side {
-        width: 50%;
-        padding: 0 40px;
-      }
-    }
+@media(max-width: 990px) {
+  #inchworm-logo {
+    display: none;
+  }
+  .footer-side {
+    width: 50%;
+    padding: 0 40px;
+  }
+}
 
 @media(max-width: 768px) {
   #footer-content {
