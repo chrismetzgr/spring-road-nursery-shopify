@@ -1,7 +1,3 @@
-window.addEventListener('resize', setMobileNavHeight);
-window.addEventListener('orientationchange', setMobileNavHeight);
-window.addEventListener('load', setMobileNavHeight);
-
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
 const wormSortIcon = document.querySelector('#sort-icon');
