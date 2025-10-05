@@ -280,12 +280,12 @@
   font-size: 1.6rem !important; /* Keep the default size */
 }
 
-/* Shrink to 8px when the label moves up (on focus or when input has content) */
+{% comment %} /* Shrink to 8px when the label moves up (on focus or when input has content) */
 .field__input:focus ~ .field__label,
 .field__input:not(:placeholder-shown) ~ .field__label,
 .field__input:-webkit-autofill ~ .field__label {
   font-size: 10px !important;
-}
+} {% endcomment %}
 
     @media(max-width: 990px) {
       #inchworm-logo {
@@ -395,7 +395,6 @@
 #footer-email-form-mobile .field__label,
 #footer-email-form-mobile .field__input::placeholder {
   color: var(--color-background) !important;
-  font-size: 10px !important;
 }
 
 #footer-email-form-mobile .field__input::placeholder {
