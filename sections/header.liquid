@@ -39,7 +39,8 @@
             <span data-sort="newest">Newest</span>
           </div>
         </div>
-      <a href="{{ routes.cart_url }}"><div class="srn-cart {% if cart == empty %}hidden{% endif %}">CART {{ cart.item_count }}</div></a>
+      <div id="header-cart">      <a href="{{ routes.cart_url }}"><div class="srn-cart {% if cart == empty %}hidden{% endif %}">CART {{ cart.item_count }}</div></a>
+      </div>
     </div>
   </div>
 </div>
