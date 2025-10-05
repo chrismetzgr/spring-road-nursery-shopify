@@ -1,6 +1,14 @@
 // Set viewport height for mobile nav
 function setMobileNavHeight() {
-  document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+  const vh = window.innerHeight;
+  document.documentElement.style.setProperty('--viewport-height', `${vh}px`);
+  
+  // Also set it directly on the background element
+  const mobileNavBg = document.querySelector('.mobile-nav-background');
+  if (mobileNavBg) {
+    mobileNavBg.style.height = `${vh * 1.2}px`; // 120% of viewport
+    mobileNavBg.style.top = `${vh * -0.1}px`; // -10% of viewport
+  }
 }
 
 window.addEventListener('resize', setMobileNavHeight);
@@ -29,11 +37,12 @@ function clickExitEventHandler(element) {
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
-  setMobileNavHeight(); // Recalculate viewport height when opening menu
+  setMobileNavHeight(); // Recalculate and apply viewport height when opening menu
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
 });
 
+// Rest of your code stays the same...
 wormSortIcon.addEventListener('click', () => {
   if(window.innerWidth < 850){
     mobileSort.style.display = 'block'; 
