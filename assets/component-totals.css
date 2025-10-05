@@ -23,6 +23,8 @@
 
 .totals__total {
   margin-top: .5rem;
+  font-family: var(--font-family-secondary);
+  text-transform: uppercase;
 }
 
 .totals__total-value {
