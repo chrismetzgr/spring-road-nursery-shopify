@@ -19,16 +19,9 @@ function clickExitEventHandler(element) {
   }, { once: true})
 }
 
-let clickCount = 0;
-
 hamburgerMenuIcon.addEventListener('click', () => {
-  // Force viewport recalculation
-  const vh = window.innerHeight;
-  mobileNav.style.height = vh + 'px';
-  
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
-});
 });
 
 wormSortIcon.addEventListener('click', () => {
