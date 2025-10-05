@@ -131,15 +131,6 @@ function handleSort(sortValue) {
     });
 }
 
-// Desktop sort
-desktopSortDropdown?.addEventListener('click', (e) => {
-  const sortValue = e.target.dataset.sort;
-  if (sortValue) {
-    handleSort(sortValue);
-    desktopSortDropdown.classList.remove('active');
-  }
-});
-
 // Mobile sort
 document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
   const sortValue = e.target.dataset.sort;
