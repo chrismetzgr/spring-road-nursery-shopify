@@ -340,6 +340,16 @@
     text-align: center;
     flex-basis: 100%; /* Force these to take full width, creating their own row */
   }
+
+  #footer-email-form-mobile .field__input {
+    background-color: var(--font-color-dark); /* Use the text color as background */
+    color: var(--color-background-light); /* Use the background color as text - adjust this variable name to match your actual background color variable */
+    }
+
+    #footer-email-form-mobile .field__input::placeholder {
+    color: var(--color-background-light); /* Make placeholder match the text color */
+    opacity: 0.7; /* Optional: make placeholder slightly transparent */
+    }
 }
 
 </style>
