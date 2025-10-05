@@ -28,10 +28,11 @@
 
 .mobile-nav-background {
   position: fixed;
-  top: -500px; /* Extend way up */
-  bottom: -500px; /* Extend way down */
+  top: -20vh;
   left: 0;
   width: 80vw;
+  height: 140vh;
+  min-height: 1200px; /* Safety net - adjust based on your tallest phone */
   background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
   background-repeat: no-repeat;
   background-position: center center;
