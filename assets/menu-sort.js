@@ -1,11 +1,3 @@
-function setMobileNavHeight() {
-  const vh = window.innerHeight;
-  const mobileNav = document.getElementById('mobile-nav');
-  if (mobileNav) {
-    mobileNav.style.height = vh + 'px';
-  }
-}
-
 window.addEventListener('resize', setMobileNavHeight);
 window.addEventListener('orientationchange', setMobileNavHeight);
 window.addEventListener('load', setMobileNavHeight);
