@@ -4,85 +4,87 @@
       <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
     </div>
     <div id="mobile-menu">
-        {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{% endif %}
+        {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
         <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
         <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
         <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
     </div>
-</div>
+  </div>
 <style>
-#mobile-nav {
-  display: none;
-  position: fixed;
-  inset: 0;
-  width: 100vw; /* Changed from 80vw */
-  height: 100vh;
-  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  z-index: 3000;
-  overflow: hidden; /* Prevent content inside from scrolling */
-}
+  #mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    top: 0;
+    left: 0;
+    width: 80vw;
+    background-image: url('{{ "MOBILE-MENU-BACKGROUND.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 2000;
+    overflow: hidden;
+    
+    .exit-container {
+      direction: rtl;
+      img {
+        margin: 20px 20px 0 0;
+      }
+      img:hover {
+        cursor:pointer;
+      }
+    }
 
-#mobile-nav .exit-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
-}
+   #mobile-menu {
+      height: 100%;
+      font-family: var(--font-family-secondary);
+      font-size: 20px;
+      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 100px;
 
-#mobile-nav .exit-container img:hover {
-  cursor: pointer;
-}
-
-  #mobile-menu {
-    height: 100%;
-    font-family: var(--font-family-secondary);
-    font-size: 20px;
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #mobile-menu a {
-    color: var(--font-color-light-secondary);
-  }
-  
-  #mobile-menu a:visited {
-    color: var(--font-color-light-secondary);
+      a {
+        color: var(--font-color-light-secondary);
+      }
+      a:visited {
+        color: var(--font-color-light-secondary);
+      }
+    }
   }
 
   #mobile-nav.show {
-    display: block;
-    animation: slideInLeft 0.5s ease-out forwards;
+    display: block; /* Make it visible */
+    animation: slideInLeft 0.5s ease-out forwards; /* Apply the animation */
   }
 
   #mobile-nav.hide {
-    animation: slideOutLeft 0.5s ease-out;
+    animation: slideOutLeft 0.5s ease-out; /* Apply the animation */
   }
 
-  @keyframes slideInLeft {
-    from {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%); /* Start off-screen to the left */
+    opacity: 0; /* Start invisible */
   }
+  to {
+    transform: translateX(0); /* End at its original position */
+    opacity: 1; /* End fully visible */
+  }
+}
 
-  @keyframes slideOutLeft {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0); /* Start at current position */
+    opacity: 1;
   }
+  to {
+    transform: translateX(-100%); /* Slide out to the left */
+    opacity: 0;
+  }
+}
 </style>
