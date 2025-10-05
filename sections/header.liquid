@@ -63,19 +63,19 @@
           href="{{ collections['web-shop'].url }}" 
           class="srn-header__nav-link {% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}"
         >
-          THE SHOP
+          The Shop
         </a>
         <a 
           href="/pages/nursery" 
           class="srn-header__nav-link {% if page.handle == 'nursery' %}wavy-underline{% endif %}"
         >
-          THE NURSERY
+          The Nursery
         </a>
         <a 
           href="/pages/garden-design" 
           class="srn-header__nav-link {% if page.handle == 'garden-design' %}wavy-underline{% endif %}"
         >
-          GARDEN DESIGN
+          Garden Design
         </a>
       </nav>
     </div>
@@ -114,7 +114,7 @@
       <div id="header-cart" class="srn-header__cart-wrapper {% if template == 'collection' %}srn-header__cart-wrapper--hide-mobile{% endif %}">
         <a href="{{ routes.cart_url }}" class="srn-header__cart-link" aria-label="Shopping cart">
           <span class="srn-header__cart {% if cart == empty %}srn-header__cart--hidden{% endif %}">
-            CART {{ cart.item_count }}
+            Cart {{ cart.item_count }}
           </span>
         </a>
       </div>
@@ -141,7 +141,7 @@
         
         cartElements.forEach(cartElement => {
           if (itemCount > 0) {
-            cartElement.textContent = `CART ${itemCount}`;
+            cartElement.textContent = `Cart ${itemCount}`;
             cartElement.classList.remove('srn-header__cart--hidden');
           } else {
             cartElement.classList.add('srn-header__cart--hidden');
@@ -157,11 +157,6 @@
    HEADER STYLES
    ============================================ */
 
-/* Reset link styles */
-a {
-  text-decoration: none;
-}
-
 /* Base Styles */
 .srn-header {
   width: 100vw;
@@ -174,11 +169,19 @@ a {
   min-width: 768px;
   margin: 0 auto;
   display: flex;
+  align-items: flex-start;
 }
 
 /* Logo */
 .srn-header__logo-link {
   display: inline-block;
+  text-decoration: none;
+}
+
+.srn-header__logo-link:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .srn-header__logo {
@@ -210,6 +213,15 @@ a {
 
 .srn-header__nav-link {
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.srn-header__nav-link:hover,
+.srn-header__nav-link:focus {
+  text-decoration: underline;
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
 }
 
 /* Side Sections */
@@ -220,27 +232,38 @@ a {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  gap: 100px;
   position: relative;
 }
 
-.srn-header__side--left {
-  display: flex;
+/* Hamburger Menu (Mobile Only) */
+.srn-header__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
 }
 
-/* Cart positioning - always vertically centered */
-.srn-header__cart-wrapper {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.srn-header__hamburger:hover,
+.srn-header__hamburger:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Sort dropdown positioning */
+.srn-header__hamburger img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+/* Sort Dropdown */
 .srn-header__sort {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: auto;
 }
 
 .srn-header__sort-toggle {
@@ -250,9 +273,17 @@ a {
   cursor: pointer;
 }
 
+.srn-header__sort-toggle:hover,
+.srn-header__sort-toggle:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .srn-header__sort-toggle img {
   height: 60px;
   width: auto;
+  display: block;
 }
 
 .srn-header__sort-dropdown {
@@ -286,22 +317,38 @@ a {
 .srn-header__sort-dropdown span {
   text-transform: uppercase;
   font-size: 12px;
+  padding: 8px 16px;
   cursor: pointer;
   color: var(--font-color-dark);
   font-family: var(--font-family-secondary);
 }
 
+.srn-header__sort-dropdown span:hover,
+.srn-header__sort-dropdown span:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  outline: none;
+}
+
 /* Cart */
 .srn-header__cart-wrapper {
-  display: block;
+  display: flex;
 }
 
 .srn-header__cart-link {
   text-decoration: none;
 }
 
+.srn-header__cart-link:hover,
+.srn-header__cart-link:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .srn-header__cart {
   font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .srn-header__cart--hidden {
@@ -313,12 +360,12 @@ a {
    ============================================ */
 
 /* Default Theme */
-.srn-header .srn-header__nav-link,
-.srn-header .srn-header__nav-link:visited {
+.srn-header__nav-link,
+.srn-header__nav-link:visited {
   color: var(--font-color-dark);
 }
 
-.srn-header .srn-header__cart {
+.srn-header__cart {
   color: var(--font-color-dark);
 }
 
@@ -371,17 +418,6 @@ a {
   /* Hide desktop navigation */
   .srn-header__nav {
     display: none;
-  }
-
-  /* Reset cart to static positioning on mobile */
-  .srn-header__cart-wrapper {
-    position: static;
-    transform: none;
-  }
-
-  /* Adjust sort dropdown */
-  .srn-header__sort {
-    margin-top: 0;
   }
 
   /* Adjust sort dropdown */
