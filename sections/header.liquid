@@ -1,139 +1,294 @@
 {% render 'mobile-nav' %}
 {% render 'mobile-sort' %}
-{% if page.handle == 'nursery' %}
-  {% assign header_image = 'SRN-LOGO-BLACK.png' %}
-{% elsif page.handle == 'garden-design' %}
-  {% assign header_image = 'SRN-LOGO-LIGHT-GREEN.png' %}
-{% else %}
-    {% assign header_image = 'SRN-GREEN.png' %}
-{% endif %}
-{% if page.handle == 'nursery' %}
-  {% assign hamburger = 'hamburger.png' %}
-{% elsif page.handle == 'garden-design' %}
-  {% assign hamburger = 'hamburger-light-green.png' %}
-{% else %}
-    {% assign hamburger = 'hamburger-dark-green.png' %}
-{% endif %}
-<div class="sn-header {% if page.handle == 'nursery' %}nursery-header{% elsif page.handle == 'garden-design' %}garden-design-header{% endif %}">
-  <div class="content">
-    <div class="side">
-      <img class="mobile" id="hamburger-icon"src="{{ hamburger | asset_url }}" height="auto" width="auto"/>
+
+{% comment %}
+  Determine theme variant based on current page
+  - nursery: black theme
+  - garden-design: light green theme
+  - default: dark green theme
+{% endcomment %}
+{% liquid
+  case page.handle
+    when 'nursery'
+      assign theme_variant = 'nursery'
+      assign logo_image = 'SRN-LOGO-BLACK.png'
+      assign hamburger_image = 'hamburger.png'
+    when 'garden-design'
+      assign theme_variant = 'garden-design'
+      assign logo_image = 'SRN-LOGO-LIGHT-GREEN.png'
+      assign hamburger_image = 'hamburger-light-green.png'
+    else
+      assign theme_variant = 'default'
+      assign logo_image = 'SRN-GREEN.png'
+      assign hamburger_image = 'hamburger-dark-green.png'
+  endcase
+%}
+
+<header class="srn-header srn-header--{{ theme_variant }}" role="banner">
+  <div class="srn-header__container">
+    
+    <!-- Left Side: Mobile Menu Toggle -->
+    <div class="srn-header__side srn-header__side--left">
+      <button 
+        id="hamburger-icon" 
+        class="srn-header__hamburger" 
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <img 
+          src="{{ hamburger_image | asset_url }}" 
+          alt=""
+          aria-hidden="true"
+          width="20" 
+          height="20"
+        />
+      </button>
     </div>
-    <div class="main">
-      <a href="{{ routes.root_url }}">
-        <img id="logo" src="{{ header_image | asset_url }}" height="auto" width="auto"/>
+
+    <!-- Center: Logo and Navigation -->
+    <div class="srn-header__main">
+      <a href="{{ routes.root_url }}" class="srn-header__logo-link" aria-label="Spring Road Nursery home">
+        <img 
+          id="logo" 
+          class="srn-header__logo" 
+          src="{{ logo_image | asset_url }}" 
+          alt="Spring Road Nursery"
+          width="220" 
+          height="220"
+        />
       </a>
-      <div class="menu">
-        <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
-        <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
-        <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
-      </div>
+      
+      <nav class="srn-header__nav" aria-label="Main navigation">
+        <a 
+          href="{{ collections['web-shop'].url }}" 
+          class="srn-header__nav-link {% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}"
+        >
+          The Shop
+        </a>
+        <a 
+          href="/pages/nursery" 
+          class="srn-header__nav-link {% if page.handle == 'nursery' %}wavy-underline{% endif %}"
+        >
+          The Nursery
+        </a>
+        <a 
+          href="/pages/garden-design" 
+          class="srn-header__nav-link {% if page.handle == 'garden-design' %}wavy-underline{% endif %}"
+        >
+          Garden Design
+        </a>
+      </nav>
     </div>
-    <div class="side">
-      <div class="sort-container {% if template != 'collection' %}hide{% endif %}">
-          <img id="sort-icon" src="{{ 'WormFilterIcon.png' | asset_url }}" height="auto" width="auto"/>
-          <div id="sort-menu" class="sort-dropdown">
-            <span data-sort="featured">Featured</span>
-            <span data-sort="best-selling">Best Selling</span>
-            <span data-sort="price">Price</span>
-            <span data-sort="newest">Newest</span>
-          </div>
+
+    <!-- Right Side: Sort and Cart -->
+    <div class="srn-header__side srn-header__side--right">
+      
+      <!-- Sort Dropdown (Collection pages only) -->
+      {% if template == 'collection' %}
+      <div class="srn-header__sort">
+        <button 
+          id="sort-icon" 
+          class="srn-header__sort-toggle"
+          aria-label="Sort products"
+          aria-expanded="false"
+          aria-controls="sort-menu"
+        >
+          <img 
+            src="{{ 'WormFilterIcon.png' | asset_url }}" 
+            alt=""
+            aria-hidden="true"
+            width="60" 
+            height="60"
+          />
+        </button>
+        <div id="sort-menu" class="srn-header__sort-dropdown" role="menu">
+          <span data-sort="featured" role="menuitem" tabindex="0">Featured</span>
+          <span data-sort="best-selling" role="menuitem" tabindex="0">Best Selling</span>
+          <span data-sort="price" role="menuitem" tabindex="0">Price</span>
+          <span data-sort="newest" role="menuitem" tabindex="0">Newest</span>
         </div>
-        <div id="header-cart"><a href="{{ routes.cart_url }}"><div class="srn-cart {% if cart == empty %}hidden{% endif %}">CART {{ cart.item_count }}</div></a>
       </div>
+      {% endif %}
+
+      <!-- Cart Link (Hidden on mobile collection pages) -->
+      <div id="header-cart" class="srn-header__cart-wrapper {% if template == 'collection' %}srn-header__cart-wrapper--hide-mobile{% endif %}">
+        <a href="{{ routes.cart_url }}" class="srn-header__cart-link" aria-label="Shopping cart">
+          <span class="srn-header__cart {% if cart == empty %}srn-header__cart--hidden{% endif %}">
+            Cart {{ cart.item_count }}
+          </span>
+        </a>
+      </div>
+      
     </div>
   </div>
-</div>
+</header>
+
 <script src="{{ 'menu-sort.js' | asset_url }}" defer="defer"></script>
 <script>
+  /**
+   * Update cart visibility and count
+   */
   document.addEventListener('DOMContentLoaded', function() {
-  updateCartVisibility();
-});
+    updateCartVisibility();
+  });
 
-function updateCartVisibility() {
-  fetch('/cart.js')
-    .then(response => response.json())
-    .then(cart => {
-      const itemCount = cart.item_count;
-      const cartElements = document.querySelectorAll('.srn-cart');
-      
-      cartElements.forEach(cartElement => {
-        if (itemCount > 0) {
-          cartElement.textContent = `CART ${itemCount}`;
-          cartElement.style.display = 'block';
-        }
-      });
-    })
-    .catch(error => console.error('Error fetching cart:', error));
-}
+  function updateCartVisibility() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        const itemCount = cart.item_count;
+        const cartElements = document.querySelectorAll('.srn-header__cart');
+        
+        cartElements.forEach(cartElement => {
+          if (itemCount > 0) {
+            cartElement.textContent = `Cart ${itemCount}`;
+            cartElement.classList.remove('srn-header__cart--hidden');
+          } else {
+            cartElement.classList.add('srn-header__cart--hidden');
+          }
+        });
+      })
+      .catch(error => console.error('Error fetching cart:', error));
+  }
 </script>
+
 <style>
-  a {
-    text-decoration: none;
-  }
-  .sn-header .menu a,
-  .sn-header .menu a:visited{
-    color: var(--font-color-dark) !important;
-  }
-  .garden-design-header .menu a,
-  .garden-design-header .menu a:visited{
-    color: var(--font-color-light-quaternary) !important;
-  }
-  .nursery-header .menu a,
-  .nursery-header .menu a:visited{
-    color: var(--font-color-dark-secondary) !important;
-  }
-  .garden-design-header .menu a,
-  .garden-design-header .menu a:visited{
-    color: var(--font-color-light-quaternary) !important;
-  }
-  .sn-header .srn-cart {
-    color: var(--font-color-dark);
-    font-size: 15px
-  }
-  .garden-design-header .srn-cart {
-    color: var(--font-color-light-quaternary);
-    font-size: 15px
-  }
-  .nursery-header .srn-cart {
-    color: var(--font-color-dark-secondary);
-    font-size: 15px
-  }
-  #logo {
-    height: 220px;
-  }
-  #filter {
-    margin-top: 10px;
-  }
-  #menu-icon {
-    margin-top: 10px;
-  }
-  img:hover {
-    cursor: pointer;
-  }
-  .content {
-    font-family: var(--font-family-secondary);
-    max-width: 1200px;
-    width: 100%;
-    min-width: 768px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-  }
-  .sort-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+/* ============================================
+   HEADER STYLES
+   ============================================ */
 
-  .sort-container.hide {
-      visibility: hidden;
-    }
+/* Base Styles */
+.srn-header {
+  width: 100vw;
+}
 
-.sort-dropdown {
+.srn-header__container {
+  font-family: var(--font-family-secondary);
+  max-width: 1200px;
+  width: 100%;
+  min-width: 768px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Logo */
+.srn-header__logo-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.srn-header__logo-link:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.srn-header__logo {
+  height: 220px;
+  width: auto;
+  display: block;
+}
+
+/* Main Center Section */
+.srn-header__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* Navigation */
+.srn-header__nav {
+  font-size: 14px;
+  font-stretch: expanded;
+  font-weight: 400;
+  max-width: 768px;
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.srn-header__nav-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.srn-header__nav-link:hover,
+.srn-header__nav-link:focus {
+  text-decoration: underline;
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Side Sections */
+.srn-header__side {
+  min-width: 20%;
+  max-width: 275px;
+  min-height: 1px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 100px;
+  position: relative;
+}
+
+/* Hamburger Menu (Mobile Only) */
+.srn-header__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.srn-header__hamburger:hover,
+.srn-header__hamburger:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.srn-header__hamburger img {
+  height: 20px;
+  width: auto;
+  display: block;
+}
+
+/* Sort Dropdown */
+.srn-header__sort {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.srn-header__sort-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.srn-header__sort-toggle:hover,
+.srn-header__sort-toggle:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.srn-header__sort-toggle img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.srn-header__sort-dropdown {
   position: absolute;
-  top: 100%; /* Position directly below the image */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
   min-width: 170px;
@@ -153,117 +308,131 @@ function updateCartVisibility() {
   letter-spacing: 3px;
 }
 
-.sort-dropdown.active {
+.srn-header__sort-dropdown.active {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
-.sort-dropdown span {
+.srn-header__sort-dropdown span {
   text-transform: uppercase;
   font-size: 12px;
+  padding: 8px 16px;
   cursor: pointer;
   color: var(--font-color-dark);
   font-family: var(--font-family-secondary);
 }
 
-.side {
-  min-width: 20%;
-  max-width: 275px;
-  min-height: 1px;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 100px;
-  position: relative; /* Add this */
+.srn-header__sort-dropdown span:hover,
+.srn-header__sort-dropdown span:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  outline: none;
 }
 
-  @media (max-width: 850px) {
-    .sort-dropdown {
-      min-width: 150px;
-      max-width: 200px;
-    }
-  }
-  .main {
-    display: flex;
-    flex-direction: column;
+/* Cart */
+.srn-header__cart-wrapper {
+  display: flex;
+}
+
+.srn-header__cart-link {
+  text-decoration: none;
+}
+
+.srn-header__cart-link:hover,
+.srn-header__cart-link:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.srn-header__cart {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.srn-header__cart--hidden {
+  display: none;
+}
+
+/* ============================================
+   THEME VARIANTS
+   ============================================ */
+
+/* Default Theme */
+.srn-header__nav-link,
+.srn-header__nav-link:visited {
+  color: var(--font-color-dark);
+}
+
+.srn-header__cart {
+  color: var(--font-color-dark);
+}
+
+/* Nursery Theme */
+.srn-header--nursery .srn-header__nav-link,
+.srn-header--nursery .srn-header__nav-link:visited {
+  color: var(--font-color-dark-secondary);
+}
+
+.srn-header--nursery .srn-header__cart {
+  color: var(--font-color-dark-secondary);
+}
+
+/* Garden Design Theme */
+.srn-header--garden-design .srn-header__nav-link,
+.srn-header--garden-design .srn-header__nav-link:visited {
+  color: var(--font-color-light-quaternary);
+}
+
+.srn-header--garden-design .srn-header__cart {
+  color: var(--font-color-light-quaternary);
+}
+
+/* ============================================
+   TABLET/MOBILE BREAKPOINT (≤850px)
+   ============================================ */
+@media (max-width: 850px) {
+  .srn-header__container {
+    min-width: auto;
+    padding: 0 20px;
     align-items: center;
-    flex: 1;
-  }
-  .sn-header {
-    width: 100vw;
-  }
-  .menu {
-    font-size: 14px;
-    font-stretch: expanded;
-    font-weight: 400;
-    max-width: 768px;
-    width: 80%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
   }
 
-  .side:first-child {
-    display: flex !important;
+  .srn-header__logo {
+    height: 150px;
   }
 
-  .mobile {
+  .srn-header__side {
+    min-width: auto;
+    max-width: none;
+    width: 60px;
+    gap: 0;
+  }
+
+  /* Show hamburger on mobile */
+  .srn-header__hamburger {
+    display: block;
+  }
+
+  /* Hide desktop navigation */
+  .srn-header__nav {
     display: none;
   }
 
-  #hamburger-icon {
-    height: 20px
+  /* Adjust sort dropdown */
+  .srn-header__sort-toggle img {
+    height: 45px;
   }
 
-  #sort-icon {
-    height: 60px;
+  .srn-header__sort-dropdown {
+    min-width: 150px;
+    max-width: 200px;
   }
 
-  @media (max-width: 850px) {
-    #logo {
-      height: 150px;
-    }
-    
-    #hamburger-icon {
-      height: 20px
-    }
-    
-    #sort-icon {
-      height: 45px
-    }
-
-    .content {
-      min-width: auto;
-      padding: 0 20px;
-      align-items: center;
-    }
-
-    .side {
-      min-width: auto;
-      max-width: none;
-      width: 60px;
-      gap: 0px;
-    }
-    
-    .menu {
-      display: none;
-    }
-
-    .mobile {
-      display: block;
-    }
-
-    .sort-container.hide {
-      display: none;
-    }
-
-    {% if template == 'collection' %}
-    #header-cart {
-      display: none;
-    }
-    {% endif %}
+  /* Hide cart on mobile collection pages */
+  .srn-header__cart-wrapper--hide-mobile {
+    display: none;
   }
+}
 </style>
