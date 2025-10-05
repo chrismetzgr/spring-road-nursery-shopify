@@ -208,6 +208,10 @@ a {
   align-items: flex-start;
 }
 
+.srn-header__nav-link {
+  text-decoration: none;
+}
+
 /* Side Sections */
 .srn-header__side {
   min-width: 20%;
@@ -222,6 +226,11 @@ a {
 
 .srn-header__side--left {
   display: flex;
+}
+
+/* When no sort filter present, center the cart */
+.srn-header__side--right:not(:has(.srn-header__sort)) {
+  justify-content: center;
 }
 
 /* Hamburger Menu (Mobile Only) */
