@@ -23,22 +23,21 @@
 #mobile-sort .exit-container img:hover {
   cursor: pointer;
 }
-  #mobile-sort {
-    display: none;
-    color: var(--font-color-dark);
-    width: 80vw;
-    position: absolute;
-    background-image: url('{{ "mobile-sort-background.png" | asset_url }}');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    z-index: 2000;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    position:fixed;
-    overflow-y:scroll;
-    overflow-x:hidden;
+#mobile-sort {
+  display: none;
+  color: var(--font-color-dark);
+  width: 100vw; /* Changed from 80vw */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url('{{ "mobile-sort-background.png" | asset_url }}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  z-index: 2000;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
     #mobile-sort-menu {
       height: 100vh;
