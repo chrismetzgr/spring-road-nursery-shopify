@@ -33,10 +33,10 @@
 }
 
 .newsletter-form__message--success {
-  font-family: var(--font-family-secondary);
-  color: var(--font-color-dark);
-  text-transform: uppercase;
-  font-stretch: expanded;
+  font-family: var(--font-family-secondary) !important;
+  color: var(--font-color-dark) !important;
+  text-transform: uppercase !important;
+  font-stretch: expanded !important;
 }
 
 @media screen and (min-width: 750px) {
