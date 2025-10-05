@@ -192,6 +192,8 @@ cart-items {
   background-color: var(--font-color-dark-secondary);
   color: var(--font-color-light);
   max-width: 36rem;
+  font-family: var(--font-family-secondary);
+  text-transform: uppercase;
 }
 
 .cart__ctas {
