@@ -65,9 +65,9 @@ function updateVariantAvailability() {
       if (label) {
         label.classList.toggle('variant-radio-label--disabled', !isAvailable);
         
-        if (!isAvailable && !label.textContent.includes('- Out of stock')) {
-          label.textContent = `${optionValue} - Out of stock`;
-        } else if (isAvailable && label.textContent.includes('- Out of stock')) {
+        if (!isAvailable && !label.textContent.includes('- Out of Stock')) {
+          label.textContent = `${optionValue} - Out of Stock`;
+        } else if (isAvailable && label.textContent.includes('- Out of Stock')) {
           label.textContent = optionValue;
         }
       }
