@@ -1,188 +1,221 @@
 {% render 'email-collection-popup' %}
-<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 
-<div id="garden-design">
-    <div id="img-container">
-        <img src="{{ 'garden-design-header-image.png' | asset_url }}" height="auto" width="auto"/>
-    </div>
-    <div id="garden-design-content">
-        <img class="text-image desktop-pic" src="{{ 'coming-soon.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'coming-soon-mobile.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="text">
-            We've begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.
-            <br/><br/>
-            At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.
-            <br/><br/>
-            If you're interested in working with us, please reach out: 
-            <span class="garden-design-email">design@springroadnursery.com  </span>
-        </div>
-    </div>
-</div>
+<main class="srn-garden-design" id="garden-design-page">
+  <!-- Hero Image -->
+  <div class="srn-garden-design__hero">
+    <img 
+      src="{{ 'garden-design-header-image.png' | asset_url }}" 
+      alt="Garden design project by Spring Road Nursery"
+      class="srn-garden-design__hero-image"
+      width="1370" 
+      height="630"
+    />
+  </div>
+
+  <!-- Content Section -->
+  <div class="srn-garden-design__content">
+    
+    <section class="srn-garden-design__section">
+      <h1 class="srn-garden-design__heading">
+        <img 
+          src="{{ 'coming-soon.png' | asset_url }}" 
+          alt="Coming Soon"
+          class="srn-garden-design__heading-image srn-garden-design__heading-image--desktop"
+          width="auto" 
+          height="75"
+        />
+        <img 
+          src="{{ 'coming-soon-mobile.png' | asset_url }}" 
+          alt="Coming Soon"
+          class="srn-garden-design__heading-image srn-garden-design__heading-image--mobile"
+          width="auto" 
+          height="150"
+        />
+      </h1>
+      
+      <article class="srn-garden-design__text">
+        <p>We've begun to take on garden design projects across New England. Our approach is simple: to create gardens that belong to their place—landscapes that feel inevitable, as if they had always been waiting there. We work with the realities of our changing climate, designing spaces that can endure unpredictability and still thrive.</p>
+        
+        <p>At the heart of every project is our love for unusual and uncommon plants, woven into designs that balance structure with spontaneity and wildness with care.</p>
+        
+        <p>If you're interested in working with us, please reach out: 
+          <a href="mailto:design@springroadnursery.com" class="srn-garden-design__email">
+            design@springroadnursery.com
+          </a>
+        </p>
+      </article>
+    </section>
+
+  </div>
+</main>
 
 <style>
-    /* Base styles - Desktop (>850px) */
-    #garden-design {
-        margin-top: 50px;
-        margin-bottom: 150px;
-    }
+/* ============================================
+   GARDEN DESIGN PAGE STYLES
+   ============================================ */
 
-    #img-container {
-        max-height: 630px;
-        width: 100%;
-        display: flex;
-        opacity: 0;
-        justify-content: center;
-        transform: translateY(30px);
-        animation: fadeInUp .5s ease-out forwards;
-    }
+/* Base/Mobile Styles (Mobile-First Approach) */
+.srn-garden-design {
+  margin-top: 0;
+  margin-bottom: 75px;
+}
 
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    #img-container img {
-        max-width: 1370px;
-        width: 100%;
-    }
+/* Hero Section */
+.srn-garden-design__hero {
+  max-height: 630px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: srn-fadeInUp 0.5s ease-out forwards;
+}
 
-    #garden-design-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 100px;
-        padding: 0 20px;
-        color: var(--font-color-light-tertiary);
-    }
+@keyframes srn-fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    #garden-design-content img {
-        align-self: center;
-        max-width: 90%;
-        height: auto;
-    }
+.srn-garden-design__hero-image {
+  max-width: 1370px;
+  width: 100%;
+  height: auto;
+}
 
-    #garden-design-content a {
-        font-size: 20px;
-    }
+/* Content Container */
+.srn-garden-design__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 25px;
+  padding: 0 20px;
+  color: var(--font-color-light-tertiary);
+}
 
-    #garden-design-content div {
-        margin-top: 100px;
-    }
+.srn-garden-design__content img {
+  align-self: center;
+  max-width: 90%;
+  height: auto;
+}
 
-    img.text-image {
-        max-height: 75px;
-        width: auto;
-    }
+/* Section */
+.srn-garden-design__section {
+  max-width: 850px;
+  width: 100%;
+  margin: 25px auto 0;
+  text-align: center;
+}
 
-    .mobile-pic {
-        display: none;
-    }
+/* Headings */
+.srn-garden-design__heading {
+  margin: 0;
+}
 
-    .text {
-        max-width: 850px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50px;
-        font-size: 25px;
-        line-height: 1.15;
-        text-align: center;
-    }
+.srn-garden-design__heading-image {
+  max-height: 75px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
 
-    .garden-design-email {
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-    }
+.srn-garden-design__heading-image--desktop {
+  display: none;
+}
 
-    .garden-design-menu {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        max-width: 700px;
-        width: 100%;
-        margin: 20px auto 0;
-        padding: 0 20px;
-        font-family: var(--font-family-secondary);
-        font-size: 14px;
-        text-transform: uppercase;
-    }
+.srn-garden-design__heading-image--mobile {
+  display: inline-block;
+  max-height: 150px;
+}
 
-    /* Tablet (481px - 850px) */
-    @media (min-width: 481px) and (max-width: 850px) {
-        #garden-design {
-            margin-top: 30px;
-            margin-bottom: 100px;
-        }
+/* Text Content */
+.srn-garden-design__text {
+  margin-top: 25px;
+  font-size: 18px;
+  line-height: 1.15;
+}
 
-        #garden-design-content {
-            margin-top: 60px;
-        }
+.srn-garden-design__text p {
+  margin: 0 0 1em 0;
+}
 
-        #garden-design-content a {
-            font-size: 18px;
-        }
+.srn-garden-design__text p:last-child {
+  margin-bottom: 0;
+}
 
-        #garden-design-content div {
-            margin-top: 60px;
-        }
+.srn-garden-design__email {
+  color: var(--font-color-light-tertiary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 
-        img.text-image {
-            max-height: 60px;
-        }
+.srn-garden-design__email:hover,
+.srn-garden-design__email:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
 
-        .text {
-            margin-top: 35px;
-            font-size: 20px;
-        }
+/* ============================================
+   TABLET BREAKPOINT (481px - 850px)
+   ============================================ */
+@media (min-width: 481px) {
+  .srn-garden-design {
+    margin-top: 30px;
+    margin-bottom: 100px;
+  }
 
-        .garden-design-menu {
-            margin-top: 15px;
-            font-size: 12px;
-        }
-    }
+  .srn-garden-design__content {
+    margin-top: 60px;
+  }
 
-    /* Mobile (≤480px) */
-    @media (max-width: 480px) {
-        #garden-design {
-            margin-top: 0;
-            margin-bottom: 75px;
-        }
+  .srn-garden-design__section {
+    margin-top: 60px;
+  }
 
-        #garden-design-content {
-            margin-top: 25px;
-        }
+  .srn-garden-design__heading-image {
+    max-height: 60px;
+  }
 
-        #garden-design-content a {
-            font-size: 16px;
-        }
+  .srn-garden-design__heading-image--mobile {
+    max-height: 60px;
+  }
 
-        #garden-design-content div {
-            margin-top: 25px;
-        }
+  .srn-garden-design__text {
+    margin-top: 35px;
+    font-size: 20px;
+  }
+}
 
-        .mobile-pic {
-            display: inline-block;
-        }
+/* ============================================
+   DESKTOP BREAKPOINT (>850px)
+   ============================================ */
+@media (min-width: 851px) {
+  .srn-garden-design {
+    margin-top: 50px;
+    margin-bottom: 150px;
+  }
 
-        img.text-image.mobile-pic {
-            max-height: 150px;
-        }
-        
-        .desktop-pic { 
-            display: none;
-        }
+  .srn-garden-design__content {
+    margin-top: 100px;
+  }
 
-        .text {
-            margin-top: 25px;
-            font-size: 18px;
-        }
+  .srn-garden-design__section {
+    margin-top: 100px;
+  }
 
-        .garden-design-menu {
-            margin-top: 10px;
-            font-size: 11px;
-        }
-    }
+  .srn-garden-design__heading-image--desktop {
+    display: inline-block;
+  }
+
+  .srn-garden-design__heading-image--mobile {
+    display: none;
+  }
+
+  .srn-garden-design__text {
+    margin-top: 50px;
+    font-size: 25px;
+  }
+}
 </style>
