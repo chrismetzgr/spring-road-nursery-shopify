@@ -19,7 +19,30 @@ function clickExitEventHandler(element) {
   }, { once: true})
 }
 
+let clickCount = 0;
+
 hamburgerMenuIcon.addEventListener('click', () => {
+  clickCount++;
+  console.log('=== HAMBURGER CLICK #' + clickCount + ' ===');
+  console.log('Window inner height:', window.innerHeight);
+  console.log('Document height:', document.documentElement.clientHeight);
+  
+  const background = document.querySelector('.mobile-nav-background');
+  if (background) {
+    const bgStyles = window.getComputedStyle(background);
+    console.log('Background computed styles:');
+    console.log('  height:', bgStyles.height);
+    console.log('  top:', bgStyles.top);
+    console.log('  position:', bgStyles.position);
+    console.log('  display:', bgStyles.display);
+  }
+  
+  const navStyles = window.getComputedStyle(mobileNav);
+  console.log('Mobile nav computed styles:');
+  console.log('  height:', navStyles.height);
+  console.log('  top:', navStyles.top);
+  console.log('  display:', navStyles.display);
+  
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
 });
