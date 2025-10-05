@@ -29,7 +29,7 @@ if (popup && customerPosted === 'true') {
     window.history.replaceState({}, '', url);
   }, 5000);
 // } else if (popup && !localStorage.getItem(popupKey)) {
-} else if (popup) {
+} else if (false) {
   // Normal behavior: show after 5 second delay for first-time visitors
   popup.style.opacity = '0';
   popup.style.transition = 'opacity 0.5s ease';
