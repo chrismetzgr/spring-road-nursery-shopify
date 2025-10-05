@@ -1,102 +1,163 @@
-const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
-const mobileNav = document.querySelector('#mobile-nav');
-const wormSortIcon = document.querySelector('#sort-icon');
-const mobileSort = document.querySelector('#mobile-sort')
-const desktopSortDropdown = document.querySelector('.sort-dropdown')
+/**
+ * Menu and Sort functionality for Spring Road Nursery
+ * Handles mobile navigation, sort dropdown, and product filtering
+ */
 
-function clickExitEventHandler(element) {
+// ============================================
+// CONSTANTS & DOM ELEMENTS
+// ============================================
+
+const BREAKPOINT_MOBILE = 850;
+const DRAWER_ANIMATION_DELAY = 500;
+
+const elements = {
+  hamburgerIcon: document.querySelector('#hamburger-icon'),
+  mobileNav: document.querySelector('#mobile-nav'),
+  sortIcon: document.querySelector('#sort-icon'),
+  mobileSort: document.querySelector('#mobile-sort'),
+  desktopSortDropdown: document.querySelector('.srn-header__sort-dropdown'),
+  mobileSortMenu: document.querySelector('#mobile-sort-menu'),
+  productGrid: document.querySelector('#product-grid'),
+  productGridContainer: document.querySelector('#ProductGridContainer')
+};
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+/**
+ * Check if viewport is mobile size
+ */
+function isMobile() {
+  return window.innerWidth <= BREAKPOINT_MOBILE;
+}
+
+/**
+ * Open a drawer with animation
+ */
+function openDrawer(element) {
+  if (!element) return;
+  
+  element.style.display = 'block';
   element.classList.add('show');
   element.classList.remove('hide');
   
-  const exitButton = element.querySelector('.exit-container')
-  exitButton.addEventListener('click', () => {
-    element.classList.remove('show');
-    element.classList.add('hide');
-    
-    setTimeout(() => {
-      element.style.display = 'none';
-    }, 500); 
-  }, { once: true})
+  const exitButton = element.querySelector('.exit-container');
+  if (exitButton) {
+    exitButton.addEventListener('click', () => closeDrawer(element), { once: true });
+  }
 }
 
-// Function to close a drawer
+/**
+ * Close a drawer with animation
+ */
 function closeDrawer(element) {
-  if (element && element.classList.contains('show')) {
-    element.classList.remove('show');
-    element.classList.add('hide');
-    
-    setTimeout(() => {
-      element.style.display = 'none';
-    }, 500);
+  if (!element || !element.classList.contains('show')) return;
+  
+  element.classList.remove('show');
+  element.classList.add('hide');
+  
+  setTimeout(() => {
+    element.style.display = 'none';
+  }, DRAWER_ANIMATION_DELAY);
+}
+
+/**
+ * Close all mobile drawers
+ */
+function closeAllDrawers() {
+  closeDrawer(elements.mobileNav);
+  closeDrawer(elements.mobileSort);
+}
+
+// ============================================
+// MOBILE NAVIGATION
+// ============================================
+
+if (elements.hamburgerIcon && elements.mobileNav) {
+  elements.hamburgerIcon.addEventListener('click', () => {
+    openDrawer(elements.mobileNav);
+    elements.hamburgerIcon.setAttribute('aria-expanded', 'true');
+  });
+  
+  // Update aria-expanded when drawer closes
+  const navExitButton = elements.mobileNav.querySelector('.exit-container');
+  if (navExitButton) {
+    navExitButton.addEventListener('click', () => {
+      elements.hamburgerIcon.setAttribute('aria-expanded', 'false');
+    });
   }
 }
 
-// Window resize listener to close mobile drawers on desktop
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 850) {
-    closeDrawer(mobileNav);
-    closeDrawer(mobileSort);
-  }
-});
-
-hamburgerMenuIcon.addEventListener('click', () => {
-  mobileNav.style.display = 'block'; 
-  clickExitEventHandler(mobileNav);
-});
-
-wormSortIcon.addEventListener('click', () => {
-  if(window.innerWidth < 850){
-    mobileSort.style.display = 'block'; 
-    clickExitEventHandler(mobileSort);
-  }
-});
+// ============================================
+// SORT FUNCTIONALITY
+// ============================================
 
 let sortTimeout;
 
-wormSortIcon.addEventListener('mouseover', () => {
-  if(window.innerWidth > 850){
+/**
+ * Show desktop sort dropdown
+ */
+function showSortDropdown() {
+  if (!isMobile() && elements.desktopSortDropdown) {
     clearTimeout(sortTimeout);
-    desktopSortDropdown.classList.add('active');
+    elements.desktopSortDropdown.classList.add('active');
+    elements.sortIcon?.setAttribute('aria-expanded', 'true');
   }
-});
+}
 
-wormSortIcon.addEventListener('mouseout', () => {
-  if(window.innerWidth > 850){
+/**
+ * Hide desktop sort dropdown with delay
+ */
+function hideSortDropdown() {
+  if (!isMobile() && elements.desktopSortDropdown) {
     sortTimeout = setTimeout(() => {
-      desktopSortDropdown.classList.remove('active');
+      elements.desktopSortDropdown.classList.remove('active');
+      elements.sortIcon?.setAttribute('aria-expanded', 'false');
     }, 100);
   }
-});
+}
 
-desktopSortDropdown.addEventListener('mouseover', () => {
-  if(window.innerWidth > 850){
-    clearTimeout(sortTimeout);
-    desktopSortDropdown.classList.add('active');
-  }
-});
+// Desktop sort dropdown hover behavior
+if (elements.sortIcon && elements.desktopSortDropdown) {
+  // Sort icon hover
+  elements.sortIcon.addEventListener('click', () => {
+    if (isMobile()) {
+      openDrawer(elements.mobileSort);
+      elements.sortIcon.setAttribute('aria-expanded', 'true');
+    }
+  });
+  
+  elements.sortIcon.addEventListener('mouseover', showSortDropdown);
+  elements.sortIcon.addEventListener('mouseout', hideSortDropdown);
+  
+  // Dropdown hover
+  elements.desktopSortDropdown.addEventListener('mouseover', showSortDropdown);
+  elements.desktopSortDropdown.addEventListener('mouseout', hideSortDropdown);
+}
 
-desktopSortDropdown.addEventListener('mouseout', () => {
-  if(window.innerWidth > 850){
-    sortTimeout = setTimeout(() => {
-      desktopSortDropdown.classList.remove('active');
-    }, 100);
-  }
-});
+// ============================================
+// PRODUCT SORTING
+// ============================================
 
+const SORT_MAPPING = {
+  'featured': 'manual',
+  'best-selling': 'best-selling',
+  'price': 'price-ascending',
+  'newest': 'created-descending'
+};
+
+/**
+ * Handle product sorting
+ */
 function handleSort(sortValue) {
-  const sortMapping = {
-    'featured': 'manual',
-    'best-selling': 'best-selling',
-    'price': 'price-ascending',
-    'newest': 'created-descending'
-  };
+  const sortBy = SORT_MAPPING[sortValue];
+  if (!sortBy || !elements.productGrid) return;
   
   const url = new URL(window.location.href);
-  url.searchParams.set('sort_by', sortMapping[sortValue]);
+  url.searchParams.set('sort_by', sortBy);
   
-  const productGrid = document.getElementById('product-grid');
-  const sectionId = productGrid?.dataset.id;
-  
+  const sectionId = elements.productGrid.dataset.id;
   if (!sectionId) return;
   
   const fetchUrl = `${url.pathname}?section_id=${sectionId}&${url.searchParams.toString()}`;
@@ -106,32 +167,65 @@ function handleSort(sortValue) {
     .then(html => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
-      const newContainer = doc.getElementById('ProductGridContainer');
+      const newContainer = doc.querySelector('#ProductGridContainer');
       
-      if (newContainer) {
-        document.getElementById('ProductGridContainer').innerHTML = newContainer.innerHTML;
+      if (newContainer && elements.productGridContainer) {
+        elements.productGridContainer.innerHTML = newContainer.innerHTML;
       }
       
       history.pushState({}, '', url.toString());
-    });
+    })
+    .catch(error => console.error('Error sorting products:', error));
 }
 
-desktopSortDropdown?.addEventListener('click', (e) => {
-  const sortValue = e.target.dataset.sort;
-  if (sortValue) {
-    handleSort(sortValue);
-    desktopSortDropdown.classList.remove('active');
-  }
-});
+// Desktop sort dropdown click
+if (elements.desktopSortDropdown) {
+  elements.desktopSortDropdown.addEventListener('click', (e) => {
+    const sortValue = e.target.dataset.sort;
+    if (sortValue) {
+      handleSort(sortValue);
+      elements.desktopSortDropdown.classList.remove('active');
+      elements.sortIcon?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Keyboard navigation for sort options
+  elements.desktopSortDropdown.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const sortValue = e.target.dataset.sort;
+      if (sortValue) {
+        handleSort(sortValue);
+        elements.desktopSortDropdown.classList.remove('active');
+        elements.sortIcon?.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+}
 
-document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
-  const sortValue = e.target.dataset.sort;
-  if (sortValue) {
-    handleSort(sortValue);
-    mobileSort.classList.remove('show');
-    mobileSort.classList.add('hide');
-    setTimeout(() => {
-      mobileSort.style.display = 'none';
-    }, 500);
+// Mobile sort menu click
+if (elements.mobileSortMenu) {
+  elements.mobileSortMenu.addEventListener('click', (e) => {
+    const sortValue = e.target.dataset.sort;
+    if (sortValue) {
+      handleSort(sortValue);
+      closeDrawer(elements.mobileSort);
+      elements.sortIcon?.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// ============================================
+// RESPONSIVE BEHAVIOR
+// ============================================
+
+/**
+ * Close mobile drawers when resizing to desktop
+ */
+window.addEventListener('resize', () => {
+  if (!isMobile()) {
+    closeAllDrawers();
+    elements.hamburgerIcon?.setAttribute('aria-expanded', 'false');
+    elements.sortIcon?.setAttribute('aria-expanded', 'false');
   }
 });
