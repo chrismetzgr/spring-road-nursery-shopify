@@ -320,11 +320,14 @@
 #footer-email-form-mobile {
   display: block;
   width: 100vw;
-  margin-left: calc(-1 * (100vw - 100%) / 2); /* Account for scrollbar */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   padding: 0;
   box-sizing: border-box;
 }
-
   #footer-details {
     display: flex; 
     flex-wrap: wrap;
