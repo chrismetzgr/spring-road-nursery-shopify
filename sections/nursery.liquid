@@ -1,356 +1,473 @@
 {% render 'email-collection-popup' %}
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
-<div id="the-nursery">
 
-<div id="img-container">
-    <img src="{{ 'nursery.jpg' | asset_url }}" height="auto" width="auto"/>
-</div>
-<div id="nursery-menu">
-    <div><a href="#what-we-do">What We Do</a></div>
-    <div>•</div>
-    <div><a href="#hours">Our Hours</a></div>
-    <div>•</div>
-    <div><a href="#plants">Our Plants</a></div>
-    <div>•</div>
-    <div><a href="#contact">Contact Us</a></div>
-</div>
-<div id="nursery-content">
-    <div id="what-we-do" class="nursery-section">
-        <img class="text-image desktop-pic" src="{{ 'what-we-do.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'what-we-do-mobile.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="what-we-do-text">
-            Cross the covered bridge in Tunbridge village, follow the road as it climbs the mountain and turns to dirt, and you'll arrive at Spring Road Nursery: a farm of terraced gardens where rare plants are grown and propagated, and new landscapes are imagined into being.
-            <br/><br/>
-            This place was once a pasture. Now it is a living library of plants. Each bed is an experiment, where sun, water, and soil test the resilience, abundance, and vigor of every species. Flowers chosen for their uncommon color, foliage that calls to be touched. We collect seed, take cuttings, divide crowns, and pass them on, so you can plant them at home.
-            <br/><br/>
-            The greenhouse hums with what we've grown, ready for you to sift through and find the thing you didn't know you needed. In the barn you'll find our shop full of tools and objects built to last—spades and shears, handwoven blankets, birdhouses made by a luthier, and glossaries of plants. Things that make the work steadier, sharper, and more beautiful.
-            <br/><br/>
-            The labor here is a daily ritual. Beds weeded. Seedlings lifted. Compost spread. Stalks cut back. Chickens shooed from the rows. Work that ties us to the soil we all depend on.
-            <br/><br/>
-            The garden is not decoration. It is a force—ecstatic, insistent, alive. It humbles and surprises. It asks for patience but also surrender. Every season it reshapes itself, and us with it.
-            <br/><br/>
-            This is what we offer: plants to carry home, tools to work with, objects to keep close, and gardens designed to endure. All of it is rooted here, shaped by weather, labor, and time.
-            <br/><br/>
-            And through each season—the effort, the devotion, the ecstasy—we carry one assurance close: All will be well in the garden.
-            <br/><br/>
-            We hope to see you soon.
-            <br/>
-            Bryan & Adam
-            <br/><br/>
-            "Plant a garden in which strange plants grow and mysteries bloom. The need for mystery is greater than the need for an answer." —Ken Kesey  
+<main class="srn-nursery" id="nursery-page">
+  <!-- Hero Image -->
+  <div class="srn-nursery__hero">
+    <img 
+      src="{{ 'nursery.jpg' | asset_url }}" 
+      alt="Spring Road Nursery terraced gardens"
+      class="srn-nursery__hero-image"
+      width="1370" 
+      height="630"
+    />
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="srn-nursery__nav" aria-label="Nursery page navigation">
+    <a href="#what-we-do" class="srn-nursery__nav-link">What We Do</a>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <a href="#hours" class="srn-nursery__nav-link">Our Hours</a>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <a href="#plants" class="srn-nursery__nav-link">Our Plants</a>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <a href="#contact" class="srn-nursery__nav-link">Contact Us</a>
+  </nav>
+
+  <!-- Content Sections -->
+  <div class="srn-nursery__content">
+    
+    <!-- What We Do Section -->
+    <section id="what-we-do" class="srn-nursery__section">
+      <h2 class="srn-nursery__heading">
+        <img 
+          src="{{ 'what-we-do.png' | asset_url }}" 
+          alt="What We Do"
+          class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
+          width="auto" 
+          height="75"
+        />
+        <img 
+          src="{{ 'what-we-do-mobile.png' | asset_url }}" 
+          alt="What We Do"
+          class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
+          width="auto" 
+          height="150"
+        />
+      </h2>
+      <article class="srn-nursery__text srn-nursery__text--left-align">
+        <p>Cross the covered bridge in Tunbridge village, follow the road as it climbs the mountain and turns to dirt, and you'll arrive at Spring Road Nursery: a farm of terraced gardens where rare plants are grown and propagated, and new landscapes are imagined into being.</p>
+        
+        <p>This place was once a pasture. Now it is a living library of plants. Each bed is an experiment, where sun, water, and soil test the resilience, abundance, and vigor of every species. Flowers chosen for their uncommon color, foliage that calls to be touched. We collect seed, take cuttings, divide crowns, and pass them on, so you can plant them at home.</p>
+        
+        <p>The greenhouse hums with what we've grown, ready for you to sift through and find the thing you didn't know you needed. In the barn you'll find our shop full of tools and objects built to last—spades and shears, handwoven blankets, birdhouses made by a luthier, and glossaries of plants. Things that make the work steadier, sharper, and more beautiful.</p>
+        
+        <p>The labor here is a daily ritual. Beds weeded. Seedlings lifted. Compost spread. Stalks cut back. Chickens shooed from the rows. Work that ties us to the soil we all depend on.</p>
+        
+        <p>The garden is not decoration. It is a force—ecstatic, insistent, alive. It humbles and surprises. It asks for patience but also surrender. Every season it reshapes itself, and us with it.</p>
+        
+        <p>This is what we offer: plants to carry home, tools to work with, objects to keep close, and gardens designed to endure. All of it is rooted here, shaped by weather, labor, and time.</p>
+        
+        <p>And through each season—the effort, the devotion, the ecstasy—we carry one assurance close: All will be well in the garden.</p>
+        
+        <p>We hope to see you soon.<br/>Bryan & Adam</p>
+        
+        <p class="srn-nursery__quote">"Plant a garden in which strange plants grow and mysteries bloom. The need for mystery is greater than the need for an answer." —Ken Kesey</p>
+      </article>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="srn-nursery__section">
+      <h2 class="srn-nursery__heading">
+        <img 
+          src="{{ 'hours.png' | asset_url }}" 
+          alt="Our Hours"
+          class="srn-nursery__heading-image"
+          width="auto" 
+          height="75"
+        />
+      </h2>
+      <p class="srn-nursery__hours-intro">Our days and hours shift with the season. Currently, we are open...</p>
+      <div class="srn-nursery__hours-grid">
+        <div class="srn-nursery__hours-block">
+          <div class="srn-nursery__hours-day">Weekdays</div>
+          <div class="srn-nursery__hours-time">by appointment</div>
         </div>
-    </div>
-    <div id="hours" class="nursery-section">
-        <img class="text-image" src="{{ 'hours.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="hours-heading">
-            Our days and hours shift with the season. Currently, we are open...
+        <div class="srn-nursery__hours-block">
+          <div class="srn-nursery__hours-day">Saturday & Sunday</div>
+          <div class="srn-nursery__hours-time">10AM - 4PM</div>
         </div>
-        <div class="hours-content">
-            <div class="hours">            
-                <span class="schedule-title">Weekdays </span>
-                <br/>
-                <span class="schedule-hours">by appointment</span>
-            </div>
-             <div class="hours">            
-                <span class="schedule-title">Saturday & Sunday</span>
-                <br/>
-                <span class="schedule-hours">10AM - 4PM</span>
-            </div>
-        </div>
-    </div>
-    <div id="plants" class="nursery-section">
-        <img class="text-image desktop-pic" src="{{ 'our-plants.png' | asset_url }}" height="auto" width="auto"/>
-        <img class="text-image mobile-pic" src="{{ 'our-plants-mobile.png' | asset_url }}" height="auto" width="auto"/>
-        <div class="plants-content">
-            We propagate thousands of plants from seed, cuttings, and division. 
-            <br/><br/>
-            A shifting chorus that changes with the seasons and our curiosities.  Alongside these perennials and annuals, you'll find a small gathering of trees and shrubs — each available here at our nursery  in Tunbridge, Vermont.
-            <br/><br/>
-            <a href="#" class="plants-link wavy-underline">Click here for the full list of what's growing, blooming,
-                <br/>
-                and ready to wander home with you.</a>
-        </div>
-    </div>
-    <div id="contact" class="nursery-section">
-        <img class="text-image" src="{{ 'contact.png' | asset_url }}" height="auto" width="auto"/>
-            <span class="nursery-email">hello@springroadnurseryvt.com</span>
-            <span class="nursery-phone">(802) 276-6481</span>
-    </div>
-</div>
-</div>
+      </div>
+    </section>
+
+    <!-- Plants Section -->
+    <section id="plants" class="srn-nursery__section">
+      <h2 class="srn-nursery__heading">
+        <img 
+          src="{{ 'our-plants.png' | asset_url }}" 
+          alt="Our Plants"
+          class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
+          width="auto" 
+          height="75"
+        />
+        <img 
+          src="{{ 'our-plants-mobile.png' | asset_url }}" 
+          alt="Our Plants"
+          class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
+          width="auto" 
+          height="150"
+        />
+      </h2>
+      <div class="srn-nursery__text">
+        <p>We propagate thousands of plants from seed, cuttings, and division.</p>
+        
+        <p>A shifting chorus that changes with the seasons and our curiosities. Alongside these perennials and annuals, you'll find a small gathering of trees and shrubs — each available here at our nursery in Tunbridge, Vermont.</p>
+        
+        <p>
+          <a href="#" class="srn-nursery__link wavy-underline">
+            Click here for the full list of what's growing, blooming,<br/>
+            and ready to wander home with you.
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="srn-nursery__section srn-nursery__section--contact">
+      <h2 class="srn-nursery__heading">
+        <img 
+          src="{{ 'contact.png' | asset_url }}" 
+          alt="Contact Us"
+          class="srn-nursery__heading-image"
+          width="auto" 
+          height="75"
+        />
+      </h2>
+      <a href="mailto:hello@springroadnurseryvt.com" class="srn-nursery__contact-email">
+        hello@springroadnurseryvt.com
+      </a>
+      <a href="tel:+18022766481" class="srn-nursery__contact-phone">
+        (802) 276-6481
+      </a>
+    </section>
+
+  </div>
+</main>
 
 <style>
-    /* Base styles - Desktop (>850px) */
-    #the-nursery {
-        margin-top: 50px;
-        margin-bottom: 150px;
-    }
-    
-   #img-container {
-        max-height: 630px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    
-    #img-container img {
-        max-width: 1370px;
-        width: 100%;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp .5s ease-out forwards;
-    }
+/* ============================================
+   NURSERY PAGE STYLES
+   ============================================ */
 
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+/* Base/Mobile Styles (Mobile-First Approach) */
+.srn-nursery {
+  margin-top: 0;
+  margin-bottom: 75px;
+}
 
-    #nursery-menu {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        align-items: flex-start;
-        max-width: 700px;
-        width: 100%;
-        margin: 40px auto 0;
-        padding: 0 20px;
-        font-family: var(--font-family-secondary);
-        font-size: 14px;
-        font-stretch: expanded;
-        text-transform: uppercase;
-    }
-    
-    #nursery-menu a,
-    #nursery-menu a:visited { 
-        color: var(--font-color-dark-secondary);
-    }
+/* Hero Section */
+.srn-nursery__hero {
+  max-height: 630px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    #nursery-content {
-        margin-top: 150px;
-        font-size: 18px;
-        padding: 0 1%;
-        color: var(--font-color-dark-secondary);
-    }
+.srn-nursery__hero-image {
+  max-width: 1370px;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: srn-fadeInUp 0.5s ease-out forwards;
+}
 
-    #nursery-content img {
-        max-width: 90%;
-        height: auto;
-    }
+@keyframes srn-fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    #nursery-content a {
-        color: var(--font-color-dark-secondary);
-        font-family: var(--font-family-secondary);
-        font-size: 20px;
-        font-weight: medium;
-    }
+/* Navigation */
+.srn-nursery__nav {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  align-items: center;
+  max-width: 700px;
+  width: 100%;
+  margin: 15px auto 0;
+  padding: 0 20px;
+  font-family: var(--font-family-secondary);
+  font-size: 9px;
+  font-stretch: expanded;
+  text-transform: uppercase;
+}
 
-    .nursery-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        max-width: 850px;
-        width: 100%;
-        margin: 100px auto 0;
-        padding: 0 20px;
-        font-size: 25px;
-        line-height: 1.15;
-        text-align: center;
-    }
+.srn-nursery__nav-link,
+.srn-nursery__nav-link:visited {
+  color: var(--font-color-dark-secondary);
+  text-decoration: none;
+}
 
-    img.text-image {
-        max-height: 75px;
-        width: auto;
-    }
+.srn-nursery__nav-link:hover,
+.srn-nursery__nav-link:focus {
+  text-decoration: underline;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
 
-    .mobile-pic {
-        display: none;
-    }
+.srn-nursery__nav-divider {
+  color: var(--font-color-dark-secondary);
+}
 
-    .what-we-do-text {
-        margin-top: 40px;
-        text-align: left;
-    }
+/* Content Container */
+.srn-nursery__content {
+  margin-top: 25px;
+  font-size: 15px;
+  padding: 0 1%;
+  color: var(--font-color-dark-secondary);
+}
 
-    #hours {
-        font-stretch: expanded;
-    }
+.srn-nursery__content img {
+  max-width: 90%;
+  height: auto;
+}
 
-    .hours-heading {
-        margin: 40px 0;
-    }
+.srn-nursery__content a {
+  color: var(--font-color-dark-secondary);
+}
 
-    .hours-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 60px;
-        font-family: var(--font-family-secondary);
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        line-height: 1.7;
-    }
+/* Section Base Styles */
+.srn-nursery__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 850px;
+  width: 100%;
+  margin: 50px auto 0;
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 1.15;
+  text-align: center;
+}
 
-    .hours {
-        text-align: center;
-    }
+/* Headings */
+.srn-nursery__heading {
+  margin: 0;
+}
 
-    .schedule-hours {
-        font-weight: 300;
-    }
+.srn-nursery__heading-image {
+  max-height: 75px;
+  width: auto;
+  display: block;
+}
 
-    .plants-content {
-        margin-top: 50px;
-        line-height: 1.5;
-    }
+.srn-nursery__heading-image--desktop {
+  display: none;
+}
 
-    .plants-link {
-        font-weight: 500;
-        letter-spacing: 3px;
-    }
+.srn-nursery__heading-image--mobile {
+  display: inline-block;
+  max-height: 150px;
+}
 
-    #contact {
-        gap: 0;
-        letter-spacing: 2px;
-    }
+/* Text Content */
+.srn-nursery__text p {
+  margin: 0 0 1em 0;
+}
 
-    .nursery-email {
-        margin-top: 50px;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-    }
+.srn-nursery__text p:last-child {
+  margin-bottom: 0;
+}
 
-    /* Tablet (481px - 850px) */
-    @media (min-width: 481px) and (max-width: 850px) {
-        #the-nursery {
-            margin-top: 30px;
-            margin-bottom: 100px;
-        }
+.srn-nursery__text--left-align {
+  margin-top: 10px;
+  text-align: left;
+}
 
-        #nursery-menu {
-            margin-top: 25px;
-            font-size: 12px;
-            gap: 10px;
-        }
+.srn-nursery__quote {
+  font-style: italic;
+}
 
-        #nursery-content {
-            margin-top: 75px;
-            font-size: 16px;
-        }
+.srn-nursery__link {
+  font-family: var(--font-family-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
 
-        #nursery-content a {
-            font-size: 18px;
-        }
+/* Hours Section */
+.srn-nursery__hours-intro {
+  margin: 25px 0;
+}
 
-        .nursery-section {
-            margin-top: 70px;
-            gap: 25px;
-            font-size: 20px;
-        }
+.srn-nursery__hours-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  font-family: var(--font-family-secondary);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.7;
+  font-stretch: expanded;
+}
 
-        img.text-image {
-            max-height: 60px;
-        }
+.srn-nursery__hours-block {
+  text-align: center;
+}
 
-        .what-we-do-text {
-            margin-top: 25px;
-        }
+.srn-nursery__hours-day {
+  font-weight: 400;
+}
 
-        .hours-heading {
-            margin: 35px 0;
-        }
+.srn-nursery__hours-time {
+  font-weight: 300;
+}
 
-        .hours-content {
-            gap: 50px;
-            letter-spacing: 4px;
-        }
+/* Contact Section */
+.srn-nursery__section--contact {
+  display: none;
+  gap: 0;
+  letter-spacing: 2px;
+}
 
-        .plants-content {
-            margin-top: 35px;
-        }
+.srn-nursery__contact-email,
+.srn-nursery__contact-phone {
+  text-decoration: none;
+  color: inherit;
+}
 
-        .plants-link {
-            letter-spacing: 2px;
-        }
+.srn-nursery__contact-email {
+  margin-top: 50px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 
-        #contact {
-            letter-spacing: 1.5px;
-        }
+.srn-nursery__contact-email:hover,
+.srn-nursery__contact-email:focus,
+.srn-nursery__contact-phone:hover,
+.srn-nursery__contact-phone:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
 
-        .nursery-email {
-            margin-top: 35px;
-        }
-    }
+/* ============================================
+   TABLET BREAKPOINT (481px - 850px)
+   ============================================ */
+@media (min-width: 481px) {
+  .srn-nursery {
+    margin-top: 30px;
+    margin-bottom: 100px;
+  }
 
-    /* Mobile (≤480px) */
-    @media (max-width: 480px) {
-        #the-nursery {
-            margin-top: 0;
-            margin-bottom: 75px;
-        }
+  .srn-nursery__nav {
+    margin-top: 25px;
+    font-size: 12px;
+    gap: 10px;
+  }
 
-        #nursery-menu {
-            margin-top: 15px;
-            font-size: 9px;
-            gap: 3px;
-        }
+  .srn-nursery__content {
+    margin-top: 75px;
+    font-size: 16px;
+  }
 
-        #nursery-content {
-            margin-top: 25px;
-            font-size: 15px;
-        }
+  .srn-nursery__section {
+    margin-top: 70px;
+    gap: 25px;
+    font-size: 20px;
+  }
 
-        #nursery-content a {
-            font-size: 16px;
-        }
+  .srn-nursery__heading-image {
+    max-height: 60px;
+  }
 
-        .nursery-section {
-            margin-top: 50px;
-            gap: 20px;
-            font-size: 18px;
-        }
+  .srn-nursery__heading-image--mobile {
+    max-height: 60px;
+  }
 
-        .mobile-pic {
-            display: inline-block;
-        }
+  .srn-nursery__text--left-align {
+    margin-top: 25px;
+  }
 
-        img.text-image.mobile-pic {
-            max-height: 150px;
-        }
-        
-        .desktop-pic { 
-            display: none;
-        }
+  .srn-nursery__link {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
 
-        .what-we-do-text {
-            margin-top: 10px;
-        }
+  .srn-nursery__hours-intro {
+    margin: 35px 0;
+  }
 
-        .hours-heading {
-            margin: 25px 0;
-        }
+  .srn-nursery__hours-grid {
+    gap: 50px;
+    letter-spacing: 4px;
+  }
 
-        .hours-content {
-            gap: 40px;
-            letter-spacing: 3px;
-        }
+  .srn-nursery__section--contact {
+    letter-spacing: 1.5px;
+  }
 
-        .plants-content {
-            margin-top: 25px;
-        }
+  .srn-nursery__contact-email {
+    margin-top: 35px;
+  }
+}
 
-        .plants-link {
-            letter-spacing: 1.5px;
-        }
+/* ============================================
+   DESKTOP BREAKPOINT (>850px)
+   ============================================ */
+@media (min-width: 851px) {
+  .srn-nursery {
+    margin-top: 50px;
+    margin-bottom: 150px;
+  }
 
-        #contact {
-            display: none;
-        }
-    }
+  .srn-nursery__nav {
+    margin-top: 40px;
+    font-size: 14px;
+    gap: 15px;
+  }
+
+  .srn-nursery__content {
+    margin-top: 150px;
+    font-size: 18px;
+  }
+
+  .srn-nursery__section {
+    margin-top: 100px;
+    gap: 30px;
+    font-size: 25px;
+  }
+
+  .srn-nursery__heading-image--desktop {
+    display: inline-block;
+  }
+
+  .srn-nursery__heading-image--mobile {
+    display: none;
+  }
+
+  .srn-nursery__text--left-align {
+    margin-top: 40px;
+  }
+
+  .srn-nursery__link {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+
+  .srn-nursery__hours-intro {
+    margin: 40px 0;
+  }
+
+  .srn-nursery__hours-grid {
+    gap: 60px;
+    letter-spacing: 5px;
+  }
+
+  .srn-nursery__section--contact {
+    display: flex;
+  }
+
+  .srn-nursery__contact-email {
+    margin-top: 50px;
+  }
+}
 </style>
