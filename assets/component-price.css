@@ -16,6 +16,8 @@
 
 .price--end {
   text-align: right;
+  font-family: var(--font-family-secondary);
+  text-transform: uppercase;
 }
 
 .price .price-item {
