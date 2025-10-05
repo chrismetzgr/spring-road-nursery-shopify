@@ -1,37 +1,21 @@
 const popupKey = 'springRoadNurseryNewsLetterSignupUpdated';
 const popup = document.getElementById('email-collection-popup');
 
-function attemptShowPopup() {
-  // Check if menu or sort is open
-  if (window.isMenuOrSortOpen && window.isMenuOrSortOpen()) {
-    // Wait 5 seconds and try again
-    setTimeout(attemptShowPopup, 5000);
-    return;
-  }
-  
-  // Show the popup
-  popup.style.opacity = '0';
-  popup.style.transition = 'opacity 0.5s ease';
-  popup.style.display = 'block';
-  
-  setTimeout(() => {
-    popup.style.opacity = '1';
-    popup.style['z-index'] = 2000;
-  }, 100);
-}
-
 // Check if the page was refreshed after successful form submission
 const urlParams = new URLSearchParams(window.location.search);
 const customerPosted = urlParams.get('customer_posted');
 
+// If form was just submitted successfully, show the success message even if localStorage exists
 if (popup && customerPosted === 'true') {
   popup.style.opacity = '0';
   popup.style.transition = 'opacity 0.5s ease';
   popup.style.display = 'block';
   
+  // Show immediately with success message
   popup.style.opacity = '1';
   popup.style['z-index'] = 2000;
   
+  // Close after 5 seconds
   setTimeout(() => {
     popup.style.opacity = '0';
     setTimeout(() => {
@@ -39,16 +23,25 @@ if (popup && customerPosted === 'true') {
     }, 500);
     localStorage.setItem(popupKey, 'true');
     
+    // Clean up URL by removing query param
     const url = new URL(window.location);
     url.searchParams.delete('customer_posted');
     window.history.replaceState({}, '', url);
   }, 5000);
+// } else if (popup && !localStorage.getItem(popupKey)) {
 } else if (popup) {
-  // Wait 5 seconds then attempt to show
-  setTimeout(attemptShowPopup, 5000);
+  // Normal behavior: show after 5 second delay for first-time visitors
+  popup.style.opacity = '0';
+  popup.style.transition = 'opacity 0.5s ease';
+  popup.style.display = 'block';
+  
+  setTimeout(() => {
+    popup.style.opacity = '1';
+    popup.style['z-index'] = 2000;
+  }, 5000);
 }
 
-// Exit button handler - scoped to popup only
+// Exit button handler
 popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
   popup.style.opacity = '0';
   setTimeout(() => {
