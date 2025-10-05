@@ -216,7 +216,6 @@ a {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  gap: 100px;
   position: relative;
 }
 
@@ -224,31 +223,20 @@ a {
   display: flex;
 }
 
-/* When no sort filter present, center the cart */
-.srn-header__side--right:not(:has(.srn-header__sort)) {
-  justify-content: center;
+/* Cart positioning - always vertically centered */
+.srn-header__cart-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* Hamburger Menu (Mobile Only) */
-.srn-header__hamburger {
-  display: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.srn-header__hamburger img {
-  height: 20px;
-  width: auto;
-}
-
-/* Sort Dropdown */
+/* Sort dropdown positioning */
 .srn-header__sort {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: auto;
 }
 
 .srn-header__sort-toggle {
@@ -379,6 +367,17 @@ a {
   /* Hide desktop navigation */
   .srn-header__nav {
     display: none;
+  }
+
+  /* Reset cart to static positioning on mobile */
+  .srn-header__cart-wrapper {
+    position: static;
+    transform: none;
+  }
+
+  /* Adjust sort dropdown */
+  .srn-header__sort {
+    margin-top: 0;
   }
 
   /* Adjust sort dropdown */
