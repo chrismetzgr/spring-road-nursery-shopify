@@ -1,53 +1,28 @@
 <link rel="preload" as="image" href="{{ "mobile-menu-background.png" | asset_url }}">
 <div id="mobile-nav">
-    <div class="mobile-nav-background"></div>
-    <div class="mobile-nav-content">
-      <div class="exit-container">
-        <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
-      </div>
-      <div id="mobile-menu">
-          {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{% endif %}
-          <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
-          <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
-          <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
-      </div>
+    <div class="exit-container">
+      <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
     </div>
-  </div>
+    <div id="mobile-menu">
+        {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{% endif %}
+        <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
+        <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
+        <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
+    </div>
+</div>
 <style>
   #mobile-nav {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0; /* Cover everything */
     width: 80vw;
-    height: 100vh;
-    height: 100dvh; /* Fallback for browsers that support it */
+    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     z-index: 3000;
-    overflow: hidden;
-  }
-
-.mobile-nav-background {
-  position: fixed;
-  top: -20vh;
-  left: 0;
-  width: 80vw;
-  height: 140vh;
-  min-height: 1200px; /* Safety net - adjust based on your tallest phone */
-  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  display: block !important;
-  z-index: 1;
-}
-
-  .mobile-nav-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .exit-container {
@@ -60,7 +35,7 @@
   }
 
   #mobile-menu {
-    flex: 1;
+    height: 100%;
     font-family: var(--font-family-secondary);
     font-size: 20px;
     gap: 20px;
@@ -68,7 +43,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 60px;
+    padding-bottom: 100px;
   }
 
   #mobile-menu a {
