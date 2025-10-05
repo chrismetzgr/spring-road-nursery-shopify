@@ -317,14 +317,14 @@
     display: none;
   }
 
-  #footer-email-form-mobile {
-    display: block;
-    width: 100vw; /* Full viewport width for edge-to-edge */
-    max-width: 100vw;
-    margin-left: calc(-50vw + 50%); /* Center it while allowing full width */
-    padding: 0 20px; /* Interior padding for the form elements */
-    box-sizing: border-box;
-  }
+#footer-email-form-mobile {
+  display: block;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 0; /* Remove the padding */
+  box-sizing: border-box;
+}
 
   #footer-details {
     display: flex; 
@@ -340,6 +340,8 @@
     text-align: center;
     flex-basis: 100%; /* Force these to take full width, creating their own row */
   }
+
+
 #footer-email-form-mobile .field__input {
   background-color: var(--font-color-dark); /* Use the text color as background */
   color: var(--bg-color); /* Use the background color as text */
