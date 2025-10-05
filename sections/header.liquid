@@ -87,6 +87,18 @@ function updateCartVisibility() {
   .garden-design-header .menu a:visited{
     color: var(--font-color-light-quaternary) !important;
   }
+  .sn-header .srn-cart {
+    color: var(--font-color-dark);
+    font-size: 15px
+  }
+  .garden-design-header .srn-cart {
+    color: var(--font-color-light-quaternary);
+    font-size: 15px
+  }
+  .nursery-header .srn-cart {
+    color: var(--font-color-dark-secondary);
+    font-size: 15px
+  }
   #logo {
     height: 220px;
   }
@@ -181,10 +193,6 @@ function updateCartVisibility() {
   .sn-header {
     width: 100vw;
   }
-  .srn-cart {
-    color: var(--font-color-dark);
-    font-size: 15px
-  }
   .menu {
     font-size: 14px;
     font-stretch: expanded;
@@ -248,7 +256,10 @@ function updateCartVisibility() {
       display: block;
     }
 
-    #srn-cart {
-      display: none;}
+    {% if template == 'collection' or template == 'product' %}
+    #header-cart {
+      display: none;
     }
+    {% endif %}
+  }
 </style>
