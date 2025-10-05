@@ -320,9 +320,8 @@
 #footer-email-form-mobile {
   display: block;
   width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 0; /* Remove the padding */
+  margin-left: calc(-1 * (100vw - 100%) / 2); /* Account for scrollbar */
+  padding: 0;
   box-sizing: border-box;
 }
 
