@@ -283,44 +283,48 @@
       }
     }
 
-    @media(max-width: 768px) {
+@media(max-width: 768px) {
+  #footer-content {
+    min-width: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center; /* Keep items centered */
+  }
 
-      #footer-email-form {
-        width: 100%;
-      }
+  .footer-side {
+    width: 100%; /* Change from 50% to 100% */
+    max-width: 425px; /* Match the form max-width for consistency */
+    padding: 0 20px; /* Add some breathing room */
+    margin-bottom: 30px; /* Add spacing between sections */
+  }
 
-      .footer-side {
-        max-width: 480px;
-        padding: 0;
-      }
+  .footer-menu {
+    width: 100%; /* Let it use full available width */
+    font-size: 12px;
+    padding: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 15px; /* Add horizontal gap for better spacing */
+    justify-content: center;
+  }
 
-      .side-title, .side-text {
-        width: 320px;
-      }
+  .side-title, .side-text {
+    width: 100%; /* Use full width instead of fixed 320px */
+    padding: 0 20px; /* Consistent padding */
+  }
 
-      #footer-content {
-        min-width: 0;
-        width: 100%;
-        flex-direction: column;
-      }
+  #footer-email-form {
+    display: none;
+  }
 
-      .footer-menu {
-        width: 320px;
-        font-size: 12px;
-        padding: 0 30px;
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-
-      #footer-email-form {
-        display: none;
-      }
-
-      #footer-email-form-mobile{
-        display: block;
-        width: 100%;
-        max-width: 425px;
-      }
-    }
+  #footer-email-form-mobile {
+    display: block;
+    width: 100vw; /* Full viewport width for edge-to-edge */
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Center it while allowing full width */
+    padding: 0 20px; /* Interior padding for the form elements */
+    box-sizing: border-box;
+  }
+}
 
 </style>
