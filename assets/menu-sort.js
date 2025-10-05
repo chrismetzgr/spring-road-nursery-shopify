@@ -1,3 +1,8 @@
+// Set viewport height for mobile nav
+function setMobileNavHeight() {
+  document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+}
+
 window.addEventListener('resize', setMobileNavHeight);
 window.addEventListener('orientationchange', setMobileNavHeight);
 window.addEventListener('load', setMobileNavHeight);
@@ -10,7 +15,7 @@ const desktopSortDropdown = document.querySelector('.sort-dropdown')
 
 function clickExitEventHandler(element) {
   element.classList.add('show');
-  element.classList.remove('hide'); // Remove hide class if present
+  element.classList.remove('hide');
   
   const exitButton = element.querySelector('.exit-container')
   exitButton.addEventListener('click', () => {
@@ -24,6 +29,7 @@ function clickExitEventHandler(element) {
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
+  setMobileNavHeight(); // Recalculate viewport height when opening menu
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
 });
