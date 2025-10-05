@@ -15,12 +15,18 @@ function clickExitEventHandler(element) {
     
     setTimeout(() => {
       element.style.display = 'none';
+      // Unlock body scroll when menu closes
+      document.body.style.overflow = '';
+      document.body.style.position = '';
     }, 500); 
   }, { once: true})
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
-  mobileNav.style.display = 'block'; 
+  mobileNav.style.display = 'block';
+  // Lock body scroll when menu opens
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
   clickExitEventHandler(mobileNav);
 });
 
@@ -75,45 +81,4 @@ function handleSort(sortValue) {
   url.searchParams.set('sort_by', sortMapping[sortValue]);
   
   const productGrid = document.getElementById('product-grid');
-  const sectionId = productGrid?.dataset.id;
-  
-  if (!sectionId) return;
-  
-  const fetchUrl = `${url.pathname}?section_id=${sectionId}&${url.searchParams.toString()}`;
-  
-  fetch(fetchUrl)
-    .then(response => response.text())
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const newContainer = doc.getElementById('ProductGridContainer');
-      
-      if (newContainer) {
-        document.getElementById('ProductGridContainer').innerHTML = newContainer.innerHTML;
-      }
-      
-      history.pushState({}, '', url.toString());
-    });
-}
-
-// Desktop sort
-desktopSortDropdown?.addEventListener('click', (e) => {
-  const sortValue = e.target.dataset.sort;
-  if (sortValue) {
-    handleSort(sortValue);
-    desktopSortDropdown.classList.remove('active');
-  }
-});
-
-// Mobile sort
-document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
-  const sortValue = e.target.dataset.sort;
-  if (sortValue) {
-    handleSort(sortValue);
-    mobileSort.classList.remove('show');
-    mobileSort.classList.add('hide');
-    setTimeout(() => {
-      mobileSort.style.display = 'none';
-    }, 500);
-  }
-});
+  const sectionId = p
