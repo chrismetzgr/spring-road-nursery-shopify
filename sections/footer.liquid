@@ -309,16 +309,34 @@
     padding: 0 20px; /* Add some breathing room */
     margin-bottom: 30px; /* Add spacing between sections */
   }
-
+  
   .footer-menu {
-    width: 100%; /* Let it use full available width */
-    font-size: 12px;
-    padding: 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px 15px; /* Add horizontal gap for better spacing */
-    justify-content: center;
-  }
+  width: 100%;
+  font-size: 12px;
+  padding: 0;
+  display: block; /* Change from flex */
+  text-align: center;
+}
+
+.footer-menu a {
+  display: inline-block;
+}
+
+.footer-menu a:first-child {
+  display: block; /* THE SHOP on its own line */
+  margin-bottom: 5px;
+}
+
+.footer-menu a:nth-child(2)::after,
+.footer-menu a:nth-child(4)::after {
+  content: " | ";
+  margin: 0 8px;
+}
+
+.footer-menu a:nth-child(3)::after {
+  content: "\A"; /* Line break after GARDEN DESIGN */
+  white-space: pre;
+}
 
   .side-title, .side-text {
     width: 100%; /* Use full width instead of fixed 320px */
