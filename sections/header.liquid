@@ -118,6 +118,11 @@
           </span>
         </a>
       </div>
+
+      <!-- Spacer to maintain layout when sort filter absent -->
+      {% unless template == 'collection' %}
+      <div class="srn-header__sort-spacer" aria-hidden="true"></div>
+      {% endunless %}
       
     </div>
   </div>
@@ -206,6 +211,10 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.srn-header__nav-link {
+  text-decoration: none;
 }
 
 /* Side Sections */
