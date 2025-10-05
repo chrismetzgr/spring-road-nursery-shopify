@@ -122,13 +122,26 @@
 </style>
 
 <script>
-  // Set the actual viewport height on load and resize
-  function setViewportHeight() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
-  }
+// Set the actual viewport height on load and resize
+function setViewportHeight() {
+  document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+}
 
-  setViewportHeight();
-  window.addEventListener('resize', setViewportHeight);
-  window.addEventListener('orientationchange', setViewportHeight);
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+
+// Add this: recalculate viewport height when menu opens
+const mobileNav = document.getElementById('mobile-nav');
+const observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.attributeName === 'class') {
+      if (mobileNav.classList.contains('show')) {
+        setViewportHeight(); // Recalculate when menu opens
+      }
+    }
+  });
+});
+
+observer.observe(mobileNav, { attributes: true });
 </script>
