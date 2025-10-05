@@ -141,14 +141,16 @@ function handleFirstTimeVisitor() {
 // MAIN EXECUTION
 // ============================================
 
-if (popup && !hasSeenPopup()) {
+if (popup) {
   // Check if page was redirected after successful form submission
   const urlParams = new URLSearchParams(window.location.search);
   const customerPosted = urlParams.get('customer_posted');
   
   if (customerPosted === 'true') {
+    // Always show success message, even if user has seen popup before
     handleSuccessDisplay();
-  } else {
+  } else if (!hasSeenPopup()) {
+    // Only show to first-time visitors for normal display
     handleFirstTimeVisitor();
   }
 }
