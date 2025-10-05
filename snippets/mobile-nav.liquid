@@ -18,41 +18,47 @@
     --viewport-height: 100vh;
   }
 
-  #mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80vw;
-    height: 100vh;
-    height: var(--viewport-height);
-    z-index: 2000;
-    overflow: hidden;
-  }
+:root {
+  --viewport-height: 100vh;
+}
 
-  .mobile-nav-background {
-    display: block !important;
-    position: absolute;
-    top: -10%;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    pointer-events: none;
-    z-index: 1;
-  }
+#mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  height: 100vh;
+  height: var(--viewport-height);
+  z-index: 2000;
+  overflow: visible; /* CHANGED from hidden to visible */
+}
 
-  .mobile-nav-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-  }
+.mobile-nav-background {
+  position: fixed; /* CHANGED from absolute to fixed */
+  top: -10vh; /* Extend 10% above viewport */
+  left: 0;
+  width: 80vw;
+  height: 120vh; /* 120% of viewport */
+  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  display: block !important;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mobile-nav-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Move overflow hidden here to prevent menu scrolling */
+}
 
   .exit-container {
     direction: rtl;
