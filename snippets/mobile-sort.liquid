@@ -5,8 +5,12 @@
     </div>
     <div id="mobile-sort-menu">
         <div class="mobile-sort-cart-container">
+          <a href="{{ routes.cart_url }}">
             <span class="cart-title">CART<span>
-            {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+              <span class="cart-count">
+                {{ cart.item_count }}
+              </span>
+            </a>
         </div>
         <div data-sort="featured">FEATURED</div>
         <div data-sort="best-selling">BEST SELLING</div>
