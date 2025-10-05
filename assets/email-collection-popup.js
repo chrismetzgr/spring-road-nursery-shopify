@@ -1,82 +1,177 @@
-const popupKey = 'springRoadNurseryNewsLetterSignupUpdated';
-const popup = document.getElementById('email-collection-popup');
+/**
+ * Email Collection Popup
+ * Shows newsletter signup to first-time visitors with smart timing
+ */
 
-// Function to check if any drawer menus are open
+// ============================================
+// CONSTANTS
+// ============================================
+
+const STORAGE_KEY = 'springRoadNurseryNewsLetterSignupUpdated';
+const INITIAL_DELAY = 5000; // 5 seconds
+const SUCCESS_DISPLAY_TIME = 5000; // 5 seconds
+const DRAWER_CHECK_INTERVAL = 5000; // 5 seconds
+const FADE_DURATION = 500; // 0.5 seconds
+
+// ============================================
+// DOM ELEMENTS
+// ============================================
+
+const popup = document.getElementById('email-collection-popup');
+const exitButton = popup?.querySelector('.srn-email-popup__exit');
+const form = popup?.querySelector('form');
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+/**
+ * Check if any mobile drawer menus are currently open
+ */
 function areDrawersOpen() {
   const mobileNav = document.querySelector('#mobile-nav');
   const mobileSort = document.querySelector('#mobile-sort');
   
-  // Check if either drawer has the 'show' class or is displayed
-  const navOpen = mobileNav && (mobileNav.classList.contains('show') || 
-                  (mobileNav.style.display === 'block' && !mobileNav.classList.contains('hide')));
-  const sortOpen = mobileSort && (mobileSort.classList.contains('show') || 
-                   (mobileSort.style.display === 'block' && !mobileSort.classList.contains('hide')));
+  const isNavOpen = mobileNav?.classList.contains('show') || 
+                    (mobileNav?.style.display === 'block' && !mobileNav?.classList.contains('hide'));
   
-  return navOpen || sortOpen;
+  const isSortOpen = mobileSort?.classList.contains('show') || 
+                     (mobileSort?.style.display === 'block' && !mobileSort?.classList.contains('hide'));
+  
+  return isNavOpen || isSortOpen;
 }
 
-// Function to show the popup with drawer check
+/**
+ * Show the popup with fade-in animation
+ */
+function showPopup() {
+  if (!popup) return;
+  
+  popup.style.opacity = '1';
+  popup.style.zIndex = '2000';
+}
+
+/**
+ * Hide the popup with fade-out animation
+ */
+function hidePopup() {
+  if (!popup) return;
+  
+  popup.style.opacity = '0';
+  
+  setTimeout(() => {
+    popup.style.display = 'none';
+  }, FADE_DURATION);
+}
+
+/**
+ * Mark popup as seen in localStorage
+ */
+function markPopupAsSeen() {
+  localStorage.setItem(STORAGE_KEY, 'true');
+}
+
+/**
+ * Check if user has already seen the popup
+ */
+function hasSeenPopup() {
+  return localStorage.getItem(STORAGE_KEY) === 'true';
+}
+
+/**
+ * Recursively check if drawers are closed before showing popup
+ */
 function showPopupWhenReady() {
   if (areDrawersOpen()) {
-    // If drawers are open, wait 5 seconds and check again
-    setTimeout(showPopupWhenReady, 5000);
+    // If drawers are open, wait and check again
+    setTimeout(showPopupWhenReady, DRAWER_CHECK_INTERVAL);
   } else {
-    // Drawers are closed, show the popup
-    popup.style.opacity = '1';
-    popup.style['z-index'] = 2000;
+    // Drawers are closed, safe to show popup
+    showPopup();
   }
 }
 
-// Check if the page was refreshed after successful form submission
-const urlParams = new URLSearchParams(window.location.search);
-const customerPosted = urlParams.get('customer_posted');
-
-// If form was just submitted successfully, show the success message even if localStorage exists
-if (popup && customerPosted === 'true') {
+/**
+ * Initialize popup with fade transition
+ */
+function initializePopup() {
+  if (!popup) return;
+  
   popup.style.opacity = '0';
-  popup.style.transition = 'opacity 0.5s ease';
+  popup.style.transition = `opacity ${FADE_DURATION / 1000}s ease`;
   popup.style.display = 'block';
+}
+
+// ============================================
+// POPUP DISPLAY LOGIC
+// ============================================
+
+/**
+ * Handle successful form submission display
+ */
+function handleSuccessDisplay() {
+  initializePopup();
   
-  // Show immediately with success message (bypass drawer check for success messages)
-  popup.style.opacity = '1';
-  popup.style['z-index'] = 2000;
+  // Show immediately with success message (bypass drawer check)
+  showPopup();
   
-  // Close after 5 seconds
+  // Auto-close after delay
   setTimeout(() => {
-    popup.style.opacity = '0';
-    setTimeout(() => {
-      popup.style.display = 'none';
-    }, 500);
-    localStorage.setItem(popupKey, 'true');
+    hidePopup();
+    markPopupAsSeen();
     
-    // Clean up URL by removing query param
+    // Clean up URL by removing query parameter
     const url = new URL(window.location);
     url.searchParams.delete('customer_posted');
     window.history.replaceState({}, '', url);
-  }, 5000);
-} else if (popup) {
-  // Normal behavior: show after 5 second delay for first-time visitors
-  popup.style.opacity = '0';
-  popup.style.transition = 'opacity 0.5s ease';
-  popup.style.display = 'block';
-  
-  // Wait 5 seconds, then check if drawers are open before showing
-  setTimeout(() => {
-    showPopupWhenReady();
-  }, 5000);
+  }, SUCCESS_DISPLAY_TIME);
 }
 
-// Exit button handler
-popup?.querySelector('.exit-container img')?.addEventListener('click', () => {
-  popup.style.opacity = '0';
-  setTimeout(() => {
-    popup.style.display = 'none';
-  }, 500);
-  localStorage.setItem(popupKey, 'true');
-});
+/**
+ * Handle normal first-time visitor display
+ */
+function handleFirstTimeVisitor() {
+  initializePopup();
+  
+  // Wait initial delay, then check if drawers are open before showing
+  setTimeout(showPopupWhenReady, INITIAL_DELAY);
+}
 
-// Form submission handler
-const form = popup?.querySelector('form');
-form?.addEventListener('submit', () => {
-  localStorage.setItem(popupKey, 'true');
-});
+// ============================================
+// MAIN EXECUTION
+// ============================================
+
+if (popup && !hasSeenPopup()) {
+  // Check if page was redirected after successful form submission
+  const urlParams = new URLSearchParams(window.location.search);
+  const customerPosted = urlParams.get('customer_posted');
+  
+  if (customerPosted === 'true') {
+    handleSuccessDisplay();
+  } else {
+    handleFirstTimeVisitor();
+  }
+}
+
+// ============================================
+// EVENT LISTENERS
+// ============================================
+
+/**
+ * Handle exit button click
+ */
+if (exitButton) {
+  exitButton.addEventListener('click', () => {
+    hidePopup();
+    markPopupAsSeen();
+  });
+}
+
+/**
+ * Handle form submission
+ */
+if (form) {
+  form.addEventListener('submit', () => {
+    markPopupAsSeen();
+  });
+}
