@@ -11,19 +11,20 @@
     </div>
 </div>
 <style>
-  #mobile-nav {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    z-index: 3000;
-  }
-  
+#mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100vw; /* Changed from 80vw */
+  height: 100vh;
+  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: 3000;
+  overflow: hidden; /* Prevent content inside from scrolling */
+}
+
 #mobile-nav .exit-container {
   position: absolute;
   top: 20px;
