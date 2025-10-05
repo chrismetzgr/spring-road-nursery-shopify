@@ -108,6 +108,9 @@
           <span data-sort="newest" role="menuitem" tabindex="0">Newest</span>
         </div>
       </div>
+      {% else %}
+      <!-- Spacer to maintain layout when sort filter absent -->
+      <div class="srn-header__sort-spacer" aria-hidden="true"></div>
       {% endif %}
 
       <!-- Cart Link (Hidden on mobile collection pages) -->
@@ -298,6 +301,12 @@ a {
   font-family: var(--font-family-secondary);
 }
 
+/* Spacer to hold space for sort filter when absent */
+.srn-header__sort-spacer {
+  height: 60px;
+  width: 60px;
+}
+
 /* Cart */
 .srn-header__cart-wrapper {
   display: block;
@@ -377,6 +386,11 @@ a {
 
   /* Hide desktop navigation */
   .srn-header__nav {
+    display: none;
+  }
+
+  /* Hide spacer on mobile */
+  .srn-header__sort-spacer {
     display: none;
   }
 
