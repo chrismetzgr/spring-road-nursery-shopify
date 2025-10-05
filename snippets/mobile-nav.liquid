@@ -14,29 +14,28 @@
     </div>
   </div>
 <style>
-  #mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80vw;
-    height: 100vh;
-    z-index: 3000; /* Changed from 2000 to be above modal */
-  }
+#mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  /* height removed - set by JS */
+  z-index: 3000;
+}
 
-  .mobile-nav-background {
-    position: absolute;
-    top: -10%;
-    left: 0;
-    width: 100%;
-    height: 120%;
-    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    display: block !important;
-    z-index: 1;
-  }
+.mobile-nav-background {
+  position: absolute;
+  /* top and height removed - set by JS */
+  left: 0;
+  width: 100%;
+  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: block !important;
+  z-index: 1;
+}
 
   .mobile-nav-content {
     position: absolute;
