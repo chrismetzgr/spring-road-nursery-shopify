@@ -4,6 +4,10 @@
       <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
     </div>
     <div id="mobile-sort-menu">
+        <div class="mobile-sort-cart-container">
+            <span class="cart-title">CART<span>
+            {% if cart.item_count != 0 %} <a href="{{ routes.cart_url }}"><div id="srn-cart">CART {{ cart.item_count }}</div></a>{%  endif %}
+        </div>
         <div data-sort="featured">FEATURED</div>
         <div data-sort="best-selling">BEST SELLING</div>
         <div data-sort="price">PRICE</div>
