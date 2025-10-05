@@ -259,7 +259,7 @@
     .nursery-footer .side-text,
     .nursery-footer .field__label,
     .nursery-footer .field__input {
-      color: var(--color-background) !important!;
+      color: var(--font-color-dark-secondary) !important;
     }
 
     .garden-design-footer,
@@ -352,30 +352,33 @@
 
 
 #footer-email-form-mobile .field__input {
-  color: var(--background); /* Use the background color as text */
+  background-color: var(--font-color-dark) !important;
+  color: var(--color-background) !important;
 }
 
-#footer-email-form-mobile .field__label {
-  color: var(--color-background); /* Make label match the input text color */
+#footer-email-form-mobile .field__label,
+#footer-email-form-mobile .field__input::placeholder {
+  color: var(--color-background) !important;
 }
 
+#footer-email-form-mobile .field__input::placeholder {
+  opacity: 0.7;
+}
+
+#footer-email-form-mobile .svg-wrapper,
+#footer-email-form-mobile .svg-wrapper svg {
+  color: var(--color-background) !important;
+  fill: var(--color-background) !important;
+}
+
+/* Only need page-specific styles for background color */
 .nursery-footer #footer-email-form-mobile .field__input {
-  background-color: var(--font-color-dark-secondary);
-}
-
-.nursery-footer #footer-email-form-mobile .field__input {
-  background-color: var(--font-color-dark-secondary);
+  background-color: var(--font-color-dark-secondary) !important;
 }
 
 .garden-design-footer #footer-email-form-mobile .field__input {
-  background-color: var(--font-color-light-quaternary);
+  background-color: var(--font-color-light-quaternary) !important;
 }
-
-  #footer-email-form-mobile .svg-wrapper,
-  #footer-email-form-mobile .svg-wrapper svg {
-    color: var(--color-background);
-    fill: var(--color-background);
-  }
 }
 
 </style>
