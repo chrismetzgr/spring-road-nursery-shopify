@@ -1,39 +1,68 @@
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
 const wormSortIcon = document.querySelector('#sort-icon');
-const mobileSort = document.querySelector('#mobile-sort')
-const desktopSortDropdown = document.querySelector('.sort-dropdown')
+const mobileSort = document.querySelector('#mobile-sort');
+const desktopSortDropdown = document.querySelector('.sort-dropdown');
 
-function clickExitEventHandler(element) {
+// Track what's currently open
+let menuOpen = false;
+let sortOpen = false;
+
+function clickExitEventHandler(element, onClose) {
   element.classList.add('show');
   element.classList.remove('hide');
   
-  const exitButton = element.querySelector('.exit-container')
+  const exitButton = element.querySelector('.exit-container img');
   exitButton.addEventListener('click', () => {
     element.classList.remove('show');
     element.classList.add('hide');
     
     setTimeout(() => {
       element.style.display = 'none';
-      // Unlock body scroll when menu closes
       document.body.style.overflow = '';
-      document.body.style.position = '';
+      if (onClose) onClose();
     }, 500); 
   }, { once: true})
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
+  // Close sort if open
+  if (sortOpen) {
+    mobileSort.classList.remove('show');
+    mobileSort.classList.add('hide');
+    setTimeout(() => {
+      mobileSort.style.display = 'none';
+      sortOpen = false;
+    }, 500);
+  }
+  
   mobileNav.style.display = 'block';
-  // Lock body scroll when menu opens
   document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  clickExitEventHandler(mobileNav);
+  menuOpen = true;
+  
+  clickExitEventHandler(mobileNav, () => {
+    menuOpen = false;
+  });
 });
 
 wormSortIcon.addEventListener('click', () => {
   if(window.innerWidth < 850){
-    mobileSort.style.display = 'block'; 
-    clickExitEventHandler(mobileSort);
+    // Close menu if open
+    if (menuOpen) {
+      mobileNav.classList.remove('show');
+      mobileNav.classList.add('hide');
+      setTimeout(() => {
+        mobileNav.style.display = 'none';
+        menuOpen = false;
+      }, 500);
+    }
+    
+    mobileSort.style.display = 'block';
+    sortOpen = true;
+    
+    clickExitEventHandler(mobileSort, () => {
+      sortOpen = false;
+    });
   }
 });
 
@@ -81,4 +110,51 @@ function handleSort(sortValue) {
   url.searchParams.set('sort_by', sortMapping[sortValue]);
   
   const productGrid = document.getElementById('product-grid');
-  const sectionId = p
+  const sectionId = productGrid?.dataset.id;
+  
+  if (!sectionId) return;
+  
+  const fetchUrl = `${url.pathname}?section_id=${sectionId}&${url.searchParams.toString()}`;
+  
+  fetch(fetchUrl)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newContainer = doc.getElementById('ProductGridContainer');
+      
+      if (newContainer) {
+        document.getElementById('ProductGridContainer').innerHTML = newContainer.innerHTML;
+      }
+      
+      history.pushState({}, '', url.toString());
+    });
+}
+
+// Desktop sort
+desktopSortDropdown?.addEventListener('click', (e) => {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    desktopSortDropdown.classList.remove('active');
+  }
+});
+
+// Mobile sort
+document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    mobileSort.classList.remove('show');
+    mobileSort.classList.add('hide');
+    setTimeout(() => {
+      mobileSort.style.display = 'none';
+      sortOpen = false;
+    }, 500);
+  }
+});
+
+// Export state checker for modal
+window.isMenuOrSortOpen = function() {
+  return menuOpen || sortOpen;
+};
