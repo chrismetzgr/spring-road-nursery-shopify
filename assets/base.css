@@ -30,6 +30,11 @@
 
 /* base */
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .page-width {
   max-width: var(--page-width);
   margin: 0 auto;
