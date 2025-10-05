@@ -183,6 +183,7 @@ function updateCartVisibility() {
       min-width: 150px;
       max-width: 200px;
     }
+  }
   .main {
     display: flex;
     flex-direction: column;
@@ -221,6 +222,7 @@ function updateCartVisibility() {
     height: 60px;
   }
 
+  @media (max-width: 850px) {
     #logo {
       height: 150px;
     }
@@ -234,8 +236,7 @@ function updateCartVisibility() {
     }
 
     .content {
-      min-width: auto !important;
-      width: 100%;
+      min-width: auto;
       padding: 0 20px;
       align-items: center;
     }
