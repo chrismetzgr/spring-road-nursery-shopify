@@ -25,14 +25,14 @@
     <div class="srn-email-popup__form-wrapper">
       {% form 'customer', class: 'newsletter-form' %}
         {%- if form.posted_successfully? -%}
-          <p
+          <h3
             class="newsletter-form__message newsletter-form__message--success"
             id="Newsletter-success--{{ section.id }}"
             tabindex="-1"
             autofocus
           >
             {{- 'newsletter.success' | t }}
-          </p>
+          </h3>
         {%- else -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">

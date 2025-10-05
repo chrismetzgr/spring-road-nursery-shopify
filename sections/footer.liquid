@@ -32,13 +32,13 @@
       <div id="footer-email-form">
         {% form 'customer', class: 'newsletter-form' %}
         {%- if form.posted_successfully? -%}
-          <p
+          <h3
             class="newsletter-form__message newsletter-form__message--success"
             id="Newsletter-success--{{ section.id }}"
             autofocus
           >
             {{- 'newsletter.success' | t }}
-          </p>
+          </h3>
         {%  else %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">
