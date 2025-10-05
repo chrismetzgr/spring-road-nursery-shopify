@@ -10,7 +10,7 @@ const desktopSortDropdown = document.querySelector('.sort-dropdown')
 
 function clickExitEventHandler(element) {
   element.classList.add('show');
-  element.classList.remove('hide'); // Remove hide class if present
+  element.classList.remove('hide');
   
   const exitButton = element.querySelector('.exit-container')
   exitButton.addEventListener('click', () => {
@@ -100,7 +100,6 @@ function handleSort(sortValue) {
     });
 }
 
-// Desktop sort
 desktopSortDropdown?.addEventListener('click', (e) => {
   const sortValue = e.target.dataset.sort;
   if (sortValue) {
@@ -109,7 +108,6 @@ desktopSortDropdown?.addEventListener('click', (e) => {
   }
 });
 
-// Mobile sort
 document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
   const sortValue = e.target.dataset.sort;
   if (sortValue) {
