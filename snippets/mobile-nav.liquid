@@ -35,19 +35,19 @@
 }
 
 .mobile-nav-background {
-  position: fixed; /* CHANGED from absolute to fixed */
-  top: -10vh; /* Extend 10% above viewport */
+  position: fixed;
+  top: -10vh;
   left: 0;
   width: 80vw;
-  height: 120vh; /* 120% of viewport */
+  height: 120vh;
   background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  background-position: center center; /* Keep centered */
   background-size: cover;
   display: block !important;
   pointer-events: none;
   z-index: 1;
+  /* REMOVED: background-attachment: fixed; */
 }
 
 .mobile-nav-content {
