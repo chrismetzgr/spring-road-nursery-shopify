@@ -27,10 +27,13 @@ function updateVariantAvailability() {
     if (label) {
       label.classList.toggle('variant-radio-label--disabled', !hasAnyAvailable);
       
-      if (!hasAnyAvailable && !label.textContent.includes('- Out of stock')) {
-        label.textContent = `${optionValue} - Out of stock`;
-      } else if (hasAnyAvailable && label.textContent.includes('- Out of stock')) {
-        label.textContent = optionValue;
+      // FIX: Clean the label text first, then set it based on availability
+      const cleanText = label.textContent.replace(' - Out of stock', '').trim();
+      
+      if (!hasAnyAvailable) {
+        label.textContent = `${cleanText} - Out of stock`;
+      } else {
+        label.textContent = cleanText;
       }
     }
     
@@ -65,10 +68,13 @@ function updateVariantAvailability() {
       if (label) {
         label.classList.toggle('variant-radio-label--disabled', !isAvailable);
         
-        if (!isAvailable && !label.textContent.includes('- Out of stock')) {
-          label.textContent = `${optionValue} - Out of stock`;
-        } else if (isAvailable && label.textContent.includes('- Out of stock')) {
-          label.textContent = optionValue;
+        // FIX: Clean the label text first, then set it based on availability
+        const cleanText = label.textContent.replace(' - Out of stock', '').trim();
+        
+        if (!isAvailable) {
+          label.textContent = `${cleanText} - Out of stock`;
+        } else {
+          label.textContent = cleanText;
         }
       }
       
