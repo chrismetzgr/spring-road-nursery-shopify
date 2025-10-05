@@ -58,32 +58,32 @@
   }
 
   #mobile-nav.show {
-    display: block; /* Make it visible */
-    animation: slideInLeft 0.5s ease-out forwards; /* Apply the animation */
+    display: block;
+    animation: slideInLeft 0.5s ease-out forwards;
   }
 
   #mobile-nav.hide {
-    animation: slideOutLeft 0.5s ease-out; /* Apply the animation */
+    animation: slideOutLeft 0.5s ease-out;
   }
 
 @keyframes slideInLeft {
   from {
-    transform: translateX(-100%); /* Start off-screen to the left */
-    opacity: 0; /* Start invisible */
+    transform: translateX(-100%);
+    opacity: 0;
   }
   to {
-    transform: translateX(0); /* End at its original position */
-    opacity: 1; /* End fully visible */
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes slideOutLeft {
   from {
-    transform: translateX(0); /* Start at current position */
+    transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateX(-100%); /* Slide out to the left */
+    transform: translateX(-100%);
     opacity: 0;
   }
 }
