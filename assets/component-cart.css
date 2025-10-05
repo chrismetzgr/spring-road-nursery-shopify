@@ -189,8 +189,8 @@ cart-items {
 }
 
 .cart__checkout-button {
-  background-color: var(--font-color-dark);
-  color: var(--color-background);
+  background-color: var(--font-color-dark-secondary);
+  color: var(--color-background-);
   max-width: 36rem;
 }
 
