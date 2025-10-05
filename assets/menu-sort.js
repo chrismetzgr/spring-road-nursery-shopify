@@ -1,68 +1,37 @@
+window.addEventListener('resize', setMobileNavHeight);
+window.addEventListener('orientationchange', setMobileNavHeight);
+window.addEventListener('load', setMobileNavHeight);
+
 const hamburgerMenuIcon = document.querySelector('#hamburger-icon');
 const mobileNav = document.querySelector('#mobile-nav');
 const wormSortIcon = document.querySelector('#sort-icon');
-const mobileSort = document.querySelector('#mobile-sort');
-const desktopSortDropdown = document.querySelector('.sort-dropdown');
+const mobileSort = document.querySelector('#mobile-sort')
+const desktopSortDropdown = document.querySelector('.sort-dropdown')
 
-// Track what's currently open
-let menuOpen = false;
-let sortOpen = false;
-
-function clickExitEventHandler(element, onClose) {
+function clickExitEventHandler(element) {
   element.classList.add('show');
-  element.classList.remove('hide');
+  element.classList.remove('hide'); // Remove hide class if present
   
-  const exitButton = element.querySelector('.exit-container img');
+  const exitButton = element.querySelector('.exit-container')
   exitButton.addEventListener('click', () => {
     element.classList.remove('show');
     element.classList.add('hide');
     
     setTimeout(() => {
       element.style.display = 'none';
-      document.body.style.overflow = '';
-      if (onClose) onClose();
     }, 500); 
   }, { once: true})
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
-  // Close sort if open
-  if (sortOpen) {
-    mobileSort.classList.remove('show');
-    mobileSort.classList.add('hide');
-    setTimeout(() => {
-      mobileSort.style.display = 'none';
-      sortOpen = false;
-    }, 500);
-  }
-  
-  mobileNav.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-  menuOpen = true;
-  
-  clickExitEventHandler(mobileNav, () => {
-    menuOpen = false;
-  });
+  mobileNav.style.display = 'block'; 
+  clickExitEventHandler(mobileNav);
 });
 
 wormSortIcon.addEventListener('click', () => {
   if(window.innerWidth < 850){
-    // Close menu if open
-    if (menuOpen) {
-      mobileNav.classList.remove('show');
-      mobileNav.classList.add('hide');
-      setTimeout(() => {
-        mobileNav.style.display = 'none';
-        menuOpen = false;
-      }, 500);
-    }
-    
-    mobileSort.style.display = 'block';
-    sortOpen = true;
-    
-    clickExitEventHandler(mobileSort, () => {
-      sortOpen = false;
-    });
+    mobileSort.style.display = 'block'; 
+    clickExitEventHandler(mobileSort);
   }
 });
 
@@ -131,6 +100,15 @@ function handleSort(sortValue) {
     });
 }
 
+// Desktop sort
+desktopSortDropdown?.addEventListener('click', (e) => {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    desktopSortDropdown.classList.remove('active');
+  }
+});
+
 // Mobile sort
 document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
   const sortValue = e.target.dataset.sort;
@@ -140,12 +118,6 @@ document.getElementById('mobile-sort-menu')?.addEventListener('click', (e) => {
     mobileSort.classList.add('hide');
     setTimeout(() => {
       mobileSort.style.display = 'none';
-      sortOpen = false;
     }, 500);
   }
 });
-
-// Export state checker for modal
-window.isMenuOrSortOpen = function() {
-  return menuOpen || sortOpen;
-};
