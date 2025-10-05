@@ -20,19 +20,6 @@ function clickExitEventHandler(element) {
 }
 
 hamburgerMenuIcon.addEventListener('click', () => {
-  // Get actual viewport height in pixels
-  const vh = window.innerHeight;
-  
-  // Set the container height
-  mobileNav.style.height = vh + 'px';
-  
-  // Set the background to extend beyond
-  const background = mobileNav.querySelector('.mobile-nav-background');
-  if (background) {
-    background.style.height = (vh * 1.2) + 'px';
-    background.style.top = (vh * -0.1) + 'px';
-  }
-  
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
 });
