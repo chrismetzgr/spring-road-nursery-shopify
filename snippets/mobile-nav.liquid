@@ -14,51 +14,40 @@
     </div>
   </div>
 <style>
-  :root {
-    --viewport-height: 100vh;
+  #mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80vw;
+    height: 100vh;
+    z-index: 2000;
   }
 
-:root {
-  --viewport-height: 100vh;
-}
+  .mobile-nav-background {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: block !important;
+    z-index: 1;
+  }
 
-#mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 80vw;
-  height: 100vh;
-  height: var(--viewport-height);
-  z-index: 2000;
-  overflow: visible; /* CHANGED from hidden to visible */
-}
-
-.mobile-nav-background {
-  position: fixed;
-  top: -10vh;
-  left: 0;
-  width: 80vw;
-  height: 120vh;
-  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-  background-repeat: no-repeat;
-  background-position: center center; /* Keep centered */
-  background-size: cover;
-  display: block !important;
-  pointer-events: none;
-  z-index: 1;
-  /* REMOVED: background-attachment: fixed; */
-}
-
-.mobile-nav-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Move overflow hidden here to prevent menu scrolling */
-}
+  .mobile-nav-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
 
   .exit-container {
     direction: rtl;
