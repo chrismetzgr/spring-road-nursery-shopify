@@ -19,6 +19,26 @@ function clickExitEventHandler(element) {
   }, { once: true})
 }
 
+// Function to close a drawer
+function closeDrawer(element) {
+  if (element && element.classList.contains('show')) {
+    element.classList.remove('show');
+    element.classList.add('hide');
+    
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, 500);
+  }
+}
+
+// Window resize listener to close mobile drawers on desktop
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 850) {
+    closeDrawer(mobileNav);
+    closeDrawer(mobileSort);
+  }
+});
+
 hamburgerMenuIcon.addEventListener('click', () => {
   mobileNav.style.display = 'block'; 
   clickExitEventHandler(mobileNav);
