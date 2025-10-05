@@ -194,6 +194,7 @@ cart-items {
   max-width: 36rem;
   font-family: var(--font-family-secondary);
   text-transform: uppercase;
+  font-stretch: expanded;
 }
 
 .cart__ctas {
