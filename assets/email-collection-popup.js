@@ -75,7 +75,7 @@ function markPopupAsSeen() {
  * Check if user has already seen the popup
  */
 function hasSeenPopup() {
-  return false;
+  return localStorage.getItem(STORAGE_KEY) === 'true';
 }
 
 /**
