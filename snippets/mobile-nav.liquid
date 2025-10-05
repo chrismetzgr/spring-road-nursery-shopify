@@ -11,27 +11,21 @@
     </div>
 </div>
 <style>
-#mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 80vw;
-  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  z-index: 3000;
-  /* Extend INTO the safe areas */
-  padding-top: 0;
-  padding-bottom: 0;
-  margin-top: calc(-1 * env(safe-area-inset-top));
-  padding-top: env(safe-area-inset-top);
-  margin-bottom: calc(-1 * env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
-}
+  #mobile-nav {
+    display: none;
+    position: fixed;
+    top: calc(-1 * env(safe-area-inset-top, 0px));
+    left: 0;
+    bottom: calc(-1 * env(safe-area-inset-bottom, 0px));
+    width: 80vw;
+    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 3000;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 
   .exit-container {
     direction: rtl;
