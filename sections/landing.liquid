@@ -1,143 +1,219 @@
-<main class="landing" role="main">
-  <div class="video-container">
-    <video autoplay autobuffer muted loop playsinline src="https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1"/>
+<main class="srn-landing" role="main">
+  <!-- Background Video with Fallback Image -->
+  <div class="srn-landing__video-container">
+    <img 
+      src="{{ 'clouds-backup-background.jpg' | asset_url }}"
+      alt="Spring Road Nursery clouds"
+      class="srn-landing__fallback-image"
+    />
+    <video 
+      class="srn-landing__video"
+      autoplay 
+      autobuffer 
+      muted 
+      loop 
+      playsinline 
+      src="https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1"
+      aria-label="Background video of Spring Road Nursery"
+    ></video>
   </div>
-  <nav class="landing__menu" role="navigation" aria-label="Main navigation">
-        <div><a href="{{ collections['web-shop'].url }}" class="landing__menu-link">THE SHOP</a></div>
-        <div><a href="/pages/nursery" class="landing__menu-link">THE NURSERY</a></div>
-        <div><a href="/pages/garden-design" class="landing__menu-link">GARDEN DESIGN</a></div>
+
+  <!-- Navigation Menu -->
+  <nav class="srn-landing__nav" role="navigation" aria-label="Main navigation">
+    <a href="{{ collections['web-shop'].url }}" class="srn-landing__nav-link">The Shop</a>
+    <a href="/pages/nursery" class="srn-landing__nav-link">The Nursery</a>
+    <a href="/pages/garden-design" class="srn-landing__nav-link">Garden Design</a>
   </nav>
   
-  <div class="landing__logo">
-    <img src="{{ 'SRN-WHITE-LARGE.png' | asset_url }}" 
-         alt="{{ shop.name | default: 'Site Logo' }}" 
-         class="landing__logo-image"
-         height="auto" 
-         width="auto">
+  <!-- Logo -->
+  <div class="srn-landing__logo">
+    <img 
+      src="{{ 'SRN-WHITE-LARGE.png' | asset_url }}" 
+      alt="Spring Road Nursery"
+      class="srn-landing__logo-image"
+      width="auto" 
+      height="auto"
+    />
   </div>
   
-  <footer class="landing__location" role="contentinfo">
-    TUNBRIDGE, VERMONT
+  <!-- Location Footer -->
+  <footer class="srn-landing__location" role="contentinfo">
+    Tunbridge, Vermont
   </footer>
 </main>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const video = document.querySelector('.video-container video');
-  
-  video.addEventListener('canplay', function() {
-    video.classList.add('loaded');
+  /**
+   * Landing Page Video Loader
+   * Fades in background video when ready to play
+   */
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.srn-landing__video');
+    
+    if (!video) return;
+    
+    /**
+     * Add loaded class when video is ready
+     */
+    function markVideoAsLoaded() {
+      video.classList.add('srn-landing__video--loaded');
+    }
+    
+    // Listen for video ready state
+    video.addEventListener('canplay', markVideoAsLoaded);
+    
+    // Check if video is already loaded
+    if (video.readyState >= 3) {
+      markVideoAsLoaded();
+    }
   });
-  
-  if (video.readyState >= 3) {
-    video.classList.add('loaded');
-  }
-});
 </script>
 
 <style>
-  .landing {
-    font-family: var(--font-family-secondary);
-    color: #FFFFFF;
-    position: relative;
-    min-height: 100vh;
-    width: 100vw;
-    font-stretch: expanded;
-  }
+/* ============================================
+   LANDING PAGE STYLES
+   ============================================ */
 
-  .landing__menu-link {
-    text-decoration: none;
-    color: var(--font-color-light);
-    transition: opacity 0.2s ease;
-  }
+/* Prevent scrolling on landing page */
+html:has(.srn-landing),
+body:has(.srn-landing) {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
 
-  .landing__menu-link:visited {
-    color: #FFFFFF;
-  }
+/* Base Styles */
+.srn-landing {
+  font-family: var(--font-family-secondary);
+  color: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  font-stretch: expanded;
+  overflow: hidden;
+}
 
-  .landing__menu-link:hover {
-    opacity: 0.7;
-  }
+/* Video Container */
+.srn-landing__video-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  z-index: -101;
+}
 
-  .landing__menu {
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100vw - 120px);
-    max-width: calc(100vw - 120px);
-    font-size: 30px;
-    letter-spacing: 0.07em;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
+/* Fallback Image */
+.srn-landing__fallback-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: -100;
+}
 
-  .landing__logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+/* Video (overlays fallback image) */
+.srn-landing__video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: -99;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.srn-landing__video--loaded {
+  opacity: 1;
+}
+
+/* Navigation */
+.srn-landing__nav {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 120px);
+  max-width: calc(100vw - 120px);
+  font-size: 30px;
+  letter-spacing: 0.07em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-transform: uppercase;
+}
+
+.srn-landing__nav-link {
+  text-decoration: none;
+  color: var(--font-color-light);
+  transition: opacity 0.2s ease;
+}
+
+.srn-landing__nav-link:visited {
+  color: #FFFFFF;
+}
+
+.srn-landing__nav-link:hover,
+.srn-landing__nav-link:focus {
+  opacity: 0.7;
+}
+
+/* Logo */
+.srn-landing__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -99;
+  pointer-events: none;
+}
+
+.srn-landing__logo-image {
+  display: block;
+  max-width: 90vw;
+  height: auto;
+}
+
+/* Location Footer */
+.srn-landing__location {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  text-transform: uppercase;
+}
+
+/* ============================================
+   MOBILE BREAKPOINT (≤999px)
+   ============================================ */
+@media (max-width: 999px) {
+  .srn-landing__nav {
+    top: 55%;
     transform: translate(-50%, -50%);
-    z-index: -99;
-  }
-
-  .landing__logo-image {
-    display: block;
-  }
-
-  .landing__location {
-    position: absolute;
-    left: 50%;
-    bottom: 5%;
-    transform: translate(-50%);
-  }
-
-.video-container {
-    height: 100vh;
     width: 100vw;
-    position: relative;
-    background-color: black;
-    z-index: -101;
-}
-
-.video-container video {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    object-fit: cover;
-    z-index: -100;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-}
-
-.video-container video.loaded {
-    opacity: 1;
-}
-
-  @media (max-width: 999px) {
-    .landing__menu {
-      top: 55%;
-      transform: translate(-50%, -50%);
-      width: 100vw;
-      height: 17.5vh;
-      font-size: 20px;
-      letter-spacing: 0.15em;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0;
-    }
-
-    .landing__logo {
-      top: 33%;
-    }
-
-    .landing__logo-image {
-      width: 300px;
-    }
-
-    .landing__location {
-      font-size: 10px;
-    }
+    height: 17.5vh;
+    font-size: 20px;
+    letter-spacing: 0.15em;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
   }
+
+  .srn-landing__logo {
+    top: 33%;
+  }
+
+  .srn-landing__logo-image {
+    width: 300px;
+  }
+
+  .srn-landing__location {
+    font-size: 10px;
+  }
+}
 </style>
