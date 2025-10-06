@@ -65,6 +65,7 @@ variant-selects {
   gap: 1px;
   .form__label {
     font-size: 16px;
+    letter-spacing: 1px;
   }
 }
 
