@@ -420,14 +420,10 @@
 }
 
 @media (min-width: 768px) and (max-width: 990px) {
-  /* Smaller font for tablet range */
-  #footer-email-form-mobile .field__input:focus ~ .field__label,
-  #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
-  #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
+  #footer-email-form-mobile .field .field__input:focus ~ .newsletter-label.field__label,
+  #footer-email-form-mobile .field .field__input:not(:placeholder-shown) ~ .newsletter-label.field__label,
+  #footer-email-form-mobile .field .field__input:-webkit-autofill ~ .newsletter-label.field__label {
     font-size: 6px !important;
-    top: calc(var(--inputs-border-width) + 0.5rem);
-    left: calc(var(--inputs-border-width) + 2rem);
-    letter-spacing: 0.04rem;
   }
 }
 
