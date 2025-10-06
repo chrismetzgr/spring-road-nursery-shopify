@@ -39,31 +39,25 @@
 -%}
 
 <style>
-  .media-gallery__main {
-    position: relative;
-    width: 100%;
-  }
+.media-gallery__main {
+  position: relative;
+  width: 100%;
+}
 
-  .media-gallery__spacer {
-    width: 100%;
-    visibility: hidden;
-    pointer-events: none;
-  }
+.media-gallery__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
 
-  .media-gallery__item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s ease-in-out;
-  }
-
-  .media-gallery__item.is-active {
-    opacity: 1;
-    pointer-events: auto;
-  }
+.media-gallery__item.is-active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
 
   .thumbnail-slider {
     position: relative;
@@ -229,8 +223,6 @@
   
   <!-- Main Gallery Viewer with Fade Transitions -->
 <div id="GalleryViewer-{{ section.id }}" class="media-gallery__main">
-  <div class="media-gallery__spacer"></div>
-  
   <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
     {{ 'accessibility.skip_to_product_info' | t }}
   </a>
