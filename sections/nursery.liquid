@@ -285,20 +285,19 @@
 }
 
 .srn-nursery__heading-image {
-  height: auto;
   width: auto;
   display: block;
-  max-width: none;
 }
 
-/* Mobile: Hide desktop versions, show mobile versions at larger size */
-.srn-nursery__heading-image--desktop {
-  display: none;
-}
-
+/* Mobile versions: larger */
 .srn-nursery__heading-image--mobile {
   display: inline-block;
-  max-height: 91px;
+  height: 91px;
+}
+
+/* Desktop versions: hidden on mobile */
+.srn-nursery__heading-image--desktop {
+  display: none;
 }
 
 /* Text Content */
@@ -406,15 +405,12 @@
   }
 
   /* Desktop: All headers get consistent height */
-  .srn-nursery__heading-image {
-    max-height: 78px;
-  }
-
-  /* Desktop: Show desktop versions, hide mobile versions */
   .srn-nursery__heading-image--desktop {
     display: inline-block;
+    height: 78px;
   }
 
+  /* Desktop: Hide mobile versions */
   .srn-nursery__heading-image--mobile {
     display: none;
   }
