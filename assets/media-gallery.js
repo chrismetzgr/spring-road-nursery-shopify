@@ -1,6 +1,3 @@
-7.56 KB •219 lines
-•
-Formatting may be inconsistent from source
 if (!customElements.get('media-gallery')) {
   customElements.define(
     'media-gallery',
