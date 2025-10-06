@@ -254,14 +254,19 @@ function updateActiveSortOption() {
     'created-descending': 'newest'
   };
   
-  // Remove wavy-underline from all sort options
+  // Remove active classes from all sort options
   document.querySelectorAll('[data-sort]').forEach(el => {
-    el.classList.remove('wavy-underline');
+    el.classList.remove('wavy-underline', 'sort-active');
   });
   
   const activeSortValue = sortMap[currentSort] || 'featured';
   document.querySelectorAll(`[data-sort="${activeSortValue}"]`).forEach(el => {
-    el.classList.add('wavy-underline');
+    // Desktop dropdown gets sort-active, mobile gets wavy-underline
+    if (el.closest('.srn-header__sort-dropdown')) {
+      el.classList.add('sort-active');
+    } else {
+      el.classList.add('wavy-underline');
+    }
   });
 }
 
