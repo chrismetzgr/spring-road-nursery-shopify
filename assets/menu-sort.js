@@ -119,12 +119,24 @@ function hideSortDropdown() {
 }
 
 /**
- * Handle sort icon click - mobile opens drawer, desktop does nothing (hover handles it)
+ * Handle sort icon click - mobile opens drawer, desktop toggles dropdown
  */
-function handleSortIconClick() {
+function handleSortIconClick(e) {
   if (isMobile()) {
     openDrawer(elements.mobileSort);
     elements.sortIcon.setAttribute('aria-expanded', 'true');
+  } else {
+    // Desktop: toggle the dropdown
+    e.stopPropagation();
+    const isActive = elements.desktopSortDropdown.classList.contains('active');
+    if (isActive) {
+      elements.desktopSortDropdown.classList.remove('active');
+      elements.sortIcon.setAttribute('aria-expanded', 'false');
+    } else {
+      clearTimeout(sortTimeout);
+      elements.desktopSortDropdown.classList.add('active');
+      elements.sortIcon.setAttribute('aria-expanded', 'true');
+    }
   }
 }
 
@@ -133,13 +145,22 @@ if (elements.sortIcon && elements.desktopSortDropdown) {
   // Sort icon click - using named function for easier cleanup
   elements.sortIcon.addEventListener('click', handleSortIconClick);
   
-  // Hover events for desktop
+  // Hover events for desktop (work alongside click)
   elements.sortIcon.addEventListener('mouseover', showSortDropdown);
   elements.sortIcon.addEventListener('mouseout', hideSortDropdown);
   
   // Dropdown hover
   elements.desktopSortDropdown.addEventListener('mouseover', showSortDropdown);
   elements.desktopSortDropdown.addEventListener('mouseout', hideSortDropdown);
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!elements.sortIcon.contains(e.target) && 
+        !elements.desktopSortDropdown.contains(e.target)) {
+      elements.desktopSortDropdown.classList.remove('active');
+      elements.sortIcon.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 // ============================================
