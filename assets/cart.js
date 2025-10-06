@@ -189,6 +189,8 @@ class CartItems extends HTMLElement {
                   parsedState.sections[section.section],
                   section.selector
                 );
+              } else {
+                console.warn(`${section?.id} has no element to replace`)
               }
           });
           const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
