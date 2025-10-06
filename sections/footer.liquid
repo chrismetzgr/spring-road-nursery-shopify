@@ -542,44 +542,44 @@
 </style>
 
 <script>
-function updateFooterNavDividers() {
-  const nav = document.querySelector('.srn-footer__nav');
-  if (!nav) return;
-  
-  const links = Array.from(nav.querySelectorAll('a'));
-  if (links.length === 0) return;
-  
-  // Remove all existing divider classes
-  links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
-  
-  // Get the top position of each link to determine rows
-  let currentRow = links[0].offsetTop;
-  let rowEndIndices = [];
-  
-  links.forEach((link, index) => {
-    if (link.offsetTop > currentRow) {
-      // New row detected, mark previous link as row end
-      rowEndIndices.push(index - 1);
-      currentRow = link.offsetTop;
-    }
-  });
-  
-  // The last link is always a row end
-  rowEndIndices.push(links.length - 1);
-  
-  // Add no-divider class to links at the end of each row
-  rowEndIndices.forEach(index => {
-    links[index].classList.add('srn-footer__nav-link--no-divider');
-  });
-}
+(function() {
+  function updateFooterNavDividers() {
+    const nav = document.querySelector('.srn-footer__nav');
+    if (!nav) return;
+    
+    const links = Array.from(nav.querySelectorAll('a'));
+    if (links.length === 0) return;
+    
+    // Remove all existing divider classes
+    links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
+    
+    // Get the top position of each link to determine rows
+    let currentRow = links[0].offsetTop;
+    let rowEndIndices = [];
+    
+    links.forEach((link, index) => {
+      if (link.offsetTop > currentRow) {
+        rowEndIndices.push(index - 1);
+        currentRow = link.offsetTop;
+      }
+    });
+    
+    rowEndIndices.push(links.length - 1);
+    
+    // Add no-divider class to links at the end of each row
+    rowEndIndices.forEach(index => {
+      links[index].classList.add('srn-footer__nav-link--no-divider');
+    });
+  }
 
-// Run on load
-document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
+  // Run on load
+  document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
 
-// Run on resize (debounced for performance)
-let resizeTimer;
-window.addEventListener('resize', function() {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(updateFooterNavDividers, 100);
-});
+  // Run on resize (debounced for performance)
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateFooterNavDividers, 100);
+  });
+})();
 </script>
