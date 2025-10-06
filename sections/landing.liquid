@@ -1,19 +1,13 @@
 <main class="srn-landing" role="main">
   <!-- Background Video with Fallback Image -->
   <div class="srn-landing__video-container">
-    <img 
-      src="{{ 'clouds-backup-background.jpg' | asset_url }}"
-      alt="Spring Road Nursery clouds"
-      class="srn-landing__fallback-image"
-      height="auto"
-      width="auto"
-    />
     <video 
       class="srn-landing__video"
       autoplay 
       muted 
       loop 
       playsinline 
+      poster="{{ 'clouds-backup-background.jpg' | asset_url }}"
       src="https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1"
       aria-label="Background video of Spring Road Nursery"
     ></video>
@@ -49,22 +43,13 @@
     
     if (!video) return;
     
-    // After a short delay, check if video is actually playing
-    setTimeout(function() {
-      if (video.paused) {
-        video.remove();
-      }
-    }, 1000);
-    
-    // Fade in video when ready
-    video.addEventListener('canplay', function() {
-      if (!video.paused) {
-        video.classList.add('srn-landing__video--loaded');
-      }
+    // Fade in video when it starts playing
+    video.addEventListener('playing', function() {
+      video.classList.add('srn-landing__video--loaded');
     });
     
-    // Check if already loaded
-    if (video.readyState >= 3 && !video.paused) {
+    // Check if already playing
+    if (!video.paused) {
       video.classList.add('srn-landing__video--loaded');
     }
   });
@@ -108,16 +93,7 @@ body:has(.srn-landing) {
   z-index: -101;
 }
 
-/* Fallback Image */
-.srn-landing__fallback-image {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  object-fit: cover;
-  z-index: -100;
-}
-
-/* Video (overlays fallback image) */
+/* Video with poster fallback */
 .srn-landing__video {
   width: 100%;
   height: 100%;
@@ -126,16 +102,10 @@ body:has(.srn-landing) {
   z-index: -99;
   opacity: 0;
   transition: opacity 1s ease-in;
-  pointer-events: none; /* Prevent interaction with video */
 }
 
 .srn-landing__video--loaded {
   opacity: 1;
-}
-
-/* Hide video if it's paused (low power mode) */
-.srn-landing__video:paused {
-  display: none;
 }
 
 /* Navigation */
