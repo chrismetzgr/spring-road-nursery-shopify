@@ -5,6 +5,7 @@
 
 .product {
   color: var(--font-color-dark);
+  margin-top: 50px;
   margin-bottom: 200px;
 }
 
