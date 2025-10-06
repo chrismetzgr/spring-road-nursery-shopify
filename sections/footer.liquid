@@ -291,10 +291,14 @@
 }
 
 @media (min-width: 768px) and (max-width: 990px) {
-  #footer-email-form-mobile .field__input:focus ~ .field__label,
-  #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
-  #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
-    font-size: 1px !important;
+  #footer #footer-email-form-mobile .newsletter-label.field__label:is(:focus, :not(:placeholder-shown), :-webkit-autofill) {
+    font-size: 6px !important;
+  }
+  
+  #footer #footer-email-form-mobile .field__input:focus ~ .newsletter-label.field__label,
+  #footer #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .newsletter-label.field__label,
+  #footer #footer-email-form-mobile .field__input:-webkit-autofill ~ .newsletter-label.field__label {
+    font-size: 6px !important;
   }
 }
 
