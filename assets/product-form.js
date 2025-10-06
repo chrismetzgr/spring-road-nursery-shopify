@@ -273,13 +273,14 @@ if (!customElements.get('product-form')) {
           .then(response => response.json())
           .then(cart => {
             const itemCount = cart.item_count;
-            const cartElements = document.querySelectorAll('.srn-cart'); // or '#srn-cart' if you kept the ID
-            console.log({itemCount})
+            const cartElements = document.querySelectorAll('.srn-header__cart');
+            
             cartElements.forEach(cartElement => {
               if (itemCount > 0) {
-                // Show cart and update count
                 cartElement.textContent = `CART ${itemCount}`;
-                cartElement.classList.remove('hidden');
+                cartElement.classList.remove('srn-header__cart--hidden');
+              } else {
+                cartElement.classList.add('srn-header__cart--hidden');
               }
             });
           })
