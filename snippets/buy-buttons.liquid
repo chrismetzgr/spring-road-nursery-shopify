@@ -39,7 +39,62 @@
       endif
     -%}
 
-    {%- if is_sold_out == false -%}
+    <product-form
+      class="product-form no-margin"
+      data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      data-section-id="{{ section.id }}"
+    >
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          {% if is_sold_out %}disabled{% endif %}
+          class="product-variant-id"
+        >
+
+        {%- if gift_card_recipient_feature_active -%}
+          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+        {%- endif -%}
+
+        <div class="product-form__buttons">
+          <button
+            id="ProductSubmitButton-{{ section_id }}"
+            type="submit"
+            name="add"
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            {% if is_sold_out %}disabled{% endif %}
+          >
+            <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
+              {%- if product.selected_or_first_available_variant == null -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif is_sold_out -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            </span>
+            <span class="added-to-cart-text" style="display: none;">Added!</span>
+            {%- render 'loading-spinner' -%}
+          </button>
+          {%- if show_dynamic_checkout and is_sold_out == false -%}
+            {{ form | payment_button }}
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+    </product-form>
+
+    {%- if is_sold_out -%}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading">Email When In Stock</p>
         
@@ -103,63 +158,19 @@
       </div>
     {%- endif -%}
   {%- else -%}
-    <product-form
-      class="product-form no-margin"
-      data-hide-errors="{{ gift_card_recipient_feature_active }}"
-      data-section-id="{{ section.id }}"
-    >
-      <div class="product-form__error-message-wrapper" role="alert" hidden>
-        <span class="product-form__error-message"></span>
-      </div>
-
-      {%- form 'product',
-        product,
-        id: product_form_id,
-        class: 'form',
-        novalidate: 'novalidate',
-        data-type: 'add-to-cart-form'
-      -%}
-        <input
-          type="hidden"
-          name="id"
-          value="{{ product.selected_or_first_available_variant.id }}"
-          {% if is_sold_out %}disabled{% endif %}
-          class="product-variant-id"
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          disabled
         >
-
-        {%- if gift_card_recipient_feature_active -%}
-          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
-        {%- endif -%}
-
-        <div class="product-form__buttons">
-          <button
-            id="ProductSubmitButton-{{ section_id }}"
-            type="submit"
-            name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if is_sold_out %}disabled{% endif %}
-          >
-            <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
-              {%- if product.selected_or_first_available_variant == null -%}
-                {{ 'products.product.unavailable' | t }}
-              {%- elsif is_sold_out -%}
-                {{ 'products.product.sold_out' | t }}
-              {%- else -%}
-                {{ 'products.product.add_to_cart' | t }}
-              {%- endif -%}
-            </span>
-            <span class="added-to-cart-text" style="display: none;">Added!</span>
-            {%- render 'loading-spinner' -%}
-          </button>
-          {%- if show_dynamic_checkout and is_sold_out == false -%}
-            {{ form | payment_button }}
-          {%- endif -%}
-        </div>
-      {%- endform -%}
-    </product-form>
-    
-
-  {% endif %}
+          {{ 'products.product.sold_out' | t }}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
 
   {%- if show_pickup_availability -%}
     {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
