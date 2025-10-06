@@ -464,6 +464,10 @@
   text-transform: uppercase; 
 }
 
+.card__heading-title{
+  font-weight: 500;
+}
+
 @media screen and (max-width: 600px) {
   .card__heading {
     font-size: 12px;
@@ -509,10 +513,6 @@
 
 .card--horizontal__quick-add:before {
   box-shadow: none;
-}
-
-.card__heading-title{
-  font-weight: 500px;
 }
 
 @media screen and (max-width: 900px) {
