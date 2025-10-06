@@ -89,7 +89,7 @@
                 height="{{ card_product.featured_media.height }}"
               >
               {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
-
+{% comment %} 
               {%- if card_product.media[1] != null and show_secondary_image -%}
                 <img
                   srcset="
@@ -109,7 +109,7 @@
                   width="{{ card_product.media[1].width }}"
                   height="{{ card_product.media[1].height }}"
                 >
-              {%- endif -%}
+              {%- endif -%} {% endcomment %}
             </div>
           </div>
         {%- endif -%}
