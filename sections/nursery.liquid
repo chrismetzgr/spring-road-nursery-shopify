@@ -447,11 +447,6 @@
     preloadedImages.push(preloadImg);
   });
   
-  // Remove the animation after it completes so transitions work
-  img.addEventListener('animationend', function() {
-    img.style.animation = 'none';
-  });
-  
   let currentIndex = 0;
   
   function changeSlide() {
@@ -461,15 +456,15 @@
       currentIndex = (currentIndex + 1) % slides.length;
       img.src = slides[currentIndex];
       
-      // Force a small delay to ensure the image has changed before fading in
       setTimeout(function() {
         img.style.opacity = '1';
       }, 50);
     }, 500);
   }
   
-  // Wait for initial animation to complete (500ms) plus display time before starting slideshow
+  // Wait for initial animation, then add class and start slideshow
   setTimeout(function() {
+    img.classList.add('srn-slideshow-active');
     setInterval(changeSlide, 4000);
   }, 4000);
 })();
