@@ -468,13 +468,16 @@
   font-weight: 500;
 }
 
-@media screen and (max-width: 600px) {
-  .card__heading {
-    font-size: 12px;
+.card__heading {
     margin-top: 5px;
     display: flex; 
     flex-direction: row;
     align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .card__heading {
+    font-size: 12px;
   }
 
 .card__heading span {
