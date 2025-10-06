@@ -66,20 +66,20 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  opacity: 0;
-  animation: srn-fadeIn 0.5s ease-in;
-}
-
-@keyframes srn-fadeIn {
-  to {
-    opacity: 1;
-  }
 }
 
 .srn-garden-design__hero-image {
   max-width: 1370px;
   width: 100%;
   height: auto;
+  opacity: 0;
+  animation: srn-fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes srn-fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 /* Content Container */
