@@ -234,13 +234,25 @@
       if media_position > 1
         assign lazy_load = true
       endif
+    -%}
+
+    {%- liquid
+      assign is_active = false
       
-    assign is_active = false
-    if product.featured_media.id == media.id
-    assign is_active = true
-    elsif product.featured_media == nil and forloop.first
-    assign is_active = true
-    endif
+      # Check if there's a variant specified (either from URL or selection)
+      if product.selected_or_first_available_variant.id != product.variants.first.id
+        # A specific variant is selected, use its featured media
+        if product.selected_or_first_available_variant.featured_media.id == media.id
+          assign is_active = true
+        endif
+      else
+        # No specific variant selected, use product's default featured media
+        if product.featured_media.id == media.id
+          assign is_active = true
+        elsif product.featured_media == nil and forloop.first
+          assign is_active = true
+        endif
+      endif
     -%}
     
     <div
