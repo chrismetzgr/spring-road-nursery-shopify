@@ -155,9 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const currentSort = urlParams.get('sort_by');
     
-    console.log('Current URL:', window.location.search);
-    console.log('sort_by parameter:', currentSort);
-    
     const sortMap = {
       'manual': 'featured',
       'best-selling': 'best-selling',
