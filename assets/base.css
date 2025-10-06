@@ -1293,7 +1293,8 @@ button.shopify-payment-button__button--unbranded {
 .button::selection,
 .shopify-challenge__button::selection,
 .customer button::selection {
-  background-color: rgba(var(--color-button-text), 0.3);
+  background-color: var(--color-background-tertiarty);
+  color: var(--font-color-light);
 }
 
 .button,
