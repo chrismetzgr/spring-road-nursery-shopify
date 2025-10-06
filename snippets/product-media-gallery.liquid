@@ -42,6 +42,7 @@
   .media-gallery__main {
     position: relative;
     width: 100%;
+    min-height: 500px; /* fallback height */
   }
 
   .media-gallery__item {
@@ -54,15 +55,14 @@
     transition: opacity 0.6s ease-in-out;
   }
 
-  /* The first child always holds space */
-  .media-gallery__item:first-child {
-    position: relative;
-  }
-
-  /* When active, just show it */
   .media-gallery__item.is-active {
     opacity: 1;
     pointer-events: auto;
+  }
+
+  /* First item starts relative to establish initial height */
+  .media-gallery__item:first-child.is-active {
+    position: relative;
   }
 
   .thumbnail-slider {
