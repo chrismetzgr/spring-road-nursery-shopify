@@ -464,7 +464,7 @@
   text-transform: uppercase; 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   .card__heading {
     font-size: 12px;
     margin-top: 0px;
