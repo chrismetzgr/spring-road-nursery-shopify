@@ -69,30 +69,14 @@
   color: var(--font-color-light-secondary);
 }
 
-  .mobile-nav-content { 
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+#mobile-nav.show {
+  display: block;
+  animation: slideInLeft 0.5s ease-out forwards;
+}
 
-  .mobile-nav-content .exit-container {
-    align-self: flex-end;
-    img {
-      margin: 20px 20px 0 0;
-    }
-    img:hover {
-      cursor: pointer;
-    }
-  }
-
-  #mobile-nav.show {
-    display: block;
-    animation: slideInLeft 0.5s ease-out forwards;
-  }
-
-  #mobile-nav.hide {
-    animation: slideOutLeft 0.5s ease-out;
-  }
+#mobile-nav.hide {
+  animation: slideOutLeft 0.5s ease-out;
+}
 
 @keyframes slideInLeft {
   from {
