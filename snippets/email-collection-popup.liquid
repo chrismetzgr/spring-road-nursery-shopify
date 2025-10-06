@@ -14,7 +14,7 @@
       height="auto"
     />
     
-    <p class="srn-email-popup__text--desktop">
+    <p class="srn-email-popup__text desktop-text">
       From rare plants to handcrafted goods,
       we cultivate the strange and the beautiful
       on our mountainside in Vermont.
@@ -22,7 +22,7 @@
       what's unfurling in the garden.
     </p>
 
-     <p class="srn-email-popup__text--mobile">
+     <p class="srn-email-popup__text- mobile-text">
       From rare plants to handcrafted goods,
       we cultivate the strange and the beautiful
       on our mountainside in Vermont.
@@ -212,6 +212,10 @@
   text-transform: uppercase;
   font-stretch: expanded;
   text-align: center;
+}
+
+.desktop-text {
+  display: none; 
 }
 
 @media (max-width: 480px) {
