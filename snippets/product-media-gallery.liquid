@@ -46,27 +46,27 @@
 }
 
 .media-gallery__item {
-  transition: opacity 0.3s ease-in-out;
+  width: 100%;
+  transition: opacity 0.3s ease-in-out, z-index 0s 0.3s;
 }
 
 .media-gallery__item:not(:first-child) {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
 }
 
-.media-gallery__item:first-child:not(.is-active) {
-  visibility: hidden;
+.media-gallery__item:not(.is-active) {
+  opacity: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
 .media-gallery__item.is-active {
-  visibility: visible;
   opacity: 1;
+  z-index: 2;
   pointer-events: auto;
+  transition: opacity 0.3s ease-in-out, z-index 0s;
 }
 
   .thumbnail-slider {
