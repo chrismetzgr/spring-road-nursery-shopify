@@ -424,7 +424,6 @@
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const heroContainer = document.querySelector('.srn-nursery__hero');
   const heroImage = document.querySelector('.srn-nursery__hero-image');
   const totalSlides = 9;
   let currentSlide = 1;
@@ -437,35 +436,21 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadedImages.push(img);
   }
   
-  // Create a second image element for crossfading
-  const heroImage2 = heroImage.cloneNode(true);
-  heroImage2.style.position = 'absolute';
-  heroImage2.style.top = '0';
-  heroImage2.style.left = '0';
-  heroImage2.style.opacity = '0';
-  heroContainer.style.position = 'relative';
-  heroContainer.appendChild(heroImage2);
-  
-  // Start with slide-1.png
-  heroImage.src = preloadedImages[0].src;
-  
-  let isFirstImage = true;
+  // Start with slide-1.png (after initial animation completes)
+  setTimeout(() => {
+    heroImage.src = preloadedImages[0].src;
+  }, 500);
   
   function changeSlide() {
-    currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+    // Fade out
+    heroImage.style.opacity = '0';
     
-    const fadingIn = isFirstImage ? heroImage2 : heroImage;
-    const fadingOut = isFirstImage ? heroImage : heroImage2;
-    
-    // Set the new image
-    fadingIn.src = preloadedImages[currentSlide - 1].src;
-    
-    // Crossfade
-    fadingOut.style.opacity = '0';
-    fadingIn.style.opacity = '1';
-    
-    // Toggle which image is on top
-    isFirstImage = !isFirstImage;
+    // After fade out completes, change image and fade back in
+    setTimeout(() => {
+      currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+      heroImage.src = preloadedImages[currentSlide - 1].src;
+      heroImage.style.opacity = '1';
+    }, 500);
   }
   
   // Change slides every 5 seconds
