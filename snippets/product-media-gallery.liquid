@@ -54,14 +54,15 @@
     transition: opacity 0.6s ease-in-out;
   }
 
-  .media-gallery__item.is-active {
-    position: relative;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
+  /* The first child always holds space */
   .media-gallery__item:first-child {
     position: relative;
+  }
+
+  /* When active, just show it */
+  .media-gallery__item.is-active {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .thumbnail-slider {
