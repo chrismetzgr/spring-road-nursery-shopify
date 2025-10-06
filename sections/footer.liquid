@@ -369,7 +369,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    row-gap: 2px;
+    column-gap: 0;
   }
 
   .srn-footer__nav a {
@@ -378,14 +379,9 @@
   }
 
   /* Add divider after each link */
-  .srn-footer__nav a::after {
-    content: " |";
-    margin-left: 8px;
-  }
-
-  /* Remove divider from last element in each row */
-  .srn-footer__nav a:last-child::after {
-    content: none;
+  .srn-footer__nav a:not(:last-child)::after {
+    content: " | ";
+    margin: 0 8px;
   }
 
   /* Title and Text */
