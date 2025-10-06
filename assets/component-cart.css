@@ -242,9 +242,8 @@ cart-items {
 @media screen and (min-width: 435px){
   .title-wrapper-with-link{
       display: flex; 
-      flex-direction: row-reverse;
-      align-items: center; 
-      justify-content: space-between; 
+      flex-direction: column;
+      align-items: flex-start; 
       margin-bottom: 50px;
   }
 }
