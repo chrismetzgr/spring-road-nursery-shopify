@@ -466,9 +466,10 @@
     }, 500);
   }
   
-  // Wait for initial animation, then add class and start slideshow
+  // Wait for initial animation, then add class, set opacity, and start slideshow
   setTimeout(function() {
     img.classList.add('srn-slideshow-active');
+    img.style.opacity = '1';
     setInterval(changeSlide, 4000);
   }, 4000);
 })();
