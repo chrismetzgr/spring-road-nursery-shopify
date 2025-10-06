@@ -251,20 +251,25 @@
 }
 
 .srn-nursery__heading-image {
-  max-height: 70px;
   height: auto;
   width: auto;
   display: block;
 }
 
+/* Mobile: Single-line headers (like "Contact" and "Our Hours") */
+.srn-nursery__heading-image:not(.srn-nursery__heading-image--mobile):not(.srn-nursery__heading-image--desktop) {
+  max-height: 75px;
+}
+
+/* Mobile: Images without desktop/mobile distinction */
 .srn-nursery__heading-image--desktop {
   display: none;
 }
 
+/* Mobile: Two-line stacked headers (like "What We Do" and "Our Plants") */
 .srn-nursery__heading-image--mobile {
   display: inline-block;
   max-height: 150px;
-  width: 316px;
 }
 
 /* Text Content */
@@ -371,8 +376,9 @@
     margin-top: 0;
   }
 
+  /* Desktop: All single-line headers get consistent height */
   .srn-nursery__heading-image {
-    max-height: none;
+    max-height: 78px;
   }
 
   .srn-nursery__heading-image--desktop {
