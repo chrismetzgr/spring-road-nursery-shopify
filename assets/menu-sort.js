@@ -175,6 +175,9 @@ function handleSort(sortValue) {
       }
       
       history.pushState({}, '', url.toString());
+      
+      // Update the active sort option after URL changes
+      updateActiveSortOption();
     })
     .catch(error => console.error('Error sorting products:', error));
 }
