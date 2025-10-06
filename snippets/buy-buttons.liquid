@@ -94,7 +94,7 @@
       {%- endform -%}
     </product-form>
 
-      {%- if is_sold_out -%}
+    {% comment %} {%- if is_sold_out -%} {% endcomment %}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading">Email When In Stock</p>
         
@@ -157,7 +157,7 @@
         {% endform %}
       </div>
     {%- endif -%}
-    {%- else -%}
+    {% comment %} {%- else -%}
       <div class="product-form">
         <div class="product-form__buttons form">
           <button
@@ -170,7 +170,7 @@
           </button>
         </div>
       </div>
-    {%- endif -%}
+    {%- endif -%} {% endcomment %}
 
   {%- if show_pickup_availability -%}
     {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
