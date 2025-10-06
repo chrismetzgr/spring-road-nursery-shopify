@@ -118,16 +118,22 @@ function hideSortDropdown() {
   }
 }
 
+/**
+ * Handle sort icon click - mobile opens drawer, desktop does nothing (hover handles it)
+ */
+function handleSortIconClick() {
+  if (isMobile()) {
+    openDrawer(elements.mobileSort);
+    elements.sortIcon.setAttribute('aria-expanded', 'true');
+  }
+}
+
 // Desktop sort dropdown hover behavior
 if (elements.sortIcon && elements.desktopSortDropdown) {
-  // Sort icon hover
-  elements.sortIcon.addEventListener('click', () => {
-    if (isMobile()) {
-      openDrawer(elements.mobileSort);
-      elements.sortIcon.setAttribute('aria-expanded', 'true');
-    }
-  });
+  // Sort icon click - using named function for easier cleanup
+  elements.sortIcon.addEventListener('click', handleSortIconClick);
   
+  // Hover events for desktop
   elements.sortIcon.addEventListener('mouseover', showSortDropdown);
   elements.sortIcon.addEventListener('mouseout', hideSortDropdown);
   
@@ -182,41 +188,54 @@ function handleSort(sortValue) {
     .catch(error => console.error('Error sorting products:', error));
 }
 
-// Desktop sort dropdown click
-if (elements.desktopSortDropdown) {
-  elements.desktopSortDropdown.addEventListener('click', (e) => {
+/**
+ * Handle desktop sort dropdown click
+ */
+function handleDesktopSortClick(e) {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    elements.desktopSortDropdown.classList.remove('active');
+    elements.sortIcon?.setAttribute('aria-expanded', 'false');
+  }
+}
+
+/**
+ * Handle desktop sort dropdown keyboard navigation
+ */
+function handleDesktopSortKeydown(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
     const sortValue = e.target.dataset.sort;
     if (sortValue) {
       handleSort(sortValue);
       elements.desktopSortDropdown.classList.remove('active');
       elements.sortIcon?.setAttribute('aria-expanded', 'false');
     }
-  });
-  
-  // Keyboard navigation for sort options
-  elements.desktopSortDropdown.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      const sortValue = e.target.dataset.sort;
-      if (sortValue) {
-        handleSort(sortValue);
-        elements.desktopSortDropdown.classList.remove('active');
-        elements.sortIcon?.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
+  }
+}
+
+/**
+ * Handle mobile sort menu click
+ */
+function handleMobileSortClick(e) {
+  const sortValue = e.target.dataset.sort;
+  if (sortValue) {
+    handleSort(sortValue);
+    closeDrawer(elements.mobileSort);
+    elements.sortIcon?.setAttribute('aria-expanded', 'false');
+  }
+}
+
+// Desktop sort dropdown click
+if (elements.desktopSortDropdown) {
+  elements.desktopSortDropdown.addEventListener('click', handleDesktopSortClick);
+  elements.desktopSortDropdown.addEventListener('keydown', handleDesktopSortKeydown);
 }
 
 // Mobile sort menu click
 if (elements.mobileSortMenu) {
-  elements.mobileSortMenu.addEventListener('click', (e) => {
-    const sortValue = e.target.dataset.sort;
-    if (sortValue) {
-      handleSort(sortValue);
-      closeDrawer(elements.mobileSort);
-      elements.sortIcon?.setAttribute('aria-expanded', 'false');
-    }
-  });
+  elements.mobileSortMenu.addEventListener('click', handleMobileSortClick);
 }
 
 // ============================================
@@ -226,13 +245,21 @@ if (elements.mobileSortMenu) {
 /**
  * Close mobile drawers when resizing to desktop
  */
-window.addEventListener('resize', () => {
+function handleResize() {
   if (!isMobile()) {
     closeAllDrawers();
     elements.hamburgerIcon?.setAttribute('aria-expanded', 'false');
     elements.sortIcon?.setAttribute('aria-expanded', 'false');
+    
+    // Clear any active dropdown state and timeouts
+    clearTimeout(sortTimeout);
+    if (elements.desktopSortDropdown) {
+      elements.desktopSortDropdown.classList.remove('active');
+    }
   }
-});
+}
+
+window.addEventListener('resize', handleResize);
 
 // ============================================
 // UPDATE ACTIVE SORT OPTION
@@ -241,7 +268,6 @@ window.addEventListener('resize', () => {
 /**
  * Makes sure active sort on mobile is selected
  */
-
 function updateActiveSortOption() {
   const urlParams = new URLSearchParams(window.location.search);
   const currentSort = urlParams.get('sort_by');
