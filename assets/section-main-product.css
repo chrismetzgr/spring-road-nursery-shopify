@@ -201,6 +201,7 @@
 .product-form__submit, .product-form__quantity, .quantity__label {
     font-family: "Akzidenz-Grotesk Pro", sans-serif;
     font-stretch: expanded;
+    letter-spacing: 1px;
 }
 
 .product-form__submit[aria-disabled='true'] + .shopify-payment-button .shopify-payment-button__button[disabled],
