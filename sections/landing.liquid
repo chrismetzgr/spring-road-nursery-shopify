@@ -49,21 +49,22 @@
     
     if (!video) return;
     
+    // After a short delay, check if video is actually playing
+    setTimeout(function() {
+      if (video.paused) {
+        video.remove();
+      }
+    }, 1000);
+    
     // Fade in video when ready
     video.addEventListener('canplay', function() {
-      video.classList.add('srn-landing__video--loaded');
-    });
-    
-    // Remove video if it fails to play (low power mode)
-    video.addEventListener('suspend', function() {
-      console.log('suspending');
-      if (video.networkState === 2) {
-        video.remove();
+      if (!video.paused) {
+        video.classList.add('srn-landing__video--loaded');
       }
     });
     
     // Check if already loaded
-    if (video.readyState >= 3) {
+    if (video.readyState >= 3 && !video.paused) {
       video.classList.add('srn-landing__video--loaded');
     }
   });
@@ -125,10 +126,16 @@ body:has(.srn-landing) {
   z-index: -99;
   opacity: 0;
   transition: opacity 1s ease-in;
+  pointer-events: none; /* Prevent interaction with video */
 }
 
 .srn-landing__video--loaded {
   opacity: 1;
+}
+
+/* Hide video if it's paused (low power mode) */
+.srn-landing__video:paused {
+  display: none;
 }
 
 /* Navigation */
