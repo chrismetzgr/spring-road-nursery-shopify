@@ -143,48 +143,6 @@
 
   </div>
 </main>
-
-<script>
-(function() {
-  const img = document.getElementById('hero-slideshow');
-  if (!img) return;
-  
-  const slides = [
-    '{{ "slide-1.png" | asset_url }}',
-    '{{ "slide-2.png" | asset_url }}',
-    '{{ "slide-3.png" | asset_url }}',
-    '{{ "slide-4.png" | asset_url }}',
-    '{{ "slide-5.png" | asset_url }}',
-    '{{ "slide-6.png" | asset_url }}',
-    '{{ "slide-7.png" | asset_url }}',
-    '{{ "slide-8.png" | asset_url }}',
-    '{{ "slide-9.png" | asset_url }}'
-  ];
-  
-  // Preload all images
-  const preloadedImages = [];
-  slides.forEach(function(src) {
-    const preloadImg = new Image();
-    preloadImg.src = src;
-    preloadedImages.push(preloadImg);
-  });
-  
-  let currentIndex = 0;
-  
-  function changeSlide() {
-    img.style.opacity = '0';
-    
-    setTimeout(function() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      img.src = slides[currentIndex];
-      img.style.opacity = '1';
-    }, 500);
-  }
-  
-  setInterval(changeSlide, 4000);
-})();
-</script>
-
 <style>
 /* ============================================
    NURSERY PAGE STYLES
@@ -464,3 +422,56 @@
   }
 }
 </style>
+
+<script>
+(function() {
+  const img = document.getElementById('hero-slideshow');
+  if (!img) return;
+  
+  const slides = [
+    '{{ "slide-1.png" | asset_url }}',
+    '{{ "slide-2.png" | asset_url }}',
+    '{{ "slide-3.png" | asset_url }}',
+    '{{ "slide-4.png" | asset_url }}',
+    '{{ "slide-5.png" | asset_url }}',
+    '{{ "slide-6.png" | asset_url }}',
+    '{{ "slide-7.png" | asset_url }}',
+    '{{ "slide-8.png" | asset_url }}',
+    '{{ "slide-9.png" | asset_url }}'
+  ];
+  
+  // Preload all images
+  const preloadedImages = [];
+  slides.forEach(function(src) {
+    const preloadImg = new Image();
+    preloadImg.src = src;
+    preloadedImages.push(preloadImg);
+  });
+  
+  // Remove the animation after it completes so transitions work
+  img.addEventListener('animationend', function() {
+    img.style.animation = 'none';
+  });
+  
+  let currentIndex = 0;
+  
+  function changeSlide() {
+    img.style.opacity = '0';
+    
+    setTimeout(function() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      img.src = slides[currentIndex];
+      
+      // Force a small delay to ensure the image has changed before fading in
+      setTimeout(function() {
+        img.style.opacity = '1';
+      }, 50);
+    }, 500);
+  }
+  
+  // Wait for initial animation to complete before starting slideshow
+  setTimeout(function() {
+    setInterval(changeSlide, 4000);
+  }, 500);
+})();
+</script>
