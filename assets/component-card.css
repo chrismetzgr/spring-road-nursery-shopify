@@ -486,6 +486,7 @@
 .card__heading-price {
   font-stretch: expanded;
   font-size: 6.5px;
+  margin-right: 2px;
 }
 
 .card__heading:last-child {
