@@ -93,32 +93,45 @@ if (!customElements.get('media-gallery')) {
         }
       }
 
-      setActiveMedia(mediaId) {
-        const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
-        const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
+    setActiveMedia(mediaId) {
+      const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
+      const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
 
-        if (!targetMedia || targetMedia === currentMedia) {
-          return;
-        }
-
-        if (currentMedia) {
-          currentMedia.classList.remove('is-active');
-        }
-
-        targetMedia.classList.add('is-active');
-        this.currentMediaId = mediaId;
-
-        this.setActiveThumbnail(mediaId);
-        this.updateNavigationArrows();
-        this.playActiveMedia(targetMedia);
-
-        const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
-        if (thumbnail) {
-          this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
-        }
-
-        this.preventStickyHeader();
+      if (!targetMedia || targetMedia === currentMedia) {
+        return;
       }
+
+      // Make target visible (but keep current visible too for crossfade)
+      targetMedia.style.opacity = '1';
+      targetMedia.style.pointerEvents = 'auto';
+
+      // Fade out current after a tiny delay to ensure target is rendering
+      if (currentMedia) {
+        setTimeout(() => {
+          currentMedia.classList.remove('is-active');
+          currentMedia.style.opacity = '0';
+          currentMedia.style.pointerEvents = 'none';
+        }, 50);
+      }
+
+      // After transition completes, set the new active state
+      setTimeout(() => {
+        targetMedia.classList.add('is-active');
+      }, 650);
+
+      this.currentMediaId = mediaId;
+
+      this.setActiveThumbnail(mediaId);
+      this.updateNavigationArrows();
+      this.playActiveMedia(targetMedia);
+
+      const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
+      if (thumbnail) {
+        this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
+      }
+
+      this.preventStickyHeader();
+    }
 
       setActiveThumbnail(mediaId) {
         if (!this.elements.thumbnailList) return;
