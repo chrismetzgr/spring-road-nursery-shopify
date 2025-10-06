@@ -137,7 +137,10 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 .page-margin,
 .shopify-challenge__container {
   margin: 7rem auto;
-  font-family: var(--font-family-secondary);
+}
+
+.shopify-challenge__message {
+    font-family: var(--font-family-secondary) !important;
 }
 
 .rte-width {
