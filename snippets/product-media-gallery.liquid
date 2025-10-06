@@ -235,12 +235,12 @@
         assign lazy_load = true
       endif
       
-      assign is_active = false
-      if product.selected_or_first_available_variant.featured_media.id == media.id
-        assign is_active = true
-      elsif product.selected_or_first_available_variant.featured_media == nil and forloop.first
-        assign is_active = true
-      endif
+    assign is_active = false
+    if product.featured_media.id == media.id
+    assign is_active = true
+    elsif product.featured_media == nil and forloop.first
+    assign is_active = true
+    endif
     -%}
     
     <div
