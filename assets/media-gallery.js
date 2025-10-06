@@ -226,3 +226,21 @@ setActiveMedia(mediaId) {
     }
   );
 }
+
+updateSpacer() {
+  const activeItem = this.elements.viewer.querySelector('.media-gallery__item.is-active');
+  if (activeItem && this.elements.spacer) {
+    // Clone the active image into the spacer to match its height
+    const activeImage = activeItem.querySelector('img');
+    if (activeImage) {
+      const spacerImg = this.elements.spacer.querySelector('img');
+      if (spacerImg) {
+        spacerImg.src = activeImage.src;
+      } else {
+        const clonedImg = activeImage.cloneNode(true);
+        this.elements.spacer.innerHTML = '';
+        this.elements.spacer.appendChild(clonedImg);
+      }
+    }
+  }
+}
