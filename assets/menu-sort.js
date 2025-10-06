@@ -143,7 +143,8 @@ if (elements.sortIcon && elements.desktopSortDropdown) {
 const SORT_MAPPING = {
   'featured': 'manual',
   'best-selling': 'best-selling',
-  'price': 'price-ascending',
+  'price-low': 'price-ascending',
+  'price-high': 'price-descending',
   'newest': 'created-descending'
 };
 
