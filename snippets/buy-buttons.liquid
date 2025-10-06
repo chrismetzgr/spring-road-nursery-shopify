@@ -39,7 +39,7 @@
       endif
     -%}
 
-    {%- if !is_sold_out-%}
+    {%- if is_sold_out == false -%}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading">Email When In Stock</p>
         
