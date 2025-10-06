@@ -464,12 +464,60 @@
   text-transform: uppercase; 
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 600px) {
   .card__heading {
     font-size: 12px;
     margin-top: 5px;
     display: flex; 
     flex-direction: row;
+    align-items: center;
+  }
+
+.card__heading span {
+  color: var(--font-color-dark)
+}
+
+.card__heading-title {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 8px;
+
+
+}
+.card__heading-price {
+  font-stretch: expanded;
+  font-size: 6.5px;
+  margin-right: 2px;
+}
+
+.card__heading:last-child {
+  margin-bottom: 0;
+}
+
+.card--horizontal .card__heading,
+.card--horizontal .price__container .price-item,
+.card--horizontal__quick-add {
+  font-size: calc(var(--font-heading-scale) * 1.2rem);
+}
+
+.card--horizontal
+  .card-information
+  > *:not(.visually-hidden:first-child)
+  + *:not(.rating):not(.card__information-volume-pricing-note) {
+  margin-top: 0;
+}
+
+.card--horizontal__quick-add:before {
+  box-shadow: none;
+}
+
+@media screen and (max-width: 900px) {
+  .card__heading {
+    font-size: 14px;
+    margin-top: 5px;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
   }
 
