@@ -1,113 +1,111 @@
-<div id="footer" class="{% if page.handle == 'nursery' %}nursery-footer{% elsif page.handle == 'garden-design' %}garden-design-footer{% endif %}">
-  <div id="footer-content">
-    <div class="footer-side">
-      <div class="footer-menu">
-        <a href="{{ collections['web-shop'].url }}">THE SHOP</a>
-        <a href="/pages/nursery">THE NURSERY</a>
-        <a href="/pages/garden-design">GARDEN DESIGN</a>
-        <a href="/pages/nursery#contact">CONTACT US</a>
-        <a href="https://www.instagram.com/springroadnursery/">INSTAGRAM</a>
-      </div>
+<footer id="footer" class="srn-footer {% if page.handle == 'nursery' %}srn-footer--nursery{% elsif page.handle == 'garden-design' %}srn-footer--garden-design{% endif %}" role="contentinfo">
+  <div class="srn-footer__content">
+    
+    <!-- Left: Navigation Menu -->
+    <div class="srn-footer__side">
+      <nav class="srn-footer__nav" aria-label="Footer navigation">
+        <a href="{{ collections['web-shop'].url }}" class="srn-footer__nav-link">THE SHOP</a>
+        <a href="/pages/nursery" class="srn-footer__nav-link">THE NURSERY</a>
+        <a href="/pages/garden-design" class="srn-footer__nav-link">GARDEN DESIGN</a>
+        <a href="/pages/nursery#contact" class="srn-footer__nav-link">CONTACT US</a>
+        <a href="https://www.instagram.com/springroadnursery/" class="srn-footer__nav-link" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+      </nav>
     </div>
-    <div id="inchworm-logo">
+
+    <!-- Center: Logo -->
+    <div class="srn-footer__logo">
       {% if page.handle == 'nursery' %}
-        <img src="{{ 'inchworm-black.png' | asset_url }}" height="150px" width="auto"/>
+        <img src="{{ 'inchworm-black.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
       {% elsif page.handle == 'garden-design' %}
-        <img src="{{ 'inchworm-light-green.png' | asset_url }}" height="150px" width="auto"/>
+        <img src="{{ 'inchworm-light-green.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
       {% else %}
-        <img src="{{ 'inchworm.png' | asset_url }}" height="150px" width="auto"/>
+        <img src="{{ 'inchworm.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
       {% endif %}
     </div>
-    <div class="footer-side">
-      <div class="side-title wavy-underline">
-        Keep In touch
-      </div>
-      <div class="side-text">
+
+    <!-- Right: Newsletter Signup (Desktop) -->
+    <div class="srn-footer__side">
+      <h2 class="srn-footer__title wavy-underline">Keep In Touch</h2>
+      <p class="srn-footer__text">
         From rare plants to handcrafted goods,
         we cultivate the strange and the beautiful
-        on our mountainside in Vermont.  
-        Be the first to hear about 
+        on our mountainside in Vermont.
+        Be the first to hear about
         what's unfurling in the garden.
-      </div>
-      <div id="footer-email-form">
+      </p>
+      
+      <div class="srn-footer__form srn-footer__form--desktop">
         {% form 'customer', class: 'newsletter-form' %}
-        {%- if form.posted_successfully? -%}
-          <h3
-            class="newsletter-form__message newsletter-form__message--success"
-            id="Newsletter-success--{{ section.id }}"
-            autofocus
-          >
-            {{- 'newsletter.success' | t }}
-          </h3>
-        {%  else %}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="newsletter-form__field-wrapper">
-            <div class="field">
-              <input
-                id="NewsletterForm--{{ section.id }}"
-                type="email"
-                name="contact[email]"
-                class="field__input"
-                value="{{ form.email }}"
-                aria-required="true"
-                autocorrect="off"
-                autocapitalize="off"
-                autocomplete="email"
-                {% if form.errors %}
-                  autofocus
-                  aria-invalid="true"
-                  aria-describedby="Newsletter-error--{{ section.id }}"
-                {% elsif form.posted_successfully? %}
-                  aria-describedby="Newsletter-success--{{ section.id }}"
-                {% endif %}
-                placeholder=""
-                required
-              >
-              <label class="newsletter-label field__label" for="NewsletterForm--{{ section.id }}">
-                Your Email Here
-              </label>
-              <button
-                type="submit"
-                class="newsletter-form__button field__button"
-                name="commit"
-                id="Subscribe"
-                aria-label="{{ 'newsletter.button_label' | t }}"
-              >
-                <span class="svg-wrapper">
-                  {{- 'icon-arrow.svg' | inline_asset_content -}}
-                </span>
-              </button>
+          {%- if form.posted_successfully? -%}
+            <h3 class="newsletter-form__message newsletter-form__message--success" tabindex="-1" autofocus>
+              {{- 'newsletter.success' | t }}
+            </h3>
+          {%- else -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="newsletter-form__field-wrapper">
+              <div class="field">
+                <input
+                  id="NewsletterForm--footer-desktop"
+                  type="email"
+                  name="contact[email]"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="Newsletter-error--footer"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="Newsletter-success--footer"
+                  {% endif %}
+                  placeholder=""
+                  required
+                >
+                <label class="newsletter-label field__label" for="NewsletterForm--footer-desktop">
+                  Your Email Here
+                </label>
+                <button
+                  type="submit"
+                  class="newsletter-form__button field__button"
+                  name="commit"
+                  aria-label="{{ 'newsletter.button_label' | t }}"
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <small class="newsletter-form__message form__message" id="Newsletter-error--footer">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
             </div>
-            {%- if form.errors -%}
-              <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </small>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      {% endform %}
+          {%- endif -%}
+        {% endform %}
       </div>
     </div>
-    <div id="footer-email-form-mobile">
-        {% form 'customer', class: 'newsletter-form' %}
+
+    <!-- Newsletter Signup (Mobile) -->
+    <div class="srn-footer__form srn-footer__form--mobile">
+      {% form 'customer', class: 'newsletter-form' %}
         {%- if form.posted_successfully? -%}
-          <div
-            class="newsletter-form__message newsletter-form__message--success"
-            id="Newsletter-success--{{ section.id }}"
-            autofocus
-          >
+          <div class="newsletter-form__message newsletter-form__message--success" tabindex="-1" autofocus>
             {{- 'newsletter.success' | t }}
           </div>
-        {%  else %}
+        {%- else -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form__field-wrapper">
             <div class="field">
               <input
-                id="NewsletterForm--{{ section.id }}"
+                id="NewsletterForm--footer-mobile"
                 type="email"
                 name="contact[email]"
                 class="field__input"
@@ -119,21 +117,20 @@
                 {% if form.errors %}
                   autofocus
                   aria-invalid="true"
-                  aria-describedby="Newsletter-error--{{ section.id }}"
+                  aria-describedby="Newsletter-error--footer-mobile"
                 {% elsif form.posted_successfully? %}
-                  aria-describedby="Newsletter-success--{{ section.id }}"
+                  aria-describedby="Newsletter-success--footer-mobile"
                 {% endif %}
                 placeholder=""
                 required
               >
-              <label class="newsletter-label field__label" for="NewsletterForm--{{ section.id }}">
+              <label class="newsletter-label field__label" for="NewsletterForm--footer-mobile">
                 Your Email Here
               </label>
               <button
                 type="submit"
                 class="newsletter-form__button field__button"
                 name="commit"
-                id="Subscribe"
                 aria-label="{{ 'newsletter.button_label' | t }}"
               >
                 <span class="svg-wrapper">
@@ -142,7 +139,7 @@
               </button>
             </div>
             {%- if form.errors -%}
-              <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
+              <small class="newsletter-form__message form__message" id="Newsletter-error--footer-mobile">
                 <span class="svg-wrapper">
                   {{- 'icon-error.svg' | inline_asset_content -}}
                 </span>
@@ -153,278 +150,317 @@
           </div>
         {%- endif -%}
       {% endform %}
-      </div>
+    </div>
+
   </div>
-  <div id="footer-details">
-    <span>Spring Road Nursery </span>      
-    <span>78 Spring Rd </span>      
-    <span>Tunbridge, VT 05077  </span>      
+
+  <!-- Footer Details -->
+  <div class="srn-footer__details">
+    <span>Spring Road Nursery</span>
+    <span>78 Spring Rd</span>
+    <span>Tunbridge, VT 05077</span>
     <span>(802) 276-6481</span>
   </div>
-</div>
+</footer>
+
 <style>
-    #footer {
-      margin: 50px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: var(--font-color-dark);
-      font-family: var(--font-family-secondary);
-    }
-    #footer a, #footer a:visited {
-      color: var(--font-color-dark);
-    }
-    .nursery-footer .menu a,
-    .nursery-footer .menu a:visited{
-      color: var(--font-color-dark-secondary) !important;
-    }
-    .garden-design-footer .menu a,
-    .garden-design-footer .menu a:visited{
-    color: var(--font-color-light-quaternary) !important;
-  }
-    h3 {
-      text-align: center;
-    }
-    #footer-content {
-      min-width: 700px;
-      max-width: 1100px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-side {
-      width: 33%;
-      text-align: center;
-      padding: 0 10px;
-    }
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
 
-    .side-title {
-      font-weight: 500;
-      font-size: 24px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-decoration-thickness: 1px; /* Set the thickness of the underline */
-      padding: 0 50px;
-    }
-
-    .side-text {
-      padding: 0 50px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      font-size: 15px;
-      line-height: 1;
-    }
-    #footer .newsletter-label {
-      font-size: 14px;
-      font-stretch: expanded;
-      text-transform: uppercase;
-      font-stretch: expanded;
-    }
-    .footer-menu {
-      font-size: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 2px;
-      gap: 5px;
-      text-transform: uppercase;
-      font-stretch: expanded;
-    }
-    #footer-details {
-      margin-top: 65px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 25px;
-      text-transform: uppercase;
-      font-size: 12px;
-      font-stretch: expanded;
-    }
-
-    #footer-email-form {
-      margin-top: 20px;
-      padding: 10px;
-    }
-
-    #footer-email-form-mobile {
-      display: none;
-    }
-
-    .nursery-footer,
-    .nursery-footer a,
-    .nursery-footer a:visited,
-    .nursery-footer span,
-    .nursery-footer .side-title,
-    .nursery-footer .side-text,
-    .nursery-footer .field__label,
-    .nursery-footer .field__input {
-      color: var(--font-color-dark-secondary) !important;
-    }
-
-    .garden-design-footer,
-    .garden-design-footer a,
-    .garden-design-footer a:visited,
-    .garden-design-footer span,
-    .garden-design-footer .side-title,
-    .garden-design-footer .side-text,
-    .garden-design-footer .field__label,
-    .garden-design-footer .field__input {
-      color: var(--font-color-light-quaternary) !important;
-    }
-
-    /* Keep label at normal size initially on mobile */
-.field__label {
-  font-size: 1.6rem;
+/* Base Styles */
+.srn-footer {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--font-color-dark);
+  font-family: var(--font-family-secondary);
 }
 
-@media(max-width: 990px) {
-  #inchworm-logo {
+.srn-footer a,
+.srn-footer a:visited {
+  color: var(--font-color-dark);
+  text-decoration: none;
+}
+
+.srn-footer h2,
+.srn-footer h3 {
+  text-align: center;
+}
+
+/* Success Message */
+.srn-footer .newsletter-form__message--success {
+  font-family: var(--font-family-secondary);
+}
+
+/* Content Container */
+.srn-footer__content {
+  min-width: 700px;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Side Sections */
+.srn-footer__side {
+  width: 33%;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.srn-footer__title {
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration-thickness: 1px;
+  padding: 0 50px;
+  margin: 0;
+}
+
+.srn-footer__text {
+  padding: 0 50px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Navigation */
+.srn-footer__nav {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 2px;
+  gap: 5px;
+  text-transform: uppercase;
+  font-stretch: expanded;
+}
+
+/* Footer Details */
+.srn-footer__details {
+  margin-top: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-stretch: expanded;
+}
+
+/* Newsletter Form */
+.srn-footer__form--desktop {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.srn-footer__form--mobile {
+  display: none;
+}
+
+.srn-footer .newsletter-label {
+  font-size: 14px;
+  font-stretch: expanded;
+  text-transform: uppercase;
+}
+
+/* Desktop - Label shrinks on focus */
+.srn-footer__form--desktop .field__input:focus ~ .newsletter-label,
+.srn-footer__form--desktop .field__input:not(:placeholder-shown) ~ .newsletter-label,
+.srn-footer__form--desktop .field__input:-webkit-autofill ~ .newsletter-label {
+  font-size: 1rem;
+}
+
+/* ============================================
+   THEME VARIANTS
+   ============================================ */
+
+/* Nursery Theme */
+.srn-footer--nursery,
+.srn-footer--nursery a,
+.srn-footer--nursery a:visited,
+.srn-footer--nursery span,
+.srn-footer--nursery .srn-footer__title,
+.srn-footer--nursery .srn-footer__text,
+.srn-footer--nursery .field__label,
+.srn-footer--nursery .field__input {
+  color: var(--font-color-dark-secondary);
+}
+
+/* Garden Design Theme */
+.srn-footer--garden-design,
+.srn-footer--garden-design a,
+.srn-footer--garden-design a:visited,
+.srn-footer--garden-design span,
+.srn-footer--garden-design .srn-footer__title,
+.srn-footer--garden-design .srn-footer__text,
+.srn-footer--garden-design .field__label,
+.srn-footer--garden-design .field__input {
+  color: var(--font-color-light-quaternary);
+}
+
+/* ============================================
+   TABLET BREAKPOINT (481px - 990px)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 990px) {
+  .srn-footer__logo {
     display: none;
   }
-  .footer-side {
+
+  .srn-footer__side {
     width: 50%;
     padding: 0 40px;
   }
 }
 
-@media(max-width: 768px) {
-  #footer-content {
-    min-width: 0 !important;
+/* ============================================
+   MOBILE BREAKPOINT (≤768px)
+   ============================================ */
+@media (max-width: 768px) {
+  .srn-footer__content {
+    min-width: 0;
     width: 100%;
     flex-direction: column;
-    align-items: center; /* Keep items centered */
+    align-items: center;
   }
 
-  .footer-side {
-    width: 100%; /* Change from 50% to 100% */
-    max-width: 425px; /* Match the form max-width for consistency */
-    padding: 0 20px; /* Add some breathing room */
-    margin-bottom: 30px; /* Add spacing between sections */
+  .srn-footer__side {
+    width: 100%;
+    max-width: 425px;
+    padding: 0 20px;
+    margin-bottom: 30px;
   }
 
-.footer-menu {
-  width: 100%;
-  font-size: 12px;
-  padding: 0;
-  display: block; /* Change from flex */
-  text-align: center;
-}
-
-.footer-menu a {
-  display: inline-block;
-}
-
-.footer-menu a:first-child {
-  display: block; /* THE SHOP on its own line */
-  margin-bottom: 7px;
-}
-
-.footer-menu a:nth-child(2)::after,
-.footer-menu a:nth-child(4)::after {
-  content: " | ";
-  margin: 0 8px;
-}
-
-.footer-menu a:nth-child(3) {
-  margin-bottom: 7px; /* Add margin after GARDEN DESIGN */
-}
-
-.footer-menu a:nth-child(3)::after {
-  content: "\A"; /* Line break after GARDEN DESIGN */
-  white-space: pre;
-}
-
-  .side-title, .side-text {
-    width: 100%; /* Use full width instead of fixed 320px */
-    padding: 0 20px; /* Consistent padding */
+  /* Navigation - Mobile Layout */
+  .srn-footer__nav {
+    width: 100%;
+    font-size: 12px;
+    padding: 0;
+    display: block;
+    text-align: center;
   }
 
-  #footer-email-form {
+  .srn-footer__nav a {
+    display: inline-block;
+  }
+
+  .srn-footer__nav a:first-child {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  .srn-footer__nav a:nth-child(2)::after,
+  .srn-footer__nav a:nth-child(4)::after {
+    content: " | ";
+    margin: 0 8px;
+  }
+
+  .srn-footer__nav a:nth-child(3) {
+    margin-bottom: 7px;
+  }
+
+  .srn-footer__nav a:nth-child(3)::after {
+    content: "\A";
+    white-space: pre;
+  }
+
+  /* Title and Text */
+  .srn-footer__title,
+  .srn-footer__text {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  /* Forms - Show Mobile, Hide Desktop */
+  .srn-footer__form--desktop {
     display: none;
   }
 
-#footer-email-form-mobile {
-  display: block;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-#footer-email-form-mobile .field {
-  width: 100%;
-  max-width: none;
-  padding: 0;
-  margin: 0;
-}
+  .srn-footer__form--mobile {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-#footer-email-form-mobile .field__input {
-  width: 100%;
-}
-  #footer-details {
-    display: flex; 
+  .srn-footer__form--mobile .field {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .srn-footer__form--mobile .field__input {
+    width: 100%;
+    background-color: var(--font-color-dark);
+    color: var(--color-background);
+  }
+
+  .srn-footer__form--mobile .field__label,
+  .srn-footer__form--mobile .field__input::placeholder {
+    color: var(--color-background);
+  }
+
+  .srn-footer__form--mobile .field__input::placeholder {
+    opacity: 0.7;
+  }
+
+  .srn-footer__form--mobile .svg-wrapper,
+  .srn-footer__form--mobile .svg-wrapper svg {
+    color: var(--color-background);
+    fill: var(--color-background);
+  }
+
+  /* Theme-specific mobile form backgrounds */
+  .srn-footer--nursery .srn-footer__form--mobile .field__input {
+    background-color: var(--font-color-dark-secondary);
+  }
+
+  .srn-footer--garden-design .srn-footer__form--mobile .field__input {
+    background-color: var(--font-color-light-quaternary);
+  }
+
+  /* Mobile - Label shrinks on focus */
+  .srn-footer__form--mobile .field__input:focus ~ .field__label,
+  .srn-footer__form--mobile .field__input:not(:placeholder-shown) ~ .field__label,
+  .srn-footer__form--mobile .field__input:-webkit-autofill ~ .field__label {
+    font-size: 8px;
+  }
+
+  /* Footer Details */
+  .srn-footer__details {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center; /* Center the items */
+    justify-content: center;
     font-size: 10px;
     gap: 5px;
   }
 
-  #footer-details span:first-child,
-  #footer-details span:last-child {
+  .srn-footer__details span:first-child,
+  .srn-footer__details span:last-child {
     text-align: center;
-    flex-basis: 100%; /* Force these to take full width, creating their own row */
-  }
-
-
-#footer-email-form-mobile .field__input {
-  background-color: var(--font-color-dark) !important;
-  color: var(--color-background) !important;
-}
-
-#footer-email-form-mobile .field__label,
-#footer-email-form-mobile .field__input::placeholder {
-  color: var(--color-background) !important;
-}
-
-#footer-email-form-mobile .field__input::placeholder {
-  opacity: 0.7;
-}
-
-#footer-email-form-mobile .svg-wrapper,
-#footer-email-form-mobile .svg-wrapper svg {
-  color: var(--color-background) !important;
-  fill: var(--color-background) !important;
-}
-
-/* Only need page-specific styles for background color */
-.nursery-footer #footer-email-form-mobile .field__input {
-  background-color: var(--font-color-dark-secondary) !important;
-}
-
-.garden-design-footer #footer-email-form-mobile .field__input {
-  background-color: var(--font-color-light-quaternary) !important;
-}
-
-  #footer-email-form-mobile .field__input:focus ~ .field__label,
-  #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
-  #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
-    font-size: 8px !important;
-    top: calc(var(--inputs-border-width) + 0.5rem);
-    left: calc(var(--inputs-border-width) + 2rem);
-    letter-spacing: 0.04rem;
+    flex-basis: 100%;
   }
 }
 
+/* ============================================
+   TABLET-SPECIFIC LABEL SIZE (768px - 990px)
+   ============================================ */
 @media (min-width: 768px) and (max-width: 990px) {
-  #footer-email-form-mobile .field .field__input:focus ~ .newsletter-label.field__label,
-  #footer-email-form-mobile .field .field__input:not(:placeholder-shown) ~ .newsletter-label.field__label,
-  #footer-email-form-mobile .field .field__input:-webkit-autofill ~ .newsletter-label.field__label {
-    font-size: 6px !important;
+  .srn-footer__form--mobile .field__input:focus ~ .field__label,
+  .srn-footer__form--mobile .field__input:not(:placeholder-shown) ~ .field__label,
+  .srn-footer__form--mobile .field__input:-webkit-autofill ~ .field__label {
+    font-size: 6px;
   }
 }
-
 </style>
