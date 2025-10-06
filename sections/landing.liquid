@@ -8,16 +8,7 @@
       height="auto"
       width="auto"
     />
-    <video 
-      class="srn-landing__video"
-      autoplay 
-      autobuffer 
-      muted 
-      loop 
-      playsinline 
-      src="https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1"
-      aria-label="Background video of Spring Road Nursery"
-    ></video>
+    <!-- Video will be injected by JavaScript if autoplay is supported -->
   </div>
 
   <!-- Navigation Menu -->
@@ -47,27 +38,67 @@
 <script>
   /**
    * Landing Page Video Loader
-   * Fades in background video when ready to play
+   * Detects low power mode and only loads video if autoplay is supported
    */
-  document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('.srn-landing__video');
+  document.addEventListener('DOMContentLoaded', async function() {
+    const videoContainer = document.querySelector('.srn-landing__video-container');
     
-    if (!video) return;
+    if (!videoContainer) return;
     
     /**
-     * Add loaded class when video is ready
+     * Test if autoplay is supported (low power mode blocks autoplay)
      */
-    function markVideoAsLoaded() {
-      video.classList.add('srn-landing__video--loaded');
+    async function canAutoplay() {
+      const testVideo = document.createElement('video');
+      testVideo.muted = true;
+      testVideo.playsInline = true;
+      testVideo.autoplay = true;
+      
+      // Use a tiny data URI video for testing
+      testVideo.src = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAr9tZGF0AAACrgYF//+q3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE0OCByMjY0MyA1YzY1NzA0IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAxNSAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTMgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJfcHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTI1IHNjZW5lY3V0PTQwIGludHJhX3JlZnJlc2g9MCByY19sb29rYWhlYWQ9NDAgcmM9Y3JmIG1idHJlZT0xIGNyZj0yMy4wIHFjb21wPTAuNjAgcXBtaW49MCBxcG1heD02OSBxcHN0ZXA9NCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAAA4mWIhAA3//728P4FNjuY0JcRzeidMx+/Fbi6NDe9zgAAAwAAAwAAD/gk2ABBi2SQgEBCw==';
+      
+      try {
+        await testVideo.play();
+        return true;
+      } catch (err) {
+        // Autoplay failed - likely low power mode or autoplay restrictions
+        return false;
+      }
     }
     
-    // Listen for video ready state
-    video.addEventListener('canplay', markVideoAsLoaded);
-    
-    // Check if video is already loaded
-    if (video.readyState >= 3) {
-      markVideoAsLoaded();
+    /**
+     * Load and initialize the background video
+     */
+    function loadVideo() {
+      const video = document.createElement('video');
+      video.className = 'srn-landing__video';
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.src = 'https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1';
+      video.setAttribute('aria-label', 'Background video of Spring Road Nursery');
+      
+      // Fade in video when ready
+      video.addEventListener('canplay', function() {
+        video.classList.add('srn-landing__video--loaded');
+      });
+      
+      // Check if already loaded
+      if (video.readyState >= 3) {
+        video.classList.add('srn-landing__video--loaded');
+      }
+      
+      videoContainer.appendChild(video);
     }
+    
+    // Test autoplay support and load video if available
+    const autoplaySupported = await canAutoplay();
+    
+    if (autoplaySupported) {
+      loadVideo();
+    }
+    // Otherwise, fallback image remains visible
   });
 </script>
 
