@@ -161,6 +161,14 @@
     '{{ "slide-9.png" | asset_url }}'
   ];
   
+  // Preload all images
+  const preloadedImages = [];
+  slides.forEach(function(src) {
+    const preloadImg = new Image();
+    preloadImg.src = src;
+    preloadedImages.push(preloadImg);
+  });
+  
   let currentIndex = 0;
   
   function changeSlide() {
