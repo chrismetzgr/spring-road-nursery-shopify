@@ -230,3 +230,34 @@ window.addEventListener('resize', () => {
     elements.sortIcon?.setAttribute('aria-expanded', 'false');
   }
 });
+
+// ============================================
+// UPDATE ACTIVE SORT OPTION
+// ============================================
+
+/**
+ * Makes sure active sort on mobile is selected
+ */
+
+function updateActiveSortOption() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentSort = urlParams.get('sort_by');
+  
+  const sortMap = {
+    'manual': 'featured',
+    'best-selling': 'best-selling',
+    'price-ascending': 'price-low',
+    'price-descending': 'price-high',
+    'created-descending': 'newest'
+  };
+  
+  // Remove wavy-underline from all sort options
+  document.querySelectorAll('[data-sort]').forEach(el => {
+    el.classList.remove('wavy-underline');
+  });
+  
+  const activeSortValue = sortMap[currentSort] || 'featured';
+  document.querySelectorAll(`[data-sort="${activeSortValue}"]`).forEach(el => {
+    el.classList.add('wavy-underline');
+  });
+}
