@@ -468,6 +468,9 @@
   .card__heading {
     font-size: 12px;
     margin-top: 5px;
+    display: flex; 
+    flex-direction: row;
+    align-items center;
   }
 
 }
