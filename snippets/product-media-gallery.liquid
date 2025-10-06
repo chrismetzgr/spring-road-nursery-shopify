@@ -58,12 +58,13 @@
   pointer-events: none;
 }
 
-.media-gallery__item:first-child {
-  opacity: 0;
+.media-gallery__item:first-child:not(.is-active) {
+  visibility: hidden;
   pointer-events: none;
 }
 
 .media-gallery__item.is-active {
+  visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
