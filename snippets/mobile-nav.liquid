@@ -1,5 +1,6 @@
 <link rel="preload" as="image" href="{{ "mobile-menu-background.png" | asset_url }}">
 <div id="mobile-nav">
+  <div class="mobile-nav-content"> 
     <div class="exit-container">
       <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
     </div>
@@ -9,8 +10,10 @@
         <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
     </div>
   </div>
+  </div>
 <style>
   #mobile-nav {
+    position: relative;
     display: none;
     position: fixed;
     inset: 0;
