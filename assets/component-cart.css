@@ -238,3 +238,12 @@ cart-items {
     gap: 1rem;
   }
 }
+
+@media screen and (min-width: 435px){
+  .title-wrapper-with-link{
+      display: flex; 
+      flex-direction: row-reverse;
+      align-items: center; 
+      justify-content: space-between; 
+  }
+}
