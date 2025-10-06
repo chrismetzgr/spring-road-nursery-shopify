@@ -580,7 +580,7 @@
 }
 
 .card__heading {
-  margin-top: 5px;
+  margin-top: 5px !important;
 }
 
 .card__heading a::after {
