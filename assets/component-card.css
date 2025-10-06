@@ -473,8 +473,6 @@
     align-items center;
   }
 
-}
-
 .card__heading span {
   color: var(--font-color-dark)
 }
