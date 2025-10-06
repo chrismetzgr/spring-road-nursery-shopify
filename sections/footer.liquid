@@ -485,16 +485,9 @@
     align-items: center;
     justify-content: space-around;
     font-size: 10px;
-    gap: 8px;
+    gap: 10px;
     margin-top: 0;
     padding: 0 3px;
-  }
-
-  @media (max-width: 650px){
-    .srn-footer__details span:first-child {
-      text-align: center;
-      flex-basis: 100%;
-    }
   }
 
   .srn-footer__title {
@@ -531,6 +524,13 @@
   .srn-footer__form--mobile .field__input:not(:placeholder-shown) ~ .field__label,
   .srn-footer__form--mobile .field__input:-webkit-autofill ~ .field__label {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 650px){
+  .srn-footer__details span:first-child {
+    text-align: center;
+    flex-basis: 100%;
   }
 }
 </style>
