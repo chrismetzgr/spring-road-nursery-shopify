@@ -1,7 +1,6 @@
 .cart {
   position: relative;
   display: block;
-  font: var(--font-family-secondary);
 }
 
 .cart__empty-text,
