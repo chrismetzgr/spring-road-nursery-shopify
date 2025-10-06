@@ -7,7 +7,7 @@
 // CONSTANTS
 // ============================================
 
-const STORAGE_KEY = 'springRoadNurseryNewsLetterSignupUpdated';
+const STORAGE_KEY = 'springRoadNurseryNewsLetterFall2025';
 const INITIAL_DELAY = 5000; // 5 seconds
 const SUCCESS_DISPLAY_TIME = 5000; // 5 seconds
 const DRAWER_CHECK_INTERVAL = 5000; // 5 seconds
