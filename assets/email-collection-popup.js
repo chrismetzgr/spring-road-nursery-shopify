@@ -8,7 +8,6 @@
 // ============================================
 
 const STORAGE_KEY = 'springRoadNurseryNewsLetterSignupUpdated';
-const SUCCESS_SHOWN_KEY = 'springRoadNurserySuccessShown';
 const INITIAL_DELAY = 5000; // 5 seconds
 const SUCCESS_DISPLAY_TIME = 5000; // 5 seconds
 const DRAWER_CHECK_INTERVAL = 5000; // 5 seconds
@@ -80,20 +79,6 @@ function hasSeenPopup() {
 }
 
 /**
- * Check if success message has already been shown
- */
-function hasSeenSuccessMessage() {
-  return localStorage.getItem(SUCCESS_SHOWN_KEY) === 'true';
-}
-
-/**
- * Mark success message as shown
- */
-function markSuccessAsShown() {
-  localStorage.setItem(SUCCESS_SHOWN_KEY, 'true');
-}
-
-/**
  * Recursively check if drawers are closed before showing popup
  */
 function showPopupWhenReady() {
@@ -134,7 +119,6 @@ function handleSuccessDisplay() {
   setTimeout(() => {
     hidePopup();
     markPopupAsSeen();
-    markSuccessAsShown();
     
     // Clean up URL by removing query parameter
     const url = new URL(window.location);
@@ -162,8 +146,8 @@ if (popup) {
   const urlParams = new URLSearchParams(window.location.search);
   const customerPosted = urlParams.get('customer_posted');
   
-  if (customerPosted === 'true' && !hasSeenSuccessMessage()) {
-    // Only show success message if it hasn't been shown before
+  if (customerPosted === 'true') {
+    // Always show success message, even if user has seen popup before
     handleSuccessDisplay();
   } else if (!hasSeenPopup()) {
     // Only show to first-time visitors for normal display
