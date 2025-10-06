@@ -487,10 +487,16 @@
     useFirstImage = !useFirstImage;
   }
   
-  // Wait for fade-in (0.5s) + display time (7s) = 7.5s total
-  setTimeout(function() {
-    crossfade();
-    setInterval(crossfade, 7000);
-  }, 7500);
+  // Wait for the animation to complete
+  img1.addEventListener('animationend', function() {
+    // Remove the animation completely so img1 behaves like img2
+    img1.style.animation = 'none';
+    
+    // Wait 7 seconds, then start slideshow
+    setTimeout(function() {
+      crossfade();
+      setInterval(crossfade, 7000);
+    }, 7000);
+  }, { once: true });
 })();
 </script>
