@@ -548,6 +548,8 @@
 
   .grid--3-col-desktop .grid__item:nth-child(6n+2) .card-wrapper:hover .card__media img {
     border-radius: 0 0 50% 50%; /* Bottom corners */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .grid--3-col-desktop .grid__item:nth-child(6n+3) .card-wrapper:hover .card__media img {
@@ -556,6 +558,8 @@
 
   .grid--3-col-desktop .grid__item:nth-child(6n+4) .card-wrapper:hover .card__media img {
     border-radius: 0 0 50% 50%; /* Bottom corners */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .grid--3-col-desktop .grid__item:nth-child(6n+5) .card-wrapper:hover .card__media img {
@@ -564,6 +568,8 @@
 
   .grid--3-col-desktop .grid__item:nth-child(6n+6) .card-wrapper:hover .card__media img {
     border-radius: 0 0 50% 50%; /* Bottom corners */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   /* 2-column grid pattern */
