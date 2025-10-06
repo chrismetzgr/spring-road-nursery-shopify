@@ -699,6 +699,7 @@
 }
 
 .card--standard > .card__content {
+  margin-top: 5px;
   padding: 0;
 }
 
