@@ -48,7 +48,7 @@
           alt="What We Do"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="150"
+          height="75"
         />
       </h2>
       <article class="srn-nursery__text srn-nursery__text--left-align">
@@ -78,7 +78,14 @@
         <img 
           src="{{ 'hours.png' | asset_url }}" 
           alt="Our Hours"
-          class="srn-nursery__heading-image"
+          class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
+          width="auto" 
+          height="75"
+        />
+        <img 
+          src="{{ 'hours-mobile.png' | asset_url }}" 
+          alt="Our Hours"
+          class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
           height="75"
         />
@@ -111,7 +118,7 @@
           alt="Our Plants"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="150"
+          height="75"
         />
       </h2>
       <div class="srn-nursery__text">
@@ -134,7 +141,14 @@
         <img 
           src="{{ 'contact.png' | asset_url }}" 
           alt="Contact Us"
-          class="srn-nursery__heading-image"
+          class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
+          width="auto" 
+          height="75"
+        />
+        <img 
+          src="{{ 'contact.png' | asset_url }}" 
+          alt="Contact Us"
+          class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
           height="75"
         />
@@ -174,7 +188,7 @@
   max-width: 1370px;
   width: 100%;
   height: auto;
-  opacity: 1;  /* Changed from 0 to 1 */
+  opacity: 1;
   animation: srn-fadeIn 0.5s ease-out;
   transition: opacity 1.5s ease-in-out;
 }
@@ -274,22 +288,16 @@
   height: auto;
   width: auto;
   display: block;
-}
-
-/* Mobile: Single-line headers (like "Contact" and "Our Hours") */
-.srn-nursery__heading-image:not(.srn-nursery__heading-image--mobile):not(.srn-nursery__heading-image--desktop) {
   max-height: 75px;
 }
 
-/* Mobile: Images without desktop/mobile distinction */
+/* Mobile: Hide desktop versions, show mobile versions */
 .srn-nursery__heading-image--desktop {
   display: none;
 }
 
-/* Mobile: Two-line stacked headers (like "What We Do" and "Our Plants") */
 .srn-nursery__heading-image--mobile {
   display: inline-block;
-  max-height: 150px;
 }
 
 /* Text Content */
@@ -396,11 +404,12 @@
     margin-top: 0;
   }
 
-  /* Desktop: All single-line headers get consistent height */
+  /* Desktop: All headers get consistent height */
   .srn-nursery__heading-image {
     max-height: 78px;
   }
 
+  /* Desktop: Show desktop versions, hide mobile versions */
   .srn-nursery__heading-image--desktop {
     display: inline-block;
   }
@@ -468,12 +477,11 @@
   
   if (!img1 || !img2) return;
   
-  let currentIndex = 1;  // slide-2 is already loaded in img2
-  let useFirstImage = false;  // Start with false so first crossfade shows img2
-  let isFirstTransition = true;  // Track if this is the first transition
+  let currentIndex = 1;
+  let useFirstImage = false;
+  let isFirstTransition = true;
   
   function crossfade() {
-    // Only increment if it's NOT the first transition
     if (!isFirstTransition) {
       currentIndex = (currentIndex + 1) % slides.length;
     }
@@ -492,14 +500,10 @@
     useFirstImage = !useFirstImage;
   }
   
-  // Wait for the animation to complete
   img1.addEventListener('animationend', function() {
-    // Remove the animation
     img1.style.animation = 'none';
-    // Set opacity explicitly so transitions will work
     img1.style.opacity = '1';
     
-    // Wait 3.5 seconds, then start slideshow
     setTimeout(function() {
       crossfade();
       setInterval(crossfade, 5000);
