@@ -479,10 +479,13 @@
 .card__heading-title {
   font-weight: 500;
   font-style: normal;
+  font-size: 8px;
+
 
 }
 .card__heading-price {
   font-stretch: expanded;
+  font-size: 6.5px;
 }
 
 .card__heading:last-child {
