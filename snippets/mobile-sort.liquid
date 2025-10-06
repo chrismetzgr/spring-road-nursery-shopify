@@ -1,26 +1,26 @@
 <link rel="preload" as="image" href="{{ "mobile-sort-background.png" | asset_url }}">
 <div id="mobile-sort">
-    <div class="exit-container">
-      <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
-    </div>
-    <div id="mobile-sort-menu">
-        <div id="mobile-sort-cart-container">
-          <a href="{{ routes.cart_url }}">
-            <div class="mobile-sort-title">CART</div>
-              <div class="cart-count">
-                {{ cart.item_count }}
-              </div>
-            </a>
+  <div class="exit-container">
+    <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
+  </div>
+  <div id="mobile-sort-menu">
+    <div id="mobile-sort-cart-container">
+      <a href="{{ routes.cart_url }}">
+        <div class="mobile-sort-title">CART</div>
+        <div class="cart-count">
+          {{ cart.item_count }}
         </div>
-        <div id="mobile-sort-container">
-          <div class="mobile-sort-title">SORT</div>
-          <div data-sort="featured" class="sort-option">FEATURED</div>
-          <div data-sort="best-selling" class="sort-option">BEST SELLING</div>
-          <div data-sort="price-low" class="sort-option">PRICE: LOW TO HIGH</div>
-          <div data-sort="price-high" class="sort-option">PRICE: HIGH TO LOW</div>
-          <div data-sort="newest" class="sort-option">NEWEST</div>
-        </div>
+      </a>
     </div>
+    <div id="mobile-sort-container">
+      <div class="mobile-sort-title">SORT</div>
+      <div data-sort="featured" class="sort-option">FEATURED</div>
+      <div data-sort="best-selling" class="sort-option">BEST SELLING</div>
+      <div data-sort="price-low" class="sort-option">PRICE: LOW TO HIGH</div>
+      <div data-sort="price-high" class="sort-option">PRICE: HIGH TO LOW</div>
+      <div data-sort="newest" class="sort-option">NEWEST</div>
+    </div>
+  </div>
 </div>
 <style>
   .exit-container {
@@ -28,46 +28,49 @@
     top: 0;
     right: 0;
     direction: rtl;
-    img {
-      margin: 20px 20px 0 0;
-    }
-    img:hover {
-      cursor:pointer;
-    }
   }
+  
+  .exit-container img {
+    margin: 20px 20px 0 0;
+  }
+  
+  .exit-container img:hover {
+    cursor: pointer;
+  }
+  
   #mobile-sort {
     display: none;
     color: var(--font-color-light);
     width: 100vw;
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     background-image: url('{{ "mobile-sort-background.png" | asset_url }}');
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-position: center;
+    background-size: cover;
     z-index: 2000;
     top: 0;
     bottom: 0;
     right: 0;
-    position:fixed;
-
-    #mobile-sort-menu {
-      height: 100vh;
-      font-family: var(--font-family-secondary);
-      font-size: 20px;
-      gap: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 100px;
-
-      div:hover {
-        cursor: pointer;
-      }
-    }
   }
 
-  .mobile-sort-title{
+  #mobile-sort #mobile-sort-menu {
+    height: 100vh;
+    font-family: var(--font-family-secondary);
+    font-size: 20px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 100px;
+  }
+  
+  #mobile-sort #mobile-sort-menu div:hover {
+    cursor: pointer;
+  }
+
+  .mobile-sort-title {
     font-size: 15px;
     font-weight: 700;
     font-stretch: expanded; 
@@ -78,12 +81,13 @@
     font-stretch: expanded; 
   }
 
-  #mobile-sort-cart-container{
+  #mobile-sort-cart-container {
     text-align: center;
-
-    a, a:visited {
-      color: var(--font-color-light);
-    }
+  }
+  
+  #mobile-sort-cart-container a,
+  #mobile-sort-cart-container a:visited {
+    color: var(--font-color-light);
   }
 
   #mobile-sort-container {
@@ -95,35 +99,35 @@
   }
 
   #mobile-sort.show {
-    display: block; /* Make it visible */
-    animation: slideInRight 0.5s ease-out forwards; /* Apply the animation */
+    display: block;
+    animation: slideInRight 0.5s ease-out forwards;
   }
 
   #mobile-sort.hide {
-    animation: slideOutRight 0.5s ease-out; /* Apply the animation */
+    animation: slideOutRight 0.5s ease-out;
   }
 
   @keyframes slideInRight {
-  from {
-    transform: translateX(100%); /* Start off-screen to the Right */
-    opacity: 0; /* Start invisible */
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  to {
-    transform: translateX(0); /* End at its original position */
-    opacity: 1; /* End fully visible */
-  }
-}
 
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0); /* Start at current position */
-    opacity: 1;
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
   }
-  to {
-    transform: translateX(100%); /* Slide out to the Right */
-    opacity: 0;
-  }
-}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
