@@ -450,7 +450,7 @@ h6:empty {
 a {
   z-index: 1000;
   text-decoration: none;
-  color: #3B5669;
+  color: var(--font-color-dark);
 }
 
 .link,
