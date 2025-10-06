@@ -39,52 +39,18 @@
 -%}
 
 <style>
-/* Force the media wrapper to behave as a proper block */
-.product__media-wrapper {
-  display: block;
-  width: 100%;
-  min-height: 400px;
-}
-
-.media-gallery__main {
-  position: relative;
-  width: 100%;
-  padding: 0 20px;
-  display: block;
-}
-
-.media-gallery__item {
-  width: 100%;
-  display: block;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Keep first item in normal flow to maintain height */
-.media-gallery__item:first-child {
-  position: relative;
-  z-index: 1;
-}
-
-/* All other items stack on top */
-.media-gallery__item:not(:first-child) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-
-/* Inactive items fade out */
-.media-gallery__item:not(.is-active) {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Active items fade in */
-.media-gallery__item.is-active {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 2;
-}
+  .media-galleryitem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .media-galleryitem.is-active {
+    opacity: 1;
+    position: relative;
+  }
 
   .thumbnail-slider {
     position: relative;
