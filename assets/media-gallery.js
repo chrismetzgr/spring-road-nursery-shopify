@@ -93,37 +93,37 @@ if (!customElements.get('media-gallery')) {
         }
       }
 
-  setActiveMedia(mediaId) {
-    const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
-    const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
+setActiveMedia(mediaId) {
+  const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
+  const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
 
-    if (!targetMedia || targetMedia === currentMedia) {
-      return;
-    }
-
-    // Start fading in the target immediately
-    targetMedia.classList.add('is-active');
-
-    // Start fading out the current after a brief delay
-    if (currentMedia) {
-      setTimeout(() => {
-        currentMedia.classList.remove('is-active');
-      }, 50);
-    }
-
-    this.currentMediaId = mediaId;
-
-    this.setActiveThumbnail(mediaId);
-    this.updateNavigationArrows();
-    this.playActiveMedia(targetMedia);
-
-    const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
-    if (thumbnail) {
-      this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
-    }
-
-    this.preventStickyHeader();
+  if (!targetMedia || targetMedia === currentMedia) {
+    return;
   }
+
+  // Add is-active to target (makes it relative and visible)
+  targetMedia.classList.add('is-active');
+
+  // Remove is-active from current after brief delay (makes it absolute and fades out)
+  if (currentMedia) {
+    setTimeout(() => {
+      currentMedia.classList.remove('is-active');
+    }, 50);
+  }
+
+  this.currentMediaId = mediaId;
+
+  this.setActiveThumbnail(mediaId);
+  this.updateNavigationArrows();
+  this.playActiveMedia(targetMedia);
+
+  const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
+  if (thumbnail) {
+    this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
+  }
+
+  this.preventStickyHeader();
+}
 
       setActiveThumbnail(mediaId) {
         if (!this.elements.thumbnailList) return;
