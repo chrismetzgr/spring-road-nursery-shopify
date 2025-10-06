@@ -264,3 +264,5 @@ function updateActiveSortOption() {
     el.classList.add('wavy-underline');
   });
 }
+
+updateActiveSortOption();
