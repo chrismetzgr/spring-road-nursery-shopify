@@ -12,40 +12,62 @@
   </div>
   </div>
 <style>
-  #mobile-nav {
-    display: none;
-    position: fixed;
-    inset: 0;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    top: 0;
-    left: 0;
-    width: 100vw;
-    background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    z-index: 2000;
+#mobile-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-image: url('{{ "mobile-menu-background.png" | asset_url }}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  z-index: 2000;
+}
 
+.mobile-nav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
-   #mobile-menu {
-      flex: 1;
-      font-family: var(--font-family-secondary);
-      font-size: 20px;
-      gap: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+.mobile-nav-content .exit-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
 
-      a {
-        color: var(--font-color-light-secondary);
-      }
-      a:visited {
-        color: var(--font-color-light-secondary);
-      }
-    }
-  }
+.mobile-nav-content .exit-container img {
+  margin: 0;
+}
+
+.mobile-nav-content .exit-container img:hover {
+  cursor: pointer;
+}
+
+#mobile-menu {
+  flex: 1;
+  font-family: var(--font-family-secondary);
+  font-size: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#mobile-menu a {
+  color: var(--font-color-light-secondary);
+}
+
+#mobile-menu a:visited {
+  color: var(--font-color-light-secondary);
+}
 
   .mobile-nav-content { 
     height: 100%;
