@@ -1,14 +1,15 @@
 {% render 'email-collection-popup' %}
 
 <main class="srn-nursery" id="nursery-page">
-  <!-- Hero Image -->
+  <!-- Hero Image Slideshow -->
   <div class="srn-nursery__hero">
     <img 
-      src="{{ 'nursery.jpg' | asset_url }}" 
+      src="{{ 'slide-1.png' | asset_url }}" 
       alt="Spring Road Nursery terraced gardens"
       class="srn-nursery__hero-image"
       width="1370" 
       height="630"
+      id="hero-slideshow"
     />
   </div>
 
@@ -143,6 +144,39 @@
   </div>
 </main>
 
+<script>
+(function() {
+  const img = document.getElementById('hero-slideshow');
+  if (!img) return;
+  
+  const slides = [
+    '{{ "slide-1.png" | asset_url }}',
+    '{{ "slide-2.png" | asset_url }}',
+    '{{ "slide-3.png" | asset_url }}',
+    '{{ "slide-4.png" | asset_url }}',
+    '{{ "slide-5.png" | asset_url }}',
+    '{{ "slide-6.png" | asset_url }}',
+    '{{ "slide-7.png" | asset_url }}',
+    '{{ "slide-8.png" | asset_url }}',
+    '{{ "slide-9.png" | asset_url }}'
+  ];
+  
+  let currentIndex = 0;
+  
+  function changeSlide() {
+    img.style.opacity = '0';
+    
+    setTimeout(function() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      img.src = slides[currentIndex];
+      img.style.opacity = '1';
+    }, 500);
+  }
+  
+  setInterval(changeSlide, 4000);
+})();
+</script>
+
 <style>
 /* ============================================
    NURSERY PAGE STYLES
@@ -169,6 +203,7 @@
   opacity: 0;
   transform: translateY(30px);
   animation: srn-fadeInUp 0.5s ease-out forwards;
+  transition: opacity 0.5s ease-in-out;
 }
 
 @keyframes srn-fadeInUp {
