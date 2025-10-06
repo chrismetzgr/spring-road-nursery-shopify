@@ -429,6 +429,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const totalSlides = 9;
   let currentSlide = 1;
   
+  // Preload all slide images
+  const preloadedImages = [];
+  for (let i = 1; i <= totalSlides; i++) {
+    const img = new Image();
+    img.src = heroImage.src.replace('nursery.jpg', `slide-${i}.png`);
+    preloadedImages.push(img);
+  }
+  
   function changeSlide() {
     currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
     
@@ -437,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Change image source after fade out
     setTimeout(() => {
-      heroImage.src = heroImage.src.replace(/slide-\d+\.png|nursery\.jpg/, `slide-${currentSlide}.png`);
+      heroImage.src = preloadedImages[currentSlide - 1].src;
       
       // Fade in
       setTimeout(() => {
@@ -447,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Start with slide-1.png
-  heroImage.src = heroImage.src.replace('nursery.jpg', 'slide-1.png');
+  heroImage.src = preloadedImages[0].src;
   
   // Change slides every 5 seconds
   setInterval(changeSlide, 5000);
