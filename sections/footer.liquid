@@ -290,6 +290,14 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 990px) {
+  #footer-email-form-mobile .field__input:focus ~ .field__label,
+  #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
+  #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
+    font-size: 12px !important;
+  }
+}
+
 @media(max-width: 768px) {
   #footer-content {
     min-width: 0 !important;
