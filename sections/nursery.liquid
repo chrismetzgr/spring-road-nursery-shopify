@@ -494,13 +494,17 @@
       animationComplete = true;
       img1.style.animation = 'none';
       img1.style.transform = 'translateY(0)';
-      img1.style.opacity = '1';  // Lock in opacity AFTER removing animation
       
-      // Wait 7 seconds before first transition
+      // Use setTimeout to ensure the browser processes this before we start transitioning
       setTimeout(function() {
-        crossfade();
-        setInterval(crossfade, 7000);
-      }, 7000);
+        img1.style.opacity = '1';
+        
+        // Wait 7 seconds before first transition
+        setTimeout(function() {
+          crossfade();
+          setInterval(crossfade, 7000);
+        }, 7000);
+      }, 50);
     }
   });
 })();
