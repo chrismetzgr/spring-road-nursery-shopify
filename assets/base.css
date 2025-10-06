@@ -1297,6 +1297,11 @@ button.shopify-payment-button__button--unbranded {
   color: var(--font-color-light);
 }
 
+.shopify-challenge__button btn {
+  background-color: var(--color-background-tertiarty);
+  color: var(--font-color-light);
+}
+
 .button,
 .button-label,
 .shopify-challenge__button,
