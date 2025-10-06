@@ -1,13 +1,18 @@
 <main class="srn-landing" role="main">
   <!-- Background Video with Fallback Image -->
   <div class="srn-landing__video-container">
+    <img 
+      src="{{ 'clouds-backup-background.jpg' | asset_url }}"
+      alt="Spring Road Nursery clouds"
+      class="srn-landing__fallback-image"
+      height="auto"
+      width="auto"
+    />
     <video 
       class="srn-landing__video"
-      autoplay 
       muted 
       loop 
       playsinline 
-      poster="{{ 'clouds-backup-background.jpg' | asset_url }}"
       src="https://www.dropbox.com/scl/fi/ki9d8ioobyxjbjr5l67o8/SRN_CLOUD-VIDEO_1003_H264-B.mp4?rlkey=ilzk8yynna2gpowp1nuv7nntw&raw=1"
       aria-label="Background video of Spring Road Nursery"
     ></video>
@@ -41,17 +46,22 @@
   document.addEventListener('DOMContentLoaded', function() {
     const video = document.querySelector('.srn-landing__video');
     
-    if (!video) return;
+    const ensureVideoPlays = (video) => {
+      if (!video) return;
+      
+      const promise = video.play();
+      promise
+        .then(() => {
+          // Autoplay starts - fade in video
+          video.classList.add('srn-landing__video--loaded');
+        })
+        .catch(() => {
+          // Autoplay didn't start (low power mode) - hide video, show fallback image
+          video.style.display = 'none';
+        });
+    };
     
-    // Fade in video when it starts playing
-    video.addEventListener('playing', function() {
-      video.classList.add('srn-landing__video--loaded');
-    });
-    
-    // Check if already playing
-    if (!video.paused) {
-      video.classList.add('srn-landing__video--loaded');
-    }
+    ensureVideoPlays(video);
   });
 </script>
 
@@ -93,7 +103,16 @@ body:has(.srn-landing) {
   z-index: -101;
 }
 
-/* Video with poster fallback */
+/* Fallback Image */
+.srn-landing__fallback-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: -100;
+}
+
+/* Video (overlays fallback image) */
 .srn-landing__video {
   width: 100%;
   height: 100%;
