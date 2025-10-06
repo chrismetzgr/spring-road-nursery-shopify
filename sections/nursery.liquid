@@ -423,3 +423,33 @@
   }
 }
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const heroImage = document.querySelector('.srn-nursery__hero-image');
+  const totalSlides = 9;
+  let currentSlide = 1;
+  
+  function changeSlide() {
+    currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+    
+    // Fade out
+    heroImage.style.opacity = '0';
+    
+    // Change image source after fade out
+    setTimeout(() => {
+      heroImage.src = heroImage.src.replace(/slide-\d+\.png|nursery\.jpg/, `slide-${currentSlide}.png`);
+      
+      // Fade in
+      setTimeout(() => {
+        heroImage.style.opacity = '1';
+      }, 50);
+    }, 500);
+  }
+  
+  // Start with slide-1.png
+  heroImage.src = heroImage.src.replace('nursery.jpg', 'slide-1.png');
+  
+  // Change slides every 5 seconds
+  setInterval(changeSlide, 5000);
+});
+</script>
