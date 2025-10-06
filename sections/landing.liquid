@@ -56,6 +56,7 @@
     
     // Remove video if it fails to play (low power mode)
     video.addEventListener('suspend', function() {
+      console.log('suspending');
       if (video.networkState === 2) {
         video.remove();
       }
