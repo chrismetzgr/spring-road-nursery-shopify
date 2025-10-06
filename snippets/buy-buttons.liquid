@@ -94,7 +94,7 @@
       {%- endform -%}
     </product-form>
 
-    {% comment %} {%- if is_sold_out -%} {% endcomment %}
+    {%- if is_sold_out -%}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading">Email When In Stock</p>
         
@@ -157,20 +157,20 @@
         {% endform %}
       </div>
     {%- endif -%}
-    {% comment %} {%- else -%}
-      <div class="product-form">
-        <div class="product-form__buttons form">
-          <button
-            type="submit"
-            name="add"
-            class="product-form__submit button button--full-width button--primary"
-            disabled
-          >
-            {{ 'products.product.sold_out' | t }}
-          </button>
-        </div>
+  {%- else -%}
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          disabled
+        >
+          {{ 'products.product.sold_out' | t }}
+        </button>
       </div>
-    {%- endif -%} {% endcomment %}
+    </div>
+  {%- endif -%}
 
   {%- if show_pickup_availability -%}
     {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
