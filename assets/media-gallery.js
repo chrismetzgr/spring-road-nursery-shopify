@@ -56,6 +56,10 @@ if (!customElements.get('media-gallery')) {
           this.currentMediaId = activeItem.dataset.mediaId;
           this.setActiveThumbnail(this.currentMediaId);
         }
+        this.elements.spacer = this.querySelector('.media-gallery__spacer');
+        if (this.elements.spacer) {
+          this.updateSpacer();
+  }
       }
 
       connectedCallback() {
