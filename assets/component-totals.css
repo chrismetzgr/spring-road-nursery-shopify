@@ -23,6 +23,7 @@
 
 .totals__total {
   margin-top: .5rem;
+  font-stretch: expanded;
 }
 
 .totals__total-value {
