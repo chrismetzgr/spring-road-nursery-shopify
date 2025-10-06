@@ -46,24 +46,26 @@
 }
 
 .media-gallery__item {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.media-gallery__item:not(:first-child) {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
+}
+
+.media-gallery__item:first-child {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .media-gallery__item.is-active {
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Use first item to establish container height */
-.media-gallery__item:first-child {
-  position: relative;
 }
 
   .thumbnail-slider {
