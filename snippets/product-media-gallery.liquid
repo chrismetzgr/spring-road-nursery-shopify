@@ -39,18 +39,26 @@
 -%}
 
 <style>
-  .media-galleryitem {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .media-galleryitem.is-active {
-    opacity: 1;
-    position: relative;
-  }
+.media-gallery__main {
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.media-gallery__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.media-gallery__item.is-active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
 
   .thumbnail-slider {
     position: relative;
