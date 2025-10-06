@@ -295,7 +295,12 @@ a {
   cursor: pointer;
   color: var(--font-color-dark);
   font-family: var(--font-family-secondary);
-  transition: opacity 0.2s ease;
+  font-weight: 400;
+  transition: font-weight 0.2s ease, opacity 0.2s ease;
+}
+
+.srn-header__sort-dropdown span.sort-active {
+  font-weight: 500;
 }
 
 .srn-header__sort-dropdown span:hover,
