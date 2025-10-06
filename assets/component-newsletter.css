@@ -37,6 +37,7 @@
   color: var(--font-color-dark) !important;
   text-transform: uppercase !important;
   font-stretch: expanded !important;
+  text-align: center;
 }
 
 @media screen and (min-width: 750px) {
