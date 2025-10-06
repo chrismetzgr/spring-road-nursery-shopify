@@ -409,19 +409,25 @@
   background-color: var(--font-color-light-quaternary) !important;
 }
 
-  /* Shrink to 8px when the label moves up (on focus or when input has content) */
   #footer-email-form-mobile .field__input:focus ~ .field__label,
   #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
   #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
     font-size: 8px !important;
+    top: calc(var(--inputs-border-width) + 0.5rem);
+    left: calc(var(--inputs-border-width) + 2rem);
+    letter-spacing: 0.04rem;
   }
 }
 
 @media (min-width: 768px) and (max-width: 990px) {
+  /* Smaller font for tablet range */
   #footer-email-form-mobile .field__input:focus ~ .field__label,
   #footer-email-form-mobile .field__input:not(:placeholder-shown) ~ .field__label,
   #footer-email-form-mobile .field__input:-webkit-autofill ~ .field__label {
-    font-size: 1px !important;
+    font-size: 6px !important;
+    top: calc(var(--inputs-border-width) + 0.5rem);
+    left: calc(var(--inputs-border-width) + 2rem);
+    letter-spacing: 0.04rem;
   }
 }
 
