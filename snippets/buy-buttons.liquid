@@ -22,6 +22,21 @@
       if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
         assign show_dynamic_checkout = true
       endif
+
+      assign check_against_inventory = true
+      if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+        assign check_against_inventory = false
+      endif
+      
+      assign quantity_rule_soldout = false
+      if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+        assign quantity_rule_soldout = true
+      endif
+
+      assign is_sold_out = false
+      if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null
+        assign is_sold_out = true
+      endif
     -%}
 
     <product-form
@@ -44,12 +59,7 @@
           type="hidden"
           name="id"
           value="{{ product.selected_or_first_available_variant.id }}"
-          {% if product.selected_or_first_available_variant.available == false
-            or quantity_rule_soldout
-            or product.selected_or_first_available_variant == null
-          %}
-            disabled
-          {% endif %}
+          {% if is_sold_out %}disabled{% endif %}
           class="product-variant-id"
         >
 
@@ -58,31 +68,17 @@
         {%- endif -%}
 
         <div class="product-form__buttons">
-          {%- liquid
-            assign check_against_inventory = true
-            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
-              assign check_against_inventory = false
-            endif
-            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
-              assign quantity_rule_soldout = true
-            endif
-          -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            {% if product.selected_or_first_available_variant.available == false
-              or quantity_rule_soldout
-              or product.selected_or_first_available_variant == null
-            %}
-              disabled
-            {% endif %}
+            {% if is_sold_out %}disabled{% endif %}
           >
-            <span class="add-to-cart-text {% if product.selected_or_first_available_variant != null and product.selected_or_first_available_variant.available != false and quantity_rule_soldout != true %}wavy-underline{% endif %}">
+            <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
-              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {%- elsif is_sold_out -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
@@ -91,12 +87,76 @@
             <span class="added-to-cart-text" style="display: none;">Added!</span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
+          {%- if show_dynamic_checkout and is_sold_out == false -%}
             {{ form | payment_button }}
           {%- endif -%}
         </div>
       {%- endform -%}
     </product-form>
+
+    {%- if is_sold_out -%}
+      <div class="srn-restock-notification">
+        <p class="srn-restock-notification__heading">Email When In Stock</p>
+        
+        {% form 'customer', class: 'srn-restock-notification__form' %}
+          {%- if form.posted_successfully? -%}
+            <p class="srn-restock-notification__success" tabindex="-1" autofocus>
+              {{ 'newsletter.success' | t }}
+            </p>
+          {%- else -%}
+            <input type="hidden" name="contact[tags]" value="restock-notification,{{ product.handle }}">
+            
+            <div class="srn-restock-notification__field-wrapper">
+              <div class="field">
+                <input
+                  id="RestockEmail-{{ section_id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="RestockEmail-error-{{ section_id }}"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="RestockEmail-success-{{ section_id }}"
+                  {% endif %}
+                  placeholder="Your Email Here"
+                  required
+                >
+                <label class="field__label" for="RestockEmail-{{ section_id }}">
+                  Your Email Here
+                </label>
+                <button
+                  type="submit"
+                  class="field__button"
+                  name="commit"
+                  aria-label="Subscribe to restock notifications"
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
+                </button>
+              </div>
+              
+              {%- if form.errors -%}
+                <small class="form__message" id="RestockEmail-error-{{ section_id }}">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {% endform %}
+      </div>
+    {%- endif -%}
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
@@ -149,12 +209,148 @@
 </div>
 
 <style>
-  .button--processing {
-    pointer-events: none;
-    cursor: not-allowed !important;
-    text-align: center;
+/* ============================================
+   BUY BUTTONS STYLES
+   ============================================ */
+
+.button--processing {
+  pointer-events: none;
+  cursor: not-allowed;
+  text-align: center;
+}
+
+.added-to-cart-text {
+  text-transform: uppercase;
+}
+
+/* ============================================
+   RESTOCK NOTIFICATION FORM
+   ============================================ */
+
+.srn-restock-notification {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: var(--color-background-light, #f9f9f9);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.srn-restock-notification__heading {
+  font-family: var(--font-family-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 15px 0;
+  color: var(--font-color-dark);
+}
+
+.srn-restock-notification__form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.srn-restock-notification__success {
+  font-family: var(--font-family-secondary);
+  color: var(--font-color-dark);
+  margin: 0;
+  padding: 10px;
+}
+
+.srn-restock-notification__field-wrapper {
+  width: 100%;
+}
+
+.srn-restock-notification .field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.srn-restock-notification .field__input {
+  flex: 1;
+  padding: 12px 50px 12px 15px;
+  border: 1px solid var(--font-color-dark);
+  background-color: var(--color-background);
+  font-family: var(--font-family-secondary);
+  font-size: 14px;
+  color: var(--font-color-dark);
+  border-radius: 4px;
+  outline: none;
+}
+
+.srn-restock-notification .field__input:focus {
+  border-color: var(--font-color-dark);
+}
+
+.srn-restock-notification .field__label {
+  position: absolute;
+  left: 15px;
+  pointer-events: none;
+  font-family: var(--font-family-secondary);
+  font-size: 14px;
+  color: var(--font-color-dark);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.srn-restock-notification .field__input:focus + .field__label,
+.srn-restock-notification .field__input:not(:placeholder-shown) + .field__label {
+  opacity: 0;
+}
+
+.srn-restock-notification .field__button {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.srn-restock-notification .field__button:hover {
+  opacity: 0.7;
+}
+
+.srn-restock-notification .svg-wrapper {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  color: var(--font-color-dark);
+}
+
+.srn-restock-notification .form__message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--font-color-dark);
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+  .srn-restock-notification {
+    padding: 15px;
+    margin-top: 15px;
   }
-  .added-to-cart-text {
-    text-transform: uppercase: 
+
+  .srn-restock-notification__heading {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
   }
+
+  .srn-restock-notification .field__input {
+    font-size: 13px;
+    padding: 10px 45px 10px 12px;
+  }
+
+  .srn-restock-notification .field__label {
+    font-size: 13px;
+  }
+}
 </style>
