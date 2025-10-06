@@ -97,37 +97,40 @@ if (!customElements.get('media-gallery')) {
         }
       }
 
-setActiveMedia(mediaId) {
-  const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
-  const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
+    setActiveMedia(mediaId) {
+      const targetMedia = this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`);
+      const currentMedia = this.elements.viewer.querySelector('.media-gallery__item.is-active');
 
-  if (!targetMedia || targetMedia === currentMedia) {
-    return;
-  }
+      if (!targetMedia || targetMedia === currentMedia) {
+        return;
+      }
 
-  // Add is-active to target (makes it relative and visible)
-  targetMedia.classList.add('is-active');
+      // Add is-active to target
+      targetMedia.classList.add('is-active');
 
-  // Remove is-active from current after brief delay (makes it absolute and fades out)
-  if (currentMedia) {
-    setTimeout(() => {
-      currentMedia.classList.remove('is-active');
-    }, 50);
-  }
+      // Remove is-active from current after brief delay
+      if (currentMedia) {
+        setTimeout(() => {
+          currentMedia.classList.remove('is-active');
+        }, 50);
+      }
 
-  this.currentMediaId = mediaId;
+      // Update spacer to match new active image
+      this.updateSpacer();
 
-  this.setActiveThumbnail(mediaId);
-  this.updateNavigationArrows();
-  this.playActiveMedia(targetMedia);
+      this.currentMediaId = mediaId;
 
-  const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
-  if (thumbnail) {
-    this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
-  }
+      this.setActiveThumbnail(mediaId);
+      this.updateNavigationArrows();
+      this.playActiveMedia(targetMedia);
 
-  this.preventStickyHeader();
-}
+      const thumbnail = this.elements.thumbnailList?.querySelector(`[data-target="${mediaId}"]`);
+      if (thumbnail) {
+        this.announceLiveRegion(targetMedia, thumbnail.dataset.mediaPosition);
+      }
+
+      this.preventStickyHeader();
+    }
 
       setActiveThumbnail(mediaId) {
         if (!this.elements.thumbnailList) return;
@@ -225,9 +228,7 @@ setActiveMedia(mediaId) {
       }
     }
   );
-}
-
-updateSpacer() {
+  updateSpacer() {
   const activeItem = this.elements.viewer.querySelector('.media-gallery__item.is-active');
   if (activeItem && this.elements.spacer) {
     // Clone the active image into the spacer to match its height
@@ -244,3 +245,5 @@ updateSpacer() {
     }
   }
 }
+}
+
