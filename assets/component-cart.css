@@ -1,7 +1,6 @@
 .cart {
   position: relative;
   display: block;
-  font-family: var(--font-family-secondary) !important;
 }
 
 .cart__empty-text,
@@ -60,6 +59,10 @@ cart-items {
   position: relative;
   padding-bottom: 3rem;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.cart__items th {
+  font-family: var(--font-family-secondary) !important;
 }
 
 .cart__items--disabled {
