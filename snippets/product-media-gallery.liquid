@@ -46,24 +46,24 @@
 }
 
 .media-gallery__item {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease-in-out;
 }
 
-.media-gallery__item:not(.is-active) {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
 .media-gallery__item.is-active {
-  position: relative;
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.3s ease-in-out;
+}
+
+/* Use first item to establish container height */
+.media-gallery__item:first-child {
+  position: relative;
 }
 
   .thumbnail-slider {
