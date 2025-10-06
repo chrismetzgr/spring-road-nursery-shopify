@@ -2,14 +2,20 @@
 
 <main class="srn-nursery" id="nursery-page">
   <!-- Hero Image Slideshow -->
-  <div class="srn-nursery__hero">
+  <div class="srn-nursery__hero" id="hero-slideshow">
     <img 
       src="{{ 'slide-1.png' | asset_url }}" 
       alt="Spring Road Nursery terraced gardens"
       class="srn-nursery__hero-image"
       width="1370" 
       height="630"
-      id="hero-slideshow"
+    />
+    <img 
+      src="{{ 'slide-2.png' | asset_url }}" 
+      alt="Spring Road Nursery terraced gardens"
+      class="srn-nursery__hero-image srn-nursery__hero-image--hidden"
+      width="1370" 
+      height="630"
     />
   </div>
 
@@ -143,6 +149,7 @@
 
   </div>
 </main>
+
 <style>
 /* ============================================
    NURSERY PAGE STYLES
@@ -160,16 +167,32 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .srn-nursery__hero-image {
   max-width: 1370px;
   width: 100%;
   height: auto;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
   opacity: 0;
-  transform: translateY(30px);
   animation: srn-fadeInUp 0.5s ease-out forwards;
-  transition: opacity .25s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.srn-nursery__hero-image--hidden {
+  opacity: 0;
+  animation: none;
+  transform: translateX(-50%) translateY(0);
+}
+
+.srn-nursery__hero-image:first-child {
+  position: relative;
+  left: auto;
+  transform: translateY(30px);
 }
 
 @keyframes srn-fadeInUp {
@@ -420,12 +443,17 @@
   .srn-nursery__contact-email {
     margin-top: 70px;
   }
+
+  .srn-nursery__hero-image:first-child {
+    transform: translateX(-50%) translateY(30px);
+  }
 }
 </style>
+
 <script>
 (function() {
-  const img = document.getElementById('hero-slideshow');
-  if (!img) return;
+  const container = document.getElementById('hero-slideshow');
+  if (!container) return;
   
   const slides = [
     '{{ "slide-1.png" | asset_url }}',
@@ -440,41 +468,42 @@
   ];
   
   // Preload all images
-  const preloadedImages = [];
   slides.forEach(function(src) {
     const preloadImg = new Image();
     preloadImg.src = src;
-    preloadedImages.push(preloadImg);
   });
   
+  const img1 = container.children[0];
+  const img2 = container.children[1];
   let currentIndex = 0;
-  let slideshowStarted = false;
+  let useFirstImage = true;
   
-  function changeSlide() {
-    img.style.opacity = '0';
+  function crossfade() {
+    currentIndex = (currentIndex + 1) % slides.length;
     
-    setTimeout(function() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      img.src = slides[currentIndex];
-      img.style.opacity = '1';
-    }, 600);
+    if (useFirstImage) {
+      // Fade to img1
+      img1.src = slides[currentIndex];
+      img1.style.opacity = '1';
+      img2.style.opacity = '0';
+    } else {
+      // Fade to img2
+      img2.src = slides[currentIndex];
+      img2.style.opacity = '1';
+      img1.style.opacity = '0';
+    }
+    
+    useFirstImage = !useFirstImage;
   }
   
-  // Wait for the animation to complete
-  img.addEventListener('animationend', function() {
-    if (!slideshowStarted) {
-      slideshowStarted = true;
-      // Remove animation and lock in the final state
-      img.style.animation = 'none';
-      img.style.opacity = '1';
-      img.style.transform = 'translateY(0)';
-      
-      // Wait 7 seconds, then start cycling
-      setTimeout(function() {
-        changeSlide();
-        setInterval(changeSlide, 7000);
-      }, 7000);
-    }
+  // Wait for initial animation to complete, then start slideshow
+  img1.addEventListener('animationend', function() {
+    img1.style.animation = 'none';
+    img1.style.transform = 'translateX(-50%) translateY(0)';
+    
+    setTimeout(function() {
+      setInterval(crossfade, 7000);
+    }, 7000);
   });
 })();
 </script>
