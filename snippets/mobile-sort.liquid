@@ -125,12 +125,14 @@
 }
 </style>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get current sort parameter from URL
+document.addEventListener('DOMContentLoaded', function() {
+  function updateActiveSortOption() {
     const urlParams = new URLSearchParams(window.location.search);
     const currentSort = urlParams.get('sort_by');
     
-    // Map sort_by values to data-sort attributes
+    console.log('Current URL:', window.location.search);
+    console.log('sort_by parameter:', currentSort);
+    
     const sortMap = {
       'manual': 'featured',
       'best-selling': 'best-selling',
@@ -139,12 +141,22 @@
       'created-descending': 'newest'
     };
     
-    // Find matching sort option and add wavy-underline class
-    const activeSortValue = sortMap[currentSort] || 'featured'; // default to featured
+    // Remove wavy-underline from all options first
+    document.querySelectorAll('.sort-option').forEach(el => {
+      el.classList.remove('wavy-underline');
+    });
+    
+    const activeSortValue = sortMap[currentSort] || 'featured';
+    console.log('Mapped to:', activeSortValue);
+    
     const activeSortElement = document.querySelector(`[data-sort="${activeSortValue}"]`);
+    console.log('Found element:', activeSortElement);
     
     if (activeSortElement) {
       activeSortElement.classList.add('wavy-underline');
     }
-  });
+  }
+  
+  updateActiveSortOption();
+});
 </script>
