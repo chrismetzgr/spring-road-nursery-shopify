@@ -377,10 +377,15 @@
     white-space: nowrap;
   }
 
-  /* Add divider after each link */
-  .srn-footer__nav a:not(:last-child)::after {
+  /* Add divider after each link by default */
+  .srn-footer__nav a::after {
     content: " | ";
     margin: 0 8px;
+  }
+
+  /* Remove divider from last item in each row */
+  .srn-footer__nav a.srn-footer__nav-link--no-divider::after {
+    content: none;
   }
 
   /* Title and Text */
