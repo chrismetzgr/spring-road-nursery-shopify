@@ -22,11 +22,11 @@
   <!-- Navigation Menu -->
   <nav class="srn-nursery__nav" aria-label="Nursery page navigation">
     <a href="#what-we-do" class="srn-nursery__nav-link">What We Do</a>
-    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">|</span>
     <a href="#hours" class="srn-nursery__nav-link">Our Hours</a>
-    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">|</span>
     <a href="#plants" class="srn-nursery__nav-link">Our Plants</a>
-    <span class="srn-nursery__nav-divider" aria-hidden="true">•</span>
+    <span class="srn-nursery__nav-divider" aria-hidden="true">|</span>
     <a href="#contact" class="srn-nursery__nav-link">Contact Us</a>
   </nav>
 
@@ -389,6 +389,16 @@
     gap: 20px;
   }
 
+  /* Desktop: Change vertical bars to dots */
+  .srn-nursery__nav-divider {
+    font-size: 0;
+  }
+  
+  .srn-nursery__nav-divider::before {
+    content: '•';
+    font-size: 14px;
+  }
+
   .srn-nursery__content {
     font-size: 18px;
     margin-top: 125px;
@@ -450,17 +460,6 @@
     margin-top: 70px;
   }
 }
-
-@media (max-width: 700px){
-  
-  .srn-nursery__nav-divider {
-    display: none;
-  }
-
-  .srn-nursery__nav-divider::before {
-    content: '•';
-    display: inline;
-  }}
 </style>
 <script>
 (function() {
