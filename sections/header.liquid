@@ -83,9 +83,8 @@
     <!-- Right Side: Sort and Cart -->
     <div class="srn-header__side srn-header__side--right">
       
-      <!-- Sort Dropdown (Collection pages only) -->
-      {% if template == 'collection' %}
-      <div class="srn-header__sort">
+      <!-- Sort Dropdown -->
+      <div class="srn-header__sort {% unless template == 'collection' %}srn-header__sort--hidden{% endunless %}">
         <button 
           id="sort-icon" 
           class="srn-header__sort-toggle"
@@ -108,10 +107,6 @@
           <span data-sort="newest" role="menuitem" tabindex="0">Newest</span>
         </div>
       </div>
-      {% else %}
-      <!-- Spacer to maintain layout when sort filter absent -->
-      <div class="srn-header__sort-spacer" aria-hidden="true"></div>
-      {% endif %}
 
       <!-- Cart Link (Hidden on mobile collection pages) -->
       <div id="header-cart" class="srn-header__cart-wrapper {% if template == 'collection' %}srn-header__cart-wrapper--hide-mobile{% endif %}">
@@ -253,6 +248,11 @@ a {
   align-items: center;
 }
 
+.srn-header__sort--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .srn-header__sort-toggle {
   background: none;
   border: none;
@@ -392,6 +392,11 @@ a {
 
   /* Hide spacer on mobile */
   .srn-header__sort-spacer {
+    display: none;
+  }
+
+  /* Show sort filter on mobile collection pages */
+  .srn-header__sort--hidden {
     display: none;
   }
 
