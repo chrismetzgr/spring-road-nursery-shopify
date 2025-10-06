@@ -453,9 +453,11 @@
 
 .card__heading {
   display: flex; 
-  flex-direction: row; 
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 0px;
   font-size: 12px;
   letter-spacing: 3px;
   margin-top: 15px;
@@ -468,12 +470,6 @@
   font-weight: 500;
 }
 
-.card__heading {
-    margin-top: 5px;
-    display: flex; 
-    flex-direction: row;
-    align-items: center;
-}
 
 @media screen and (max-width: 600px) {
   .card__heading {
@@ -522,12 +518,6 @@
   .card__heading {
     font-size: 14px;
     margin-top: 5px;
-    display: flex; 
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0px;
   }
 
 .card__heading span {
