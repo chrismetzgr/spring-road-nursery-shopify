@@ -175,8 +175,7 @@
   width: 100%;
   height: auto;
   opacity: 0;
-  transform: translateY(30px);
-  animation: srn-fadeInUp 0.5s ease-out forwards;
+  animation: srn-fadeIn 0.5s ease-out forwards;
   transition: opacity 1.5s ease-in-out;
 }
 
@@ -187,14 +186,12 @@
   right: 0;
   margin: 0 auto;
   animation: none;
-  transform: none;
   opacity: 0;
 }
 
-@keyframes srn-fadeInUp {
+@keyframes srn-fadeIn {
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -470,7 +467,6 @@
   
   let currentIndex = 0;
   let useFirstImage = true;
-  let animationComplete = false;
   
   function crossfade() {
     currentIndex = (currentIndex + 1) % slides.length;
@@ -488,24 +484,10 @@
     useFirstImage = !useFirstImage;
   }
   
-  // Wait for initial animation
-  img1.addEventListener('animationend', function() {
-    if (!animationComplete) {
-      animationComplete = true;
-      img1.style.animation = 'none';
-      img1.style.transform = 'translateY(0)';
-      
-      // Use setTimeout to ensure the browser processes this before we start transitioning
-      setTimeout(function() {
-        img1.style.opacity = '1';
-        
-        // Wait 7 seconds before first transition
-        setTimeout(function() {
-          crossfade();
-          setInterval(crossfade, 7000);
-        }, 7000);
-      }, 50);
-    }
-  });
+  // Wait for fade-in (0.5s) + display time (7s) = 7.5s total
+  setTimeout(function() {
+    crossfade();
+    setInterval(crossfade, 7000);
+  }, 7500);
 })();
 </script>
