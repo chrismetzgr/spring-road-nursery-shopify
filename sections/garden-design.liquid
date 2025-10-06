@@ -114,16 +114,18 @@
 }
 
 .srn-garden-design__heading-image {
-  max-height: 75px;
+  height: auto;
   width: auto;
   display: block;
   margin: 0 auto;
 }
 
+/* Mobile: Images without desktop/mobile distinction */
 .srn-garden-design__heading-image--desktop {
   display: none;
 }
 
+/* Mobile: Two-line stacked headers (like "Coming Soon") */
 .srn-garden-design__heading-image--mobile {
   display: inline-block;
   max-height: 150px;
@@ -162,6 +164,11 @@
 
   .srn-garden-design__section {
     margin-top: 100px;
+  }
+
+  /* Desktop: All single-line headers get consistent height */
+  .srn-garden-design__heading-image {
+    max-height: 78px;
   }
 
   .srn-garden-design__heading-image--desktop {
