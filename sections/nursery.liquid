@@ -168,6 +168,7 @@
   height: auto;
   opacity: 0;
   transform: translateY(30px);
+  animation: srn-fadeInUp 0.5s ease-out forwards;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -423,6 +424,7 @@
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  const heroContainer = document.querySelector('.srn-nursery__hero');
   const heroImage = document.querySelector('.srn-nursery__hero-image');
   const totalSlides = 9;
   let currentSlide = 1;
@@ -435,25 +437,36 @@ document.addEventListener('DOMContentLoaded', function() {
     preloadedImages.push(img);
   }
   
-  function changeSlide() {
-    currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
-    
-    // Fade out
-    heroImage.style.opacity = '0';
-    
-    // Change image source after fade out
-    setTimeout(() => {
-      heroImage.src = preloadedImages[currentSlide - 1].src;
-      
-      // Fade in
-      setTimeout(() => {
-        heroImage.style.opacity = '1';
-      }, 50);
-    }, 500);
-  }
+  // Create a second image element for crossfading
+  const heroImage2 = heroImage.cloneNode(true);
+  heroImage2.style.position = 'absolute';
+  heroImage2.style.top = '0';
+  heroImage2.style.left = '0';
+  heroImage2.style.opacity = '0';
+  heroContainer.style.position = 'relative';
+  heroContainer.appendChild(heroImage2);
   
   // Start with slide-1.png
   heroImage.src = preloadedImages[0].src;
+  
+  let isFirstImage = true;
+  
+  function changeSlide() {
+    currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+    
+    const fadingIn = isFirstImage ? heroImage2 : heroImage;
+    const fadingOut = isFirstImage ? heroImage : heroImage2;
+    
+    // Set the new image
+    fadingIn.src = preloadedImages[currentSlide - 1].src;
+    
+    // Crossfade
+    fadingOut.style.opacity = '0';
+    fadingIn.style.opacity = '1';
+    
+    // Toggle which image is on top
+    isFirstImage = !isFirstImage;
+  }
   
   // Change slides every 5 seconds
   setInterval(changeSlide, 5000);
