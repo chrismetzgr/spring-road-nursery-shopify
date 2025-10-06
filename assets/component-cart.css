@@ -12,6 +12,7 @@ cart-items.is-empty .title-wrapper-with-link,
 
 .title-wrapper-with-link a{
   font-family: var(--font-family-secondary);
+  font-stretch: expanded;
 }
 
 .is-empty .cart__empty-text,
