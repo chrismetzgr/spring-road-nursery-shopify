@@ -3,22 +3,20 @@
 <main class="srn-nursery" id="nursery-page">
   <!-- Hero Image Slideshow -->
   <div class="srn-nursery__hero">
-    <div class="srn-nursery__hero-container">
-      <img 
-        src="{{ 'slide-1.png' | asset_url }}" 
-        alt="Spring Road Nursery terraced gardens"
-        class="srn-nursery__hero-image srn-nursery__hero-image--bottom"
-        width="1370" 
-        height="630"
-      />
-      <img 
-        src="{{ 'slide-2.png' | asset_url }}" 
-        alt="Spring Road Nursery terraced gardens"
-        class="srn-nursery__hero-image srn-nursery__hero-image--top"
-        width="1370" 
-        height="630"
-      />
-    </div>
+    <img 
+      src="{{ 'slide-1.png' | asset_url }}" 
+      alt="Spring Road Nursery terraced gardens"
+      class="srn-nursery__hero-image"
+      width="1370" 
+      height="630"
+    />
+    <img 
+      src="{{ 'slide-2.png' | asset_url }}" 
+      alt="Spring Road Nursery terraced gardens"
+      class="srn-nursery__hero-image srn-nursery__hero-image--overlay"
+      width="1370" 
+      height="630"
+    />
   </div>
 
   <!-- Navigation Menu -->
@@ -169,11 +167,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.srn-nursery__hero-container {
-  max-width: 1370px;
-  width: 100%;
   position: relative;
 }
 
@@ -181,20 +174,20 @@
   max-width: 1370px;
   width: 100%;
   height: auto;
-  display: block;
-  transition: opacity 1.5s ease-in-out;
-}
-
-.srn-nursery__hero-image--bottom {
   opacity: 0;
   transform: translateY(30px);
   animation: srn-fadeInUp 0.5s ease-out forwards;
+  transition: opacity 1.5s ease-in-out;
 }
 
-.srn-nursery__hero-image--top {
+.srn-nursery__hero-image--overlay {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  margin: 0 auto;
+  animation: none;
+  transform: none;
   opacity: 0;
 }
 
@@ -469,39 +462,45 @@
     img.src = src;
   });
   
-  const bottomImg = document.querySelector('.srn-nursery__hero-image--bottom');
-  const topImg = document.querySelector('.srn-nursery__hero-image--top');
+  const images = document.querySelectorAll('.srn-nursery__hero-image');
+  const img1 = images[0];
+  const img2 = images[1];
   
-  if (!bottomImg || !topImg) return;
+  if (!img1 || !img2) return;
   
   let currentIndex = 0;
-  let showingTop = false;
+  let useFirstImage = true;
+  let animationComplete = false;
   
   function crossfade() {
     currentIndex = (currentIndex + 1) % slides.length;
     
-    if (showingTop) {
-      // Fade to bottom
-      bottomImg.src = slides[currentIndex];
-      bottomImg.style.opacity = '1';
-      topImg.style.opacity = '0';
+    if (useFirstImage) {
+      img1.src = slides[currentIndex];
+      img1.style.opacity = '1';
+      img2.style.opacity = '0';
     } else {
-      // Fade to top
-      topImg.src = slides[currentIndex];
-      topImg.style.opacity = '1';
-      bottomImg.style.opacity = '0';
+      img2.src = slides[currentIndex];
+      img2.style.opacity = '1';
+      img1.style.opacity = '0';
     }
     
-    showingTop = !showingTop;
+    useFirstImage = !useFirstImage;
   }
   
-  // Wait for initial animation, then start slideshow
-  bottomImg.addEventListener('animationend', function() {
-    bottomImg.style.animation = 'none';
-    
-    setTimeout(function() {
-      setInterval(crossfade, 7000);
-    }, 7000);
+  // Wait for initial animation
+  img1.addEventListener('animationend', function() {
+    if (!animationComplete) {
+      animationComplete = true;
+      img1.style.animation = 'none';
+      img1.style.transform = 'translateY(0)';
+      
+      // Wait 7 seconds before first transition
+      setTimeout(function() {
+        crossfade();
+        setInterval(crossfade, 7000);
+      }, 7000);
+    }
   });
 })();
 </script>
