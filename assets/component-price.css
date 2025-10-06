@@ -22,7 +22,7 @@
 
 .price .price-item {
   display: inline-block;
-  margin: 2.5rem 0 1.5rem 0;
+  margin: 2.5rem 0 1rem 0;
   font-family: var(--font-family-secondary);
   font-size: 14px;
   font-stretch: expanded;
