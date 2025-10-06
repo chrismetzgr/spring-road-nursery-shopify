@@ -123,3 +123,27 @@
   }
 }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get current sort parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentSort = urlParams.get('sort_by');
+    
+    // Map sort_by values to data-sort attributes
+    const sortMap = {
+      'manual': 'featured',
+      'best-selling': 'best-selling',
+      'price-ascending': 'price-low',
+      'price-descending': 'price-high',
+      'created-descending': 'newest'
+    };
+    
+    // Find matching sort option and add wavy-underline class
+    const activeSortValue = sortMap[currentSort] || 'featured'; // default to featured
+    const activeSortElement = document.querySelector(`[data-sort="${activeSortValue}"]`);
+    
+    if (activeSortElement) {
+      activeSortElement.classList.add('wavy-underline');
+    }
+  });
+</script>
