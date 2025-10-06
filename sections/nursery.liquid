@@ -452,6 +452,7 @@
   });
   
   let currentIndex = 0;
+  let slideshowStarted = false;
   
   function changeSlide() {
     img.style.opacity = '0';
@@ -459,22 +460,25 @@
     setTimeout(function() {
       currentIndex = (currentIndex + 1) % slides.length;
       img.src = slides[currentIndex];
-      
-      setTimeout(function() {
-        img.style.opacity = '1';
-      }, 50);
+      img.style.opacity = '1';
     }, 1000);
   }
   
-  // Wait for initial animation, then prepare for slideshow and start immediately
-  setTimeout(function() {
-    img.classList.add('srn-slideshow-active');
-    img.style.opacity = '1';
-    img.style.transform = 'translateY(0)';
-    
-    // Start the slideshow immediately, don't wait another interval
-    changeSlide();
-    setInterval(changeSlide, 7000);
-  }, 7000);
+  // Wait for the animation to complete
+  img.addEventListener('animationend', function() {
+    if (!slideshowStarted) {
+      slideshowStarted = true;
+      // Remove animation and lock in the final state
+      img.style.animation = 'none';
+      img.style.opacity = '1';
+      img.style.transform = 'translateY(0)';
+      
+      // Wait 7 seconds, then start cycling
+      setTimeout(function() {
+        changeSlide();
+        setInterval(changeSlide, 7000);
+      }, 7000);
+    }
+  });
 })();
 </script>
