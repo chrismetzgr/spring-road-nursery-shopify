@@ -183,8 +183,7 @@ class CartItems extends HTMLElement {
           this.getSectionsToRender().forEach((section) => {
             console.log({section})
             const elementToReplace =
-              document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
-              console.log({elementToReplace})
+              document.getElementById(section.id)?.querySelector(section.selector) || document.getElementById(section.id);
             elementToReplace.innerHTML = this.getSectionInnerHTML(
               parsedState.sections[section.section],
               section.selector
