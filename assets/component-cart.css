@@ -62,7 +62,7 @@ cart-items {
 }
 
 .cart__items th {
-  font: var(--font-family-secondary) !important;
+  font-family: var(--font-family-secondary) !important;
 }
 
 .cart__items--disabled {
