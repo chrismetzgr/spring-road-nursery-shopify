@@ -47,26 +47,31 @@
 
 .media-gallery__item {
   width: 100%;
-  transition: opacity 0.3s ease-in-out, z-index 0s 0.3s;
+  transition: opacity 0.3s ease-in-out;
 }
 
+/* Keep first item in normal flow to maintain height */
+.media-gallery__item:first-child {
+  position: relative;
+}
+
+/* All other items stack on top */
 .media-gallery__item:not(:first-child) {
   position: absolute;
   top: 0;
   left: 0;
 }
 
+/* Inactive items fade out */
 .media-gallery__item:not(.is-active) {
   opacity: 0;
-  z-index: 1;
   pointer-events: none;
 }
 
+/* Active items fade in */
 .media-gallery__item.is-active {
   opacity: 1;
-  z-index: 2;
   pointer-events: auto;
-  transition: opacity 0.3s ease-in-out, z-index 0s;
 }
 
   .thumbnail-slider {
