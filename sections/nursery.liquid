@@ -467,8 +467,8 @@
   
   if (!img1 || !img2) return;
   
-  let currentIndex = 1;  // Changed from 0 to 1 since slide-1 is already showing
-  let useFirstImage = true;
+  let currentIndex = 1;  // We're showing slide-1, slide-2 is preloaded
+  let useFirstImage = false;  // Start with false so first crossfade shows img2
   
   function crossfade() {
     currentIndex = (currentIndex + 1) % slides.length;
