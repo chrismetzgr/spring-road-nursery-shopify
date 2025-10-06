@@ -2,21 +2,23 @@
 
 <main class="srn-nursery" id="nursery-page">
   <!-- Hero Image Slideshow -->
-  <div class="srn-nursery__hero" id="hero-slideshow">
-    <img 
-      src="{{ 'slide-1.png' | asset_url }}" 
-      alt="Spring Road Nursery terraced gardens"
-      class="srn-nursery__hero-image"
-      width="1370" 
-      height="630"
-    />
-    <img 
-      src="{{ 'slide-2.png' | asset_url }}" 
-      alt="Spring Road Nursery terraced gardens"
-      class="srn-nursery__hero-image srn-nursery__hero-image--hidden"
-      width="1370" 
-      height="630"
-    />
+  <div class="srn-nursery__hero">
+    <div class="srn-nursery__hero-container">
+      <img 
+        src="{{ 'slide-1.png' | asset_url }}" 
+        alt="Spring Road Nursery terraced gardens"
+        class="srn-nursery__hero-image srn-nursery__hero-image--bottom"
+        width="1370" 
+        height="630"
+      />
+      <img 
+        src="{{ 'slide-2.png' | asset_url }}" 
+        alt="Spring Road Nursery terraced gardens"
+        class="srn-nursery__hero-image srn-nursery__hero-image--top"
+        width="1370" 
+        height="630"
+      />
+    </div>
   </div>
 
   <!-- Navigation Menu -->
@@ -167,6 +169,11 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.srn-nursery__hero-container {
+  max-width: 1370px;
+  width: 100%;
   position: relative;
 }
 
@@ -174,25 +181,21 @@
   max-width: 1370px;
   width: 100%;
   height: auto;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(30px);
-  opacity: 0;
-  animation: srn-fadeInUp 0.5s ease-out forwards;
+  display: block;
   transition: opacity 1.5s ease-in-out;
 }
 
-.srn-nursery__hero-image--hidden {
+.srn-nursery__hero-image--bottom {
   opacity: 0;
-  animation: none;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(30px);
+  animation: srn-fadeInUp 0.5s ease-out forwards;
 }
 
-.srn-nursery__hero-image:first-child {
-  position: relative;
-  left: auto;
-  transform: translateY(30px);
+.srn-nursery__hero-image--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
 
 @keyframes srn-fadeInUp {
@@ -443,18 +446,11 @@
   .srn-nursery__contact-email {
     margin-top: 70px;
   }
-
-  .srn-nursery__hero-image:first-child {
-    transform: translateX(-50%) translateY(30px);
-  }
 }
 </style>
 
 <script>
 (function() {
-  const container = document.getElementById('hero-slideshow');
-  if (!container) return;
-  
   const slides = [
     '{{ "slide-1.png" | asset_url }}',
     '{{ "slide-2.png" | asset_url }}',
@@ -469,37 +465,39 @@
   
   // Preload all images
   slides.forEach(function(src) {
-    const preloadImg = new Image();
-    preloadImg.src = src;
+    const img = new Image();
+    img.src = src;
   });
   
-  const img1 = container.children[0];
-  const img2 = container.children[1];
+  const bottomImg = document.querySelector('.srn-nursery__hero-image--bottom');
+  const topImg = document.querySelector('.srn-nursery__hero-image--top');
+  
+  if (!bottomImg || !topImg) return;
+  
   let currentIndex = 0;
-  let useFirstImage = true;
+  let showingTop = false;
   
   function crossfade() {
     currentIndex = (currentIndex + 1) % slides.length;
     
-    if (useFirstImage) {
-      // Fade to img1
-      img1.src = slides[currentIndex];
-      img1.style.opacity = '1';
-      img2.style.opacity = '0';
+    if (showingTop) {
+      // Fade to bottom
+      bottomImg.src = slides[currentIndex];
+      bottomImg.style.opacity = '1';
+      topImg.style.opacity = '0';
     } else {
-      // Fade to img2
-      img2.src = slides[currentIndex];
-      img2.style.opacity = '1';
-      img1.style.opacity = '0';
+      // Fade to top
+      topImg.src = slides[currentIndex];
+      topImg.style.opacity = '1';
+      bottomImg.style.opacity = '0';
     }
     
-    useFirstImage = !useFirstImage;
+    showingTop = !showingTop;
   }
   
-  // Wait for initial animation to complete, then start slideshow
-  img1.addEventListener('animationend', function() {
-    img1.style.animation = 'none';
-    img1.style.transform = 'translateX(-50%) translateY(0)';
+  // Wait for initial animation, then start slideshow
+  bottomImg.addEventListener('animationend', function() {
+    bottomImg.style.animation = 'none';
     
     setTimeout(function() {
       setInterval(crossfade, 7000);
