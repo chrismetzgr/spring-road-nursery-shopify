@@ -43,10 +43,13 @@
   position: relative;
   width: 100%;
   padding: 0 20px;
+  display: block;
+  isolation: isolate; /* Creates a new stacking context */
 }
 
 .media-gallery__item {
   width: 100%;
+  display: block; /* Make sure items are block-level */
   transition: opacity 0.3s ease-in-out;
 }
 
