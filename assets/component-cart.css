@@ -61,6 +61,10 @@ cart-items {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
 
+.cart__items th {
+  font: var(--font-family-secondary) !important;
+}
+
 .cart__items--disabled {
   pointer-events: none;
 }
