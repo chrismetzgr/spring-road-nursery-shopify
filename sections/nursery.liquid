@@ -41,14 +41,14 @@
           alt="What We Do"
           class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
           width="auto" 
-          height="75px"
+          height="75"
         />
         <img 
           src="{{ 'what-we-do-mobile.png' | asset_url }}" 
           alt="What We Do"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="75px"
+          height="75"
         />
       </h2>
       <article class="srn-nursery__text srn-nursery__text--left-align">
@@ -80,14 +80,14 @@
           alt="Our Hours"
           class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
           width="auto" 
-          height="75px"
+          height="75"
         />
         <img 
           src="{{ 'hours-mobile.png' | asset_url }}" 
           alt="Our Hours"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="75px"
+          height="75"
         />
       </h2>
       <p class="srn-nursery__hours-intro">Our days and hours shift with the season. Currently, we are open...</p>
@@ -111,14 +111,14 @@
           alt="Our Plants"
           class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
           width="auto" 
-          height="75px"
+          height="75"
         />
         <img 
           src="{{ 'our-plants-mobile.png' | asset_url }}" 
           alt="Our Plants"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="75px"
+          height="75"
         />
       </h2>
       <div class="srn-nursery__text">
@@ -143,14 +143,14 @@
           alt="Contact Us"
           class="srn-nursery__heading-image srn-nursery__heading-image--desktop"
           width="auto" 
-          height="75px"
+          height="75"
         />
         <img 
           src="{{ 'contact.png' | asset_url }}" 
           alt="Contact Us"
           class="srn-nursery__heading-image srn-nursery__heading-image--mobile"
           width="auto" 
-          height="75px"
+          height="75"
         />
       </h2>
       <a href="mailto:hello@springroadnurseryvt.com" class="srn-nursery__contact-email">
@@ -285,15 +285,15 @@
 }
 
 .srn-nursery__heading-image {
-  width: auto;
   display: block;
+  height: 91px;
+  width: auto;
+  max-width: none;
 }
 
-/* Mobile versions */
+/* Mobile versions: shown */
 .srn-nursery__heading-image--mobile {
   display: inline-block;
-  height: auto;
-  width: auto;
 }
 
 /* Desktop versions: hidden on mobile */
@@ -405,10 +405,14 @@
     margin-top: 0;
   }
 
-  /* Desktop: All headers get consistent height */
+  /* Desktop: Fixed height for all heading images */
+  .srn-nursery__heading-image {
+    height: 78px;
+  }
+
+  /* Desktop: Show desktop versions */
   .srn-nursery__heading-image--desktop {
     display: inline-block;
-    height: 78px;
   }
 
   /* Desktop: Hide mobile versions */
