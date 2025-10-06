@@ -336,8 +336,43 @@
    ============================================ */
 @media (max-width: 768px) {
 
+  /* ============================================
+   THEME VARIANTS
+   ============================================ */
+
+  /* Nursery Theme */
+  .srn-footer--nursery,
+  .srn-footer--nursery a,
+  .srn-footer--nursery a:visited,
+  .srn-footer--nursery span,
+  .srn-footer--nursery .srn-footer__title,
+  .srn-footer--nursery .srn-footer__text,
+  .srn-footer--nursery .field__label,
+  .srn-footer--nursery .field__input {
+    background-color: var(--font-color-dark-secondary);
+    color: #F0FFBB
+  }
+
+  /* Garden Design Theme */
+  .srn-footer--garden-design,
+  .srn-footer--garden-design a,
+  .srn-footer--garden-design a:visited,
+  .srn-footer--garden-design span,
+  .srn-footer--garden-design .srn-footer__title,
+  .srn-footer--garden-design .srn-footer__text,
+  .srn-footer--garden-design .field__label,
+  .srn-footer--garden-design .field__input {
+    color: var(--font-color-light-quaternary);
+  }
+
   .srn-footer__logo {
     display: none;
+  }
+
+  .srn-footer__title {
+    border-bottom: 1px wavy #c03;
+    width: 100%;
+    display: block;
   }
 
   .srn-footer__content {
