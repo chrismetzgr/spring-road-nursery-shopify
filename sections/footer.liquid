@@ -61,7 +61,7 @@
                   {% elsif form.posted_successfully? %}
                     aria-describedby="Newsletter-success--footer"
                   {% endif %}
-                  placeholder=""
+                  placeholder="Your Email Here"
                   required
                 >
                 <label class="newsletter-label field__label" for="NewsletterForm--footer-desktop">
@@ -120,7 +120,7 @@
                 {% elsif form.posted_successfully? %}
                   aria-describedby="Newsletter-success--footer-mobile"
                 {% endif %}
-                placeholder=""
+                placeholder="Your Email Here"
                 required
               >
               <label class="newsletter-label field__label" for="NewsletterForm--footer-mobile">
@@ -276,23 +276,33 @@
   display: none;
 }
 
+/* Hide label visually but keep for accessibility */
 .srn-footer .newsletter-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Placeholder styling */
+.srn-footer .field__input::placeholder {
   font-size: 14px;
   font-stretch: expanded;
   text-transform: uppercase;
+  font-family: var(--font-family-secondary);
+  text-align: center;
+  opacity: 1;
 }
 
 @media (min-width: 769px) {
   .srn-footer__side:last-child {
     margin-top: 15px;
   }
-}
-
-/* Desktop - Label shrinks on focus */
-.srn-footer__form--desktop .field__input:focus ~ .newsletter-label,
-.srn-footer__form--desktop .field__input:not(:placeholder-shown) ~ .newsletter-label,
-.srn-footer__form--desktop .field__input:-webkit-autofill ~ .newsletter-label {
-  font-size: 1rem;
 }
 
 /* ============================================
@@ -306,8 +316,11 @@
 .srn-footer--nursery span,
 .srn-footer--nursery .srn-footer__title,
 .srn-footer--nursery .srn-footer__text,
-.srn-footer--nursery .field__label,
 .srn-footer--nursery .field__input {
+  color: var(--font-color-dark-secondary);
+}
+
+.srn-footer--nursery .field__input::placeholder {
   color: var(--font-color-dark-secondary);
 }
 
@@ -318,17 +331,19 @@
 .srn-footer--garden-design span,
 .srn-footer--garden-design .srn-footer__title,
 .srn-footer--garden-design .srn-footer__text,
-.srn-footer--garden-design .field__label,
 .srn-footer--garden-design .field__input {
   color: var(--font-color-light-quaternary);
-  
+}
+
+.srn-footer--garden-design .field__input::placeholder {
+  color: var(--font-color-light-quaternary);
 }
 
 .srn-footer--garden-design .srn-footer__title {
-    border-bottom: 1px wavy color: var(--font-color-light-quaternary);;
-    width: 100%;
-    display: block;
-  }
+  border-bottom: 1px wavy var(--font-color-light-quaternary);
+  width: 100%;
+  display: block;
+}
 
 /* ============================================
    TABLET BREAKPOINT (481px - 990px)
@@ -353,7 +368,7 @@
     margin-top: 0px;
   }
 
-  .srn-footer__title  .wavy-underline {
+  .srn-footer__title .wavy-underline {
     text-decoration: none !important;
   }
 
@@ -448,6 +463,7 @@
     padding: 0;
     box-sizing: border-box;
   }
+
   .srn-footer__form--mobile .field__input, .select__select, .customer .field input, .customer select {
     border-radius: 0;
   }
@@ -465,12 +481,8 @@
     color: var(--color-background);
   }
 
-  .srn-footer__form--mobile .field__label,
   .srn-footer__form--mobile .field__input::placeholder {
     color: var(--color-background);
-  }
-
-  .srn-footer__form--mobile .field__input::placeholder {
     opacity: 0.7;
   }
 
@@ -480,53 +492,61 @@
     fill: var(--color-background);
   }
 
-    /* Nursery Theme */
+  /* Nursery Theme - Mobile */
   .srn-footer--nursery,
   .srn-footer--nursery a,
   .srn-footer--nursery a:visited,
   .srn-footer--nursery span,
   .srn-footer--nursery .srn-footer__title,
-  .srn-footer--nursery .srn-footer__text{
+  .srn-footer--nursery .srn-footer__text {
     background-color: var(--font-color-dark-secondary);
     color: var(--color-background);
   }
 
-  .srn-footer--nursery .field__label,
-  .srn-footer--nursery .field__input,
+  .srn-footer--nursery .field__input {
+    background-color: var(--color-background);
+    color: var(--font-color-dark-secondary);
+  }
+
+  .srn-footer--nursery .field__input::placeholder {
+    color: var(--font-color-dark-secondary);
+  }
+
   .srn-footer--nursery .svg-wrapper,
   .srn-footer--nursery .svg-wrapper svg {
     background-color: var(--color-background);
     color: var(--font-color-dark-secondary);
   }
 
-     /* Shop Theme */
+  /* Shop Theme - Mobile */
   .srn-footer--shop,
   .srn-footer--shop a,
   .srn-footer--shop a:visited,
   .srn-footer--shop span,
   .srn-footer--shop .srn-footer__title,
-  .srn-footer--shop .srn-footer__text{
+  .srn-footer--shop .srn-footer__text {
     background-color: var(--font-color-dark);
     color: var(--color-background);
   }
 
-  .srn-footer--shop .field__label,
-  .srn-footer--shop .field__input,
+  .srn-footer--shop .field__input {
+    background-color: var(--color-background);
+    color: var(--font-color-dark);
+  }
+
+  .srn-footer--shop .field__input::placeholder {
+    color: var(--font-color-dark);
+  }
+
   .srn-footer--shop .svg-wrapper,
   .srn-footer--shop .svg-wrapper svg {
     background-color: var(--color-background);
     color: var(--font-color-dark);
   }
 
+  /* Garden Design Theme - Mobile */
   .srn-footer--garden-design .srn-footer__form--mobile .field__input {
     background-color: var(--font-color-light-quaternary);
-  }
-
-  /* Mobile - Label shrinks on focus */
-  .srn-footer__form--mobile .field__input:focus ~ .field__label,
-  .srn-footer__form--mobile .field__input:not(:placeholder-shown) ~ .field__label,
-  .srn-footer__form--mobile .field__input:-webkit-autofill ~ .field__label {
-    font-size: 12px;
   }
 
   /* Footer Details */
@@ -567,18 +587,7 @@
   }
 }
 
-/* ============================================
-   TABLET-SPECIFIC LABEL SIZE (768px - 990px)
-   ============================================ */
-@media (min-width: 768px) and (max-width: 990px) {
-  .srn-footer__form--mobile .field__input:focus ~ .field__label,
-  .srn-footer__form--mobile .field__input:not(:placeholder-shown) ~ .field__label,
-  .srn-footer__form--mobile .field__input:-webkit-autofill ~ .field__label {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 650px){
+@media (max-width: 650px) {
   .srn-footer__details {
     margin: 0;
   }
