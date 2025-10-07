@@ -411,4 +411,68 @@
     margin-top: 70px;
   }
 }
-</style>
+</style><script>
+(function() {
+  const slides = [
+    '{{ "slide-1.png" | asset_url }}',
+    '{{ "slide-2.png" | asset_url }}',
+    '{{ "slide-3.png" | asset_url }}',
+    '{{ "slide-4.png" | asset_url }}',
+    '{{ "slide-5.png" | asset_url }}',
+    '{{ "slide-6.png" | asset_url }}',
+    '{{ "slide-7.png" | asset_url }}',
+    '{{ "slide-8.png" | asset_url }}',
+    '{{ "slide-9.png" | asset_url }}'
+  ];
+  
+  // Preload all images
+  slides.forEach(function(src) {
+    const img = new Image();
+    img.src = src;
+  });
+  
+  const images = document.querySelectorAll('.srn-nursery__hero-image');
+  const img1 = images[0];
+  const img2 = images[1];
+  
+  if (!img1 || !img2) return;
+  
+  let currentIndex = 1;  // slide-2 is already loaded in img2
+  let useFirstImage = false;  // Start with false so first crossfade shows img2
+  let isFirstTransition = true;  // Track if this is the first transition
+  
+  function crossfade() {
+    // Only increment if it's NOT the first transition
+    if (!isFirstTransition) {
+      currentIndex = (currentIndex + 1) % slides.length;
+    }
+    isFirstTransition = false;
+    
+    if (useFirstImage) {
+      img1.src = slides[currentIndex];
+      img1.style.opacity = '1';
+      img2.style.opacity = '0';
+    } else {
+      img2.src = slides[currentIndex];
+      img2.style.opacity = '1';
+      img1.style.opacity = '0';
+    }
+    
+    useFirstImage = !useFirstImage;
+  }
+  
+  // Wait for the animation to complete
+  img1.addEventListener('animationend', function() {
+    // Remove the animation
+    img1.style.animation = 'none';
+    // Set opacity explicitly so transitions will work
+    img1.style.opacity = '1';
+    
+    // Wait 7 seconds, then start slideshow
+    setTimeout(function() {
+      crossfade();
+      setInterval(crossfade, 7000);
+    }, 7000);
+  }, { once: true });
+})();
+</script>
