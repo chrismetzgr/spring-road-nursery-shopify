@@ -780,7 +780,7 @@
 }
 
 .card__badge.badge-bottom-center {
-    /* display: block; */
+    display: block;
     z-index: 100000 !important;
     position: fixed !important;
     bottom: 10% !important;
