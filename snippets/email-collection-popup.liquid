@@ -63,11 +63,11 @@
                 {% elsif form.posted_successfully? %}
                   aria-describedby="Newsletter-success--{{ section.id }}"
                 {% endif %}
-                placeholder="Your Email Address Here"
+                placeholder="Your Email Addres Here"
                 required
               >
               <label class="newsletter-label field__label" for="NewsletterForm--{{ section.id }}">
-                Your Email Address Here
+                Your Email Addres Here
               </label>
               <button
                 type="submit"
@@ -190,23 +190,10 @@
 .srn-email-popup .field__input {
   color: var(--font-color-dark);
   transition: none;
-  display: flex;
-  align-items: center;
 }
 
 .srn-email-popup .field__input:focus {
   transition: none;
-}
-
-.srn-email-popup .field {
-  display: flex;
-  align-items: center;
-}
-
-.srn-email-popup .field__button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Hide label visually but keep for accessibility */
@@ -239,16 +226,13 @@
   font-size: 10px;
   font-stretch: expanded;
   color: var(--font-color-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .srn-email-popup .svg-wrapper svg {
   width: 10px;
   height: 10px;
   display: block;
+  padding-top: 2px;
 }
 
 .srn-email-popup__form-wrapper .newsletter-form__message--success {
