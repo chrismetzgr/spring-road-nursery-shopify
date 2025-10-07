@@ -795,7 +795,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 250px;
+  width: 220px;
   max-width: 90%;
   z-index: 1000 !important;
 }
