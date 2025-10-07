@@ -815,7 +815,7 @@
   font-family: var(--font-family-secondary);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   color: var(--font-color-dark);
   white-space: nowrap;
 }
