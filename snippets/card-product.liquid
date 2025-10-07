@@ -134,7 +134,7 @@
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {% comment %} {%- if card_product.available == false -%} {% endcomment %}
-                 <div class="srn-sold-out">
+                 <div class="srn-sold-out" style="background-image: url('{{ 'sold-out.png' | asset_url }}');>
                   <span class="srn-sold-out-text">SOLD OUT</span>
                 </div>
             {%- if card_product.compare_at_price > card_product.price and card_product.available -%}
