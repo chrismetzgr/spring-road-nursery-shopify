@@ -780,7 +780,7 @@
 }
 
 .card__badge.badge-bottom-center {
-    /* display: block; */
+    display: none;;
     z-index: 100000 !important;
     position: fixed !important;
     bottom: 10% !important;
@@ -797,6 +797,7 @@
   justify-content: center;
   width: auto;
   height: 90px;
+  z-index: 100000 !important;
 }
 
 .srn-sold-out-text {
