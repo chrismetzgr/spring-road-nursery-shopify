@@ -21,28 +21,6 @@
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
- <div 
-  class="srn-sold-out" 
-  style="
-    background-image: url('{{ "sold-out.png" | asset_url }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 120px;
-    width: 257px;
-  "
->
-  <span style="
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-  ">
-    SOLD OUT
-  </span>
-</div>
 
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
