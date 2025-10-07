@@ -792,11 +792,11 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex !important!;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
-  max-height: 90px;
+  height: 90px;
 }
 
 .srn-sold-out-text {
