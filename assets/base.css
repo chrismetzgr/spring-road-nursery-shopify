@@ -28,8 +28,12 @@
 
 }
 
-a, button, [role="button"], .clickable {
-  pointer-events: auto !important;
+a, button, input[type="submit"], [role="button"] {
+  cursor: pointer !important;
+}
+
+a:hover, button:hover, input[type="submit"]:hover, [role="button"]:hover {
+  cursor: pointer !important;
 }
 
 /* base */
