@@ -812,7 +812,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding-top: 10px;
-  padding-right: 2px;
   font-family: var(--font-family-secondary);
   font-size: 13px;
   font-weight: 500;
