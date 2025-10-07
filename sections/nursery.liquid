@@ -411,7 +411,8 @@
     margin-top: 70px;
   }
 }
-</style><script>
+</style>
+<script>
 (function() {
   const slides = [
     '{{ "slide-1.png" | asset_url }}',
@@ -471,8 +472,8 @@
     // Wait 7 seconds, then start slideshow
     setTimeout(function() {
       crossfade();
-      setInterval(crossfade, 7000);
-    }, 7000);
+      setInterval(crossfade, 3000);
+    }, 2500);
   }, { once: true });
 })();
 </script>
