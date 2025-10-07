@@ -41,7 +41,9 @@
       assign ratio = 1
     endif
   -%}
-  <link rel="preload" as="image" href="{{ 'sold-out.png' | asset_url }}">
+  {%- if card_product.available == false -%}
+    <link rel="preload" as="image" href="{{ 'sold-out.png' | asset_url }}">
+  {% endif %}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
     <a
       href="{{ card_product.url }}"
