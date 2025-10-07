@@ -780,7 +780,7 @@
 }
 
 .card__badge.badge-bottom-center {
-  /* display: block; */
+  display: block;
   position: absolute !important;
   bottom: 5% !important;
   left: 50% !important;
@@ -813,8 +813,8 @@
 
 @media screen and (max-width: 500px) {
   .srn-sold-out {
-    width: 225px; /* 10% smaller: 250px * 0.9 = 225px */
-    height: 90px; /* 10% smaller: 100px * 0.9 = 90px */
+    width: 175px; /* 10% smaller: 250px * 0.9 = 225px */
+    height: 50px; /* 10% smaller: 100px * 0.9 = 90px */
   }
 
   .srn-sold-out-text {
