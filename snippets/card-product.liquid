@@ -136,8 +136,23 @@
             {% comment %} {%- if card_product.available == false -%} {% endcomment %}
                  <div 
   class="srn-sold-out" 
+  style="
+    background-image: url('{{ "sold-out.png" | asset_url }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    width: 257px;
+  "
 >
-  <span>
+  <span style="
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+  ">
     SOLD OUT
   </span>
 </div>
