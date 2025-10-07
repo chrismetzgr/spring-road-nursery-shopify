@@ -41,6 +41,10 @@ a, a *, button, button * {
   cursor: pointer !important;
 }
 
+html * {
+  cursor: pointer !important;
+}
+
 .page-width {
   max-width: var(--page-width);
   margin: 0 auto;
