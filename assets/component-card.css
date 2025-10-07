@@ -363,7 +363,7 @@
   justify-self: flex-end;
 }
 
-.card__badge.bottom-center {
+.card__badge.bage-bottom-center {
     display: block important!;
     z-index: 100000;
     position: fixed;
