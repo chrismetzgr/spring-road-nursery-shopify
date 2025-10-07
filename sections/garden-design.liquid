@@ -81,7 +81,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 25px;
-  padding: 0 20px;
+  padding: 0 1%;
   color: var(--font-color-light-tertiary);
 }
 
@@ -91,9 +91,10 @@
 
 /* Section */
 .srn-garden-design__section {
-  max-width: 900px;
+  max-width: 850px;
   width: 100%;
-  margin: 25px auto 0;
+  margin: 50px auto 0;
+  padding: 0 20px;
   text-align: center;
 }
 
@@ -105,17 +106,17 @@
 .srn-garden-design__heading-image {
   display: block;
   margin: 0 auto;
-  height: 22px;
+  height: auto;
+  max-height: 30px;
   width: auto;
-  max-width: none;
+  max-width: 100%;
 }
 
 /* Text Content */
 .srn-garden-design__text {
-  margin-top: 25px;
+  margin-top: 10px;
   font-size: 18px;
   line-height: 1.15;
-  {% comment %} padding: 0 20px; {% endcomment %}
 }
 
 .srn-garden-design__text p {
@@ -133,50 +134,33 @@
   text-underline-offset: 3px;
 }
 
-@media (min-width: 425px){
-   .srn-garden-design__heading-image {
-    height: 30px;
-  }
-}
-
 /* ============================================
-   DESKTOP BREAKPOINT (800px)
+   DESKTOP BREAKPOINT (700px)
    ============================================ */
-@media (min-width: 800px) and (max-width: 1100) {
+@media (min-width: 700px) {
+  .srn-garden-design {
+    margin-top: 50px;
+    margin-bottom: 150px;
+  }
 
-
-  .srn-garden-design__content{
-    margin: 100px 0;
+  .srn-garden-design__content {
+    margin-top: 125px;
+    font-size: 18px;
   }
 
   .srn-garden-design__section {
-    margin-top: 100px;
+    margin-top: 0;
+    gap: 30px;
+    font-size: 25px;
   }
 
-  /* Desktop: Fixed height for all heading images */
   .srn-garden-design__heading-image {
-    height: 58px;
+    max-height: 72px;
   }
 
   .srn-garden-design__text {
-    margin-top: 50px;
+    margin-top: 40px;
     font-size: 25px;
-  }
-}
-
-@media screen and (min-width: 1101px) {
-  .srn-garden-design__heading-image {
-    height: 72px;
-  }
-
-  .srn-garden-design__content{
-    margin: 100px 0;
-  }
-}
-
-@media (min-width: 630px) and (max-width: 799px) {
-  .srn-garden-design__heading-image {
-    height: 40px;  /* Or whatever height works for you */
   }
 }
 </style>
