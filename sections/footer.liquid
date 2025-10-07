@@ -1,4 +1,4 @@
-<footer id="footer" class="srn-footer {% if page.handle == 'nursery' %}srn-footer--nursery{% elsif page.handle == 'garden-design' %}srn-footer--garden-design{% endif %}" role="contentinfo">
+<footer id="footer" class="srn-footer {% if page.handle == 'nursery' %}srn-footer--nursery{% elsif page.handle == 'garden-design' %}srn-footer--garden-design{% else %}srn-footer--shop{% endif %}" role="contentinfo">
   <div class="srn-footer__content">
     
     <!-- Left: Navigation Menu -->
@@ -480,24 +480,24 @@
     fill: var(--color-background);
   }
 
-  /* Nursery Theme */
-.srn-footer--nursery,
-.srn-footer--nursery a,
-.srn-footer--nursery a:visited,
-.srn-footer--nursery span,
-.srn-footer--nursery .srn-footer__title,
-.srn-footer--nursery .srn-footer__text{
-  background-color: var(--font-color-dark-secondary);
-  color: var(--color-background);
-}
+    /* Nursery Theme */
+  .srn-footer--nursery,
+  .srn-footer--nursery a,
+  .srn-footer--nursery a:visited,
+  .srn-footer--nursery span,
+  .srn-footer--nursery .srn-footer__title,
+  .srn-footer--nursery .srn-footer__text{
+    background-color: var(--font-color-dark-secondary);
+    color: var(--color-background);
+  }
 
-.srn-footer--nursery .field__label,
-.srn-footer--nursery .field__input,
-.srn-footer--nursery .svg-wrapper,
-.srn-footer--nursery .svg-wrapper svg {
-  background-color: var(--color-background);
-  color: var(--font-color-dark-secondary);
-}
+  .srn-footer--nursery .field__label,
+  .srn-footer--nursery .field__input,
+  .srn-footer--nursery .svg-wrapper,
+  .srn-footer--nursery .svg-wrapper svg {
+    background-color: var(--color-background);
+    color: var(--font-color-dark-secondary);
+  }
 
   .srn-footer--garden-design .srn-footer__form--mobile .field__input {
     background-color: var(--font-color-light-quaternary);
