@@ -781,8 +781,8 @@
 
 .card__badge.bage-bottom-center {
     display: block important!;
-    z-index: 100000;
-    position: fixed;
-    bottom: 10%;
-    left: 25%;
+    z-index: 100000 !important;
+    position: fixed !important;
+    bottom: 10% !important;
+    left: 25% !important;
 }
