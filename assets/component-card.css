@@ -812,8 +812,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding-top: 5px;
+  padding-right: 5px;
   font-family: var(--font-family-secondary);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--font-color-dark);
   white-space: nowrap;
@@ -826,6 +827,7 @@
 
   .srn-sold-out-text {
     padding-top: 4.5px;
+    padding-right: 4.5px;
     font-size: 8px;
   }
 }
