@@ -65,7 +65,7 @@
                   required
                 >
                 <label class="newsletter-label field__label" for="NewsletterForm--footer-desktop">
-                  Your Email Address Here
+                  Your Email Here
                 </label>
                 <button
                   type="submit"
@@ -120,11 +120,11 @@
                 {% elsif form.posted_successfully? %}
                   aria-describedby="Newsletter-success--footer-mobile"
                 {% endif %}
-                placeholder="Your Email Address Here"
+                placeholder="Your Email Here"
                 required
               >
               <label class="newsletter-label field__label" for="NewsletterForm--footer-mobile">
-                Your Email Address Here
+                Your Email Here
               </label>
               <button
                 type="submit"
@@ -297,10 +297,24 @@
   font-family: var(--font-family-secondary);
   text-align: center;
   opacity: 1;
+  transition: none;
 }
 
-.srn-footer .field__input::placeholder {
-  color: var(--font-color-dark);
+/* Prevent any padding/height changes on focus */
+.srn-footer .field__input {
+  transition: none;
+}
+
+.srn-footer .field__input:focus {
+  transition: none;
+}
+
+/* SVG arrow styling - Desktop (default) */
+.srn-footer .svg-wrapper svg {
+  display: block;
+  margin-top: 5px;
+  width: 14px;
+  height: 14px;
 }
 
 @media (min-width: 769px) {
@@ -487,18 +501,13 @@
 
   .srn-footer__form--mobile .field__input::placeholder {
     color: var(--color-background);
+    opacity: 0.7;
   }
 
   .srn-footer__form--mobile .svg-wrapper,
   .srn-footer__form--mobile .svg-wrapper svg {
     color: var(--color-background);
     fill: var(--color-background);
-  }
-
-  /* SVG arrow styling */
-  .srn-footer .svg-wrapper svg {
-    display: block;
-    margin-top: 5px;
   }
 
   /* Nursery Theme - Mobile */
