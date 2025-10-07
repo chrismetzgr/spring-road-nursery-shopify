@@ -364,7 +364,7 @@
 }
 
 .card__badge.bottom-center {
-    display: block;
+    display: block important!;
     z-index: 100000;
     position: fixed;
     bottom: 10%;
