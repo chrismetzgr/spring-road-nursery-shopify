@@ -797,9 +797,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
+  width: 230px;
   max-width: 90%;
-  height: 90px;
+  height: 70px;
   z-index: 100 !important;
 }
 
