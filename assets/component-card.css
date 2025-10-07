@@ -348,7 +348,7 @@
 }
 
 .card__badge {
-  display: none;
+  /* display: none; */
   align-self: flex-end;
   grid-row-start: 3;
   justify-self: flex-start;
