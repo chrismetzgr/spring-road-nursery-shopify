@@ -28,12 +28,12 @@
 
 }
 
-a, button, input[type="submit"], [role="button"] {
-  cursor: pointer !important;
+body * {
+  pointer-events: none !important;
 }
 
-a:hover, button:hover, input[type="submit"]:hover, [role="button"]:hover {
-  cursor: pointer !important;
+a, button, input, select, textarea {
+  pointer-events: auto !important;
 }
 
 /* base */
