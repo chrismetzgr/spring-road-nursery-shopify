@@ -363,14 +363,6 @@
   justify-self: flex-end;
 }
 
-.card__badge.bage-bottom-center {
-    display: block important!;
-    z-index: 100000;
-    position: fixed;
-    bottom: 10%;
-    left: 25%;
-}
-
 .card:not(.card--horizontal) > .card__content > .card__badge {
   margin: 1.3rem;
 }
@@ -785,4 +777,12 @@
   .grid__item:nth-child(8n) .product-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-5));
   }
+}
+
+.card__badge.bage-bottom-center {
+    display: block important!;
+    z-index: 100000;
+    position: fixed;
+    bottom: 10%;
+    left: 25%;
 }
