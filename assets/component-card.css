@@ -820,7 +820,7 @@
   white-space: nowrap;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
   .srn-sold-out {
     width: 225px;
   }
