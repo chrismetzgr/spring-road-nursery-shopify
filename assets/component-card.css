@@ -780,24 +780,27 @@
 }
 
 .card__badge.badge-bottom-center {
-    /* display: block; */
-    z-index: 100000 !important;
-    position: fixed !important;
-    bottom: 10% !important;
-    left: 25% !important;
+    display: block;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
+    width: 100%;
+    text-align: center;
 }
 
 .srn-sold-out {
-  background-image: url('{{ "sold-out.png" | asset_url }}');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 250px;
+  max-width: 90%;
   height: 90px;
-  z-index: 100000 !important;
+  z-index: 100 !important;
 }
 
 .srn-sold-out-text {
@@ -805,5 +808,4 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--font-color-dark);
-
 }
