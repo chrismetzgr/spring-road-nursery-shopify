@@ -822,12 +822,12 @@
 
 @media screen and (max-width: 900px) {
   .srn-sold-out {
-    width: 175px;
+    width: 150px;
   }
 
   .srn-sold-out-text {
     padding-top: 8px;
     font-size: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
 }
