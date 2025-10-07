@@ -780,14 +780,14 @@
 }
 
 .card__badge.badge-bottom-center {
-    /* display: block; */
-    position: absolute !important;
-    bottom: 5% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 1000 !important;
-    width: 100%;
-    text-align: center;
+  display: block;
+  position: absolute !important;
+  bottom: 5% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1000 !important;
+  width: 100%;
+  text-align: center;
 }
 
 .srn-sold-out {
@@ -800,10 +800,11 @@
   width: 230px;
   max-width: 90%;
   height: 70px;
-  z-index: 100 !important;
+  z-index: 1000 !important;
 }
 
 .srn-sold-out-text {
+  padding-top: 5px;
   font-family: var(--font-family-secondary);
   font-size: 12px;
   font-weight: 500;
