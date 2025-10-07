@@ -134,9 +134,12 @@
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {% comment %} {%- if card_product.available == false -%} {% endcomment %}
-                 <div class="srn-sold-out" style="background-image: url('{{ 'sold-out.png' | asset_url }}')">
-                  <span class="srn-sold-out-text">SOLD OUT</span>
-                </div>
+            <div class="card__badge badge-bottom-center">
+              <div class="srn-sold-out">
+                <img src="{{ 'sold-out.png' | asset_url }}" height="auto" width="auto" class="srn-sold-out-bg">
+                <span class="srn-sold-out-text">SOLD OUT</span>
+              </div>
+            </div>
             {%- if card_product.compare_at_price > card_product.price and card_product.available -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
