@@ -28,6 +28,10 @@
 
 }
 
+a, button, [role="button"], .clickable {
+  pointer-events: auto !important;
+}
+
 /* base */
 
 html, body {
