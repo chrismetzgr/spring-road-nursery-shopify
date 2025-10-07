@@ -34,10 +34,17 @@
   }
 
   /**
-   * Open a drawer with animation
+   * Open a drawer with animation (closes other drawer first)
    */
   function openDrawer(element) {
     if (!element) return;
+    
+    // Close the other drawer first
+    if (element === elements.mobileNav) {
+      closeDrawer(elements.mobileSort);
+    } else if (element === elements.mobileSort) {
+      closeDrawer(elements.mobileNav);
+    }
     
     element.style.display = 'block';
     element.classList.add('show');
@@ -70,6 +77,32 @@
   // MOBILE NAVIGATION
   // ============================================
 
+  /**
+   * Update active navigation links based on current page
+   */
+  function updateActiveNavLinks() {
+    if (!elements.mobileNav) return;
+    
+    const navLinks = elements.mobileNav.querySelectorAll('#mobile-menu a');
+    navLinks.forEach(link => {
+      link.classList.remove('wavy-underline');
+    });
+    
+    // Check current URL path
+    const currentPath = window.location.pathname;
+    
+    navLinks.forEach(link => {
+      const linkPath = new URL(link.href).pathname;
+      
+      // Match the link
+      if (currentPath === linkPath || 
+          (link.href.includes('/collections/web-shop') && 
+           (currentPath.includes('/collections/') || currentPath.includes('/products/')))) {
+        link.classList.add('wavy-underline');
+      }
+    });
+  }
+
   // Set up exit button for mobile nav (once, at initialization)
   if (elements.mobileNav) {
     const navExitButton = elements.mobileNav.querySelector('.exit-container');
@@ -85,6 +118,7 @@
     elements.hamburgerIcon.addEventListener('click', () => {
       openDrawer(elements.mobileNav);
       elements.hamburgerIcon.setAttribute('aria-expanded', 'true');
+      updateActiveNavLinks();
     });
   }
 
@@ -124,6 +158,7 @@
     if (isMobile()) {
       openDrawer(elements.mobileSort);
       elements.sortIcon.setAttribute('aria-expanded', 'true');
+      updateActiveSortOption();
     } else {
       // Desktop: toggle the dropdown
       e.stopPropagation();
@@ -302,7 +337,7 @@
   // ============================================
 
   /**
-   * Makes sure active sort on mobile is selected
+   * Makes sure active sort on mobile/desktop is selected
    */
   function updateActiveSortOption() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -332,5 +367,7 @@
     });
   }
 
+  // Initialize on page load
   updateActiveSortOption();
+  updateActiveNavLinks();
 })();
