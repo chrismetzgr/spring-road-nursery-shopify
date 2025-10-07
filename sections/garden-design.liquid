@@ -88,7 +88,7 @@
   flex-direction: column;
   justify-content: center;
   margin-top: 25px;
-  padding: 0 1%;  /* Match the nursery page */
+  padding: 0 20px;
   color: var(--font-color-light-tertiary);
 }
 
@@ -101,7 +101,6 @@
   max-width: 900px;
   width: 100%;
   margin: 25px auto 0;
-  padding: 0 20px;  /* Add this */
   text-align: center;
 }
 
@@ -113,10 +112,9 @@
 .srn-garden-design__heading-image {
   display: block;
   margin: 0 auto;
-  height: 30px;
-  max-height: 30px;
+  height: 22px;
   width: auto;
-  max-width: 100%;
+  max-width: none;
 }
 
 /* Mobile: Show mobile versions */
@@ -152,6 +150,12 @@
   text-underline-offset: 3px;
 }
 
+@media (min-width: 425px){
+   .srn-garden-design__heading-image {
+    height: 30px;
+  }
+}
+
 /* ============================================
    DESKTOP BREAKPOINT (800px)
    ============================================ */
@@ -167,8 +171,7 @@
 
   /* Desktop: Fixed height for all heading images */
   .srn-garden-design__heading-image {
-    height: 72px;
-    max-width: none;   
+    height: 58px;
   }
 
   /* Desktop: Show desktop versions */
@@ -187,4 +190,9 @@
   }
 }
 
+@media screen and (min-width: 1101px) {
+  .srn-garden-design__heading-image {
+    height: 72px;
+  }
+}
 </style>
