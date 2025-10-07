@@ -826,6 +826,7 @@
   }
 
   .srn-sold-out-text {
+    padding-bottom: 5px;
     font-size: 8px;
     letter-spacing: 1px;
   }
