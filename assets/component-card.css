@@ -363,6 +363,14 @@
   justify-self: flex-end;
 }
 
+.card__badge.bottom-center {
+    display: block;
+    z-index: 100000;
+    position: fixed;
+    bottom: 10%;
+    left: 25%;
+}
+
 .card:not(.card--horizontal) > .card__content > .card__badge {
   margin: 1.3rem;
 }
