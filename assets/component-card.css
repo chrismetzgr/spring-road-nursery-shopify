@@ -779,7 +779,7 @@
   }
 }
 
-.card__badge.bage-bottom-center {
+.card__badge.badge-bottom-center {
     display: block important!;
     z-index: 100000 !important;
     position: fixed !important;
