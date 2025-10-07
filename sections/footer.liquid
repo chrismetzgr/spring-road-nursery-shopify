@@ -282,6 +282,12 @@
   text-transform: uppercase;
 }
 
+@media (min-width: 769px) {
+  .srn-footer__side:last-child {
+    margin-top: 10px;
+  }
+}
+
 /* Desktop - Label shrinks on focus */
 .srn-footer__form--desktop .field__input:focus ~ .newsletter-label,
 .srn-footer__form--desktop .field__input:not(:placeholder-shown) ~ .newsletter-label,
@@ -342,6 +348,10 @@
    MOBILE BREAKPOINT (≤768px)
    ============================================ */
 @media (max-width: 768px) {
+
+  .srn-footer__side:last-child {
+    margin-top: 0px;
+  }
 
   .srn-footer__title  .wavy-underline {
     text-decoration: none !important;
