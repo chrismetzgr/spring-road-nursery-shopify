@@ -33,16 +33,6 @@
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-    cursor: default !important;
-
-}
-
-a, a *, button, button * {
-  cursor: pointer !important;
-}
-
-html * {
-  cursor: pointer !important;
 }
 
 .page-width {
