@@ -782,7 +782,7 @@
 .card__badge.badge-bottom-center {
     display: block;
     position: absolute !important;
-    bottom: 0 !important;
+    bottom: 5% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 1000 !important;
