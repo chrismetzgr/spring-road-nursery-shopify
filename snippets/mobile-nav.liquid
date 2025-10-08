@@ -1,16 +1,16 @@
 <link rel="preload" as="image" href="{{ "mobile-menu-background.png" | asset_url }}">
-<div class="mobile-nav">
+<div id="mobile-nav">
   <div class="exit-container">
     <img src="{{ "exit.png" | asset_url }}" height="20px" width="20px"/>
   </div>
-  <div class="mobile-menu">
+  <div id="mobile-menu">
     <div><a href="{{ collections['web-shop'].url }}" class="{% if template == 'collection' or template == 'product' %}wavy-underline{% endif %}">THE SHOP</a></div>
     <div><a href="/pages/nursery" class="{% if page.handle == 'nursery' %}wavy-underline{% endif %}">THE NURSERY</a></div>
     <div><a href="/pages/garden-design" class="{% if page.handle == 'garden-design' %}wavy-underline{% endif %}">GARDEN DESIGN</a></div>
   </div>
 </div>
 <style>
-  .mobile-nav {
+  #mobile-nav {
     display: none;
     position: fixed;
     inset: 0;
@@ -26,19 +26,19 @@
     overflow: hidden;
   }
   
-  .mobile-nav .exit-container {
+  #mobile-nav .exit-container {
     direction: rtl;
   }
   
-  .mobile-nav .exit-container img {
+  #mobile-nav .exit-container img {
     margin: 20px 20px 0 0;
   }
   
-  .mobile-nav .exit-container img:hover {
+  #mobile-nav .exit-container img:hover {
     cursor: pointer;
   }
   
-  .mobile-nav .mobile-menu {
+  #mobile-nav #mobile-menu {
     height: 100%;
     font-family: var(--font-family-secondary);
     font-stretch: expanded;
@@ -50,20 +50,20 @@
     justify-content: center;
   }
   
-  .mobile-nav .mobile-menu a {
+  #mobile-nav #mobile-menu a {
     color: var(--font-color-light-secondary);
   }
   
-  .mobile-nav .mobile-menu a:visited {
+  #mobile-nav #mobile-menu a:visited {
     color: var(--font-color-light-secondary);
   }
   
-  .mobile-nav.show {
+  #mobile-nav.show {
     display: block;
     animation: slideInLeft 0.5s ease-out forwards;
   }
   
-  .mobile-nav.hide {
+  #mobile-nav.hide {
     animation: slideOutLeft 0.5s ease-out;
   }
   
@@ -91,11 +91,11 @@
 
 @media (min-width: 650px){
 
-  .mobile-nav .mobile-menu a {
+  #mobile-nav #mobile-menu a {
     font-size: 28px;
   }
 
-    .mobile-nav .mobile-menu {
+    #mobile-nav #mobile-menu {
       height: 90%;
       gap: 1000px;
     }
