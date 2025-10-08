@@ -94,7 +94,7 @@
       {%- endform -%}
     </product-form>
 
-    {% comment %} {%- if is_sold_out -%} {% endcomment %}
+    {%- if is_sold_out -%}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading wavy-underline">Email When In Stock</p>
         
@@ -156,7 +156,7 @@
           {%- endif -%}
         {% endform %}
       </div>
-    {% comment %} {%- endif -%} {% endcomment %}
+    {%- endif -%}
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
