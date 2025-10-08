@@ -46,8 +46,9 @@
    * Unlock body scroll
    */
   function unlockBodyScroll() {
-    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
   }
 
   /**
