@@ -679,13 +679,11 @@
 }s
 
 /* 341px - 530px: 2 rows */
-@media screen (min-width: 341px) and (max-width: 530px) {
+@media (min-width: 341px) and (max-width: 530px) {
   .srn-footer__nav a:nth-child(3)::after {  
     flex-basis: 100%;
   }
-  .srn-footer__nav a:nth-child(3)::after{
-    content: none !important!;
-  }
+  .srn-footer__nav a:nth-child(3)::after,
   .srn-footer__nav a:nth-child(5)::after {
     content: none !important!;
   }
