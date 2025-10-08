@@ -688,12 +688,15 @@
     let rowEndIndices = [];
     
     links.forEach((link, index) => {
-      if (link.offsetTop > currentRow) {
+      // Check if this link is on a new row
+      if (index > 0 && link.offsetTop > currentRow) {
+        // The previous link was the end of the last row
         rowEndIndices.push(index - 1);
         currentRow = link.offsetTop;
       }
     });
     
+    // Always add the last link as a row end
     rowEndIndices.push(links.length - 1);
     
     // Add no-divider class to links at the end of each row
