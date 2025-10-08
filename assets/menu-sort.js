@@ -37,8 +37,9 @@
    * Lock body scroll
    */
   function lockBodyScroll() {
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
   }
 
   /**
