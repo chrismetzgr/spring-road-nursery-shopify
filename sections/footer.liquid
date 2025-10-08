@@ -683,30 +683,42 @@
     // Remove all existing divider classes
     links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
     
-    // Get the top position of each link to determine rows
-    let currentRow = links[0].offsetTop;
-    let rowEndIndices = [];
+    // Group links by their vertical position (row)
+    const rows = [];
+    let currentRowTop = null;
+    let currentRowLinks = [];
     
     links.forEach((link, index) => {
-      // Check if this link is on a new row
-      if (index > 0 && link.offsetTop > currentRow) {
-        // The previous link was the end of the last row
-        rowEndIndices.push(index - 1);
-        currentRow = link.offsetTop;
+      const linkTop = link.offsetTop;
+      
+      // If this is a new row (different offsetTop)
+      if (currentRowTop === null || Math.abs(linkTop - currentRowTop) > 1) {
+        if (currentRowLinks.length > 0) {
+          rows.push([...currentRowLinks]);
+        }
+        currentRowTop = linkTop;
+        currentRowLinks = [index];
+      } else {
+        currentRowLinks.push(index);
       }
     });
     
-    // Always add the last link as a row end
-    rowEndIndices.push(links.length - 1);
+    // Don't forget the last row
+    if (currentRowLinks.length > 0) {
+      rows.push(currentRowLinks);
+    }
     
-    // Add no-divider class to links at the end of each row
-    rowEndIndices.forEach(index => {
-      links[index].classList.add('srn-footer__nav-link--no-divider');
+    // Add no-divider class to the last link in each row
+    rows.forEach(row => {
+      const lastLinkIndex = row[row.length - 1];
+      links[lastLinkIndex].classList.add('srn-footer__nav-link--no-divider');
     });
   }
 
-  // Run on load
-  document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
+  // Run on load with a slight delay to ensure layout is complete
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(updateFooterNavDividers, 0);
+  });
 
   // Run on resize (debounced for performance)
   let resizeTimer;
