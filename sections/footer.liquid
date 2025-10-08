@@ -686,33 +686,32 @@
     // Force reflow
     void nav.offsetHeight;
     
-    // DEBUG: Log the positions
-    console.log('Window width:', window.innerWidth);
-    links.forEach((link, i) => {
+    // Group links into rows based on vertical position with tolerance
+    const rows = [];
+    const tolerance = 5; // pixels
+    
+    links.forEach(link => {
       const rect = link.getBoundingClientRect();
-      const offset = link.offsetTop;
-      console.log(`Link ${i} (${link.textContent.trim()}):`, 
-        'offsetTop:', offset,
-        'boundingTop:', rect.top,
-        'boundingBottom:', rect.bottom
-      );
+      const linkTop = rect.top;
+      
+      // Find existing row with similar top position
+      let foundRow = rows.find(row => Math.abs(row.top - linkTop) < tolerance);
+      
+      if (foundRow) {
+        foundRow.links.push(link);
+      } else {
+        rows.push({ top: linkTop, links: [link] });
+      }
     });
     
-    // Find row ends by comparing with next element
-    for (let i = 0; i < links.length - 1; i++) {
-      const currentBottom = links[i].getBoundingClientRect().bottom;
-      const nextTop = links[i + 1].getBoundingClientRect().top;
-      
-      // If there's a gap between bottom of current and top of next, it's a new row
-      if (nextTop - currentBottom > 1) {
-        console.log(`Row ends at link ${i} (${links[i].textContent.trim()})`);
-        links[i].classList.add('srn-footer__nav-link--no-divider');
-      }
-    }
+    // Sort rows by vertical position
+    rows.sort((a, b) => a.top - b.top);
     
-    // Last link always ends its row
-    console.log(`Row ends at last link (${links[links.length - 1].textContent.trim()})`);
-    links[links.length - 1].classList.add('srn-footer__nav-link--no-divider');
+    // Add no-divider class to last link in each row
+    rows.forEach(row => {
+      const lastLink = row.links[row.links.length - 1];
+      lastLink.classList.add('srn-footer__nav-link--no-divider');
+    });
   }
 
   if (document.readyState === 'loading') {
