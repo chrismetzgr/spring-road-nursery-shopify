@@ -441,56 +441,52 @@
     letter-spacing: 2px;
   }
 
-  /* Navigation - Mobile Layout */
-  .srn-footer__nav {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    width: 90%;
-    font-size: 8px;
-    padding: 0;
-    letter-spacing: 2px;
-    align-items: center;
-    position: relative;
-    padding-bottom: 20px;
-    gap: 10px 5px; 
-  }
+/* Navigation - Mobile Layout */
+.srn-footer__nav {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+  font-size: 8px;
+  padding: 0;
+  letter-spacing: 2px;
+  align-items: center;
+  position: relative;
+  padding-bottom: 20px;
+  gap: 10px 5px; 
+}
 
-  .srn-footer__nav::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 120%;
-    margin-left: -10%;
-    height: 2px;
-    background: repeating-linear-gradient(
-      to right,
-      currentColor 0px,
-      currentColor 2px,
-      transparent 2px,
-      transparent 4px
-    );
-  }
+.srn-footer__nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 120%;
+  margin-left: -10%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    currentColor 0px,
+    currentColor 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
 
-  .srn-footer__nav a {
-    display: inline-block;
-    white-space: nowrap;
-  }
+.srn-footer__nav a {
+  display: inline-block;
+  white-space: nowrap;
+}
 
-  /* Add divider after each link by default */
-  .srn-footer__nav a::after {
-    content: " |";
-  }
-
-  /* Remove divider from last item in each row */
-  .srn-footer__nav a.srn-footer__nav-link--no-divider::after {
-    content: none;
-  }
+/* Add divider using CSS - it will automatically wrap with the links */
+.srn-footer__nav a:not(:last-child)::after {
+  content: " |";
+  display: inline;
+}
 
   /* Title and Text */
   .srn-footer__title,
@@ -670,61 +666,3 @@
   }
 }
 </style>
-
-<script>
-(function() {
-  function updateFooterNavDividers() {
-    const nav = document.querySelector('.srn-footer__nav');
-    if (!nav) return;
-    
-    const links = Array.from(nav.querySelectorAll('a'));
-    if (links.length === 0) return;
-    
-    // Remove all existing divider classes
-    links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
-    
-    // Group links by their vertical position (row)
-    const rows = [];
-    let currentRowTop = null;
-    let currentRowLinks = [];
-    
-    links.forEach((link, index) => {
-      const linkTop = link.offsetTop;
-      
-      // If this is a new row (different offsetTop)
-      if (currentRowTop === null || Math.abs(linkTop - currentRowTop) > 1) {
-        if (currentRowLinks.length > 0) {
-          rows.push([...currentRowLinks]);
-        }
-        currentRowTop = linkTop;
-        currentRowLinks = [index];
-      } else {
-        currentRowLinks.push(index);
-      }
-    });
-    
-    // Don't forget the last row
-    if (currentRowLinks.length > 0) {
-      rows.push(currentRowLinks);
-    }
-    
-    // Add no-divider class to the last link in each row
-    rows.forEach(row => {
-      const lastLinkIndex = row[row.length - 1];
-      links[lastLinkIndex].classList.add('srn-footer__nav-link--no-divider');
-    });
-  }
-
-  // Run on load with a slight delay to ensure layout is complete
-  document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(updateFooterNavDividers, 0);
-  });
-
-  // Run on resize (debounced for performance)
-  let resizeTimer;
-  window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(updateFooterNavDividers, 100);
-  });
-})();
-</script>
