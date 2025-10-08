@@ -37,6 +37,7 @@
    * Lock body scroll
    */
   function lockBodyScroll() {
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
@@ -44,6 +45,7 @@
    * Unlock body scroll
    */
   function unlockBodyScroll() {
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
 
