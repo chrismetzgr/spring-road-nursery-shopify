@@ -294,10 +294,17 @@
 }
 }
 
-.srn-restock-notification .field__input:focus + .field__label,
-.srn-restock-notification .field__input:not(:placeholder-shown) + .field__label {
-  opacity: 0;
+.srn-restock-notification .field__input::placeholder {
+  font-size: 14px;
+  font-stretch: expanded;
+  text-transform: uppercase;
+  font-family: var(--font-family-secondary);
+  text-align: center;
+  opacity: 1;
+  transition: none;
+  color: var(--font-color-dark);
 }
+
 
 .srn-restock-notification .field__button {
   position: absolute;
