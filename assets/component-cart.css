@@ -10,6 +10,10 @@ cart-items.is-empty .title-wrapper-with-link,
   display: none;
 }
 
+.cart__empty-text {
+  font-stretch: expanded;
+}
+
 .title-wrapper-with-link a{
   font-family: var(--font-family-secondary);
   font-stretch: expanded;
