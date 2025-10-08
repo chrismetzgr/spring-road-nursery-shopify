@@ -675,10 +675,21 @@
     content: none;
   }
   
-  /* Force THE SHOP to be alone on its row */
-  .srn-footer__nav a:nth-child(1) {
+  /* Force line breaks by inserting full-width invisible elements */
+  .srn-footer__nav a:nth-child(1)::before,  /* Break after THE SHOP */
+  .srn-footer__nav a:nth-child(3)::before {  /* Break after GARDEN DESIGN */
+    content: "";
     flex-basis: 100%;
+    height: 0;
+    order: 1;
   }
+  
+  /* Reorder so breaks happen in the right place */
+  .srn-footer__nav a:nth-child(1) { order: 0; }
+  .srn-footer__nav a:nth-child(2) { order: 2; }  /* THE NURSERY after first break */
+  .srn-footer__nav a:nth-child(3) { order: 2; }  /* GARDEN DESIGN same row */
+  .srn-footer__nav a:nth-child(4) { order: 3; }  /* CONTACT US after second break */
+  .srn-footer__nav a:nth-child(5) { order: 3; }  /* INSTAGRAM same row */
 }
 
 /* 341px - 530px: 2 rows
@@ -690,6 +701,20 @@
   .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends row 2 */
     content: none;
   }
+  
+  /* Force line break after GARDEN DESIGN */
+  .srn-footer__nav a:nth-child(3)::before {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
+    order: 1;
+  }
+  
+  .srn-footer__nav a:nth-child(1) { order: 0; }
+  .srn-footer__nav a:nth-child(2) { order: 0; }
+  .srn-footer__nav a:nth-child(3) { order: 0; }
+  .srn-footer__nav a:nth-child(4) { order: 2; }
+  .srn-footer__nav a:nth-child(5) { order: 2; }
 }
 
 /* 531px - 768px: 1 row
