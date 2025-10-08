@@ -283,13 +283,15 @@
 
 .srn-restock-notification .field__label {
   position: absolute;
-  left: 15px;
-  pointer-events: none;
-  font-family: var(--font-family-secondary);
-  font-size: 14px;
-  color: var(--font-color-dark);
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 }
 
 .srn-restock-notification .field__input:focus + .field__label,
