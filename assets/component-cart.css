@@ -20,6 +20,10 @@ cart-items.is-empty .title-wrapper-with-link,
   display: block;
 }
 
+.cart__warnings a {
+  font-stretch: expanded; 
+}
+
 .cart__warnings {
   display: none;
   text-align: center;
