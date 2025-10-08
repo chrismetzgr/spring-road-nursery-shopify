@@ -21,6 +21,7 @@ cart-items.is-empty .title-wrapper-with-link,
 }
 
 .cart__warnings a {
+  font-family: var(--font-family-secondary)
   font-stretch: expanded; 
 }
 
