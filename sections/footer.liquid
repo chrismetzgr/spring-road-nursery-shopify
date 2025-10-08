@@ -686,28 +686,35 @@
     // Force reflow
     void nav.offsetHeight;
     
-    // Get bounding rectangles for more accurate positioning
-    const positions = links.map(link => ({
-      link: link,
-      top: link.getBoundingClientRect().top
-    }));
+    // DEBUG: Log the positions
+    console.log('Window width:', window.innerWidth);
+    links.forEach((link, i) => {
+      const rect = link.getBoundingClientRect();
+      const offset = link.offsetTop;
+      console.log(`Link ${i} (${link.textContent.trim()}):`, 
+        'offsetTop:', offset,
+        'boundingTop:', rect.top,
+        'boundingBottom:', rect.bottom
+      );
+    });
     
     // Find row ends by comparing with next element
-    for (let i = 0; i < positions.length - 1; i++) {
-      const currentTop = positions[i].top;
-      const nextTop = positions[i + 1].top;
+    for (let i = 0; i < links.length - 1; i++) {
+      const currentBottom = links[i].getBoundingClientRect().bottom;
+      const nextTop = links[i + 1].getBoundingClientRect().top;
       
-      // If next element is more than 2px lower, current element ends the row
-      if (nextTop - currentTop > 2) {
-        positions[i].link.classList.add('srn-footer__nav-link--no-divider');
+      // If there's a gap between bottom of current and top of next, it's a new row
+      if (nextTop - currentBottom > 1) {
+        console.log(`Row ends at link ${i} (${links[i].textContent.trim()})`);
+        links[i].classList.add('srn-footer__nav-link--no-divider');
       }
     }
     
     // Last link always ends its row
-    positions[positions.length - 1].link.classList.add('srn-footer__nav-link--no-divider');
+    console.log(`Row ends at last link (${links[links.length - 1].textContent.trim()})`);
+    links[links.length - 1].classList.add('srn-footer__nav-link--no-divider');
   }
 
-  // Run on various events
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
   } else {
@@ -715,8 +722,6 @@
   }
   
   window.addEventListener('load', () => {
-    updateFooterNavDividers();
-    // Run once more after a short delay for web fonts
     setTimeout(updateFooterNavDividers, 100);
   });
 
