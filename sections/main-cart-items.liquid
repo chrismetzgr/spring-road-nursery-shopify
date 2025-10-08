@@ -35,9 +35,6 @@
     </div>
 
     <div class="cart__warnings">
-      <div>
-        <img src="{{ 'inchworm.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
-      </div>
       <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
       <a href="{{ collections['web-shop'].url }}" class="wavy-underline">
         {{ 'general.continue_shopping' | t }}
@@ -49,6 +46,9 @@
           {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
         </p>
       {%- endif -%}
+      <div style="top: 50%">
+        <img src="{{ 'inchworm.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
+      </div>
     </div>
 
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
