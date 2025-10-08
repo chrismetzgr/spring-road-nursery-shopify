@@ -441,52 +441,56 @@
     letter-spacing: 2px;
   }
 
-/* Navigation - Mobile Layout */
-.srn-footer__nav {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  width: 90%;
-  font-size: 8px;
-  padding: 0;
-  letter-spacing: 2px;
-  align-items: center;
-  position: relative;
-  padding-bottom: 20px;
-  gap: 10px 5px; 
-}
+  /* Navigation - Mobile Layout */
+  .srn-footer__nav {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    font-size: 8px;
+    padding: 0;
+    letter-spacing: 2px;
+    align-items: center;
+    position: relative;
+    padding-bottom: 20px;
+    gap: 10px 5px; 
+  }
 
-.srn-footer__nav::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 120%;
-  margin-left: -10%;
-  height: 2px;
-  background: repeating-linear-gradient(
-    to right,
-    currentColor 0px,
-    currentColor 2px,
-    transparent 2px,
-    transparent 4px
-  );
-}
+  .srn-footer__nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 120%;
+    margin-left: -10%;
+    height: 2px;
+    background: repeating-linear-gradient(
+      to right,
+      currentColor 0px,
+      currentColor 2px,
+      transparent 2px,
+      transparent 4px
+    );
+  }
 
-.srn-footer__nav a {
-  display: inline-block;
-  white-space: nowrap;
-}
+  .srn-footer__nav a {
+    display: inline-block;
+    white-space: nowrap;
+  }
 
-/* Add divider using CSS - it will automatically wrap with the links */
-.srn-footer__nav a:not(:last-child)::after {
-  content: " |";
-  display: inline;
-}
+  /* Add divider after each link by default */
+  .srn-footer__nav a::after {
+    content: " |";
+  }
+
+  /* Remove divider from last item in each row */
+  .srn-footer__nav a.srn-footer__nav-link--no-divider::after {
+    content: none;
+  }
 
   /* Title and Text */
   .srn-footer__title,
@@ -666,3 +670,58 @@
   }
 }
 </style>
+
+<script>
+(function() {
+  function updateFooterNavDividers() {
+    const nav = document.querySelector('.srn-footer__nav');
+    if (!nav || window.innerWidth > 768) return; // Only run on mobile
+    
+    const links = Array.from(nav.querySelectorAll('a'));
+    if (links.length === 0) return;
+    
+    // Remove all existing divider classes
+    links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
+    
+    // Force a reflow to ensure offsetTop is accurate
+    void nav.offsetHeight;
+    
+    // Track which links end each row
+    const rowEnds = new Set();
+    
+    for (let i = 0; i < links.length - 1; i++) {
+      const currentTop = links[i].offsetTop;
+      const nextTop = links[i + 1].offsetTop;
+      
+      // If next link is lower, current link ends the row
+      if (nextTop > currentTop) {
+        rowEnds.add(i);
+      }
+    }
+    
+    // Last link always ends a row
+    rowEnds.add(links.length - 1);
+    
+    // Add no-divider class to row-ending links
+    rowEnds.forEach(index => {
+      links[index].classList.add('srn-footer__nav-link--no-divider');
+    });
+  }
+
+  // Run multiple times to catch layout changes
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
+  } else {
+    updateFooterNavDividers();
+  }
+  
+  window.addEventListener('load', updateFooterNavDividers);
+
+  // Run on resize (debounced for performance)
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateFooterNavDividers, 100);
+  });
+})();
+</script>
