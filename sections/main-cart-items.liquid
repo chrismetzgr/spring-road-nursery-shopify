@@ -46,6 +46,7 @@
           {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
         </p>
       {%- endif -%}
+      <img src="{{ 'inchworm.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="150"/>
     </div>
 
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
