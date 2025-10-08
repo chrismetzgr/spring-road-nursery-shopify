@@ -378,6 +378,7 @@
     width: 342px;
   }
 }
+
 /* ============================================
    TABLET BREAKPOINT (481px - 990px)
    ============================================ */
@@ -427,7 +428,7 @@
     margin-bottom: 15px;
   }
 
-    /* Footer Details */
+  /* Footer Details */
   .srn-footer__details {
     width: 100%;
     display: flex;
@@ -484,30 +485,6 @@
   /* Default: All links have dividers */
   .srn-footer__nav a::after {
     content: " |";
-  }
-
-  /* 320px - 340px: 3 rows */
-  @media (max-width: 340px) {
-    .srn-footer__nav a:nth-child(1)::after,  /* THE SHOP ends row 1 */
-    .srn-footer__nav a:nth-child(3)::after,  /* GARDEN DESIGN ends row 2 */
-    .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends row 3 */
-      content: none;
-    }
-  }
-
-  /* 341px - 530px: 2 rows */
-  @media (min-width: 341px) and (max-width: 530px) {
-    .srn-footer__nav a:nth-child(3)::after,  /* GARDEN DESIGN ends row 1 */
-    .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends row 2 */
-      content: none;
-    }
-  }
-
-  /* 531px - 768px: 1 row */
-  @media (min-width: 531px) and (max-width: 768px) {
-    .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends the only row */
-      content: none;
-    }
   }
 
   /* Title and Text */
@@ -570,7 +547,7 @@
     fill: var(--color-background);
   }
 
-    /* Shop Theme - Mobile */
+  /* Shop Theme - Mobile */
   .srn-footer--shop,
   .srn-footer--shop a,
   .srn-footer--shop a:visited,
@@ -678,6 +655,34 @@
     mask-repeat: repeat-x;
     -webkit-mask-position: center;
     mask-position: center;
+  }
+}
+
+/* ============================================
+   MOBILE NAV DIVIDER BREAKPOINTS
+   ============================================ */
+
+/* 320px - 340px: 3 rows */
+@media (max-width: 340px) {
+  .srn-footer__nav a:nth-child(1)::after,  /* THE SHOP ends row 1 */
+  .srn-footer__nav a:nth-child(3)::after,  /* GARDEN DESIGN ends row 2 */
+  .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends row 3 */
+    content: none;
+  }
+}
+
+/* 341px - 530px: 2 rows */
+@media (min-width: 341px) and (max-width: 530px) {
+  .srn-footer__nav a:nth-child(3)::after,  /* GARDEN DESIGN ends row 1 */
+  .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends row 2 */
+    content: none;
+  }
+}
+
+/* 531px - 768px: 1 row */
+@media (min-width: 531px) and (max-width: 768px) {
+  .srn-footer__nav a:nth-child(5)::after {  /* INSTAGRAM ends the only row */
+    content: none;
   }
 }
 
