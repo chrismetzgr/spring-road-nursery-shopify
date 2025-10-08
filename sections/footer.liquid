@@ -483,11 +483,6 @@
     white-space: nowrap;
   }
 
-  /* Default: All links have dividers */
-  .srn-footer__nav a::after {
-    content: " |";
-  }
-
   /* Title and Text */
   .srn-footer__title,
   .srn-footer__text {
@@ -668,12 +663,11 @@
   .srn-footer__nav a:nth-child(1) {
    flex-basis: 100%;
   }
-  .srn-footer__nav a:nth-child(1)::after {
-    content: none;
-  }
+  .srn-footer__nav a:nth-child(2)::after, 
   .srn-footer__nav a:nth-child(3)::after, 
-  .srn-footer__nav a:nth-child(5)::after { 
-    content: none;
+  .srn-footer__nav a:nth-child(5)::after, 
+  .srn-footer__nav a:nth-child(6)::after { 
+    content: " |";
   }
 }
 
