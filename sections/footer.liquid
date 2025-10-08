@@ -675,7 +675,7 @@
 (function() {
   function updateFooterNavDividers() {
     const nav = document.querySelector('.srn-footer__nav');
-    if (!nav || window.innerWidth > 768) return; // Only run on mobile
+    if (!nav || window.innerWidth > 768) return;
     
     const links = Array.from(nav.querySelectorAll('a'));
     if (links.length === 0) return;
@@ -683,45 +683,47 @@
     // Remove all existing divider classes
     links.forEach(link => link.classList.remove('srn-footer__nav-link--no-divider'));
     
-    // Force a reflow to ensure offsetTop is accurate
+    // Force reflow
     void nav.offsetHeight;
     
-    // Track which links end each row
-    const rowEnds = new Set();
+    // Get bounding rectangles for more accurate positioning
+    const positions = links.map(link => ({
+      link: link,
+      top: link.getBoundingClientRect().top
+    }));
     
-    for (let i = 0; i < links.length - 1; i++) {
-      const currentTop = links[i].offsetTop;
-      const nextTop = links[i + 1].offsetTop;
+    // Find row ends by comparing with next element
+    for (let i = 0; i < positions.length - 1; i++) {
+      const currentTop = positions[i].top;
+      const nextTop = positions[i + 1].top;
       
-      // If next link is lower, current link ends the row
-      if (nextTop > currentTop) {
-        rowEnds.add(i);
+      // If next element is more than 2px lower, current element ends the row
+      if (nextTop - currentTop > 2) {
+        positions[i].link.classList.add('srn-footer__nav-link--no-divider');
       }
     }
     
-    // Last link always ends a row
-    rowEnds.add(links.length - 1);
-    
-    // Add no-divider class to row-ending links
-    rowEnds.forEach(index => {
-      links[index].classList.add('srn-footer__nav-link--no-divider');
-    });
+    // Last link always ends its row
+    positions[positions.length - 1].link.classList.add('srn-footer__nav-link--no-divider');
   }
 
-  // Run multiple times to catch layout changes
+  // Run on various events
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateFooterNavDividers);
   } else {
     updateFooterNavDividers();
   }
   
-  window.addEventListener('load', updateFooterNavDividers);
+  window.addEventListener('load', () => {
+    updateFooterNavDividers();
+    // Run once more after a short delay for web fonts
+    setTimeout(updateFooterNavDividers, 100);
+  });
 
-  // Run on resize (debounced for performance)
   let resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(updateFooterNavDividers, 100);
+    resizeTimer = setTimeout(updateFooterNavDividers, 50);
   });
 })();
 </script>
