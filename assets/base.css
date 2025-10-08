@@ -3600,7 +3600,7 @@ details-disclosure > details {
 }
 
 ul#product-grid > li.grid__item {
-  margin-left: -2px;
+  margin-right: -2px;
 }
 
 ul#product-grid > li.grid__item:first-child {
