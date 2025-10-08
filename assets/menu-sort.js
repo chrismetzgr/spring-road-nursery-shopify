@@ -34,6 +34,20 @@
   }
 
   /**
+   * Lock body scroll
+   */
+  function lockBodyScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Unlock body scroll
+   */
+  function unlockBodyScroll() {
+    document.body.style.overflow = '';
+  }
+
+  /**
    * Open a drawer with animation
    */
   function openDrawer(element) {
@@ -42,6 +56,11 @@
     element.style.display = 'block';
     element.classList.add('show');
     element.classList.remove('hide');
+    
+    // Lock body scroll when mobile drawer opens
+    if (isMobile()) {
+      lockBodyScroll();
+    }
   }
 
   /**
@@ -55,7 +74,20 @@
     
     setTimeout(() => {
       element.style.display = 'none';
+      
+      // Unlock body scroll only if no mobile drawers are open
+      if (isMobile() && !hasOpenDrawers()) {
+        unlockBodyScroll();
+      }
     }, DRAWER_ANIMATION_DELAY);
+  }
+
+  /**
+   * Check if any mobile drawers are currently open
+   */
+  function hasOpenDrawers() {
+    return (elements.mobileNav && elements.mobileNav.classList.contains('show')) ||
+           (elements.mobileSort && elements.mobileSort.classList.contains('show'));
   }
 
   /**
@@ -287,6 +319,9 @@
       if (elements.desktopSortDropdown) {
         elements.desktopSortDropdown.classList.remove('active');
       }
+      
+      // Unlock body scroll when switching to desktop
+      unlockBodyScroll();
     }
   }
 
