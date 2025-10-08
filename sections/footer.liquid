@@ -686,20 +686,38 @@
     // Force reflow
     void nav.offsetHeight;
     
-    // Check each link to see if the next one wraps
-    for (let i = 0; i < links.length - 1; i++) {
-      const currentRect = links[i].getBoundingClientRect();
-      const nextRect = links[i + 1].getBoundingClientRect();
-      
-      // If next link starts to the LEFT of where current link ends, it wrapped
-      if (nextRect.left < currentRect.right) {
-        console.log(`${links[i].textContent.trim()} ends row - next link wrapped`);
-        links[i].classList.add('srn-footer__nav-link--no-divider');
-      }
-    }
+    // Group links into rows - accounting for the 10px row gap
+    const rows = [];
+    const rowGap = 10; // From gap: 10px 5px
+    const tolerance = rowGap + 5; // 10px gap + 5px tolerance
     
-    // Last link always ends its row
-    links[links.length - 1].classList.add('srn-footer__nav-link--no-divider');
+    links.forEach(link => {
+      const rect = link.getBoundingClientRect();
+      const linkTop = rect.top;
+      
+      // Find existing row with similar top position (within tolerance)
+      let foundRow = rows.find(row => {
+        const diff = Math.abs(row.top - linkTop);
+        return diff < tolerance;
+      });
+      
+      if (foundRow) {
+        foundRow.links.push(link);
+      } else {
+        rows.push({ top: linkTop, links: [link] });
+      }
+    });
+    
+    // Sort rows by vertical position
+    rows.sort((a, b) => a.top - b.top);
+    
+    console.log('Rows:', rows.map(r => r.links.map(l => l.textContent.trim())));
+    
+    // Add no-divider class to last link in each row
+    rows.forEach(row => {
+      const lastLink = row.links[row.links.length - 1];
+      lastLink.classList.add('srn-footer__nav-link--no-divider');
+    });
   }
 
   if (document.readyState === 'loading') {
