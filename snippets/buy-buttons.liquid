@@ -68,7 +68,7 @@
         {%- endif -%}
 
         {%- comment -%} Custom Gift Note Field {%- endcomment -%}
-        <div class="product-form__input product-form__input--gift-note">
+        {% comment %} <div class="product-form__input product-form__input--gift-note">
           <label class="form__label" for="gift-note-{{ section.id }}">
             Gift Note (Optional)
           </label>
@@ -81,7 +81,7 @@
             placeholder="Add a personalized message for your gift..."
           ></textarea>
           <small class="form__label">Maximum 200 characters</small>
-        </div>
+        </div> {% endcomment %}
 
         <div class="product-form__buttons">
           <button
