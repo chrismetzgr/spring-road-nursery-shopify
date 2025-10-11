@@ -67,6 +67,22 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
 
+        {%- comment -%} Custom Gift Note Field {%- endcomment -%}
+        <div class="product-form__input product-form__input--gift-note">
+          <label class="form__label" for="gift-note-{{ section.id }}">
+            Gift Note (Optional)
+          </label>
+          <textarea
+            id="gift-note-{{ section.id }}"
+            class="field__input text-area"
+            name="properties[Gift Note]"
+            rows="3"
+            maxlength="200"
+            placeholder="Add a personalized message for your gift..."
+          ></textarea>
+          <small class="form__label">Maximum 200 characters</small>
+        </div>
+
         <div class="product-form__buttons">
           <button
             id="ProductSubmitButton-{{ section_id }}"
