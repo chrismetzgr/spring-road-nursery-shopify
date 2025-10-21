@@ -1954,6 +1954,22 @@ input[type='checkbox'] {
   padding: 0;
 }
 
+/* Disabled quantity buttons */
+.quantity__button:disabled,
+.quantity__button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Disabled quantity input */
+.quantity__input:disabled,
+.quantity__input[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #f5f5f5;
+}
+
 .quantity__button:first-child {
   margin-left: calc(var(--inputs-border-width));
 }
