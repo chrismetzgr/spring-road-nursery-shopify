@@ -185,29 +185,10 @@ if (!customElements.get('product-form')) {
         });
         
         if (allSelected) {
-          // Enable button - the variant change event will handle the text
+          // Simply enable the button and remove the flag
+          // Your existing theme logic will handle the text and availability
+          this.submitButton.removeAttribute('disabled');
           this.submitButton.removeAttribute('data-requires-variant');
-        }
-      });
-      
-      // Listen for actual variant changes to update button state
-      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-        if (!this.submitButton.hasAttribute('data-requires-variant')) {
-          const variant = event.data?.variant;
-          
-          if (variant) {
-            if (variant.available) {
-              this.submitButton.removeAttribute('disabled');
-              if (this.submitButtonText) {
-                this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
-              }
-            } else {
-              this.submitButton.setAttribute('disabled', 'disabled');
-              if (this.submitButtonText) {
-                this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold Out';
-              }
-            }
-          }
         }
       });
     }
