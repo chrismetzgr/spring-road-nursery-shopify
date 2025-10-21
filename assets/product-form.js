@@ -173,13 +173,23 @@ if (!customElements.get('product-form')) {
       
       if (!requiresVariant) return;
       
-      // Listen for the actual variant change event, not just option selection
-      subscribe(PUB_SUB_EVENTS.variantChange, () => {
+      // Listen for the actual variant change event
+      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+        // TEMPORARY: Log what we're getting
+        console.log('Variant Change Event:', event);
+        console.log('Variant Data:', event.data);
+        console.log('Variant Available:', event.data?.variant?.available);
+        
         // If we still have the flag, it means a variant has now been selected
         if (this.submitButton.hasAttribute('data-requires-variant')) {
-          // Enable the button - the variant change event has already updated the text
+          // Enable the button AND set the text explicitly
           this.submitButton.removeAttribute('disabled');
           this.submitButton.removeAttribute('data-requires-variant');
+          
+          // Explicitly set the button text to "Add to Cart"
+          if (this.submitButtonText) {
+            this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
+          }
         }
       });
     }
