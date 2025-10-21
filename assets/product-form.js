@@ -165,7 +165,6 @@ if (!customElements.get('product-form')) {
         this.addedText.style.opacity = '0';
       }
       
-      Initialize variant requirement handling
       this.initializeVariantRequirement();
     }
 
