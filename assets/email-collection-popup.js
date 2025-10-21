@@ -145,7 +145,6 @@ if (popup) {
   // Check if page was redirected after successful form submission
   const urlParams = new URLSearchParams(window.location.search);
   const customerPosted = urlParams.get('customer_posted');
-  const hasSeenPopup = hasSeenPopup()
   
   if (customerPosted === 'true') {
     // Always show success message, even if user has seen popup before
