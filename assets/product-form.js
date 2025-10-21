@@ -143,28 +143,59 @@ if (!customElements.get('product-form')) {
     'product-form',
     class ProductForm extends HTMLElement {
       constructor() {
-        super();
+      super();
 
-        this.form = this.querySelector('form');
-        this.variantIdInput.disabled = false;
-        this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
-        this.submitButton = this.querySelector('[type="submit"]');
-        this.submitButtonText = this.submitButton.querySelector('span.add-to-cart-text');
-        this.addedText = this.submitButton.querySelector('span.added-to-cart-text');
+      this.form = this.querySelector('form');
+      this.variantIdInput.disabled = false;
+      this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
+      this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      this.submitButton = this.querySelector('[type="submit"]');
+      this.submitButtonText = this.submitButton.querySelector('span.add-to-cart-text');
+      this.addedText = this.submitButton.querySelector('span.added-to-cart-text');
 
-        if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
+      if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
-        this.hideErrors = this.dataset.hideErrors === 'true';
-        
-        if (this.submitButtonText) {
-          this.submitButtonText.style.transition = 'opacity 0.3s ease';
-        }
-        if (this.addedText) {
-          this.addedText.style.transition = 'opacity 0.3s ease';
-          this.addedText.style.opacity = '0';
-        }
+      this.hideErrors = this.dataset.hideErrors === 'true';
+      
+      if (this.submitButtonText) {
+        this.submitButtonText.style.transition = 'opacity 0.3s ease';
       }
+      if (this.addedText) {
+        this.addedText.style.transition = 'opacity 0.3s ease';
+        this.addedText.style.opacity = '0';
+      }
+      
+      Initialize variant requirement handling
+      this.initializeVariantRequirement();
+    }
+
+    initializeVariantRequirement() {
+      const requiresVariant = this.submitButton.hasAttribute('data-requires-variant');
+      
+      if (!requiresVariant) return;
+      
+      // Listen for variant selection changes
+      subscribe(PUB_SUB_EVENTS.optionValueSelectionChange, () => {
+        const variantSelects = this.querySelector('variant-selects');
+        if (!variantSelects) return;
+        
+        // Check if all option groups have a selection
+        const radioGroups = variantSelects.querySelectorAll('fieldset.product-form__input--pill');
+        const allSelected = Array.from(radioGroups).every(group => {
+          return group.querySelector('input[type="radio"]:checked') !== null;
+        });
+        
+        if (allSelected) {
+          // Enable button and update text
+          this.submitButton.removeAttribute('disabled');
+          this.submitButton.removeAttribute('data-requires-variant');
+          
+          if (this.submitButtonText && window.variantStrings?.addToCart) {
+            this.submitButtonText.textContent = window.variantStrings.addToCart;
+          }
+        }
+      });
+    }
 
       onSubmitHandler(evt) {
         evt.preventDefault();
