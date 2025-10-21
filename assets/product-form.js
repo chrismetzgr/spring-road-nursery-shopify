@@ -168,40 +168,73 @@ if (!customElements.get('product-form')) {
       this.initializeVariantRequirement();
     }
 
-  initializeVariantRequirement() {
-    const requiresVariant = this.submitButton.hasAttribute('data-requires-variant');
-    
-    if (!requiresVariant) return;
-    
-    let variantSelected = false;
-    
-    // Listen for the actual variant change event
-    subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-      const variant = event.data?.variant;
+    initializeVariantRequirement() {
+      const requiresVariant = this.submitButton.hasAttribute('data-requires-variant');
       
-      // Once a variant has been selected for the first time, mark it
-      if (!variantSelected && variant) {
-        variantSelected = true;
-        this.submitButton.removeAttribute('data-requires-variant');
+      if (!requiresVariant) return;
+      
+      // Find the quantity input - it's in the product-info section
+      const quantityInput = document.querySelector('.quantity__input');
+      const quantityButtons = document.querySelectorAll('.quantity__button');
+      
+      // Disable quantity picker initially if variant is required
+      if (quantityInput) {
+        quantityInput.disabled = true;
       }
+      // Also disable the +/- buttons
+      quantityButtons.forEach(button => {
+        button.disabled = true;
+      });
       
-      // Keep updating the button state on every variant change
-      if (variantSelected && variant) {
-        if (variant.available) {
-          this.submitButton.removeAttribute('disabled');
-          if (this.submitButtonText) {
-            this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
-          }
-        } else {
-          // If the variant is actually sold out, keep it disabled with sold out text
-          this.submitButton.setAttribute('disabled', 'disabled');
-          if (this.submitButtonText) {
-            this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold Out';
+      let variantSelected = false;
+      
+      // Listen for the actual variant change event
+      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+        console.log('Variant Change Event:', event);
+        console.log('Variant Data:', event.data);
+        console.log('Variant Available:', event.data?.variant?.available);
+        
+        const variant = event.data?.variant;
+        
+        // Once a variant has been selected for the first time, mark it
+        if (!variantSelected && variant) {
+          variantSelected = true;
+          this.submitButton.removeAttribute('data-requires-variant');
+        }
+        
+        // Keep updating the button state on every variant change
+        if (variantSelected && variant) {
+          if (variant.available) {
+            this.submitButton.removeAttribute('disabled');
+            if (this.submitButtonText) {
+              this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
+            }
+            
+            // Enable quantity picker for available variants
+            if (quantityInput) {
+              quantityInput.disabled = false;
+            }
+            quantityButtons.forEach(button => {
+              button.disabled = false;
+            });
+          } else {
+            // If the variant is actually sold out, keep it disabled with sold out text
+            this.submitButton.setAttribute('disabled', 'disabled');
+            if (this.submitButtonText) {
+              this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold Out';
+            }
+            
+            // Disable quantity picker for sold out variants
+            if (quantityInput) {
+              quantityInput.disabled = true;
+            }
+            quantityButtons.forEach(button => {
+              button.disabled = true;
+            });
           }
         }
-      }
-    });
-  }
+      });
+    }
 
       onSubmitHandler(evt) {
         evt.preventDefault();
