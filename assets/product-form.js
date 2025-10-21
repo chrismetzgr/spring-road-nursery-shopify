@@ -185,12 +185,28 @@ if (!customElements.get('product-form')) {
         });
         
         if (allSelected) {
-          // Enable button and update text
-          this.submitButton.removeAttribute('disabled');
+          // Enable button - the variant change event will handle the text
           this.submitButton.removeAttribute('data-requires-variant');
+        }
+      });
+      
+      // Listen for actual variant changes to update button state
+      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+        if (!this.submitButton.hasAttribute('data-requires-variant')) {
+          const variant = event.data?.variant;
           
-          if (this.submitButtonText && window.variantStrings?.addToCart) {
-            this.submitButtonText.textContent = window.variantStrings.addToCart;
+          if (variant) {
+            if (variant.available) {
+              this.submitButton.removeAttribute('disabled');
+              if (this.submitButtonText) {
+                this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
+              }
+            } else {
+              this.submitButton.setAttribute('disabled', 'disabled');
+              if (this.submitButtonText) {
+                this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold Out';
+              }
+            }
           }
         }
       });
