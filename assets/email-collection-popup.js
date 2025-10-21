@@ -147,7 +147,8 @@ if (popup) {
   const customerPosted = urlParams.get('customer_posted');
   const hasSeenPopup = hasSeenPopup()
   
-  if (!hasSeenPopup && customerPosted === 'true') {
+  if (customerPosted === 'true') {
+    // Always show success message, even if user has seen popup before
     handleSuccessDisplay();
   } else if (!hasSeenPopup()) {
     // Only show to first-time visitors for normal display
