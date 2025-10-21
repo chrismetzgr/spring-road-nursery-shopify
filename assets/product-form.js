@@ -173,20 +173,11 @@ if (!customElements.get('product-form')) {
       
       if (!requiresVariant) return;
       
-      // Listen for variant selection changes
-      subscribe(PUB_SUB_EVENTS.optionValueSelectionChange, () => {
-        const variantSelects = this.querySelector('variant-selects');
-        if (!variantSelects) return;
-        
-        // Check if all option groups have a selection
-        const radioGroups = variantSelects.querySelectorAll('fieldset.product-form__input--pill');
-        const allSelected = Array.from(radioGroups).every(group => {
-          return group.querySelector('input[type="radio"]:checked') !== null;
-        });
-        
-        if (allSelected) {
-          // Simply enable the button and remove the flag
-          // Your existing theme logic will handle the text and availability
+      // Listen for the actual variant change event, not just option selection
+      subscribe(PUB_SUB_EVENTS.variantChange, () => {
+        // If we still have the flag, it means a variant has now been selected
+        if (this.submitButton.hasAttribute('data-requires-variant')) {
+          // Enable the button - the variant change event has already updated the text
           this.submitButton.removeAttribute('disabled');
           this.submitButton.removeAttribute('data-requires-variant');
         }
