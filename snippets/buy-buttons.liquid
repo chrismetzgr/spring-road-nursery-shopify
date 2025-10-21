@@ -37,6 +37,21 @@
       if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null
         assign is_sold_out = true
       endif
+
+      # Check if product has variants and if a variant was selected via URL
+      assign has_variants = false
+      assign variant_pre_selected = false
+      
+      if product.has_only_default_variant == false
+        assign has_variants = true
+        
+        # Check if variant is pre-selected from URL parameter
+        if product.selected_variant and product.selected_variant != product.selected_or_first_available_variant
+          assign variant_pre_selected = true
+        elsif request.url contains 'variant='
+          assign variant_pre_selected = true
+        endif
+      endif
     -%}
 
     <product-form
@@ -90,9 +105,12 @@
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
             {% if is_sold_out %}disabled{% endif %}
+            {% if has_variants and variant_pre_selected == false %}disabled data-requires-variant="true"{% endif %}
           >
             <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
-              {%- if product.selected_or_first_available_variant == null -%}
+              {%- if has_variants and variant_pre_selected == false -%}
+                Select Options
+              {%- elsif product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif is_sold_out -%}
                 {{ 'products.product.sold_out' | t }}
