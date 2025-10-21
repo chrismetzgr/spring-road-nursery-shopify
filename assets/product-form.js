@@ -177,10 +177,6 @@ if (!customElements.get('product-form')) {
     
     // Listen for the actual variant change event
     subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-      console.log('Variant Change Event:', event);
-      console.log('Variant Data:', event.data);
-      console.log('Variant Available:', event.data?.variant?.available);
-      
       const variant = event.data?.variant;
       
       // Once a variant has been selected for the first time, mark it
