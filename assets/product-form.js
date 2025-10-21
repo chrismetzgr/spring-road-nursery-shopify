@@ -168,31 +168,44 @@ if (!customElements.get('product-form')) {
       this.initializeVariantRequirement();
     }
 
-    initializeVariantRequirement() {
-      const requiresVariant = this.submitButton.hasAttribute('data-requires-variant');
+  initializeVariantRequirement() {
+    const requiresVariant = this.submitButton.hasAttribute('data-requires-variant');
+    
+    if (!requiresVariant) return;
+    
+    let variantSelected = false;
+    
+    // Listen for the actual variant change event
+    subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+      console.log('Variant Change Event:', event);
+      console.log('Variant Data:', event.data);
+      console.log('Variant Available:', event.data?.variant?.available);
       
-      if (!requiresVariant) return;
+      const variant = event.data?.variant;
       
-      // Listen for the actual variant change event
-      subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-        // TEMPORARY: Log what we're getting
-        console.log('Variant Change Event:', event);
-        console.log('Variant Data:', event.data);
-        console.log('Variant Available:', event.data?.variant?.available);
-        
-        // If we still have the flag, it means a variant has now been selected
-        if (this.submitButton.hasAttribute('data-requires-variant')) {
-          // Enable the button AND set the text explicitly
+      // Once a variant has been selected for the first time, mark it
+      if (!variantSelected && variant) {
+        variantSelected = true;
+        this.submitButton.removeAttribute('data-requires-variant');
+      }
+      
+      // Keep updating the button state on every variant change
+      if (variantSelected && variant) {
+        if (variant.available) {
           this.submitButton.removeAttribute('disabled');
-          this.submitButton.removeAttribute('data-requires-variant');
-          
-          // Explicitly set the button text to "Add to Cart"
           if (this.submitButtonText) {
             this.submitButtonText.textContent = window.variantStrings?.addToCart || 'Add to Cart';
           }
+        } else {
+          // If the variant is actually sold out, keep it disabled with sold out text
+          this.submitButton.setAttribute('disabled', 'disabled');
+          if (this.submitButtonText) {
+            this.submitButtonText.textContent = window.variantStrings?.soldOut || 'Sold Out';
+          }
         }
-      });
-    }
+      }
+    });
+  }
 
       onSubmitHandler(evt) {
         evt.preventDefault();
