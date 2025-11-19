@@ -107,6 +107,7 @@ cart-items {
 .cart__note {
   height: fit-content;
   top: 2.5rem;
+  font-family: var(--font-family-secondary) !important;
 }
 
 .cart__note label {
