@@ -7,7 +7,7 @@
   border: 1px solid black;
   border-radius: 4px;
   font-family: var(--font-family-secondary) !important;
-  padding: 0 !important;
+  padding: 4px !important;
   margin: 0 !important;
 }
 
