@@ -172,9 +172,12 @@
               <span class="card__heading-title">
                 {{ card_product.title | escape }}
               </span>
-              <span class="card__heading-price">
-                {{ card_product.price | money_without_trailing_zeros }}
-              </span>
+              {% if card_product.handle != 'gift-card-spring-road-nursery' %}
+                <span class="card__heading-price">
+                  {{ card_product.price | money_without_trailing_zeros }}
+                </span>
+              {% endif %}
+
             </div>
           </a>
           <div class="card-information">
