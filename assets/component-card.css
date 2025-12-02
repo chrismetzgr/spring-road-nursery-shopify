@@ -377,7 +377,7 @@
 .amaryllis {
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: bottom center;
   width: 100%;
 }
 
