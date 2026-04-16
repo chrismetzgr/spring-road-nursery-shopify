@@ -267,7 +267,6 @@
     text-decoration-style: wavy;
     text-underline-offset: 5px;
     text-decoration-thickness: 1px;
-    pointer-events: none;
   }
   a:hover {
     color: inherit !important;
