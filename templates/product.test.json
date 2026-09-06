@@ -14,7 +14,7 @@
       "settings": {}
     },
     "main": {
-      "type": "main-product",
+      "type": "main-product-test",
       "blocks": {
         "title": {
           "type": "title",
