@@ -747,9 +747,8 @@
       {{ product | structured_data }}
     </script>
   </div>
+  {% render 'extra-product-info', product: product %}
 </product-info>
-
-{% render 'extra-product-info', product: product %}
 
 {% schema %}
 {
