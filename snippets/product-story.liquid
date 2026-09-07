@@ -173,7 +173,7 @@
 
       {%- if valid_count == 2 and quote != blank -%}
         <div class="product-story__quote">
-          <p class="h3">{{ quote | newline_to_br }}</p>
+          <p>{{ quote | newline_to_br }}</p>
         </div>
         {%- assign quote_rendered = true -%}
       {%- endif -%}
@@ -182,7 +182,7 @@
 
   {%- if quote != blank and quote_rendered == blank -%}
     <div class="product-story__quote">
-      <p class="h3">{{ quote | newline_to_br }}</p>
+      <p>{{ quote | newline_to_br }}</p>
     </div>
   {%- endif -%}
 </div>
