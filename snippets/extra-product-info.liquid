@@ -113,7 +113,7 @@
 <div class="product-story">
   {%- liquid
     assign valid_count = 0
-    assign quote = product.metafields.custom['1_quote'].value
+    assign quote = product.metafields.custom['1_quote'].value | default: "Bauhaus copper mug seitan supreme wolf cut readymade. Breadcrumbing ethical irony asymmetrical cliche brainrot cray enamel pin rams gut health semiotics VHS hot chicken offill meditation."
   -%}
 
   {%- for i in (1..3) -%}
