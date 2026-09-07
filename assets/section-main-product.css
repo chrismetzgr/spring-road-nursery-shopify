@@ -5,7 +5,6 @@
 
 .product {
   color: var(--font-color-dark);
-  margin-bottom: 100px;
 }
 
 .product.grid {
