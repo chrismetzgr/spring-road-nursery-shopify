@@ -148,7 +148,7 @@
         {%- assign side_class = 'product-story__section--media-left' -%}
       {%- endif -%}
 
-      <div class="product-story__section {{ side_class }}">
+      <div class="product-story__section {{ side_class }}"{% if valid_count > 1 %} style="margin-top: 200px;"{% endif %}>
         <div class="product-story__media">
           {%- if video != blank and video.media_type == 'VIDEO' -%}
             {{ video | video_tag: autoplay: false, controls: true, loop: false }}
