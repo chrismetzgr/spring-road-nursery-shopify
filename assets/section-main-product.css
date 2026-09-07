@@ -581,7 +581,6 @@ a.product__text {
 @media screen and (min-width: 990px) {
   .product {
     color: var(--font-color-dark);
-    margin-bottom: 200px;
   }
 
   .product--stacked .product__media-item {
