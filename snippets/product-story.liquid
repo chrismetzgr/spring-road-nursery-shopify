@@ -157,14 +157,14 @@
           {%- if video != blank and video.media_type == 'VIDEO' -%}
             {{ video | video_tag: autoplay: false, controls: true, loop: false }}
           {%- elsif image != blank -%}
-            {{ image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '600,900,1200,1500' }}
+            {{ image | image_url: width: 400 | image_tag: loading: 'lazy', widths: '600,900,1200,1500' }}
           {%- else -%}
             <img
               src="https://springroadnursery.com/cdn/shop/files/20250929-SRNProductShotsMISC-26_websize.jpg?v=1776357892&width=823"
               alt=""
               loading="lazy"
-              width="1500"
-              height="1500"
+              width="400"
+              height="400"
             >
           {%- endif -%}
         </div>
