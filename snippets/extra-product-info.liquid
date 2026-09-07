@@ -123,8 +123,8 @@
       assign image_key = i | append: '_image'
       assign video_key = i | append: '_video'
 
-      assign headline = product.metafields.custom[headline_key].value
-      assign description = product.metafields.custom[description_key].value
+      assign headline = product.metafields.custom[headline_key].value | default: 'HEADLINE'
+      assign headline = product.metafields.custom[headline_key].value | default: 'HEADLINE'
       assign image = product.metafields.custom[image_key].value
       assign video = product.metafields.custom[video_key].value
 
