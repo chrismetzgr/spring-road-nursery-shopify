@@ -161,7 +161,7 @@
             {{ image | image_url: width: 400 | image_tag: loading: 'lazy'}}
           {%- else -%}
             <img
-              src="https://springroadnursery.com/cdn/shop/files/20250929-SRNProductShotsMISC-26_websize.jpg?v=1776357892&width=400"
+              src=" {{  'test_video.mp4' | asset_url }}"
               alt=""
               loading="lazy"
             >
