@@ -160,9 +160,14 @@
           {%- elsif image != blank -%}
             {{ image | image_url: width: 400 | image_tag: loading: 'lazy'}}
           {%- else -%}
-          <video controls playsinline style="width: 100%; height: 100%; object-fit: cover;">
-            <source src="{{ 'test_video.mp4' | asset_url }}" type="video/mp4">
-          </video>
+              <video 
+      class="srn-landing__video"
+      muted 
+      loop 
+      playsinline 
+      src="https://cdn.shopify.com/videos/c/o/v/9081023c7a3f46bba1b9413b3bea6656.mp4"
+      aria-label="Background video of Spring Road Nursery"
+    ></video>
           {%- endif -%}
         </div>
         <div class="product-story__text">
