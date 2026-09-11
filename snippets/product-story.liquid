@@ -166,7 +166,7 @@
         {%- if video != blank and video.media_type == 'video' -%}
           {{ video | video_tag: autoplay: false, controls: true, loop: false }}
         {%- elsif image != blank -%}
-          {{ image | image_url: width: auto | image_tag: loading: 'lazy' }}
+          {{ image | image_url: width: 500 | image_tag: loading: 'lazy' }}
         {%- endif -%}
       </div>
 
