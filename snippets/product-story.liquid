@@ -310,7 +310,7 @@
     </div>
   {%- endif -%}
 
-  {% comment %} {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
+  {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
 
   {%- if suggested_products != blank -%}
     <div class="product-story__suggested-products">
@@ -331,5 +331,5 @@
         </a>
       {%- endfor -%}
     </div>
-  {%- endif -%} {% endcomment %}
+  {%- endif -%} 
 </div>
