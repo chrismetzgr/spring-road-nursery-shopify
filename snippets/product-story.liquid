@@ -320,24 +320,26 @@
   {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
 
   {%- if suggested_products != blank -%}
-    <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
-    <div class="product-story__suggested-products">
-      {%- for suggested_product in suggested_products -%}
-        <a
-          class="product-story__suggested-product"
-          href="{{ suggested_product.url }}"
-        >
-          {%- if suggested_product.featured_image -%}
-            {{
-              suggested_product.featured_image
-              | image_url: width: 600
-              | image_tag: loading: 'lazy', alt: suggested_product.title
-            }}
-          {%- endif -%}
+    <div class="product-story__suggested-products-container">
+      <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
+      <div class="product-story__suggested-products">
+        {%- for suggested_product in suggested_products -%}
+          <a
+            class="product-story__suggested-product"
+            href="{{ suggested_product.url }}"
+          >
+            {%- if suggested_product.featured_image -%}
+              {{
+                suggested_product.featured_image
+                | image_url: width: 600
+                | image_tag: loading: 'lazy', alt: suggested_product.title
+              }}
+            {%- endif -%}
 
-          <h3>{{ suggested_product.title }}</h3>
-        </a>
-      {%- endfor -%}
+            <h3>{{ suggested_product.title }}</h3>
+          </a>
+        {%- endfor -%}
+      </div>
     </div>
   {%- endif -%} 
 </div>
