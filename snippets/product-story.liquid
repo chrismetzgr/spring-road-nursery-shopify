@@ -124,24 +124,11 @@
   <strong>Product story debug</strong>
 
   <pre>
-Product: {{ product.title | json }}
-
-custom values:
-{{ product.metafields.custom.value | json }}
-
-1_description:
-{{ product.metafields.custom['1_description'].value | json }}
-
-1_image:
-{{ product.metafields.custom['1_image'].value | json }}
-
-1_video:
-{{ product.metafields.custom['1_video'].value | json }}
-
-1_quote:
-{{ product.metafields.custom['1_quote'].value | json }}
-  </pre>
-</div>
+<pre>
+Product title: {{ product.title | json }}
+Product handle: {{ product.handle | json }}
+Product ID: {{ product.id | json }}
+</pre>
 
   {%- liquid
     assign valid_count = 0
