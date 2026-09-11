@@ -313,7 +313,7 @@
   {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
 
   {%- if suggested_products != blank -%}
-    <h3>You might also like<h3>
+    <span class="srn-footer__nav-link">You might also like</span>
     <div class="product-story__suggested-products">
       {%- for suggested_product in suggested_products -%}
         <a
