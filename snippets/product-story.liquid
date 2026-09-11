@@ -121,14 +121,32 @@
 
 <div class="product-story">
   <div style="background:#f5f5f5; color:#111; padding:20px; margin:20px 0; font-family:monospace;">
-  <strong>Product story debug</strong>
+    <h3>Product metafield debug</h3>
 
-  <pre>
-<pre>
-Product title: {{ product.title | json }}
-Product handle: {{ product.handle | json }}
-Product ID: {{ product.id | json }}
-</pre>
+    <p>Product: {{ product.title }}</p>
+    <p>Product ID: {{ product.id }}</p>
+
+    {% for namespace_pair in product.metafields %}
+      {% assign namespace_name = namespace_pair | first %}
+      {% assign namespace_fields = namespace_pair | last %}
+
+      <h4>Namespace: {{ namespace_name }}</h4>
+
+      {% for field_pair in namespace_fields %}
+        {% assign field_key = field_pair | first %}
+        {% assign field = field_pair | last %}
+
+        <div style="border-top:1px solid #ccc; padding:8px 0;">
+          <strong>{{ field_key }}</strong>
+          <br>
+          Type: {{ field.type }}
+          <br>
+          Value:
+          {{ field | metafield_tag }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
 
   {%- liquid
     assign valid_count = 0
