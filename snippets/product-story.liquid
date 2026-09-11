@@ -1,24 +1,28 @@
 {% comment %}
   product-story-sections.liquid
-  ------------------------------
-  Renders up to 3 alternating media/text story blocks + one centered quote,
-  driven entirely by numbered product metafields:
 
-    {n}_headline     -> single line text
-    {n}_description  -> multi-line text
-    {n}_image        -> file reference (image)
-    {n}_video        -> file reference (video) — takes priority over {n}_image
-    1_quote          -> single/multi-line text (rendered once, not per-section)
+  Uses product metafields from the custom namespace:
 
-  A section only renders if it has a headline AND description AND
-  (a video OR an image). Sections alternate media left/right based on
-  how many have ACTUALLY rendered so far (not their number), starting
-  with media-right on the first one rendered. The quote renders after
-  the 2nd valid section, or at the end as a fallback if fewer than 2
-  sections rendered.
+    1_deeper_headline
+    deeper_definition_one_description
+    1_deeper_image
+    1_deeper_video
+    1_deeper_quote
 
-  Usage: drop at the bottom of main-product.liquid (or wherever), e.g.
-    {% render 'extra-product-info', product: product %}
+    2_deeper_headline
+    2_deeper_description
+
+    suggested_products
+
+  A section renders only when it has:
+    - a headline
+    - a description
+    - an image or video
+
+  Video takes priority over image.
+
+  Media alternates sides based on the number of sections
+  that have actually rendered.
 {% endcomment %}
 
 {%- style -%}
@@ -40,6 +44,10 @@
   .product-story__media {
     order: 0;
     min-height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .product-story__text {
@@ -50,11 +58,22 @@
     padding: 3rem 0;
   }
 
-  .product-story__media img,
+  .product-story__media img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 28rem;
+    object-fit: contain;
+    margin-inline: auto;
+  }
+
   .product-story__media video {
     display: block;
-    object-fit: cover;
     width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   .product-story__headline {
@@ -78,6 +97,29 @@
     margin: 0;
   }
 
+  .product-story__suggested-products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .product-story__suggested-product {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .product-story__suggested-product img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .product-story__suggested-product h3 {
+    margin-top: 1rem;
+  }
+
   @media screen and (min-width: 900px) {
     .product-story__section {
       flex-direction: row;
@@ -85,21 +127,26 @@
     }
 
     .product-story__media {
-      width: 35%
-    }
-    .product-story__text {
-      width: 65%;
-    }
-
-    .product-story__media {
+      width: 35%;
       min-height: unset;
     }
 
     .product-story__text {
+      width: 65%;
       padding: 4rem 6rem;
     }
 
-    /* media on the right: media renders second visually */
+    .product-story__media img {
+      width: min(100%, clamp(16rem, 28vw, 32rem));
+      max-width: 100%;
+      max-height: 42rem;
+    }
+
+    .product-story__media video {
+      max-height: 42rem;
+    }
+
+    /* Media on the right */
     .product-story__section--media-right .product-story__media {
       order: 1;
     }
@@ -108,7 +155,7 @@
       order: 0;
     }
 
-    /* media on the left: default DOM order already handles this */
+    /* Media on the left */
     .product-story__section--media-left .product-story__media {
       order: 0;
     }
@@ -117,83 +164,113 @@
       order: 1;
     }
   }
+
+  @media screen and (max-width: 599px) {
+    .product-story__suggested-products {
+      grid-template-columns: 1fr;
+    }
+  }
 {%- endstyle -%}
 
 <div class="product-story">
- {%- liquid
-  assign valid_count = 0
-  assign quote_rendered = false
-  assign quote = product.metafields.custom['1_deeper_quote'].value
--%}
-
-{%- for i in (1..2) -%}
   {%- liquid
-    assign headline_key = i | append: '_deeper_headline'
-    assign image_key = i | append: '_deeper_image'
-    assign video_key = i | append: '_deeper_video'
-
-    assign headline = product.metafields.custom[headline_key].value
-    assign image = product.metafields.custom[image_key].value
-    assign video = product.metafields.custom[video_key].value
-
-    if i == 1
-      assign description = product.metafields.custom['deeper_definition_one_description'].value
-    elsif i == 2
-      assign description = product.metafields.custom['2_deeper_description'].value
-    endif
-
-    assign has_media = false
-
-    if video != blank and video.media_type == 'video'
-      assign has_media = true
-    elsif image != blank
-      assign has_media = true
-    endif
+    assign valid_count = 0
+    assign quote_rendered = false
+    assign quote = product.metafields.custom['1_deeper_quote'].value
   -%}
 
-  {%- if headline != blank and description != blank and has_media -%}
-    {%- assign valid_count = valid_count | plus: 1 -%}
-    {%- assign side_check = valid_count | modulo: 2 -%}
+  {%- for i in (1..2) -%}
+    {%- liquid
+      assign headline_key = i | append: '_deeper_headline'
+      assign image_key = i | append: '_deeper_image'
+      assign video_key = i | append: '_deeper_video'
 
-    {%- if side_check == 1 -%}
-      {%- assign side_class = 'product-story__section--media-right' -%}
-    {%- else -%}
-      {%- assign side_class = 'product-story__section--media-left' -%}
-    {%- endif -%}
+      assign headline = product.metafields.custom[headline_key].value
+      assign image = product.metafields.custom[image_key].value
+      assign video = product.metafields.custom[video_key].value
+      assign description = blank
 
-    <div class="product-story__section {{ side_class }}">
-      <div class="product-story__media">
-        {%- if video != blank and video.media_type == 'video' -%}
-          {{ video | video_tag: autoplay: false, controls: true, loop: false }}
-        {%- elsif image != blank -%}
-          {{ image | image_url: width: 500 | image_tag: loading: 'lazy' }}
-        {%- endif -%}
-      </div>
+      if i == 1
+        assign description = product.metafields.custom['deeper_definition_one_description'].value
+      elsif i == 2
+        assign description = product.metafields.custom['2_deeper_description'].value
+      endif
 
-      <div class="product-story__text">
-        <h1 class="product-story__headline">
-          {{ headline | escape }}
-        </h1>
+      assign has_media = false
 
-        <div class="product-story__description description-text rte">
-          {{ description | escape | newline_to_br }}
+      if video != blank and video.media_type == 'video'
+        assign has_media = true
+      elsif image != blank
+        assign has_media = true
+      endif
+    -%}
+
+    {%- if headline != blank and description != blank and has_media -%}
+      {%- assign valid_count = valid_count | plus: 1 -%}
+      {%- assign side_check = valid_count | modulo: 2 -%}
+
+      {%- if side_check == 1 -%}
+        {%- assign side_class = 'product-story__section--media-right' -%}
+      {%- else -%}
+        {%- assign side_class = 'product-story__section--media-left' -%}
+      {%- endif -%}
+
+      <div class="product-story__section {{ side_class }}">
+        <div class="product-story__media">
+          {%- if video != blank and video.media_type == 'video' -%}
+            {{ video | video_tag: autoplay: false, controls: true, loop: false }}
+          {%- elsif image != blank -%}
+            {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+          {%- endif -%}
+        </div>
+
+        <div class="product-story__text">
+          <h1 class="product-story__headline">
+            {{ headline | escape }}
+          </h1>
+
+          <div class="product-story__description description-text rte">
+            {{ description | escape | newline_to_br }}
+          </div>
         </div>
       </div>
-    </div>
 
-    {%- if valid_count == 2 and quote != blank -%}
-      <div class="product-story__quote">
-        <p>{{ quote | escape | newline_to_br }}</p>
-      </div>
+      {%- if valid_count == 2 and quote != blank -%}
+        <div class="product-story__quote">
+          <p>{{ quote | newline_to_br }}</p>
+        </div>
 
-      {%- assign quote_rendered = true -%}
+        {%- assign quote_rendered = true -%}
+      {%- endif -%}
     {%- endif -%}
-  {%- endif -%}
-{%- endfor -%}
+  {%- endfor -%}
 
-{%- if quote != blank and quote_rendered == false -%}
-  <div class="product-story__quote">
-    <p>{{ quote | escape | newline_to_br }}</p>
-  </div>
-{%- endif -%}
+  {%- if quote != blank and quote_rendered == false -%}
+    <div class="product-story__quote">
+      <p>{{ quote | newline_to_br }}</p>
+    </div>
+  {%- endif -%}
+
+  {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
+
+  {%- if suggested_products != blank -%}
+    <div class="product-story__suggested-products">
+      {%- for suggested_product in suggested_products -%}
+        <a
+          class="product-story__suggested-product"
+          href="{{ suggested_product.url }}"
+        >
+          {%- if suggested_product.featured_image -%}
+            {{
+              suggested_product.featured_image
+              | image_url: width: 600
+              | image_tag: loading: 'lazy', alt: suggested_product.title
+            }}
+          {%- endif -%}
+
+          <h3>{{ suggested_product.title }}</h3>
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </div>
