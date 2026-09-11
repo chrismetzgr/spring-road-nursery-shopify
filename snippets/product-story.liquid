@@ -120,6 +120,29 @@
 {%- endstyle -%}
 
 <div class="product-story">
+  <div style="background:#f5f5f5; color:#111; padding:20px; margin:20px 0; font-family:monospace;">
+  <strong>Product story debug</strong>
+
+  <pre>
+Product: {{ product.title | json }}
+
+1_headline:
+{{ product.metafields.custom['1_headline'].value | json }}
+
+1_description:
+{{ product.metafields.custom['1_description'].value | json }}
+
+1_image:
+{{ product.metafields.custom['1_image'].value | json }}
+
+1_video:
+{{ product.metafields.custom['1_video'].value | json }}
+
+1_quote:
+{{ product.metafields.custom['1_quote'].value | json }}
+  </pre>
+</div>
+
   {%- liquid
     assign valid_count = 0
     assign quote = product.metafields.custom['1_quote'].value | default: "Bauhaus copper mug seitan supreme wolf cut readymade. Breadcrumbing ethical irony asymmetrical cliche brainrot cray enamel pin rams gut health semiotics VHS hot chicken offill meditation."
