@@ -218,7 +218,7 @@
       <div class="product-story__section {{ side_class }}">
         <div class="product-story__media">
           {%- if video != blank and video.media_type == 'video' -%}
-            {{ video | video_tag: autoplay: false, controls: true, loop: false }}
+            {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
           {%- elsif image != blank -%}
             {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
           {%- endif -%}
