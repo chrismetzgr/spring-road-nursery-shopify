@@ -213,166 +213,166 @@
 
 <div class="product-story-container">
   <div class="product-story">
-  {%- liquid
-    assign total_valid_count = 0
-    assign valid_count = 0
-    assign quote_rendered = false
-    assign quote = product.metafields.custom['1_deeper_quote'].value
-  -%}
-
-  {% comment %}
-    First pass:
-    Count how many complete sections exist so the quote can be placed
-    after section 1 when there are multiple valid sections.
-  {% endcomment %}
-
-  {%- for i in (1..3) -%}
     {%- liquid
-      assign headline_key = i | append: '_deeper_headline'
-      assign image_key = i | append: '_deeper_image'
-      assign video_key = i | append: '_deeper_video'
-
-      assign headline = product.metafields.custom[headline_key].value
-      assign image = product.metafields.custom[image_key].value
-      assign video = product.metafields.custom[video_key].value
-      assign description = blank
-
-      if i == 1
-        assign description = product.metafields.custom['deeper_definition_one_description'].value
-      elsif i == 2
-        assign description = product.metafields.custom['2_deeper_description'].value
-      elsif i == 3
-        assign description = product.metafields.custom['3_deeper_description'].value
-      endif
-
-      assign has_media = false
-
-      if video != blank and video.media_type == 'video'
-        assign has_media = true
-      elsif image != blank
-        assign has_media = true
-      endif
+      assign total_valid_count = 0
+      assign valid_count = 0
+      assign quote_rendered = false
+      assign quote = product.metafields.custom['1_deeper_quote'].value
     -%}
 
-    {%- if headline != blank and description != blank and has_media -%}
-      {%- assign total_valid_count = total_valid_count | plus: 1 -%}
-    {%- endif -%}
-  {%- endfor -%}
+    {% comment %}
+      First pass:
+      Count how many complete sections exist so the quote can be placed
+      after section 1 when there are multiple valid sections.
+    {% endcomment %}
 
-  {% comment %}
-    Second pass:
-    Render the sections.
-  {% endcomment %}
+    {%- for i in (1..3) -%}
+      {%- liquid
+        assign headline_key = i | append: '_deeper_headline'
+        assign image_key = i | append: '_deeper_image'
+        assign video_key = i | append: '_deeper_video'
 
-  {%- for i in (1..3) -%}
-    {%- liquid
-      assign headline_key = i | append: '_deeper_headline'
-      assign image_key = i | append: '_deeper_image'
-      assign video_key = i | append: '_deeper_video'
+        assign headline = product.metafields.custom[headline_key].value
+        assign image = product.metafields.custom[image_key].value
+        assign video = product.metafields.custom[video_key].value
+        assign description = blank
 
-      assign headline = product.metafields.custom[headline_key].value
-      assign image = product.metafields.custom[image_key].value
-      assign video = product.metafields.custom[video_key].value
-      assign description = blank
+        if i == 1
+          assign description = product.metafields.custom['deeper_definition_one_description'].value
+        elsif i == 2
+          assign description = product.metafields.custom['2_deeper_description'].value
+        elsif i == 3
+          assign description = product.metafields.custom['3_deeper_description'].value
+        endif
 
-      if i == 1
-        assign description = product.metafields.custom['deeper_definition_one_description'].value
-      elsif i == 2
-        assign description = product.metafields.custom['2_deeper_description'].value
-      elsif i == 3
-        assign description = product.metafields.custom['3_deeper_description'].value
-      endif
+        assign has_media = false
 
-      assign has_media = false
+        if video != blank and video.media_type == 'video'
+          assign has_media = true
+        elsif image != blank
+          assign has_media = true
+        endif
+      -%}
 
-      if video != blank and video.media_type == 'video'
-        assign has_media = true
-      elsif image != blank
-        assign has_media = true
-      endif
-    -%}
-
-    {%- if headline != blank and description != blank and has_media -%}
-      {%- assign valid_count = valid_count | plus: 1 -%}
-      {%- assign side_check = valid_count | modulo: 2 -%}
-
-      {%- if side_check == 1 -%}
-        {%- assign side_class = 'product-story__section--media-right' -%}
-      {%- else -%}
-        {%- assign side_class = 'product-story__section--media-left' -%}
+      {%- if headline != blank and description != blank and has_media -%}
+        {%- assign total_valid_count = total_valid_count | plus: 1 -%}
       {%- endif -%}
+    {%- endfor -%}
 
-      <div class="product-story__section {{ side_class }}">
-        <div class="product-story__media">
-          {%- if video != blank and video.media_type == 'video' -%}
-            {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
-          {%- elsif image != blank -%}
-            {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
-          {%- endif -%}
-        </div>
+    {% comment %}
+      Second pass:
+      Render the sections.
+    {% endcomment %}
 
-        <div class="product-story__text">
-          <h1 class="product-story__headline">
-            {{ headline | escape }}
-          </h1>
+    {%- for i in (1..3) -%}
+      {%- liquid
+        assign headline_key = i | append: '_deeper_headline'
+        assign image_key = i | append: '_deeper_image'
+        assign video_key = i | append: '_deeper_video'
 
-          <div class="product-story__description description-text rte">
-            {{ description | escape | newline_to_br }}
+        assign headline = product.metafields.custom[headline_key].value
+        assign image = product.metafields.custom[image_key].value
+        assign video = product.metafields.custom[video_key].value
+        assign description = blank
+
+        if i == 1
+          assign description = product.metafields.custom['deeper_definition_one_description'].value
+        elsif i == 2
+          assign description = product.metafields.custom['2_deeper_description'].value
+        elsif i == 3
+          assign description = product.metafields.custom['3_deeper_description'].value
+        endif
+
+        assign has_media = false
+
+        if video != blank and video.media_type == 'video'
+          assign has_media = true
+        elsif image != blank
+          assign has_media = true
+        endif
+      -%}
+
+      {%- if headline != blank and description != blank and has_media -%}
+        {%- assign valid_count = valid_count | plus: 1 -%}
+        {%- assign side_check = valid_count | modulo: 2 -%}
+
+        {%- if side_check == 1 -%}
+          {%- assign side_class = 'product-story__section--media-right' -%}
+        {%- else -%}
+          {%- assign side_class = 'product-story__section--media-left' -%}
+        {%- endif -%}
+
+        <div class="product-story__section {{ side_class }}">
+          <div class="product-story__media">
+            {%- if video != blank and video.media_type == 'video' -%}
+              {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
+            {%- elsif image != blank -%}
+              {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+
+          <div class="product-story__text">
+            <h1 class="product-story__headline">
+              {{ headline | escape }}
+            </h1>
+
+            <div class="product-story__description description-text rte">
+              {{ description | escape | newline_to_br }}
+            </div>
           </div>
         </div>
-      </div>
 
-      {% comment %}
-        If there is more than one valid section, place the quote
-        between section 1 and section 2.
-      {% endcomment %}
+        {% comment %}
+          If there is more than one valid section, place the quote
+          between section 1 and section 2.
+        {% endcomment %}
 
-      {%- if valid_count == 1 and total_valid_count > 1 and quote != blank -%}
-        <div class="product-story__quote">
-          <p>{{ quote | newline_to_br }}</p>
-        </div>
+        {%- if valid_count == 1 and total_valid_count > 1 and quote != blank -%}
+          <div class="product-story__quote">
+            <p>{{ quote | newline_to_br }}</p>
+          </div>
 
-        {%- assign quote_rendered = true -%}
+          {%- assign quote_rendered = true -%}
+        {%- endif -%}
       {%- endif -%}
+    {%- endfor -%}
+
+    {% comment %}
+      If there is only one valid section, place the quote after it.
+    {% endcomment %}
+
+    {%- if quote != blank and quote_rendered == false -%}
+      <div class="product-story__quote">
+        <p>{{ quote | newline_to_br }}</p>
+      </div>
     {%- endif -%}
-  {%- endfor -%}
-
-  {% comment %}
-    If there is only one valid section, place the quote after it.
-  {% endcomment %}
-
-  {%- if quote != blank and quote_rendered == false -%}
-    <div class="product-story__quote">
-      <p>{{ quote | newline_to_br }}</p>
-    </div>
-  {%- endif -%}
 
   </div>
   <div>
 
-  {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
+    {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
 
-  {%- if suggested_products != blank -%}
-    <div class="product-story__suggested-products-container">
-      <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
-      <div class="product-story__suggested-products">
-        {%- for suggested_product in suggested_products -%}
-          <a
-            class="product-story__suggested-product"
-            href="{{ suggested_product.url }}"
-          >
-            {%- if suggested_product.featured_image -%}
-              {{
-                suggested_product.featured_image
-                | image_url: width: 600
-                | image_tag: loading: 'lazy', alt: suggested_product.title
-              }}
-            {%- endif -%}
+    {%- if suggested_products != blank -%}
+      <div class="product-story__suggested-products-container">
+        <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
+        <div class="product-story__suggested-products">
+          {%- for suggested_product in suggested_products -%}
+            <a
+              class="product-story__suggested-product"
+              href="{{ suggested_product.url }}"
+            >
+              {%- if suggested_product.featured_image -%}
+                {{
+                  suggested_product.featured_image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', alt: suggested_product.title
+                }}
+              {%- endif -%}
 
-            <div class="suggested-product__heading">{{ suggested_product.title }}</div>
-          </a>
-        {%- endfor -%}
+              <div class="suggested-product__heading">{{ suggested_product.title }}</div>
+            </a>
+          {%- endfor -%}
+        </div>
       </div>
-    </div>
-  {%- endif -%} 
+    {%- endif -%} 
 </div>
