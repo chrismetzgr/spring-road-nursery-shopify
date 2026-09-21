@@ -26,6 +26,26 @@
 {% endcomment %}
 
 {%- style -%}
+
+.wavy-border {
+  --wave-color: #000;
+  --wave-width: 2px;
+
+  position: relative;
+  padding: 1rem;
+}
+
+.wavy-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+
+  background: var(--wave-color);
+
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M2 5 Q5 2 8 5 T14 5 T20 5 T26 5 T32 5 T38 5 T44 5 T50 5 T56 5 T62 5 T68 5 T74 5 T80 5 T86 5 T92 5 T98 5 L98 95 Q95 98 92 95 T86 95 T80 95 T74 95 T68 95 T62 95 T56 95 T50 95 T44 95 T38 95 T32 95 T26 95 T20 95 T14 95 T8 95 T2 95 Z' fill='white'/%3E%3C/svg%3E")
+    center / 100% 100% no-repeat;
+}
   .product-story {
     color: var(--font-color-dark);
     margin-top: 6rem;
