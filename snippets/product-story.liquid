@@ -302,7 +302,7 @@
         {%- assign side_class = 'product-story__section--media-left' -%}
       {%- endif -%}
 
-      <div class="product-story__section {{ side_class }}">
+      <div class="product-story__section {{ side_class }} wavy-border">
         <div class="product-story__media">
           {%- if video != blank and video.media_type == 'video' -%}
             {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
