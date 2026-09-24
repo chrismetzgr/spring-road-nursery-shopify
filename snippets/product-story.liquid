@@ -31,6 +31,7 @@
     --story-text: #F1EFDF;
     --story-max-width: 1024px;
     --story-gutter: 1.5rem;
+    --story-media-width: 440px;
 
     color: var(--font-color-dark);
     margin-block: 6rem;
@@ -51,9 +52,10 @@
     color: var(--story-text);
   }
 
+  /* Media keeps its own aspect ratio; the section grows to fit its height */
   .product-story__media {
     width: 100%;
-    max-width: 440px;
+    max-width: var(--story-media-width);
   }
 
   .product-story__media img,
@@ -61,8 +63,9 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 2 / 1;
-    object-fit: cover;
+    /* Optional: if ALL media shares one ratio, uncomment to prevent layout
+       shift while video loads (e.g. 1 / 2 for 220w x 440h):
+       aspect-ratio: 1 / 2; */
   }
 
   .product-story__text {
@@ -139,7 +142,7 @@
     }
 
     .product-story__media {
-      flex: 0 0 43%;
+      flex: 0 1 var(--story-media-width);
       width: auto;
     }
 
