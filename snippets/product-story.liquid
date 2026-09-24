@@ -27,79 +27,57 @@
 
 {%- style -%}
   .product-story-container {
+    --story-bg: #235800;
+    --story-text: #F1EFDF;
+    --story-max-width: 1024px;
+    --story-gutter: 1.5rem;
+
     color: var(--font-color-dark);
-    margin-top: 6rem;
-    margin-bottom: 6rem;
+    margin-block: 6rem;
   }
 
+  /* Full-bleed band; content is centered and capped at --story-max-width */
   .product-story__section {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    background: #235800;
-    padding: 0 5rem;
-    border-top: solid #235800 30px;
-    border-bottom: solid #235800 30px;
-    height: 500px;
-}
-
-.product-story__section > * {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    padding-block: 4rem;
+    padding-inline: max(var(--story-gutter), calc((100vw - var(--story-max-width)) / 2));
+    background: var(--story-bg);
+    color: var(--story-text);
+  }
 
   .product-story__media {
-    order: 0;
-    min-height: 20rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .product-story__media img,
+  .product-story__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
   }
 
   .product-story__text {
-    order: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: #F1EFDF;
-  }
-
-  .product-story__media img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    margin-inline: auto;
-  }
-
-  .product-story__media video {
-    display: block;
-    min-width: 410px;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+    width: 100%;
   }
 
   .product-story__headline {
-    margin: 1 0 1.5rem 0;
+    margin: 0 0 1.5rem;
   }
 
   .product-story__description {
     margin: 0;
   }
 
-  .product-story__quote {
-    text-align: center;
-    font-family: "Akzidenz-Grotesk Pro", sans-serif;
-    font-size: 18px;
-    padding: 10px 10px;
-    font-stretch: expanded;
-    letter-spacing: 1px;
-  }
-
+  .product-story__quote,
   .suggested-products__text {
     font-family: "Akzidenz-Grotesk Pro", sans-serif;
     font-size: 18px;
@@ -107,8 +85,17 @@
     letter-spacing: 1px;
   }
 
+  .product-story__quote {
+    text-align: center;
+    padding: 10px;
+  }
+
   .product-story__quote p {
     margin: 0;
+  }
+
+  .product-story__suggested-products-container {
+    margin-top: 4rem;
   }
 
   .product-story__suggested-products {
@@ -129,71 +116,44 @@
     width: 100%;
     height: auto;
   }
-  .product-story__suggested-products-container{
-    margin-top: 4rem;
-  }
+
   .suggested-product__heading {
-      font-family: "Akzidenz-Grotesk Pro", sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      text-align: center;
-      font-size: 12px;
-      margin-top: 10px;
+    font-family: "Akzidenz-Grotesk Pro", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: 10px;
   }
 
   @media screen and (min-width: 769px) {
-    .product-story {
-      margin-bottom: 0;
-    }
-
     .product-story__section {
       flex-direction: row;
-      min-height: 45rem;
+      gap: 4rem;
+    }
+
+    /* Media is first in the markup, so this flips it to the right */
+    .product-story__section--media-right {
+      flex-direction: row-reverse;
     }
 
     .product-story__media {
-      width: 35%;
-      min-height: unset;
+      flex: 0 0 43%;
+      width: auto;
     }
 
     .product-story__text {
-      width: 65%;
-      padding: 4rem 6rem;
-    }
-
-    /* Text on the left aligns to the left edge */
-    .product-story__section--media-right .product-story__text {
-      padding-left: 0;
-    }
-
-    /* Text on the right aligns to the right edge */
-    .product-story__section--media-left .product-story__text {
-      padding-right: 0;
+      flex: 1;
+      min-width: 0;
+      width: auto;
     }
 
     .product-story__quote {
       padding: 50px 100px;
       font-size: 24px;
     }
-
-    .product-story__section--media-right .product-story__media {
-      order: 1;
-    }
-
-    .product-story__section--media-right .product-story__text {
-      order: 0;
-    }
-
-    .product-story__section--media-left .product-story__media {
-      order: 0;
-    }
-
-    .product-story__section--media-left .product-story__text {
-      order: 1;
-    }
   }
-
 
   @media screen and (max-width: 599px) {
     .product-story__suggested-products {
