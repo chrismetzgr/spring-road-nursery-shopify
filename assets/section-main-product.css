@@ -227,6 +227,8 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-family-secondary);
+  color: #BAF2BD;
+  background: ##F1EFDF;
   text-transform: uppercase;
   font-stretch: expanded;
   letter-spacing: 2px;
