@@ -222,7 +222,7 @@
 
 .add-to-cart-text {
   font-family: var(--font-family-secondary);
-  color: var(--font-color-dark);
+  color: var(--color-background);
   background: var(--font-color-dark);
   text-transform: uppercase;
   font-stretch: expanded;
