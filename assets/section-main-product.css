@@ -244,9 +244,11 @@
 
 /* Product info */
 
-/* .product__info-container > * + * {
-  margin: 1.5rem 0;
-} */
+.product__info-container > * + * {
+  margin-bottom: 100px;
+}
+
+
 
 .product__info-container iframe {
   max-width: 100%;
