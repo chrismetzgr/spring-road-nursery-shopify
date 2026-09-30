@@ -222,7 +222,7 @@
 
 .add-to-cart-text {
   width: 200px;
-  height: 50px; 
+  height: 30px; 
   font-family: var(--font-family-secondary);
   color: var(--color-background);
   background: var(--font-color-dark);
