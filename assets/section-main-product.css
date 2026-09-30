@@ -196,6 +196,12 @@
 }
 
 .product-form__submit {
+  margin: 0 !important;
+  justify-content: flex-start !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: 50px;
+  width: 200px;
   display: flex; 
   align-items: center;
   justify-content: center;
