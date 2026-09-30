@@ -257,7 +257,8 @@
 
 
 .material-details, .why-it-works {
-  font-weight: 800;
+  font-family: "Akzidenz-Grotesk Pro", sans-serif;
+  font-weight: 400;
 }
 
 .product__text {
