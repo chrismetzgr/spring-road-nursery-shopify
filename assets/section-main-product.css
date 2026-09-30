@@ -210,6 +210,10 @@
   letter-spacing: 2px;
 }
 
+.product-form__submit:hover {
+  opacity: 0.8;
+}
+
 .product-form__submit, .product-form__quantity, .quantity__label {
     font-family: "Akzidenz-Grotesk Pro", sans-serif;
     font-stretch: expanded;
