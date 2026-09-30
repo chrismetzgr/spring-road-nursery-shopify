@@ -224,7 +224,7 @@
   width: 200px;
   height: 30px; 
   font-family: var(--font-family-secondary);
-  color: var(--color-background);
+  color: #232107
   background: var(--font-color-dark);
   text-transform: uppercase;
   font-stretch: expanded;
