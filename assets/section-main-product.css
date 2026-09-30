@@ -200,6 +200,15 @@
   justify-content: flex-start !important;
   padding: 0 !important;
   min-height: 0 !important;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-secondary);
+  color: #F1EFDF;;
+  background: #235800;
+  text-transform: uppercase;
+  font-stretch: expanded;
+  letter-spacing: 2px;
 }
 
 .product-form__submit, .product-form__quantity, .quantity__label {
