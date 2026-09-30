@@ -221,8 +221,6 @@
 }
 
 .add-to-cart-text {
-  width: 200px;
-  height: 30px; 
   font-family: var(--font-family-secondary);
   color: #232107
   background: var(--font-color-dark);
