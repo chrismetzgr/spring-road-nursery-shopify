@@ -171,7 +171,9 @@
       assign total_valid_count = 0
       assign valid_count = 0
       assign quote_rendered = false
-      assign quote = product.metafields.custom['1_deeper_quote'].value
+      assign quote1 = product.metafields.custom['1_deeper_quote'].value
+      assign quote2 = product.metafields.custom['2_quote'].value
+
     -%}
 
     {% comment %}
@@ -295,9 +297,9 @@
       If there is only one valid section, place the quote after it.
     {% endcomment %}
 
-    {%- if quote != blank and quote_rendered == false -%}
+    {%- if quote1 != blank and quote_rendered == false -%}
       <div class="product-story__quote">
-        <p>{{ quote | newline_to_br }}</p>
+        <p>{{ quote1 | newline_to_br }}</p>
       </div>
     {%- endif -%}
 
