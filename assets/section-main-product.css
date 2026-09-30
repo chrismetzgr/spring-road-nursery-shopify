@@ -223,6 +223,8 @@
 .add-to-cart-text {
   width: 200px; 
   height: 50px;
+  display: flex; 
+  align-items: center;
   font-family: var(--font-family-secondary);
   background: #232107;
   text-transform: uppercase;
