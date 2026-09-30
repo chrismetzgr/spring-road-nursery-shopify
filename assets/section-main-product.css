@@ -220,20 +220,6 @@
   }
 }
 
-.add-to-cart-text {
-  width: 200px; 
-  height: 50px;
-  display: flex; 
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-family-secondary);
-  color: #F1EFDF;;
-  background: #235800;
-  text-transform: uppercase;
-  font-stretch: expanded;
-  letter-spacing: 2px;
-}
-
 /* Overrides */
 .shopify-payment-button__more-options {
   color: rgb(var(--color-foreground));
