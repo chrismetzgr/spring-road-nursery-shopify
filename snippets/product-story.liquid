@@ -58,7 +58,7 @@
     color: #BAF2BD;
   }
 
-  .product-story__section--third {
+  . {
     background: #F0FFBB;
     color: #232107;
   }
@@ -273,7 +273,7 @@
         {%- if valid_count == 2 -%}
           {%- assign color_class = 'product-story__section--second' -%}
         {%- elsif valid_count == 3 -%}
-          {%- assign color_class = 'product-story__section--third' -%}
+          {%- assign color_class = '' -%}
         {%- endif -%}
 
         <div class="product-story__section {{ side_class }} {{ color_class }}">
