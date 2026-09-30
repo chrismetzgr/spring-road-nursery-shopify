@@ -53,6 +53,16 @@
     color: var(--story-text);
   }
 
+  .product-story__section--second {
+    background: #232107;
+    color: #BAF2BD;
+  }
+
+  .product-story__section--third {
+    background: #F0FFBB;
+    color: #232107;
+  }
+
   /* Media keeps its own aspect ratio; the section grows to fit its height */
   .product-story__media {
     width: 100%;
@@ -78,6 +88,7 @@
 
   .product-story__description {
     margin: 0;
+    font-size: 17px;
   }
 
   .product-story__quote,
@@ -258,7 +269,14 @@
           {%- assign side_class = 'product-story__section--media-left' -%}
         {%- endif -%}
 
-        <div class="product-story__section {{ side_class }}">
+        {%- assign color_class = '' -%}
+        {%- if valid_count == 2 -%}
+          {%- assign color_class = 'product-story__section--second' -%}
+        {%- elsif valid_count == 3 -%}
+          {%- assign color_class = 'product-story__section--third' -%}
+        {%- endif -%}
+
+        <div class="product-story__section {{ side_class }} {{ color_class }}">
           <div class="product-story__media">
             {%- if video != blank and video.media_type == 'video' -%}
               {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
