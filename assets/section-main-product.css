@@ -225,6 +225,7 @@
   height: 50px;
   display: flex; 
   align-items: center;
+  justify-content: center;
   font-family: var(--font-family-secondary);
   color: #BAF2BD;
   background: #232107;
