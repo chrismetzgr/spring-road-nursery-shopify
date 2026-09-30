@@ -257,9 +257,11 @@
 
 
 .material-details, .why-it-works {
-  font-family: "Akzidenz-Grotesk Pro", sans-serif;
-  font-weight: 500;
-  text-transform: uppercase;
+    font-family: "Akzidenz-Grotesk Pro", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
 .product__text {
