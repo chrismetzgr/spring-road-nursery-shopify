@@ -11,6 +11,7 @@
 
     2_deeper_headline
     2_deeper_description
+    2_quote
 
     suggested_products
 
@@ -170,16 +171,14 @@
     {%- liquid
       assign total_valid_count = 0
       assign valid_count = 0
-      assign quote_rendered = false
       assign quote1 = product.metafields.custom['1_deeper_quote'].value
       assign quote2 = product.metafields.custom['2_quote'].value
-
     -%}
 
     {% comment %}
       First pass:
-      Count how many complete sections exist so the quote can be placed
-      after section 1 when there are multiple valid sections.
+      Count complete sections so quotes only appear between
+      sections that will actually render.
     {% endcomment %}
 
     {%- for i in (1..3) -%}
@@ -217,7 +216,8 @@
 
     {% comment %}
       Second pass:
-      Render the sections.
+      Render the sections and place each quote between
+      consecutive rendered sections.
     {% endcomment %}
 
     {%- for i in (1..3) -%}
@@ -278,30 +278,17 @@
           </div>
         </div>
 
-        {% comment %}
-          If there is more than one valid section, place the quote
-          between section 1 and section 2.
-        {% endcomment %}
-
-        {%- if valid_count == 1 and total_valid_count > 1 and quote != blank -%}
+        {%- if valid_count == 1 and total_valid_count > 1 and quote1 != blank -%}
           <div class="product-story__quote">
-            <p>{{ quote | newline_to_br }}</p>
+            <p>{{ quote1 | newline_to_br }}</p>
           </div>
-
-          {%- assign quote_rendered = true -%}
+        {%- elsif valid_count == 2 and total_valid_count > 2 and quote2 != blank -%}
+          <div class="product-story__quote">
+            <p>{{ quote2 | newline_to_br }}</p>
+          </div>
         {%- endif -%}
       {%- endif -%}
     {%- endfor -%}
-
-    {% comment %}
-      If there is only one valid section, place the quote after it.
-    {% endcomment %}
-
-    {%- if quote1 != blank and quote_rendered == false -%}
-      <div class="product-story__quote">
-        <p>{{ quote1 | newline_to_br }}</p>
-      </div>
-    {%- endif -%}
 
   </div>
   <div>
@@ -330,6 +317,6 @@
           {%- endfor -%}
         </div>
       </div>
-    {%- endif -%} 
+    {%- endif -%}
   </div>
 </div>
