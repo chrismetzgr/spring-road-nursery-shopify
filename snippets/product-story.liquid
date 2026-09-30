@@ -11,7 +11,6 @@
 
     2_deeper_headline
     2_deeper_description
-    2_quote
 
     suggested_products
 
@@ -53,16 +52,6 @@
     color: var(--story-text);
   }
 
-  .product-story__section--second {
-    background: #232107;
-    color: #F1EFDF;
-  }
-
-  . {
-    background: #F0FFBB;
-    color: #232107;
-  }
-
   /* Media keeps its own aspect ratio; the section grows to fit its height */
   .product-story__media {
     width: 100%;
@@ -88,7 +77,6 @@
 
   .product-story__description {
     margin: 0;
-    font-size: 17px;
   }
 
   .product-story__quote,
@@ -182,14 +170,14 @@
     {%- liquid
       assign total_valid_count = 0
       assign valid_count = 0
-      assign quote1 = product.metafields.custom['1_deeper_quote'].value
-      assign quote2 = product.metafields.custom['2_quote'].value
+      assign quote_rendered = false
+      assign quote = product.metafields.custom['1_deeper_quote'].value
     -%}
 
     {% comment %}
       First pass:
-      Count complete sections so quotes only appear between
-      sections that will actually render.
+      Count how many complete sections exist so the quote can be placed
+      after section 1 when there are multiple valid sections.
     {% endcomment %}
 
     {%- for i in (1..3) -%}
@@ -227,8 +215,7 @@
 
     {% comment %}
       Second pass:
-      Render the sections and place each quote between
-      consecutive rendered sections.
+      Render the sections.
     {% endcomment %}
 
     {%- for i in (1..3) -%}
@@ -269,14 +256,7 @@
           {%- assign side_class = 'product-story__section--media-left' -%}
         {%- endif -%}
 
-        {%- assign color_class = '' -%}
-        {%- if valid_count == 2 -%}
-          {%- assign color_class = 'product-story__section--second' -%}
-        {%- elsif valid_count == 3 -%}
-          {%- assign color_class = '' -%}
-        {%- endif -%}
-
-        <div class="product-story__section {{ side_class }} {{ color_class }}">
+        <div class="product-story__section {{ side_class }}">
           <div class="product-story__media">
             {%- if video != blank and video.media_type == 'video' -%}
               {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
@@ -296,17 +276,30 @@
           </div>
         </div>
 
-        {%- if valid_count == 1 and total_valid_count > 1 and quote1 != blank -%}
+        {% comment %}
+          If there is more than one valid section, place the quote
+          between section 1 and section 2.
+        {% endcomment %}
+
+        {%- if valid_count == 1 and total_valid_count > 1 and quote != blank -%}
           <div class="product-story__quote">
-            <p>{{ quote1 | newline_to_br }}</p>
+            <p>{{ quote | newline_to_br }}</p>
           </div>
-        {%- elsif valid_count == 2 and total_valid_count > 2 and quote2 != blank -%}
-          <div class="product-story__quote">
-            <p>{{ quote2 | newline_to_br }}</p>
-          </div>
+
+          {%- assign quote_rendered = true -%}
         {%- endif -%}
       {%- endif -%}
     {%- endfor -%}
+
+    {% comment %}
+      If there is only one valid section, place the quote after it.
+    {% endcomment %}
+
+    {%- if quote != blank and quote_rendered == false -%}
+      <div class="product-story__quote">
+        <p>{{ quote | newline_to_br }}</p>
+      </div>
+    {%- endif -%}
 
   </div>
   <div>
@@ -335,6 +328,6 @@
           {%- endfor -%}
         </div>
       </div>
-    {%- endif -%}
+    {%- endif -%} 
   </div>
 </div>
