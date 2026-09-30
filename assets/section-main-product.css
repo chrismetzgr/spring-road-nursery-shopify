@@ -244,9 +244,9 @@
 
 /* Product info */
 
-.product__info-container > * + * {
+/* .product__info-container > * + * {
   margin-bottom: 100px;
-}
+} */
 
 
 
