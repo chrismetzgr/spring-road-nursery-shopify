@@ -3,6 +3,10 @@
   line-height: 1.3;
 }
 
+.material-details, .why-it-works {
+  font-weight: 500;
+}
+
 .product {
   color: var(--font-color-dark);
 }
