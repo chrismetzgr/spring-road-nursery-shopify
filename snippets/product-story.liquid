@@ -8,9 +8,8 @@
 
   The 1_deeper_quote metafield must also be present.
 
-  When a section has both an image and a video, the image is shown until
-  the browser confirms that the video is playing. The image returns if
-  playback stops or fails.
+  If a section has both an image and a video, the image remains underneath
+  while the video fades in after playback succeeds.
 {% endcomment %}
 
 {%- liquid
@@ -86,17 +85,36 @@
       height: auto;
     }
 
-    /* Keep the image visible until playback is confirmed. */
-    .product-story__media--has-video video {
-      display: none;
+    /*
+      The image stays in the layout and sets the media area's height.
+      The video overlays it, just as the landing-page video overlays
+      its fallback image.
+    */
+    .srn-story-video-frame {
+      position: relative;
+      isolation: isolate;
     }
 
-    .product-story__media--video-playing img {
-      display: none;
-    }
-
-    .product-story__media--video-playing video {
+    .srn-story-video-frame > img {
       display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .srn-story-video-frame > video {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .srn-story-video-frame > video.srn-story-video--loaded {
+      opacity: 1;
     }
 
     .product-story__text {
@@ -200,33 +218,6 @@
         grid-template-columns: 1fr;
       }
     }
-
-    /* Image remains in the layout, so the section keeps its height. */
-    .product-story__media--has-video img {
-      display: block;
-      position: relative;
-      z-index: 0;
-      width: 100%;
-      height: auto;
-    }
-
-    /* Video sits above the image but starts transparent. */
-    .product-story__media--has-video video {
-      display: block;
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
-
-    /* The script adds this class once playback succeeds. */
-    .product-story__media--has-video.product-story__media--video-playing video {
-      opacity: 1;
-    }
   {%- endstyle -%}
 
   <div class="product-story-container">
@@ -254,13 +245,13 @@
         -%}
 
         <div class="product-story__section {{ side_class }}">
-          <div class="product-story__media{% if has_video and image != blank %} product-story__media--has-video{% endif %}"{% if has_video and image != blank %} data-product-story-video-fallback{% endif %}>
+          <div class="product-story__media{% if has_video and image != blank %} srn-story-video-frame{% endif %}">
             {%- if image != blank -%}
               {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
             {%- endif -%}
 
             {%- if has_video -%}
-              {{ video | video_tag: autoplay: true, controls: false, loop: true, muted: true, playsinline: true }}
+              {{ video | video_tag: controls: false, loop: true, muted: true, playsinline: true }}
             {%- endif -%}
           </div>
 
@@ -310,50 +301,34 @@
     </div>
   </div>
 
-<script>
-  (function () {
-    function setupProductStoryVideos() {
-      document.querySelectorAll('[data-product-story-video-fallback]').forEach(function (media) {
-        if (media.dataset.productStoryFallbackReady === 'true') return;
+  <script>
+    (function () {
+      function startProductStoryVideos() {
+        document.querySelectorAll('.srn-story-video-frame > video').forEach(function (video) {
+          if (video.dataset.srnStoryStarted === 'true') return;
+          video.dataset.srnStoryStarted = 'true';
 
-        var video = media.querySelector('video');
-        if (!video) return;
+          video.muted = true;
 
-        media.dataset.productStoryFallbackReady = 'true';
-        video.muted = true;
+          var promise = video.play();
 
-        function showVideo() {
-          media.classList.add('product-story__media--video-playing');
-        }
+          if (promise && typeof promise.then === 'function') {
+            promise
+              .then(function () {
+                video.classList.add('srn-story-video--loaded');
+              })
+              .catch(function () {
+                video.classList.remove('srn-story-video--loaded');
+              });
+          }
+        });
+      }
 
-        function showImage() {
-          media.classList.remove('product-story__media--video-playing');
-        }
-
-        video.addEventListener('playing', showVideo);
-        video.addEventListener('pause', showImage);
-        video.addEventListener('stalled', showImage);
-        video.addEventListener('error', showImage);
-
-        /* Cover a video that started before this script ran. */
-        if (!video.paused && video.readyState >= 2) {
-          showVideo();
-        }
-
-        /* Match the working landing page: reveal when play() succeeds. */
-        var playPromise = video.play();
-
-        if (playPromise && typeof playPromise.then === 'function') {
-          playPromise.then(showVideo).catch(showImage);
-        }
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupProductStoryVideos);
-    } else {
-      setupProductStoryVideos();
-    }
-  })();
-</script>
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startProductStoryVideos);
+      } else {
+        startProductStoryVideos();
+      }
+    })();
+  </script>
 {%- endif -%}
