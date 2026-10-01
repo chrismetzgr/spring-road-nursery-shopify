@@ -201,20 +201,28 @@
       }
     }
 
+    .product-story__media--has-video img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-  .product-story__media--has-video video {
-    display: block;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-  }
+    /* The video overlays the image without affecting the area's height. */
+    .product-story__media--has-video video {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
 
-  .product-story__media--video-playing video {
-    opacity: 1;
-  }
+    /* Fade the video in; do not hide or fade out the image. */
+    .product-story__media--has-video.product-story__media--video-playing video {
+      opacity: 1;
+    }
   {%- endstyle -%}
 
   <div class="product-story-container">
