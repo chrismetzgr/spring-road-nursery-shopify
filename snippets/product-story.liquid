@@ -1,12 +1,13 @@
 {% comment %}
   product-story-sections.liquid
 
-  The entire product story renders only when sections 1 and 2 each have:
+  Each section renders independently when it has:
     - a headline
     - a description
     - an image or video
 
-  The 1_deeper_quote metafield must also be present.
+  The quote renders whenever it exists, between section 1 and section 2.
+  Suggested products render whenever they exist.
 
   If a section has both an image and a video, the image remains underneath
   while the video fades in after playback succeeds.
@@ -26,307 +27,322 @@
   assign quote = product.metafields.custom['1_deeper_quote'].value
   assign suggested_products = product.metafields.custom['suggested_products'].value
 
+  assign section_1_has_video = false
+  if video_1 != blank and video_1.media_type == 'video'
+    assign section_1_has_video = true
+  endif
+
+  assign section_2_has_video = false
+  if video_2 != blank and video_2.media_type == 'video'
+    assign section_2_has_video = true
+  endif
+
   assign section_1_has_media = false
-  if image_1 != blank
-    assign section_1_has_media = true
-  elsif video_1 != blank and video_1.media_type == 'video'
+  if image_1 != blank or section_1_has_video
     assign section_1_has_media = true
   endif
 
   assign section_2_has_media = false
-  if image_2 != blank
-    assign section_2_has_media = true
-  elsif video_2 != blank and video_2.media_type == 'video'
+  if image_2 != blank or section_2_has_video
     assign section_2_has_media = true
   endif
 
-  assign show_product_story = false
-  if headline_1 != blank and description_1 != blank and section_1_has_media and headline_2 != blank and description_2 != blank and section_2_has_media and quote != blank
-    assign show_product_story = true
+  assign show_section_1 = false
+  if headline_1 != blank and description_1 != blank and section_1_has_media
+    assign show_section_1 = true
+  endif
+
+  assign show_section_2 = false
+  if headline_2 != blank and description_2 != blank and section_2_has_media
+    assign show_section_2 = true
   endif
 -%}
 
-{%- style -%}
-  .product-story-container {
-    --story-bg: #235800;
-    --story-text: #F1EFDF;
-    --story-max-width: 1250px;
-    --story-gutter: 1.5rem;
-    --story-media-width: 440px;
+{%- if show_section_1 or show_section_2 or quote != blank or suggested_products != blank -%}
+  {%- style -%}
+    .product-story-container {
+      --story-bg: #235800;
+      --story-text: #F1EFDF;
+      --story-max-width: 1250px;
+      --story-gutter: 1.5rem;
+      --story-media-width: 440px;
 
-    color: var(--font-color-dark);
-    margin-block: 6rem;
-  }
+      color: var(--font-color-dark);
+      margin-block: 6rem;
+    }
 
-  /* Full-bleed band; content is centered and capped at --story-max-width */
-  .product-story__section {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding-block: 2rem;
-    padding-inline: max(var(--story-gutter), calc((100vw - var(--story-max-width)) / 2));
-    background: var(--story-bg);
-    color: var(--story-text);
-  }
-
-  .product-story__media {
-    width: 100%;
-  }
-
-  .product-story__media img,
-  .product-story__media video {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /*
-    The image stays in the layout and sets the media area's height.
-    The video overlays it, just as the landing-page video overlays
-    its fallback image.
-  */
-  .srn-story-video-frame {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .srn-story-video-frame > img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .srn-story-video-frame > video {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in;
-  }
-
-  .srn-story-video-frame > video.srn-story-video--loaded {
-    opacity: 1;
-  }
-
-  .product-story__text {
-    width: 100%;
-  }
-
-  .product-story__headline {
-    margin: 0 0 1.5rem;
-  }
-
-  .product-story__description {
-    margin: 0;
-  }
-
-  .product-story__quote,
-  .suggested-products__text {
-    font-family: "Akzidenz-Grotesk Pro", sans-serif;
-    font-size: 18px;
-    font-stretch: expanded;
-    letter-spacing: 1px;
-  }
-
-  .product-story__quote {
-    text-align: center;
-    padding: 10px;
-  }
-
-  .product-story__quote p {
-    margin: 0;
-  }
-
-  .product-story__suggested-products-container {
-    margin-top: 4rem;
-  }
-
-  .product-story__suggested-products {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .product-story__suggested-product {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .product-story__suggested-product img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .suggested-product__heading {
-    font-family: "Akzidenz-Grotesk Pro", sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  @media screen and (min-width: 769px) {
+    /* Full-bleed band; content is centered and capped at --story-max-width */
     .product-story__section {
-      flex-direction: row;
-      gap: 7.5rem;
-      padding-block: 4rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding-block: 2rem;
+      padding-inline: max(var(--story-gutter), calc((100vw - var(--story-max-width)) / 2));
+      background: var(--story-bg);
+      color: var(--story-text);
+    }
+
+    .product-story__media {
+      width: 100%;
+    }
+
+    .product-story__media img,
+    .product-story__media video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /*
+      The image stays in the layout and sets the media area's height.
+      The video overlays it and fades in after playback succeeds.
+    */
+    .srn-story-video-frame {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .srn-story-video-frame > img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .srn-story-video-frame > video {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .srn-story-video-frame > video.srn-story-video--loaded {
+      opacity: 1;
+    }
+
+    .product-story__text {
+      width: 100%;
+    }
+
+    .product-story__headline {
+      margin: 0 0 1.5rem;
     }
 
     .product-story__description {
       margin: 0;
-      font-size: 17px;
     }
 
-    /* Media is first in the markup, so this flips it to the right */
-    .product-story__section--media-right {
-      flex-direction: row-reverse;
-    }
-
-    .product-story__media {
-      flex: 0 1 var(--story-media-width);
-      width: auto;
-    }
-
-    .product-story__text {
-      flex: 1;
-      min-width: 0;
-      width: auto;
+    .product-story__quote,
+    .suggested-products__text {
+      font-family: "Akzidenz-Grotesk Pro", sans-serif;
+      font-size: 18px;
+      font-stretch: expanded;
+      letter-spacing: 1px;
     }
 
     .product-story__quote {
-      padding: 50px 100px;
-      font-size: 24px;
+      text-align: center;
+      padding: 10px;
     }
-  }
 
-  @media screen and (max-width: 599px) {
+    .product-story__quote p {
+      margin: 0;
+    }
+
+    .product-story__suggested-products-container {
+      margin-top: 4rem;
+    }
+
     .product-story__suggested-products {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
-  }
-{%- endstyle -%}
 
-<div class="product-story-container">
-  <div class="product-story">
-    {%- for i in (1..2) -%}
-      {%- liquid
-        if i == 1
-          assign headline = headline_1
-          assign description = description_1
-          assign image = image_1
-          assign video = video_1
-          assign side_class = 'product-story__section--media-right'
-        else
-          assign headline = headline_2
-          assign description = description_2
-          assign image = image_2
-          assign video = video_2
-          assign side_class = 'product-story__section--media-left'
-        endif
+    .product-story__suggested-product {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
 
-        assign has_video = false
-        if video != blank and video.media_type == 'video'
-          assign has_video = true
-        endif
-      -%}
+    .product-story__suggested-product img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-      <div class="product-story__section {{ side_class }}">
-        <div class="product-story__media{% if has_video and image != blank %} srn-story-video-frame{% endif %}">
-          {%- if image != blank -%}
-            {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
-          {%- endif -%}
+    .suggested-product__heading {
+      font-family: "Akzidenz-Grotesk Pro", sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      margin-top: 10px;
+    }
 
-          {%- if has_video -%}
-            {{ video | video_tag: controls: false, loop: true, muted: true, playsinline: true }}
-          {%- endif -%}
-        </div>
+    @media screen and (min-width: 769px) {
+      .product-story__section {
+        flex-direction: row;
+        gap: 7.5rem;
+        padding-block: 4rem;
+      }
 
-        <div class="product-story__text">
-          <h1 class="product-story__headline">
-            {{ headline | escape }}
-          </h1>
+      .product-story__description {
+        margin: 0;
+        font-size: 17px;
+      }
 
-          <div class="product-story__description description-text rte">
-            {{ description | escape | newline_to_br }}
+      /* Media is first in the markup, so this flips it to the right */
+      .product-story__section--media-right {
+        flex-direction: row-reverse;
+      }
+
+      .product-story__media {
+        flex: 0 1 var(--story-media-width);
+        width: auto;
+      }
+
+      .product-story__text {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+      }
+
+      .product-story__quote {
+        padding: 50px 100px;
+        font-size: 24px;
+      }
+    }
+
+    @media screen and (max-width: 599px) {
+      .product-story__suggested-products {
+        grid-template-columns: 1fr;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="product-story-container">
+    <div class="product-story">
+      {%- if show_section_1 -%}
+        <div class="product-story__section product-story__section--media-right">
+          <div class="product-story__media{% if section_1_has_video and image_1 != blank %} srn-story-video-frame{% endif %}">
+            {%- if image_1 != blank -%}
+              {{ image_1 | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+
+            {%- if section_1_has_video -%}
+              {{ video_1 | video_tag: controls: false, loop: true, muted: true, playsinline: true }}
+            {%- endif -%}
+          </div>
+
+          <div class="product-story__text">
+            <h1 class="product-story__headline">
+              {{ headline_1 | escape }}
+            </h1>
+
+            <div class="product-story__description description-text rte">
+              {{ description_1 | escape | newline_to_br }}
+            </div>
           </div>
         </div>
-      </div>
+      {%- endif -%}
 
-      {%- if i == 1 -%}
+      {%- if quote != blank -%}
         <div class="product-story__quote">
           <p>{{ quote | newline_to_br }}</p>
         </div>
       {%- endif -%}
-    {%- endfor -%}
-  </div>
 
-  <div>
-    {%- if suggested_products != blank -%}
-      <div class="product-story__suggested-products-container">
-        <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
-        <div class="product-story__suggested-products">
-          {%- for suggested_product in suggested_products -%}
-            <a
-              class="product-story__suggested-product"
-              href="{{ suggested_product.url }}"
-            >
-              {%- if suggested_product.featured_image -%}
-                {{
-                  suggested_product.featured_image
-                  | image_url: width: 600
-                  | image_tag: loading: 'lazy', alt: suggested_product.title
-                }}
-              {%- endif -%}
+      {%- if show_section_2 -%}
+        <div class="product-story__section product-story__section--media-left">
+          <div class="product-story__media{% if section_2_has_video and image_2 != blank %} srn-story-video-frame{% endif %}">
+            {%- if image_2 != blank -%}
+              {{ image_2 | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
 
-              <div class="suggested-product__heading">{{ suggested_product.title }}</div>
-            </a>
-          {%- endfor -%}
+            {%- if section_2_has_video -%}
+              {{ video_2 | video_tag: controls: false, loop: true, muted: true, playsinline: true }}
+            {%- endif -%}
+          </div>
+
+          <div class="product-story__text">
+            <h1 class="product-story__headline">
+              {{ headline_2 | escape }}
+            </h1>
+
+            <div class="product-story__description description-text rte">
+              {{ description_2 | escape | newline_to_br }}
+            </div>
+          </div>
         </div>
-      </div>
-    {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <div>
+      {%- if suggested_products != blank -%}
+        <div class="product-story__suggested-products-container">
+          <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
+          <div class="product-story__suggested-products">
+            {%- for suggested_product in suggested_products -%}
+              <a
+                class="product-story__suggested-product"
+                href="{{ suggested_product.url }}"
+              >
+                {%- if suggested_product.featured_image -%}
+                  {{
+                    suggested_product.featured_image
+                    | image_url: width: 600
+                    | image_tag: loading: 'lazy', alt: suggested_product.title
+                  }}
+                {%- endif -%}
+
+                <div class="suggested-product__heading">{{ suggested_product.title }}</div>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
-</div>
 
-<script>
-  (function () {
-    function startProductStoryVideos() {
-      document.querySelectorAll('.srn-story-video-frame > video').forEach(function (video) {
-        if (video.dataset.srnStoryStarted === 'true') return;
-        video.dataset.srnStoryStarted = 'true';
+  <script>
+    (function () {
+      function startProductStoryVideos() {
+        document.querySelectorAll('.srn-story-video-frame > video').forEach(function (video) {
+          if (video.dataset.srnStoryStarted === 'true') return;
+          video.dataset.srnStoryStarted = 'true';
 
-        video.muted = true;
+          video.muted = true;
 
-        var promise = video.play();
+          var promise = video.play();
 
-        if (promise && typeof promise.then === 'function') {
-          promise
-            .then(function () {
-              video.classList.add('srn-story-video--loaded');
-            })
-            .catch(function () {
-              video.classList.remove('srn-story-video--loaded');
-            });
-        }
-      });
-    }
+          if (promise && typeof promise.then === 'function') {
+            promise
+              .then(function () {
+                video.classList.add('srn-story-video--loaded');
+              })
+              .catch(function () {
+                video.classList.remove('srn-story-video--loaded');
+              });
+          }
+        });
+      }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', startProductStoryVideos);
-    } else {
-      startProductStoryVideos();
-    }
-  })();
-</script>
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startProductStoryVideos);
+      } else {
+        startProductStoryVideos();
+      }
+    })();
+  </script>
+{%- endif -%}
