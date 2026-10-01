@@ -283,7 +283,6 @@
     </div>
   </div>
 
-  <script>
 <script>
   (function () {
     function setupProductStoryVideos() {
@@ -309,10 +308,16 @@
         video.addEventListener('stalled', showImage);
         video.addEventListener('error', showImage);
 
+        /* Cover a video that started before this script ran. */
+        if (!video.paused && video.readyState >= 2) {
+          showVideo();
+        }
+
+        /* Match the working landing page: reveal when play() succeeds. */
         var playPromise = video.play();
 
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(showImage);
+        if (playPromise && typeof playPromise.then === 'function') {
+          playPromise.then(showVideo).catch(showImage);
         }
       });
     }
@@ -324,7 +329,4 @@
     }
   })();
 </script>
-
-
-  </script>
 {%- endif -%}
