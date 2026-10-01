@@ -44,26 +44,45 @@
 </main>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('.srn-landing__video');
-    
-    const ensureVideoPlays = (video) => {
-      if (!video) return;
-      
-      const promise = video.play();
-      promise
-        .then(() => {
-          // Autoplay starts - fade in video
-          video.classList.add('srn-landing__video--loaded');
-        })
-        .catch(() => {
-          // Autoplay didn't start (low power mode) - hide video, show fallback image
-          video.style.display = 'none';
-        });
-    };
-    
-    ensureVideoPlays(video);
-  });
+  (function () {
+    function setupProductStoryVideos() {
+      document.querySelectorAll('[data-product-story-video-fallback]').forEach(function (media) {
+        if (media.dataset.productStoryFallbackReady === 'true') return;
+
+        var video = media.querySelector('video');
+        if (!video) return;
+
+        media.dataset.productStoryFallbackReady = 'true';
+        video.muted = true;
+
+        function showVideo() {
+          media.classList.add('product-story__media--video-playing');
+        }
+
+        function showImage() {
+          media.classList.remove('product-story__media--video-playing');
+        }
+
+        video.addEventListener('pause', showImage);
+        video.addEventListener('stalled', showImage);
+        video.addEventListener('error', showImage);
+
+        var playPromise = video.play();
+
+        if (playPromise && typeof playPromise.then === 'function') {
+          playPromise.then(showVideo).catch(showImage);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupProductStoryVideos);
+    } else {
+      setupProductStoryVideos();
+    }
+  })();
+</script>
+
 </script>
 
 <style>
