@@ -744,8 +744,8 @@
     <script type="application/ld+json">
       {{ product | structured_data }}
     </script>
+    {% render 'product-story', product: product %}
   </div>
-  {% render 'product-story', product: product %}
 </product-info>
 
 {% schema %}
