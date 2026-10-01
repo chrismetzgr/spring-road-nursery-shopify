@@ -201,17 +201,21 @@
       }
     }
 
+    /* Image remains in the layout, so the section keeps its height. */
     .product-story__media--has-video img {
       display: block;
+      position: relative;
+      z-index: 0;
       width: 100%;
       height: auto;
     }
 
-    /* The video overlays the image without affecting the area's height. */
+    /* Video sits above the image but starts transparent. */
     .product-story__media--has-video video {
       display: block;
       position: absolute;
       inset: 0;
+      z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -219,7 +223,7 @@
       transition: opacity 1s ease-in;
     }
 
-    /* Fade the video in; do not hide or fade out the image. */
+    /* The script adds this class once playback succeeds. */
     .product-story__media--has-video.product-story__media--video-playing video {
       opacity: 1;
     }
