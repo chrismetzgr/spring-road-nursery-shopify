@@ -284,14 +284,17 @@
   </div>
 
   <script>
-    (function () {
-      function setupProductStoryFallback(media) {
+<script>
+  (function () {
+    function setupProductStoryVideos() {
+      document.querySelectorAll('[data-product-story-video-fallback]').forEach(function (media) {
         if (media.dataset.productStoryFallbackReady === 'true') return;
 
         var video = media.querySelector('video');
         if (!video) return;
 
         media.dataset.productStoryFallbackReady = 'true';
+        video.muted = true;
 
         function showVideo() {
           media.classList.add('product-story__media--video-playing');
@@ -301,24 +304,25 @@
           media.classList.remove('product-story__media--video-playing');
         }
 
-        video.muted = true;
-        video.setAttribute('muted', '');
-        video.setAttribute('playsinline', '');
-
-        video.addEventListener('playing', showVideo);
         video.addEventListener('pause', showImage);
         video.addEventListener('stalled', showImage);
         video.addEventListener('error', showImage);
-        video.addEventListener('emptied', showImage);
 
-        if (!video.paused && video.readyState >= 2) {
-          showVideo();
+        var playPromise = video.play();
+
+        if (playPromise && typeof playPromise.then === 'function') {
+          playPromise.then(showVideo).catch(showImage);
         }
-      }
+      });
+    }
 
-      document
-        .querySelectorAll('[data-product-story-video-fallback]')
-        .forEach(setupProductStoryFallback);
-    })();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupProductStoryVideos);
+    } else {
+      setupProductStoryVideos();
+    }
+  })();
+</script>
+
   </script>
 {%- endif -%}
