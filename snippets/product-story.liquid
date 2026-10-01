@@ -1,272 +1,239 @@
 {% comment %}
   product-story-sections.liquid
 
-  Uses product metafields from the custom namespace:
-
-    1_deeper_headline
-    deeper_definition_one_description
-    1_deeper_image
-    1_deeper_video
-    1_deeper_quote
-
-    2_deeper_headline
-    2_deeper_description
-
-    suggested_products
-
-  A section renders only when it has:
+  The entire product story renders only when sections 1 and 2 each have:
     - a headline
     - a description
     - an image or video
 
-  Video takes priority over image.
+  The 1_deeper_quote metafield must also be present.
 
-  Media alternates sides based on the number of sections
-  that have actually rendered.
+  When a section has both an image and a video, the image is shown until
+  the browser confirms that the video is playing. The image returns if
+  playback stops or fails.
 {% endcomment %}
 
-{%- style -%}
-  .product-story-container {
-    --story-bg: #235800;
-    --story-text: #F1EFDF;
-    --story-max-width: 1250px;
-    --story-gutter: 1.5rem;
-    --story-media-width: 440px;
+{%- liquid
+  assign headline_1 = product.metafields.custom['1_deeper_headline'].value
+  assign description_1 = product.metafields.custom['deeper_definition_one_description'].value
+  assign image_1 = product.metafields.custom['1_deeper_image'].value
+  assign video_1 = product.metafields.custom['1_deeper_video'].value
 
-    color: var(--font-color-dark);
-    margin-block: 6rem;
-  }
+  assign headline_2 = product.metafields.custom['2_deeper_headline'].value
+  assign description_2 = product.metafields.custom['2_deeper_description'].value
+  assign image_2 = product.metafields.custom['2_deeper_image'].value
+  assign video_2 = product.metafields.custom['2_deeper_video'].value
 
-  /* Full-bleed band; content is centered and capped at --story-max-width */
-  .product-story__section {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding-block: 2rem;
-    padding-inline: max(var(--story-gutter), calc((100vw - var(--story-max-width)) / 2));
-    background: var(--story-bg);
-    color: var(--story-text);
-  }
+  assign quote = product.metafields.custom['1_deeper_quote'].value
+  assign suggested_products = product.metafields.custom['suggested_products'].value
 
-  /* Media keeps its own aspect ratio; the section grows to fit its height */
-  .product-story__media {
-    width: 100%;
-  }
+  assign section_1_has_media = false
+  if image_1 != blank
+    assign section_1_has_media = true
+  elsif video_1 != blank and video_1.media_type == 'video'
+    assign section_1_has_media = true
+  endif
 
-  .product-story__media img,
-  .product-story__media video {
-    display: block;
-    width: 100%;
-    height: auto;
-    /* Optional: if ALL media shares one ratio, uncomment to prevent layout
-       shift while video loads (e.g. 1 / 2 for 220w x 440h):
-       aspect-ratio: 1 / 2; */
-  }
+  assign section_2_has_media = false
+  if image_2 != blank
+    assign section_2_has_media = true
+  elsif video_2 != blank and video_2.media_type == 'video'
+    assign section_2_has_media = true
+  endif
 
-  .product-story__text {
-    width: 100%;
-  }
+  assign show_product_story = false
+  if headline_1 != blank and description_1 != blank and section_1_has_media and headline_2 != blank and description_2 != blank and section_2_has_media and quote != blank
+    assign show_product_story = true
+  endif
+-%}
 
-  .product-story__headline {
-    margin: 0 0 1.5rem;
-  }
+{%- if show_product_story -%}
+  {%- style -%}
+    .product-story-container {
+      --story-bg: #235800;
+      --story-text: #F1EFDF;
+      --story-max-width: 1250px;
+      --story-gutter: 1.5rem;
+      --story-media-width: 440px;
 
-  .product-story__description {
-    margin: 0;
-  }
+      color: var(--font-color-dark);
+      margin-block: 6rem;
+    }
 
-  .product-story__quote,
-  .suggested-products__text {
-    font-family: "Akzidenz-Grotesk Pro", sans-serif;
-    font-size: 18px;
-    font-stretch: expanded;
-    letter-spacing: 1px;
-  }
-
-  .product-story__quote {
-    text-align: center;
-    padding: 10px;
-  }
-
-  .product-story__quote p {
-    margin: 0;
-  }
-
-  .product-story__suggested-products-container {
-    margin-top: 4rem;
-  }
-
-  .product-story__suggested-products {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .product-story__suggested-product {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .product-story__suggested-product img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .suggested-product__heading {
-    font-family: "Akzidenz-Grotesk Pro", sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  @media screen and (min-width: 769px) {
+    /* Full-bleed band; content is centered and capped at --story-max-width */
     .product-story__section {
-      flex-direction: row;
-      gap: 7.5rem;
-      padding-block: 4rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      padding-block: 2rem;
+      padding-inline: max(var(--story-gutter), calc((100vw - var(--story-max-width)) / 2));
+      background: var(--story-bg);
+      color: var(--story-text);
+    }
+
+    .product-story__media {
+      width: 100%;
+    }
+
+    .product-story__media img,
+    .product-story__media video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Keep the image visible until playback is confirmed. */
+    .product-story__media--has-video video {
+      display: none;
+    }
+
+    .product-story__media--video-playing img {
+      display: none;
+    }
+
+    .product-story__media--video-playing video {
+      display: block;
+    }
+
+    .product-story__text {
+      width: 100%;
+    }
+
+    .product-story__headline {
+      margin: 0 0 1.5rem;
     }
 
     .product-story__description {
       margin: 0;
-      font-size: 17px;
     }
 
-    /* Media is first in the markup, so this flips it to the right */
-    .product-story__section--media-right {
-      flex-direction: row-reverse;
-    }
-
-    .product-story__media {
-      flex: 0 1 var(--story-media-width);
-      width: auto;
-    }
-
-    .product-story__text {
-      flex: 1;
-      min-width: 0;
-      width: auto;
+    .product-story__quote,
+    .suggested-products__text {
+      font-family: "Akzidenz-Grotesk Pro", sans-serif;
+      font-size: 18px;
+      font-stretch: expanded;
+      letter-spacing: 1px;
     }
 
     .product-story__quote {
-      padding: 50px 100px;
-      font-size: 24px;
+      text-align: center;
+      padding: 10px;
     }
-  }
 
-  @media screen and (max-width: 599px) {
+    .product-story__quote p {
+      margin: 0;
+    }
+
+    .product-story__suggested-products-container {
+      margin-top: 4rem;
+    }
+
     .product-story__suggested-products {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
-  }
-{%- endstyle -%}
 
-<div class="product-story-container">
-  <div class="product-story">
-    {%- liquid
-      assign total_valid_count = 0
-      assign valid_count = 0
-      assign quote_rendered = false
-      assign quote = product.metafields.custom['1_deeper_quote'].value
-    -%}
+    .product-story__suggested-product {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
 
-    {% comment %}
-      First pass:
-      Count how many complete sections exist so the quote can be placed
-      after section 1 when there are multiple valid sections.
-    {% endcomment %}
+    .product-story__suggested-product img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-    {%- for i in (1..3) -%}
-      {%- liquid
-        assign headline_key = i | append: '_deeper_headline'
-        assign image_key = i | append: '_deeper_image'
-        assign video_key = i | append: '_deeper_video'
+    .suggested-product__heading {
+      font-family: "Akzidenz-Grotesk Pro", sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      margin-top: 10px;
+    }
 
-        assign headline = product.metafields.custom[headline_key].value
-        assign image = product.metafields.custom[image_key].value
-        assign video = product.metafields.custom[video_key].value
-        assign description = blank
+    @media screen and (min-width: 769px) {
+      .product-story__section {
+        flex-direction: row;
+        gap: 7.5rem;
+        padding-block: 4rem;
+      }
 
-        if i == 1
-          assign description = product.metafields.custom['deeper_definition_one_description'].value
-        elsif i == 2
-          assign description = product.metafields.custom['2_deeper_description'].value
-        elsif i == 3
-          assign description = product.metafields.custom['3_deeper_description'].value
-        endif
+      .product-story__description {
+        margin: 0;
+        font-size: 17px;
+      }
 
-        assign has_media = false
+      /* Media is first in the markup, so this flips it to the right */
+      .product-story__section--media-right {
+        flex-direction: row-reverse;
+      }
 
-        if video != blank and video.media_type == 'video'
-          assign has_media = true
-        elsif image != blank
-          assign has_media = true
-        endif
-      -%}
+      .product-story__media {
+        flex: 0 1 var(--story-media-width);
+        width: auto;
+      }
 
-      {%- if headline != blank and description != blank and has_media -%}
-        {%- assign total_valid_count = total_valid_count | plus: 1 -%}
-      {%- endif -%}
-    {%- endfor -%}
+      .product-story__text {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+      }
 
-    {% comment %}
-      Second pass:
-      Render the sections.
-    {% endcomment %}
+      .product-story__quote {
+        padding: 50px 100px;
+        font-size: 24px;
+      }
+    }
 
-    {%- for i in (1..3) -%}
-      {%- liquid
-        assign headline_key = i | append: '_deeper_headline'
-        assign image_key = i | append: '_deeper_image'
-        assign video_key = i | append: '_deeper_video'
+    @media screen and (max-width: 599px) {
+      .product-story__suggested-products {
+        grid-template-columns: 1fr;
+      }
+    }
+  {%- endstyle -%}
 
-        assign headline = product.metafields.custom[headline_key].value
-        assign image = product.metafields.custom[image_key].value
-        assign video = product.metafields.custom[video_key].value
-        assign description = blank
+  <div class="product-story-container">
+    <div class="product-story">
+      {%- for i in (1..2) -%}
+        {%- liquid
+          if i == 1
+            assign headline = headline_1
+            assign description = description_1
+            assign image = image_1
+            assign video = video_1
+            assign side_class = 'product-story__section--media-right'
+          else
+            assign headline = headline_2
+            assign description = description_2
+            assign image = image_2
+            assign video = video_2
+            assign side_class = 'product-story__section--media-left'
+          endif
 
-        if i == 1
-          assign description = product.metafields.custom['deeper_definition_one_description'].value
-        elsif i == 2
-          assign description = product.metafields.custom['2_deeper_description'].value
-        elsif i == 3
-          assign description = product.metafields.custom['3_deeper_description'].value
-        endif
-
-        assign has_media = false
-
-        if video != blank and video.media_type == 'video'
-          assign has_media = true
-        elsif image != blank
-          assign has_media = true
-        endif
-      -%}
-
-      {%- if headline != blank and description != blank and has_media -%}
-        {%- assign valid_count = valid_count | plus: 1 -%}
-        {%- assign side_check = valid_count | modulo: 2 -%}
-
-        {%- if side_check == 1 -%}
-          {%- assign side_class = 'product-story__section--media-right' -%}
-        {%- else -%}
-          {%- assign side_class = 'product-story__section--media-left' -%}
-        {%- endif -%}
+          assign has_video = false
+          if video != blank and video.media_type == 'video'
+            assign has_video = true
+          endif
+        -%}
 
         <div class="product-story__section {{ side_class }}">
-          <div class="product-story__media">
-            {%- if video != blank and video.media_type == 'video' -%}
-              {{ video | video_tag: autoplay: true, controls: false, loop: true, audio: false }}
-            {%- elsif image != blank -%}
+          <div class="product-story__media{% if has_video and image != blank %} product-story__media--has-video{% endif %}"{% if has_video and image != blank %} data-product-story-video-fallback{% endif %}>
+            {%- if image != blank -%}
               {{ image | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+
+            {%- if has_video -%}
+              {{ video | video_tag: autoplay: true, controls: false, loop: true, muted: true, playsinline: true }}
             {%- endif -%}
           </div>
 
@@ -281,58 +248,77 @@
           </div>
         </div>
 
-        {% comment %}
-          If there is more than one valid section, place the quote
-          between section 1 and section 2.
-        {% endcomment %}
-
-        {%- if valid_count == 1 and total_valid_count > 1 and quote != blank -%}
+        {%- if i == 1 -%}
           <div class="product-story__quote">
             <p>{{ quote | newline_to_br }}</p>
           </div>
-
-          {%- assign quote_rendered = true -%}
         {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
+      {%- endfor -%}
+    </div>
 
-    {% comment %}
-      If there is only one valid section, place the quote after it.
-    {% endcomment %}
+    <div>
+      {%- if suggested_products != blank -%}
+        <div class="product-story__suggested-products-container">
+          <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
+          <div class="product-story__suggested-products">
+            {%- for suggested_product in suggested_products -%}
+              <a
+                class="product-story__suggested-product"
+                href="{{ suggested_product.url }}"
+              >
+                {%- if suggested_product.featured_image -%}
+                  {{
+                    suggested_product.featured_image
+                    | image_url: width: 600
+                    | image_tag: loading: 'lazy', alt: suggested_product.title
+                  }}
+                {%- endif -%}
 
-    {%- if quote != blank and quote_rendered == false -%}
-      <div class="product-story__quote">
-        <p>{{ quote | newline_to_br }}</p>
-      </div>
-    {%- endif -%}
-
-  </div>
-  <div>
-
-    {%- assign suggested_products = product.metafields.custom['suggested_products'].value -%}
-
-    {%- if suggested_products != blank -%}
-      <div class="product-story__suggested-products-container">
-        <span class="suggested-products__text">YOU MIGHT ALSO LIKE</span>
-        <div class="product-story__suggested-products">
-          {%- for suggested_product in suggested_products -%}
-            <a
-              class="product-story__suggested-product"
-              href="{{ suggested_product.url }}"
-            >
-              {%- if suggested_product.featured_image -%}
-                {{
-                  suggested_product.featured_image
-                  | image_url: width: 600
-                  | image_tag: loading: 'lazy', alt: suggested_product.title
-                }}
-              {%- endif -%}
-
-              <div class="suggested-product__heading">{{ suggested_product.title }}</div>
-            </a>
-          {%- endfor -%}
+                <div class="suggested-product__heading">{{ suggested_product.title }}</div>
+              </a>
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
-    {%- endif -%} 
+      {%- endif -%}
+    </div>
   </div>
-</div>
+
+  <script>
+    (function () {
+      function setupProductStoryFallback(media) {
+        if (media.dataset.productStoryFallbackReady === 'true') return;
+
+        var video = media.querySelector('video');
+        if (!video) return;
+
+        media.dataset.productStoryFallbackReady = 'true';
+
+        function showVideo() {
+          media.classList.add('product-story__media--video-playing');
+        }
+
+        function showImage() {
+          media.classList.remove('product-story__media--video-playing');
+        }
+
+        video.muted = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+
+        video.addEventListener('playing', showVideo);
+        video.addEventListener('pause', showImage);
+        video.addEventListener('stalled', showImage);
+        video.addEventListener('error', showImage);
+        video.addEventListener('emptied', showImage);
+
+        if (!video.paused && video.readyState >= 2) {
+          showVideo();
+        }
+      }
+
+      document
+        .querySelectorAll('[data-product-story-video-fallback]')
+        .forEach(setupProductStoryFallback);
+    })();
+  </script>
+{%- endif -%}
