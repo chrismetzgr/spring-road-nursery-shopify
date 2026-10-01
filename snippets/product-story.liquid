@@ -201,24 +201,20 @@
       }
     }
 
-    .product-story__media--has-video {
-      position: relative;
-    }
 
-    .product-story__media--has-video video {
-      display: block;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in;
-    }
+  .product-story__media--has-video video {
+    display: block;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
 
-    .product-story__media--video-playing video {
-      opacity: 1;
-    }
+  .product-story__media--video-playing video {
+    opacity: 1;
+  }
   {%- endstyle -%}
 
   <div class="product-story-container">
