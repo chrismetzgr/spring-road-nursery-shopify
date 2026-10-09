@@ -97,34 +97,58 @@
           ></textarea>
           <small class="form__label">Maximum 200 characters</small>
         </div> {% endcomment %}
+{%- liquid
+  assign preorder_availability_text = product.metafields.custom.preorder_availability_date.value
+  assign has_preorder_availability = false
 
-        <div class="product-form__buttons">
-        <button
-          id="ProductSubmitButton-{{ section_id }}"
-          type="submit"
-          name="add"
-          class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-          {% if is_sold_out %}disabled{% endif %}
-          {% if has_variants and variant_pre_selected == false %}disabled data-requires-variant="true"{% endif %}
-        >
-          <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
-            {%- if has_variants and variant_pre_selected == false -%}
-              {{ 'products.product.add_to_cart' | t }}
-            {%- elsif product.selected_or_first_available_variant == null -%}
-              {{ 'products.product.unavailable' | t }}
-            {%- elsif is_sold_out -%}
-              {{ 'products.product.sold_out' | t }}
-            {%- else -%}
-              {{ 'products.product.add_to_cart' | t }}
-            {%- endif -%}
-          </span>
-          <span class="added-to-cart-text" style="display: none;">Added!</span>
-          {%- render 'loading-spinner' -%}
-        </button>
-          {%- if show_dynamic_checkout and is_sold_out == false -%}
-            {{ form | payment_button }}
-          {%- endif -%}
-        </div>
+  if preorder_availability_text != blank
+    assign has_preorder_availability = true
+  endif
+-%}
+
+<div class="product-form__buttons">
+  <button
+    id="ProductSubmitButton-{{ section_id }}"
+    type="submit"
+    name="add"
+    class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+    {% if is_sold_out %}disabled{% endif %}
+    {% if has_variants and variant_pre_selected == false %}disabled data-requires-variant="true"{% endif %}
+  >
+    <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
+      {%- if has_variants and variant_pre_selected == false -%}
+        {{ 'products.product.add_to_cart' | t }}
+      {%- elsif product.selected_or_first_available_variant == null -%}
+        {{ 'products.product.unavailable' | t }}
+      {%- elsif is_sold_out -%}
+        {%- if has_preorder_availability -%}
+          Coming Soon
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'products.product.add_to_cart' | t }}
+      {%- endif -%}
+    </span>
+
+    <span class="added-to-cart-text" style="display: none;">
+      Added!
+    </span>
+
+    {%- render 'loading-spinner' -%}
+  </button>
+
+  {%- if show_dynamic_checkout and is_sold_out == false -%}
+    {{ form | payment_button }}
+  {%- endif -%}
+
+  {%- if is_sold_out and has_preorder_availability -%}
+    <div class="product__description rte">
+      <p>{{ preorder_availability_text | escape }}</p>
+    </div>
+  {%- endif -%}
+</div>
+
       {%- endform -%}
     </product-form>
 
