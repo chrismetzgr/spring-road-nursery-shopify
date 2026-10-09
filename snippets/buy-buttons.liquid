@@ -154,7 +154,15 @@
 
     {%- if is_sold_out -%}
       <div class="srn-restock-notification">
-        <p class="srn-restock-notification__heading wavy-underline">Email When In Stock</p>
+        
+        
+        <p class="srn-restock-notification__heading wavy-underline">
+          {%- if has_preorder_availability -%}
+            {{ preorder_availability_text | escape }}
+          {%- else -%}
+            Email When In Stock
+          {% endif %}
+        </p>
         
         {% form 'customer', class: 'srn-restock-notification__form' %}
           {%- if form.posted_successfully? -%}
