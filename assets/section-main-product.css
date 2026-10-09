@@ -198,7 +198,6 @@
 .product-form__submit {
   border-radius: 0 !important;
   height: 50px;
-  width: 200px;
   display: flex; 
   align-items: center;
   justify-content: center;
