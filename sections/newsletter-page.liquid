@@ -1,99 +1,103 @@
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
 
-<main class="srn-newsletter" id="newsletter-page">
-  <!-- Hero Image (swap in your own asset) -->
-  <div class="srn-newsletter__hero">
+<main class="srn-email-signup" id="email-signup-page">
+  <!-- Hero Image (upload and swap in your own asset) -->
+  <div class="srn-email-signup__hero">
     <img
-      src="{{ 'newsletter-header-image.png' | asset_url }}"
-      alt="Spring Road Nursery newsletter"
-      class="srn-newsletter__hero-image"
+      src="{{ 'email-signup-header-image.png' | asset_url }}"
+      alt="Spring Road Nursery"
+      class="srn-email-signup__hero-image"
       width="1370"
       height="630"
     />
   </div>
 
   <!-- Content Section -->
-  <div class="srn-newsletter__content">
+  <div class="srn-email-signup__content">
 
-    <section class="srn-newsletter__section">
-      <h1 class="srn-newsletter__heading">
-        {%- comment -%}
-          To match the garden design page, replace this text with a heading image:
-          <img src="{{ 'newsletter-heading.png' | asset_url }}" alt="Newsletter" class="srn-newsletter__heading-image" width="auto" height="75" />
-        {%- endcomment -%}
-        <span class="srn-newsletter__heading-text">Newsletter</span>
+    <section class="srn-email-signup__section">
+      <h1 class="srn-email-signup__heading">
+        <img
+          src="{{ 'greetings.png' | asset_url }}"
+          alt="Greetings from Spring Road Nursery"
+          class="srn-email-signup__heading-image"
+          width="650"
+          height="auto"
+        />
       </h1>
 
-      <article class="srn-newsletter__text">
-        <p>Placeholder: add your newsletter intro copy here.</p>
+      <article class="srn-email-signup__text">
+        <p>From rare plants to handbuilt terracotta, we cultivate the strange and the beautiful on our hillside in Vermont.</p>
+
+        <p>Be the first to hear about what's happening at the nursery.</p>
       </article>
 
-      <div class="srn-newsletter__form-wrapper">
+      <div class="srn-email-signup__form-wrapper">
         {% form 'customer', class: 'newsletter-form' %}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="newsletter-form__field-wrapper">
-            <div class="field">
-              <input
-                id="NewsletterForm--page"
-                type="email"
-                name="contact[email]"
-                class="field__input"
-                value="{{ form.email }}"
-                aria-required="true"
-                autocorrect="off"
-                autocapitalize="off"
-                autocomplete="email"
-                {% if form.errors %}
-                  autofocus
-                  aria-invalid="true"
-                  aria-describedby="Newsletter-error--page"
-                {% elsif form.posted_successfully? %}
-                  aria-describedby="Newsletter-success--page"
-                {% endif %}
-                placeholder="{{ 'newsletter.label' | t }}"
-                required
-              >
-              <label class="field__label" for="NewsletterForm--page">
-                {{ 'newsletter.label' | t }}
-              </label>
-              <button
-                type="submit"
-                class="newsletter-form__button field__button"
-                name="commit"
-                id="Subscribe"
-                aria-label="{{ 'newsletter.button_label' | t }}"
-              >
-                <span class="svg-wrapper">
-                  {{- 'icon-arrow.svg' | inline_asset_content -}}
-                </span>
-              </button>
-            </div>
-            {%- if form.errors -%}
-              <small class="newsletter-form__message form__message" id="Newsletter-error--page">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </small>
-            {%- endif -%}
-          </div>
           {%- if form.posted_successfully? -%}
             <h3
-              class="newsletter-form__message newsletter-form__message--success form__message"
+              class="newsletter-form__message newsletter-form__message--success"
               id="Newsletter-success--page"
               tabindex="-1"
               autofocus
             >
-              <span class="svg-wrapper">
-                {{- 'icon-success.svg' | inline_asset_content -}}
-              </span>
               {{- 'newsletter.success' | t }}
             </h3>
+          {%- else -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="newsletter-form__field-wrapper">
+              <div class="field">
+                <input
+                  id="NewsletterForm--page"
+                  type="email"
+                  name="contact[email]"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="Newsletter-error--page"
+                  {% endif %}
+                  placeholder="Your Email Address Here"
+                  required
+                >
+                <label class="newsletter-label field__label" for="NewsletterForm--page">
+                  Your Email Address Here
+                </label>
+                <button
+                  type="submit"
+                  class="newsletter-form__button field__button"
+                  name="commit"
+                  id="Subscribe"
+                  aria-label="{{ 'newsletter.button_label' | t }}"
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
+                </button>
+              </div>
+              {%- if form.errors -%}
+                <small class="newsletter-form__message form__message" id="Newsletter-error--page">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         {% endform %}
       </div>
+
+      <h2 class="srn-email-signup__title wavy-underline-light">
+        Come Back To Earth
+      </h2>
     </section>
 
   </div>
@@ -101,25 +105,26 @@
 
 <style>
 /* ============================================
-   NEWSLETTER PAGE STYLES
-   (mirrors the garden design page)
+   EMAIL SIGNUP PAGE STYLES
+   (page layout mirrors the garden design page;
+   form styling carried over from the popup)
    ============================================ */
 
 /* Base/Mobile Styles (Mobile-First Approach) */
-.srn-newsletter {
+.srn-email-signup {
   margin-top: 0;
   margin-bottom: 100px;
 }
 
 /* Hero Section */
-.srn-newsletter__hero {
+.srn-email-signup__hero {
   max-height: 630px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.srn-newsletter__hero-image {
+.srn-email-signup__hero-image {
   max-width: 1370px;
   width: 100%;
   height: auto;
@@ -134,7 +139,7 @@
 }
 
 /* Content Container */
-.srn-newsletter__content {
+.srn-email-signup__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,12 +148,12 @@
   color: var(--font-color-light-tertiary);
 }
 
-.srn-newsletter__content img {
+.srn-email-signup__content img {
   margin: auto;
 }
 
 /* Section */
-.srn-newsletter__section {
+.srn-email-signup__section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,78 +167,142 @@
 }
 
 /* Headings */
-.srn-newsletter__heading {
+.srn-email-signup__heading {
   margin: 80px 0 40px 0 !important;
 }
 
-.srn-newsletter__heading-image {
+.srn-email-signup__heading-image {
   display: block;
   margin: 0 auto;
   height: auto;
-  max-height: 30px;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  max-width: 650px;
 }
 
-.srn-newsletter__heading-text {
-  font-size: 30px;
-  line-height: 1.15;
+.srn-email-signup__title {
+  font-family: var(--font-family-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 20px 0 0 0;
 }
 
 /* Text Content */
-.srn-newsletter__text {
+.srn-email-signup__text {
   font-size: 17px;
   line-height: 1.15;
 }
 
-.srn-newsletter__text p {
+.srn-email-signup__text p {
   margin: 0 0 1em 0;
 }
 
-.srn-newsletter__text p:last-child {
+.srn-email-signup__text p:last-child {
   margin-bottom: 0;
 }
 
 /* Form */
-.srn-newsletter__form-wrapper {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto 0;
-  text-align: left;
+.srn-email-signup__form-wrapper {
+  width: 95%;
+  max-width: 600px;
+  background-color: var(--color-background-light);
+  line-height: 0;
 }
 
-.srn-newsletter__form-wrapper .newsletter-form__message--success {
-  justify-content: center;
+.srn-email-signup .field__input {
+  color: var(--font-color-dark);
+  transition: none;
+}
+
+.srn-email-signup .field__input:focus {
+  transition: none;
+}
+
+/* Hide label visually but keep for accessibility */
+.srn-email-signup .newsletter-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Placeholder styling */
+.srn-email-signup .field__input::placeholder {
+  text-transform: uppercase;
+  font-stretch: expanded;
+  color: var(--font-color-dark);
+  font-family: var(--font-family-secondary);
+  text-align: center;
+  opacity: 1;
+  transition: none;
+  font-size: 10px;
+}
+
+.srn-email-signup .svg-wrapper {
+  text-transform: uppercase;
+  font-size: 10px;
+  font-stretch: expanded;
+  color: var(--font-color-dark);
+}
+
+.srn-email-signup .svg-wrapper svg {
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin-top: 5px;
+}
+
+.srn-email-signup__form-wrapper .newsletter-form__message--success {
+  font-family: var(--font-family-secondary);
+  color: var(--font-color-dark);
+  text-transform: uppercase;
+  font-stretch: expanded;
+  text-align: center;
 }
 
 /* ============================================
    DESKTOP BREAKPOINT (700px)
    ============================================ */
 @media (min-width: 700px) {
-  .srn-newsletter {
+  .srn-email-signup {
     margin-top: 50px;
     margin-bottom: 150px;
   }
 
-  .srn-newsletter__content {
+  .srn-email-signup__content {
     font-size: 18px;
   }
 
-  .srn-newsletter__text {
+  .srn-email-signup__text {
     width: 95%;
     font-size: 25px;
   }
 
-  .srn-newsletter__heading {
+  .srn-email-signup__heading {
     margin: 150px 0 50px 0 !important;
   }
 
-  .srn-newsletter__heading-image {
-    max-height: 72px;
+  .srn-email-signup__title {
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-top: 40px;
   }
 
-  .srn-newsletter__heading-text {
-    font-size: 72px;
+  .srn-email-signup .field__input::placeholder,
+  .srn-email-signup .svg-wrapper {
+    font-size: 16px;
+  }
+
+  .srn-email-signup .svg-wrapper svg {
+    width: 16px;
+    height: 16px;
   }
 }
 </style>
