@@ -155,10 +155,8 @@
           {%- if has_preorder_availability -%}
             {{ preorder_availability_text | escape }}
             <br/>
+          {%- endif -%}
             Be the first to know when {{ product.handle }} is available
-          {%- else -%}
-            Email When In Stock
-          {% endif %}
         </p>
         
         {% form 'customer', class: 'srn-restock-notification__form' %}
