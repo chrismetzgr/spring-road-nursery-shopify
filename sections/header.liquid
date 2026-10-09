@@ -35,7 +35,7 @@
       {% for i in (1..2) %}
         <div class="srn-promo__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
           {% for j in (1..8) %}
-            <span class="srn-promo__item">FREE SHIPPING OVER $100</span>
+            <span class="srn-promo__item">FREE SHIPPING ON ORDERS OVER $100</span>
           {% endfor %}
         </div>
       {% endfor %}
@@ -61,7 +61,7 @@
     .srn-promo__track {
       display: flex;
       width: max-content;
-      animation: srn-promo-scroll 60s linear infinite;
+      animation: srn-promo-scroll 90s linear infinite;
     }
 
     .srn-promo__group {
