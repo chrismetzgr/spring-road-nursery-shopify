@@ -5,6 +5,8 @@
 
   <!-- Content Section -->
   <div class="srn-email-signup__content">
+
+    <section class="srn-email-signup__section">
       <article class="srn-email-signup__text">
         <p>From rare plants to handbuilt terracotta, we cultivate the strange and the beautiful on our hillside in Vermont.</p>
 
@@ -116,14 +118,15 @@
   }
 }
 
-/* Content Container */
+/* Content Container
+   Text color matches the "Your Email Address Here" placeholder */
 .srn-email-signup__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 20px;
   padding: 0 1%;
-  color: var(--font-color-light-tertiary);
+  color: var(--font-color-dark);
 }
 
 .srn-email-signup__content img {
@@ -165,12 +168,14 @@
   letter-spacing: 1px;
   text-align: center;
   margin: 20px 0 0 0;
+  color: var(--font-color-dark);
 }
 
 /* Text Content */
 .srn-email-signup__text {
   font-size: 17px;
   line-height: 1.15;
+  color: var(--font-color-dark);
 }
 
 .srn-email-signup__text p {
@@ -181,16 +186,18 @@
   margin-bottom: 0;
 }
 
-/* Form */
+/* Form (centered) */
 .srn-email-signup__form-wrapper {
   width: 95%;
   max-width: 600px;
+  margin: 0 auto;
   background-color: var(--color-background-light);
   line-height: 0;
 }
 
 .srn-email-signup .field__input {
   color: var(--font-color-dark);
+  text-align: center;
   transition: none;
 }
 
