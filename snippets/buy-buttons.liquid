@@ -154,6 +154,7 @@
         <p class="srn-restock-notification__heading">
           {%- if has_preorder_availability -%}
             {{ preorder_availability_text | escape }}
+            <p>Sign up for email updates</p>
           {%- else -%}
             Email When In Stock
           {% endif %}
@@ -296,7 +297,7 @@
 
 .srn-restock-notification__heading {
   font-family: var(--font-family-secondary);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 2px;
