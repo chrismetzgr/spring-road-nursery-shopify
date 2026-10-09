@@ -152,7 +152,7 @@
       {%- endform -%}
     </product-form>
 
-    {%- if is_sold_out -%}
+    {%- if is_sold_out and has_preorder_availability == false -%}
       <div class="srn-restock-notification">
         <p class="srn-restock-notification__heading wavy-underline">Email When In Stock</p>
         
