@@ -36,7 +36,7 @@
         <div class="srn-promo__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
           {% for j in (1..8) %}
             <span class="srn-promo__item">FREE SHIPPING ON ORDERS OVER $100</span>
-            <img class="srn-promo__worm" src="{{ 'inchworm-light-green.png' | asset_url }}" alt="" aria-hidden="true" />
+            <img src="{{ 'inchworm-light-green.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="2px"/>
           {% endfor %}
         </div>
       {% endfor %}
@@ -45,10 +45,13 @@
 
   <style>
     .srn-promo {
+      /* Inverted nursery colors: nursery text color as background, page background as text */
+      background-color: var(--font-color-dark-secondary);
       color: #BAF2BD;
       width: 100vw;
       overflow: hidden;
       white-space: nowrap;
+      padding: 6px 0;
       font-family: var(--font-family-secondary);
       font-size: 12px;
       letter-spacing: 2px;
@@ -57,48 +60,18 @@
     }
 
     .srn-promo__track {
-      position: relative;
       display: flex;
       width: max-content;
-      padding-bottom: 8px; /* space for the wave; matches wave height */
       animation: srn-promo-scroll 160s linear infinite;
     }
 
     .srn-promo__group {
       display: flex;
-      align-items: center;
       flex-shrink: 0;
-      background-color: var(--font-color-dark-secondary);
-      padding: 6px 0;
-      margin-bottom: -1px; /* overlaps the wave slightly to avoid a seam */
     }
 
     .srn-promo__item {
       padding: 0 40px;
-    }
-
-    .srn-promo__worm {
-      height: 25px;
-      width: auto;
-      display: block;
-    }
-
-    /* Wavy bottom edge: lives inside the track, so it scrolls with the words */
-    .srn-promo__track::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 8px;
-      background-color: var(--font-color-dark-secondary);
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 8' preserveAspectRatio='none'%3E%3Cpath d='M0 0H40V4Q30 9 20 4T0 4Z'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 8' preserveAspectRatio='none'%3E%3Cpath d='M0 0H40V4Q30 9 20 4T0 4Z'/%3E%3C/svg%3E");
-      /* 240 waves across the whole track (120 per half), so the loop is seamless */
-      -webkit-mask-size: calc(100% / 240) 8px;
-      mask-size: calc(100% / 240) 8px;
-      -webkit-mask-repeat: repeat-x;
-      mask-repeat: repeat-x;
     }
 
     /* Moves left to right: the track starts shifted left by one group, then slides right */
