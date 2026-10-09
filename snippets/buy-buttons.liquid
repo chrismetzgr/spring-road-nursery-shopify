@@ -420,4 +420,16 @@
     font-size: 13px;
   }
 }
+
+/* Keep sold-out buttons faded, even when hovered */
+.button:disabled,
+.button:disabled:hover,
+.button[aria-disabled='true'],
+.button[aria-disabled='true']:hover,
+.button.disabled,
+.button.disabled:hover {
+  opacity: 0.5 !important;
+  cursor: not-allowed;
+}
+
 </style>
