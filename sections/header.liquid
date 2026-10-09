@@ -22,6 +22,11 @@
       assign logo_image = 'SRN-GREEN.png'
       assign hamburger_image = 'hamburger-dark-green.png'
   endcase
+
+  assign show_promo_banner = false
+  if template == 'product' or template == 'collection'
+    assign show_promo_banner = true
+  endif
 %}
 
 <header class="srn-header srn-header--{{ theme_variant }}" role="banner">
