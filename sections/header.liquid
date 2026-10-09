@@ -31,27 +31,27 @@
 
 {% if show_promo_banner %}
   <div class="srn-promo" role="region" aria-label="Promotion">
-    <div class="srn-promo__track">
-      {% for i in (1..2) %}
-        <div class="srn-promo__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
-          {% for j in (1..8) %}
-            <span class="srn-promo__item">FREE SHIPPING ON ORDERS OVER $100</span>
-            <img src="{{ 'inchworm-light-green.png' | asset_url }}" alt="Spring Road Nursery" width="auto" height="25px"/>
-          {% endfor %}
-        </div>
-      {% endfor %}
+    <div class="srn-promo__viewport">
+      <div class="srn-promo__track">
+        {% for i in (1..2) %}
+          <div class="srn-promo__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
+            {% for j in (1..8) %}
+              <span class="srn-promo__item">FREE SHIPPING ON ORDERS OVER $100</span>
+              <img class="srn-promo__worm" src="{{ 'inchworm-light-green.png' | asset_url }}" alt="" aria-hidden="true" />
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
   <style>
     .srn-promo {
-      /* Inverted nursery colors: nursery text color as background, page background as text */
+      position: relative;
       background-color: var(--font-color-dark-secondary);
       color: #BAF2BD;
       width: 100vw;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 6px 0;
+      margin-bottom: 8px; /* room for the wave; matches wave height */
       font-family: var(--font-family-secondary);
       font-size: 12px;
       letter-spacing: 2px;
@@ -59,7 +59,14 @@
       line-height: 2;
     }
 
-        /* Wavy bottom edge */
+    /* overflow clipping lives here so it doesn't cut off the wave */
+    .srn-promo__viewport {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 6px 0;
+    }
+
+    /* Wavy bottom edge */
     .srn-promo::after {
       content: "";
       position: absolute;
@@ -85,11 +92,18 @@
 
     .srn-promo__group {
       display: flex;
+      align-items: center;
       flex-shrink: 0;
     }
 
     .srn-promo__item {
       padding: 0 40px;
+    }
+
+    .srn-promo__worm {
+      height: 25px;
+      width: auto;
+      display: block;
     }
 
     /* Moves left to right: the track starts shifted left by one group, then slides right */
