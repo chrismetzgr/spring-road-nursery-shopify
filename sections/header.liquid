@@ -29,61 +29,6 @@
   endif
 %}
 
-{% if show_promo_banner %}
-  <div class="srn-promo" role="region" aria-label="Promotion">
-    <div class="srn-promo__track">
-      {% for i in (1..2) %}
-        <div class="srn-promo__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
-          {% for j in (1..8) %}
-            <span class="srn-promo__item">FREE SHIPPING OVER $100</span>
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <style>
-    .srn-promo {
-      /* Inverted nursery colors: nursery text color as background, page background as text */
-      background-color: var(--font-color-dark-secondary);
-      color: var(--color-background);
-      width: 100vw;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 6px 0;
-      font-family: var(--font-family-secondary);
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    .srn-promo__track {
-      display: flex;
-      width: max-content;
-      animation: srn-promo-scroll 30s linear infinite;
-    }
-
-    .srn-promo__group {
-      display: flex;
-      flex-shrink: 0;
-    }
-
-    .srn-promo__item {
-      padding: 0 40px;
-    }
-
-    /* Moves left to right: the track starts shifted left by one group, then slides right */
-    @keyframes srn-promo-scroll {
-      from { transform: translateX(-50%); }
-      to   { transform: translateX(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .srn-promo__track { animation: none; }
-    }
-  </style>
-{% endif %}
 
 <header class="srn-header srn-header--{{ theme_variant }}" role="banner">
   <div class="srn-header__container">
