@@ -14,7 +14,7 @@
       "settings": {
       }
     },
-    "nursery": {
+    "email-signup-page": {
       "type": "email-signup-page",
       "settings": {},
     },
@@ -25,7 +25,7 @@
   },
   "order": [
     "header",
-    "nursery",
+    "email-signup-page",
     "footer"
   ]
 }
