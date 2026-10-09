@@ -142,11 +142,6 @@
     {{ form | payment_button }}
   {%- endif -%}
 
-  {%- if is_sold_out and has_preorder_availability -%}
-    <div class="product__description rte">
-      <p>{{ preorder_availability_text | escape }}</p>
-    </div>
-  {%- endif -%}
 </div>
 
       {%- endform -%}
