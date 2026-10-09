@@ -1,0 +1,239 @@
+{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
+
+<main class="srn-newsletter" id="newsletter-page">
+  <!-- Hero Image (swap in your own asset) -->
+  <div class="srn-newsletter__hero">
+    <img
+      src="{{ 'newsletter-header-image.png' | asset_url }}"
+      alt="Spring Road Nursery newsletter"
+      class="srn-newsletter__hero-image"
+      width="1370"
+      height="630"
+    />
+  </div>
+
+  <!-- Content Section -->
+  <div class="srn-newsletter__content">
+
+    <section class="srn-newsletter__section">
+      <h1 class="srn-newsletter__heading">
+        {%- comment -%}
+          To match the garden design page, replace this text with a heading image:
+          <img src="{{ 'newsletter-heading.png' | asset_url }}" alt="Newsletter" class="srn-newsletter__heading-image" width="auto" height="75" />
+        {%- endcomment -%}
+        <span class="srn-newsletter__heading-text">Newsletter</span>
+      </h1>
+
+      <article class="srn-newsletter__text">
+        <p>Placeholder: add your newsletter intro copy here.</p>
+      </article>
+
+      <div class="srn-newsletter__form-wrapper">
+        {% form 'customer', class: 'newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form__field-wrapper">
+            <div class="field">
+              <input
+                id="NewsletterForm--page"
+                type="email"
+                name="contact[email]"
+                class="field__input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                {% if form.errors %}
+                  autofocus
+                  aria-invalid="true"
+                  aria-describedby="Newsletter-error--page"
+                {% elsif form.posted_successfully? %}
+                  aria-describedby="Newsletter-success--page"
+                {% endif %}
+                placeholder="{{ 'newsletter.label' | t }}"
+                required
+              >
+              <label class="field__label" for="NewsletterForm--page">
+                {{ 'newsletter.label' | t }}
+              </label>
+              <button
+                type="submit"
+                class="newsletter-form__button field__button"
+                name="commit"
+                id="Subscribe"
+                aria-label="{{ 'newsletter.button_label' | t }}"
+              >
+                <span class="svg-wrapper">
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </span>
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <small class="newsletter-form__message form__message" id="Newsletter-error--page">
+                <span class="svg-wrapper">
+                  {{- 'icon-error.svg' | inline_asset_content -}}
+                </span>
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </small>
+            {%- endif -%}
+          </div>
+          {%- if form.posted_successfully? -%}
+            <h3
+              class="newsletter-form__message newsletter-form__message--success form__message"
+              id="Newsletter-success--page"
+              tabindex="-1"
+              autofocus
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-success.svg' | inline_asset_content -}}
+              </span>
+              {{- 'newsletter.success' | t }}
+            </h3>
+          {%- endif -%}
+        {% endform %}
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<style>
+/* ============================================
+   NEWSLETTER PAGE STYLES
+   (mirrors the garden design page)
+   ============================================ */
+
+/* Base/Mobile Styles (Mobile-First Approach) */
+.srn-newsletter {
+  margin-top: 0;
+  margin-bottom: 100px;
+}
+
+/* Hero Section */
+.srn-newsletter__hero {
+  max-height: 630px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.srn-newsletter__hero-image {
+  max-width: 1370px;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: srn-fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes srn-fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Content Container */
+.srn-newsletter__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0 1%;
+  color: var(--font-color-light-tertiary);
+}
+
+.srn-newsletter__content img {
+  margin: auto;
+}
+
+/* Section */
+.srn-newsletter__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto 0;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Headings */
+.srn-newsletter__heading {
+  margin: 80px 0 40px 0 !important;
+}
+
+.srn-newsletter__heading-image {
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  max-height: 30px;
+  width: auto;
+  max-width: 100%;
+}
+
+.srn-newsletter__heading-text {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+/* Text Content */
+.srn-newsletter__text {
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+.srn-newsletter__text p {
+  margin: 0 0 1em 0;
+}
+
+.srn-newsletter__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Form */
+.srn-newsletter__form-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto 0;
+  text-align: left;
+}
+
+.srn-newsletter__form-wrapper .newsletter-form__message--success {
+  justify-content: center;
+}
+
+/* ============================================
+   DESKTOP BREAKPOINT (700px)
+   ============================================ */
+@media (min-width: 700px) {
+  .srn-newsletter {
+    margin-top: 50px;
+    margin-bottom: 150px;
+  }
+
+  .srn-newsletter__content {
+    font-size: 18px;
+  }
+
+  .srn-newsletter__text {
+    width: 95%;
+    font-size: 25px;
+  }
+
+  .srn-newsletter__heading {
+    margin: 150px 0 50px 0 !important;
+  }
+
+  .srn-newsletter__heading-image {
+    max-height: 72px;
+  }
+
+  .srn-newsletter__heading-text {
+    font-size: 72px;
+  }
+}
+</style>
