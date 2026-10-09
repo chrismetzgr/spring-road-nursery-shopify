@@ -116,7 +116,7 @@
     {% if has_variants and variant_pre_selected == false %}disabled data-requires-variant="true"{% endif %}
   >
     <span class="add-to-cart-text {% if is_sold_out == false %}wavy-underline{% endif %}">
-      {%- if has_variants and variant_pre_selected == false -%}
+      {%- if is_sold_out == false and has_variants and variant_pre_selected == false -%}
         {{ 'products.product.add_to_cart' | t }}
       {%- elsif product.selected_or_first_available_variant == null -%}
         {{ 'products.product.unavailable' | t }}
