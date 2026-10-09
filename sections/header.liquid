@@ -74,10 +74,10 @@
       padding: 0 40px;
     }
 
-    /* Moves left to right: the track starts shifted left by one group, then slides right */
+    /* Moves right to left: the track starts at its normal position, then slides left by one group */
     @keyframes srn-promo-scroll {
-      from { transform: translateX(-50%); }
-      to   { transform: translateX(0); }
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     @media (prefers-reduced-motion: reduce) {
