@@ -12,29 +12,29 @@
         <p>Be the first to hear about what's happening at the nursery.</p>
       </article>
 
-    {% form 'customer', class: 'newsletter-form' %}
-      {%- if form.posted_successfully? -%}
-        <style>
-          #email-signup-page .srn-email-signup__form-wrapper {
-            background-color: transparent;
-            line-height: normal;
-          }
+      <div class="srn-email-signup__form-wrapper">
+        {% form 'customer', class: 'newsletter-form' %}
+          {%- if form.posted_successfully? -%}
+            <style>
+              #email-signup-page .srn-email-signup__form-wrapper {
+                background-color: transparent;
+                line-height: normal;
+              }
 
-          #email-signup-page .srn-email-signup__form-wrapper .newsletter-form__message--success {
-            color: var(--font-color-dark);
-          }
-        </style>
+              #email-signup-page .srn-email-signup__form-wrapper .newsletter-form__message--success {
+                color: var(--font-color-dark);
+              }
+            </style>
 
-        <h3
-          class="newsletter-form__message newsletter-form__message--success"
-          id="Newsletter-success--page"
-          tabindex="-1"
-          autofocus
-        >
-          Thanks for subscribing
-        </h3>
-      {%- else -%}
-        <div>
+            <h3
+              class="newsletter-form__message newsletter-form__message--success"
+              id="Newsletter-success--page"
+              tabindex="-1"
+              autofocus
+            >
+              Thanks for subscribing
+            </h3>
+          {%- else -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
             <div class="newsletter-form__field-wrapper">
               <div class="field">
@@ -84,6 +84,10 @@
           {%- endif -%}
         {% endform %}
       </div>
+
+      <h2 class="srn-email-signup__title wavy-underline">
+        Come Back To Earth
+      </h2>
     </section>
 
   </div>
