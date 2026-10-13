@@ -18,14 +18,9 @@
       "type": "email-signup-page",
       "settings": {},
     },
-    "footer": {
-      "type": "footer",
-      "settings": {},
-    }
   },
   "order": [
     "header",
     "email-signup-page",
-    "footer"
   ]
 }
