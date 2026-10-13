@@ -34,6 +34,7 @@
           Thanks for subscribing
         </h3>
       {%- else -%}
+        <div>
             <input type="hidden" name="contact[tags]" value="newsletter">
             <div class="newsletter-form__field-wrapper">
               <div class="field">
@@ -83,10 +84,6 @@
           {%- endif -%}
         {% endform %}
       </div>
-
-      <h2 class="srn-email-signup__title wavy-underline">
-        Come Back To Earth
-      </h2>
     </section>
 
   </div>
