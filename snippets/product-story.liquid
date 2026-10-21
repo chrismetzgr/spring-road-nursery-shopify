@@ -1,16 +1,34 @@
 {% comment %}
   product-story-sections.liquid
 
+  Rendering order:
+    - Section 1
+    - Quote 1
+    - Section 2
+    - Quote 2
+    - Section 3
+    - Suggested products
+
   Each section renders independently when it has:
     - a headline
     - a description
     - an image or video
 
-  The quote renders whenever it exists, between section 1 and section 2.
+  Each quote renders independently whenever it exists.
   Suggested products render whenever they exist.
 
   If a section has both an image and a video, the image remains underneath
   while the video fades in after playback succeeds.
+
+  Quote metafields:
+    - custom.1_deeper_quote
+    - custom.2_quote
+
+  Section 3 metafields:
+    - custom.3_deeper_headline
+    - custom.3_deeper_description
+    - custom.3_deeper_image
+    - custom.3_deeper_video
 {% endcomment %}
 
 {%- liquid
@@ -24,7 +42,13 @@
   assign image_2 = product.metafields.custom['2_deeper_image'].value
   assign video_2 = product.metafields.custom['2_deeper_video'].value
 
-  assign quote = product.metafields.custom['1_deeper_quote'].value
+  assign headline_3 = product.metafields.custom['3_deeper_headline'].value
+  assign description_3 = product.metafields.custom['3_deeper_description'].value
+  assign image_3 = product.metafields.custom['3_deeper_image'].value
+  assign video_3 = product.metafields.custom['3_deeper_video'].value
+
+  assign quote_1 = product.metafields.custom['1_deeper_quote'].value
+  assign quote_2 = product.metafields.custom['2_quote'].value
   assign suggested_products = product.metafields.custom['suggested_products'].value
 
   assign section_1_has_video = false
@@ -37,6 +61,11 @@
     assign section_2_has_video = true
   endif
 
+  assign section_3_has_video = false
+  if video_3 != blank and video_3.media_type == 'video'
+    assign section_3_has_video = true
+  endif
+
   assign section_1_has_media = false
   if image_1 != blank or section_1_has_video
     assign section_1_has_media = true
@@ -45,6 +74,11 @@
   assign section_2_has_media = false
   if image_2 != blank or section_2_has_video
     assign section_2_has_media = true
+  endif
+
+  assign section_3_has_media = false
+  if image_3 != blank or section_3_has_video
+    assign section_3_has_media = true
   endif
 
   assign show_section_1 = false
@@ -56,9 +90,14 @@
   if headline_2 != blank and description_2 != blank and section_2_has_media
     assign show_section_2 = true
   endif
+
+  assign show_section_3 = false
+  if headline_3 != blank and description_3 != blank and section_3_has_media
+    assign show_section_3 = true
+  endif
 -%}
 
-{%- if show_section_1 or show_section_2 or quote != blank or suggested_products != blank -%}
+{%- if show_section_1 or show_section_2 or show_section_3 or quote_1 != blank or quote_2 != blank or suggested_products != blank -%}
   {%- style -%}
     .product-story-container {
       --story-bg: #235800;
@@ -225,7 +264,6 @@
       .product-story__suggested-products-container {
         margin: 4rem 0;
       }
-
     }
 
     @media screen and (max-width: 599px) {
@@ -261,9 +299,9 @@
         </div>
       {%- endif -%}
 
-      {%- if quote != blank -%}
+      {%- if quote_1 != blank -%}
         <div class="product-story__quote">
-          <p>{{ quote | newline_to_br }}</p>
+          <p>{{ quote_1 | newline_to_br }}</p>
         </div>
       {%- endif -%}
 
@@ -286,6 +324,36 @@
 
             <div class="product-story__description description-text rte">
               {{ description_2 | escape | newline_to_br }}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if quote_2 != blank -%}
+        <div class="product-story__quote">
+          <p>{{ quote_2 | newline_to_br }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if show_section_3 -%}
+        <div class="product-story__section product-story__section--media-right">
+          <div class="product-story__media{% if section_3_has_video and image_3 != blank %} srn-story-video-frame{% endif %}">
+            {%- if image_3 != blank -%}
+              {{ image_3 | image_url: width: 1600 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+
+            {%- if section_3_has_video -%}
+              {{ video_3 | video_tag: controls: false, loop: true, muted: true, playsinline: true }}
+            {%- endif -%}
+          </div>
+
+          <div class="product-story__text">
+            <h1 class="product-story__headline">
+              {{ headline_3 | escape }}
+            </h1>
+
+            <div class="product-story__description description-text rte">
+              {{ description_3 | escape | newline_to_br }}
             </div>
           </div>
         </div>
@@ -322,7 +390,7 @@
   <script>
     (function () {
       function startProductStoryVideos() {
-        document.querySelectorAll('.srn-story-video-frame > video').forEach(function (video) {
+        document.querySelectorAll('.product-story__media > video').forEach(function (video) {
           if (video.dataset.srnStoryStarted === 'true') return;
           video.dataset.srnStoryStarted = 'true';
 
