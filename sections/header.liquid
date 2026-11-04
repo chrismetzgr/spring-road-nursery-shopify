@@ -24,10 +24,12 @@
   endcase
 
   assign show_promo_banner = false
-  if template == 'product' or template == 'collection'
-    assign show_promo_banner = true
-  endif
 %}
+{% comment %} 
+   if template == 'product' or template == 'collection'
+    assign show_promo_banner = false 
+  endif
+{% endcomment %}
 
 {% if show_promo_banner %}
   <div class="srn-promo" role="region" aria-label="Promotion">
