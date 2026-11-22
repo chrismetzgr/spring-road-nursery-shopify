@@ -152,11 +152,11 @@
         
         
         <p class="srn-restock-notification__heading">
-          {%- if has_preorder_availability -%}
+          {% comment %} {%- if has_preorder_availability -%}
             {{ preorder_availability_text | escape }}
             <br/>
             <br/>
-          {%- endif -%}
+          {%- endif -%} {% endcomment %}
             Be the first to know when {{ product.title }} is available
         </p>
         
