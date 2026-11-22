@@ -121,11 +121,11 @@
       {%- elsif product.selected_or_first_available_variant == null -%}
         {{ 'products.product.unavailable' | t }}
       {%- elsif is_sold_out -%}
-        {%- if has_preorder_availability -%}
+        {% comment %} {%- if has_preorder_availability -%}
           Coming Soon
-        {%- else -%}
+        {%- else -%} {% endcomment %}
           {{ 'products.product.sold_out' | t }}
-        {%- endif -%}
+        {% comment %} {%- endif -%} {% endcomment %}
       {%- else -%}
         {{ 'products.product.add_to_cart' | t }}
       {%- endif -%}
